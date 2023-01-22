@@ -24,19 +24,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	int gGameRunning = 1;
 	AEGfxVertexList* pMesh1 = 0;
 	AEGfxVertexList* pMesh2 = 0;
-	AEGfxVertexList* pMesh[30];
-	square object[30];
 
-	for (int i = 0; i < meshMax; i++)
-	{
-		pMesh[i] = 0;
-	}
+	square object[30];
+	AEGfxVertexList* pMesh[30];
+	AEGfxTexture* pTex[30];
+
 
 	AEGfxTexture* pTex1 = 0;
 
 	objectinit(object);
 
 	objectlevel1init(object);
+
+	textureinit(pTex);
+
 
 	square player;
 	player.x = 0;
@@ -58,10 +59,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	//object.halfW = object.width / 2;
 	//object.halfH = object.height / 2;
 
-	float objectsize = 60;
-	float objhalf = objectsize / 2;
 	float playerSpeed = 3;
 
+
+	//==================================================================
+	// Yuki's Variables
+	//==================================================================
+	// 
 	//viewport 
 	float viewportwidth = player.width + 100;
 	float viewportheight = player.width + 100; 
@@ -82,6 +86,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	float halfmapx= mapx / 2;
 	float halfmapy = mapy / 2;
 
+	//==================================================================
+	//==================================================================
 
 	/*float minWorldX = 10;
 	float minWorldY = 10;*/
@@ -172,8 +178,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
 
-
-
 		//=============================================================================================
 		// Game loop update	
 		//=============================================================================================
@@ -226,6 +230,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh1, AE_GFX_MDM_TRIANGLES);
 
+		
 
 		// Drawing object 2 - (first) - No tint
 		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
@@ -259,6 +264,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AEGfxTextureSet(pTex1, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[2], AE_GFX_MDM_TRIANGLES);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		//=============================================================================================
 		// Game loop draw end

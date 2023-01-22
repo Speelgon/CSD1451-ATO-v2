@@ -17,3 +17,5 @@ void objectlevel1init(squareObject* object);
 void meshinit(squareObject* object, AEGfxVertexList** pMesh);
 
 void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh);
+
+void textureinit(AEGfxTexture** pTex);

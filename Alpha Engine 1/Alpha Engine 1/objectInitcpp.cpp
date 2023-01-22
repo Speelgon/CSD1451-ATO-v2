@@ -7,6 +7,8 @@ void meshinit(squareObject* object, AEGfxVertexList** pMesh) {
 
 	for (int i = 0; i < meshMax; i++)
 	{
+		pMesh[i] = 0;
+
 		AEGfxMeshStart();
 
 		AEGfxTriAdd(
@@ -22,7 +24,9 @@ void meshinit(squareObject* object, AEGfxVertexList** pMesh) {
 		// Saving the mesh (list of triangles) in pMesh2
 
 		pMesh[i] = AEGfxMeshEnd();
+
 		AE_ASSERT_MESG(pMesh[i], "Failed to create mesh!!");
+
 	}
 }
 
@@ -120,4 +124,17 @@ void objectlevel1init(squareObject* object){
 
 }
 
+void textureinit(AEGfxTexture** pTex)
+{
+	for (int i = 0; i < maxObj; i++)
+	{
+		pTex = 0;
+	}
+}
 
+void drawobjects() {
+
+
+
+
+}
