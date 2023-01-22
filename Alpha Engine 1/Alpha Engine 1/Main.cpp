@@ -26,13 +26,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AEGfxVertexList* pMesh2 = 0;
 
 	square object[30];
+	square ui[5];
 	AEGfxVertexList* pMesh[30];
+	AEGfxVertexList* uiMesh[30];
 	AEGfxTexture* pTex[30];
-
 
 	AEGfxTexture* pTex1 = 0;
 
 	objectinit(object);
+
+	uiinit(ui);
+
+	uilevel1init(ui);
 
 	objectlevel1init(object);
 
@@ -119,7 +124,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh);
+	meshinitlevel1(object, pMesh, ui);
 
 	// Informing the library that we're about to start adding triangles
 	AEGfxMeshStart();
@@ -138,8 +143,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// Saving the mesh (list of triangles) in pMesh1
 
-	pMesh1 = AEGfxMeshEnd();
-	AE_ASSERT_MESG(pMesh1, "Failed to create mesh 1!!");
+	pMesh[0] = AEGfxMeshEnd();
+	AE_ASSERT_MESG(pMesh[0], "Failed to create mesh 1!!");
 	
 	// Creating the objects (Shapes) end
 	////////////////////////////////////
@@ -161,6 +166,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	//////////////////////////////////
 
 	// Game Loop
+
+
+	//===============================================================
+
+	//TEMPORARY TESTING VARIABLES
+
+	//===============================================================
+
+	int trigger = 0;
+
+
+
+	//===============================================================
+
+
+
+
 	while (gGameRunning)
 	{
 		// Informing the system about the loop's start
@@ -212,75 +234,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//=============================================================================================
 
 
-
-
-
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 		//=============================================================================================
 		// Game loop draw
 		//=============================================================================================
 		
-		// Drawing object 1
-		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-		// Set position for object 1
-		AEGfxSetPosition(player.x, player.y);
-		// No texture for object 1
-		AEGfxTextureSet(NULL, 0, 0);
-		// Drawing the mesh (list of triangles)
-		AEGfxMeshDraw(pMesh1, AE_GFX_MDM_TRIANGLES);
-
-		
-
-		// Drawing object 2 - (first) - No tint
-		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-		// Set position for object 2
-		AEGfxSetPosition(object[0].x, object[0].y);
-		// No tint
-		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-		// Set texture
-		AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-		// Drawing the mesh (list of triangles)
-		AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
-
-		// Drawing object 3 - (first) - No tint
-		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-		// Set position for object 3
-		AEGfxSetPosition(object[1].x, object[1].y);
-		// No tint
-		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-		// Set texture
-		AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-		// Drawing the mesh (list of triangles)
-		AEGfxMeshDraw(pMesh[1], AE_GFX_MDM_TRIANGLES);
-
-		// Drawing object 3 - (first) - No tint
-		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-		// Set position for object 3
-		AEGfxSetPosition(object[2].x, object[2].y);
-		// No tint
-		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-		// Set texture
-		AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-		// Drawing the mesh (list of triangles)
-		AEGfxMeshDraw(pMesh[2], AE_GFX_MDM_TRIANGLES);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		objectrender(player, object, ui, pMesh);
 
 		//=============================================================================================
 		// Game loop draw end
@@ -298,7 +261,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	}
 	// Freeing the objects and textures
-	AEGfxMeshFree(pMesh1);
+
 	AEGfxMeshFree(pMesh[0]);
 
 	//This part later needs to be changed to meshes used

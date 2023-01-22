@@ -17,7 +17,6 @@
 
 namespace {
 	
-
 	int playerBottomLessThanObjectTop(float playerY, float objectY, float playerSize, float objectSize)
 	{
 		if (playerY - playerSize <= objectY + objectSize)
