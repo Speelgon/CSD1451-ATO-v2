@@ -23,7 +23,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	///////////////////////
 	// Variable declaration
-	
+
 	int gGameRunning = 1;
 	AEGfxVertexList* pMesh1 = 0;
 	AEGfxVertexList* pMesh2 = 0;
@@ -31,7 +31,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	square object[30];
 	square ui[5];
-	square collectibles[5];
+	collectible collectible[maxCollectible];
+
 	AEGfxVertexList* pMesh[30];
 	AEGfxVertexList* uiMesh[30];
 	AEGfxTexture* pTex[30];
@@ -41,14 +42,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	objectinit(object);
 
+	collectibleinit(collectible);
+
+	collectiblelevel1init(collectible);
+
 	uiinit(ui);
 
 	uilevel1init(ui);
 
 	objectlevel1init(object);
-
-	collectiblesinit(collectibles);
-	
 
 	textureinit(pTex);
 
@@ -85,14 +87,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	float playerSpeed = 3;
 
-	
+
 	//==================================================================
 	// Yuki's Variables
 	//==================================================================
 	// 
 	//viewport 
 	float viewportwidth = player.width + 100;
-	float viewportheight = player.width + 100; 
+	float viewportheight = player.width + 100;
 	float viewporthalfw = viewportwidth / 2;
 	float viewporthalfh = viewportheight / 2;
 
@@ -100,14 +102,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	float worldX = 0;
 	float worldY = 0;
 	float worldwidth = (float)AEGetWindowWidth();;
-	float worldheight =(float)AEGetWindowHeight();;
+	float worldheight = (float)AEGetWindowHeight();;
 	float worldhalfW = worldwidth / 2;
 	float worldhalfH = worldheight / 2;
 
 	//MAPSIZE
 	float mapx = 800;
 	float mapy = 400;
-	float halfmapx= mapx / 2;
+	float halfmapx = mapx / 2;
 	float halfmapy = mapy / 2;
 
 	//==================================================================
@@ -115,7 +117,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	/*float minWorldX = 10;
 	float minWorldY = 10;*/
-	
+
 	// Variable declaration end
 	///////////////////////////
 
@@ -143,7 +145,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh, ui, collectibles);
+	meshinitlevel1(object, pMesh, ui, collectible);
 
 	// Informing the library that we're about to start adding triangles
 	AEGfxMeshStart();
@@ -164,7 +166,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	pMesh[0] = AEGfxMeshEnd();
 	AE_ASSERT_MESG(pMesh[0], "Failed to create mesh 1!!");
-	
+
 
 	AEGfxMeshStart();
 	AEGfxTriAdd(
@@ -181,7 +183,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	itemMesh = AEGfxMeshEnd();
 	AE_ASSERT_MESG(itemMesh, "Failed to create Item Mesh!!");
-	
+
 	// Creating the objects (Shapes) end
 	////////////////////////////////////
 
@@ -227,7 +229,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//=============================================================================================
 		// Input Loop
 		//=============================================================================================
-		
+
 		AEInputUpdate();
 
 		//=============================================================================================
@@ -241,7 +243,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//=============================================================================================
 		AEInputGetCursorPosition(&mouseX, &mouseY);
 
-		playerInputMovement(player.xvel,player.yvel,playerSpeed, jumptoken); //LOCATED IN movement.cpp
+		playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
 
 		playerGravity(player.yvel, gravity);
 
@@ -254,7 +256,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
 		}
 
-		playerEasingMovement(player.xvel,player.yvel, stabliser);
+		for (int i = 0; i < maxCollectible; i++)
+		{
+			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
+		}
+
+		playerEasingMovement(player.xvel, player.yvel, stabliser);
 
 		playerCollisionMapBoundary(player.x, player.y, object[0].x, object[0].y, player.halfW, player.halfH, object[0].halfW, object[0].halfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
 
@@ -279,16 +286,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//=============================================================================================
 		// Game loop draw
 		//=============================================================================================
-		
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 1a84d7c (Merged with yuki's branch)
 		objectrender(player, object, ui, pMesh, collectible);
-=======
-		objectrender(player, object, ui, pMesh, collectibles);
->>>>>>> parent of 32a4c43 (Deconflicted collectibles code)
 
 		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 
@@ -309,11 +308,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// 100 in the x-axis and 100 in the y-axis
 		AEMtx33 translate = { 0 };
 
-		item.direction.x = worldwidth/2 + (mouseX - float(AEGetWindowWidth() / 2)) * cos(item.rotation) - (mouseY - float(AEGetWindowHeight() / 2)) * sin(item.rotation);
-		item.direction.y = worldheight/2 + (mouseX - float(AEGetWindowWidth() / 2)) * sin(item.rotation) + (mouseY - float(AEGetWindowHeight() / 2)) * cos(item.rotation);
+		item.direction.x = worldwidth / 2 + (mouseX - float(AEGetWindowWidth() / 2)) * cos(item.rotation) - (mouseY - float(AEGetWindowHeight() / 2)) * sin(item.rotation);
+		item.direction.y = worldheight / 2 + (mouseX - float(AEGetWindowWidth() / 2)) * sin(item.rotation) + (mouseY - float(AEGetWindowHeight() / 2)) * cos(item.rotation);
 		AEVec2Normalize(&item.direction, &item.direction);
 
-		AEMtx33Trans(&translate, 30 * item.direction.x + player.x, 30 * item.direction.y + player.y);
+		AEMtx33Trans(&translate, 15 * item.direction.x + player.x, -15 * item.direction.y + player.y);
 
 		// Concat the matrices
 		AEMtx33 transform = { 0 };
@@ -330,9 +329,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//=============================================================================================
 		// Game loop draw end
 		//=============================================================================================
-
-
-
 
 		// Informing the system about the loop's end
 		AESysFrameEnd();
