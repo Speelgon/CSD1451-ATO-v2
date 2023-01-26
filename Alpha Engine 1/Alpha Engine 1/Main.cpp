@@ -7,6 +7,8 @@
 #include "vpCollision.hpp"
 #include "collision.hpp"
 #include "collectibles.hpp"
+#include <math.h>
+
 
 // ---------------------------------------------------------------------------
 // main
@@ -25,6 +27,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	int gGameRunning = 1;
 	AEGfxVertexList* pMesh1 = 0;
 	AEGfxVertexList* pMesh2 = 0;
+	AEGfxVertexList* itemMesh = 0;
 
 	square object[30];
 	square ui[5];
@@ -69,6 +72,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	object.height = 60;
 	object.halfW = object.width / 2;
 	object.halfH = object.height / 2;*/
+
+	rectangle item;
+	item.position.x = player.x;
+	item.position.y = player.y;
+	item.rotation = 0;
+	item.width = 8.f;
+	item.height = 45.f;
+
+	//store mouse position coordinates
+	s32 mouseX, mouseY;
 
 	float playerSpeed = 3;
 
@@ -152,6 +165,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	pMesh[0] = AEGfxMeshEnd();
 	AE_ASSERT_MESG(pMesh[0], "Failed to create mesh 1!!");
 	
+
+	AEGfxMeshStart();
+	AEGfxTriAdd(
+		-item.width / 2, -item.height / 2, 0xFFFFFF00, 0.0f, 1.0f,
+		item.width / 2, -item.height / 2, 0xFFFFFF00, 1.0f, 1.0f,
+		-item.width / 2, item.height / 2, 0xFFFFFF00, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		item.width / 2, -item.height / 2, 0xFFFFFFFF, 1.0f, 1.0f,
+		item.width / 2, item.height / 2, 0xFFFFFFFF, 1.0f, 0.0f,
+		-item.width / 2, item.height / 2, 0xFFFFFFFF, 0.0f, 0.0f);
+
+	// Saving the mesh (list of triangles) in pMesh1
+
+	itemMesh = AEGfxMeshEnd();
+	AE_ASSERT_MESG(itemMesh, "Failed to create Item Mesh!!");
+	
 	// Creating the objects (Shapes) end
 	////////////////////////////////////
 
@@ -209,6 +239,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//=============================================================================================
 		// Game loop update	
 		//=============================================================================================
+		AEInputGetCursorPosition(&mouseX, &mouseY);
 
 		playerInputMovement(player.xvel,player.yvel,playerSpeed, jumptoken); //LOCATED IN movement.cpp
 
@@ -251,6 +282,43 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		
 		objectrender(player, object, ui, pMesh, collectibles);
 
+		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+
+		item.direction.x = f32(mouseX) - f32(AEGetWindowWidth() / 2);
+		item.direction.y = f32(mouseY) - f32(AEGetWindowHeight() / 2);
+		AEVec2Normalize(&item.direction, &item.direction);
+		item.rotation = atan2(item.direction.y, item.direction.x);
+
+		// Set Scale for Item
+		AEMtx33 scale = { 0 };
+		AEMtx33Scale(&scale, 1, 1); //set scale to 1 so object can be shown. DO NOT SET TO HIGHER VALUES UNLESS INCREASING SIZE
+
+		// Create a rotation matrix
+		AEMtx33 rotate = { 0 };
+		AEMtx33Rot(&rotate, 360 - AERadToDeg(item.rotation) * 0.025);
+
+		// Create a translation matrix that translates by
+		// 100 in the x-axis and 100 in the y-axis
+		AEMtx33 translate = { 0 };
+
+		item.direction.x = worldwidth/2 + (mouseX - float(AEGetWindowWidth() / 2)) * cos(item.rotation) - (mouseY - float(AEGetWindowHeight() / 2)) * sin(item.rotation);
+		item.direction.y = worldheight/2 + (mouseX - float(AEGetWindowWidth() / 2)) * sin(item.rotation) + (mouseY - float(AEGetWindowHeight() / 2)) * cos(item.rotation);
+		AEVec2Normalize(&item.direction, &item.direction);
+
+		AEMtx33Trans(&translate, 30 * item.direction.x + player.x, 30 * item.direction.y + player.y);
+
+		// Concat the matrices
+		AEMtx33 transform = { 0 };
+		AEMtx33Concat(&transform, &rotate, &scale);
+		AEMtx33Concat(&transform, &translate, &transform);
+
+		// Choose the transform to use
+		AEGfxSetTransform(transform.m);
+		// No texture for object 1
+		AEGfxTextureSet(NULL, 0, 0);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(itemMesh, AE_GFX_MDM_TRIANGLES);
+
 		//=============================================================================================
 		// Game loop draw end
 		//=============================================================================================
@@ -269,7 +337,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Freeing the objects and textures
 
 	AEGfxMeshFree(pMesh[0]);
-
+	AEGfxMeshFree(pMesh[1]);
+	AEGfxMeshFree(pMesh[2]);
+	AEGfxMeshFree(pMesh[3]);
+	AEGfxMeshFree(itemMesh);
 	//This part later needs to be changed to meshes used
 	/*for (int i = 0; i < meshMax; i++)
 	{

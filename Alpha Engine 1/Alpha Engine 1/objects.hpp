@@ -10,6 +10,13 @@ typedef struct squareObject {
 	int lefttoken,righttoken;
 }square;
 
+typedef struct rectangleObject {
+	//AEMtx33 scale{}, rotation{}, transform{};
+	AEVec2 position, direction;
+	float width, height;
+	float rotation;
+}rectangle;
+
 void objectinit(squareObject* object);
 
 void uiinit(squareObject* ui);
