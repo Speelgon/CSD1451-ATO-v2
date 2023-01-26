@@ -99,6 +99,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClCompile Include="allheaders.cpp" />
     <ClCompile Include="collectibles.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Incrementvariable.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="meshInit.cpp" />
     <ClCompile Include="movement.cpp" />
@@ -112,6 +113,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClInclude Include="allheaders.hpp" />
     <ClInclude Include="collectibles.hpp" />
     <ClInclude Include="collision.hpp" />
+    <ClInclude Include="Incrementvariable.h" />
     <ClInclude Include="objects.hpp" />
     <ClInclude Include="movement.hpp" />
     <ClInclude Include="uiPrinting.hpp" />
