@@ -174,6 +174,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	itemMesh = AEGfxMeshEnd();
 	AE_ASSERT_MESG(itemMesh, "Failed to create Item Mesh!!");
+	
 	// Creating the objects (Shapes) end
 	////////////////////////////////////
 
@@ -329,6 +330,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Freeing the objects and textures
 
 	AEGfxMeshFree(pMesh[0]);
+	AEGfxMeshFree(pMesh[1]);
+	AEGfxMeshFree(pMesh[2]);
+	AEGfxMeshFree(pMesh[3]);
 	AEGfxMeshFree(itemMesh);
 	//This part later needs to be changed to meshes used
 	/*for (int i = 0; i < meshMax; i++)
