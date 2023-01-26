@@ -36,7 +36,6 @@
     <ClCompile Include="allheaders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="objectInitcpp.cpp">
       <Filter>Source Files\NewFilter1</Filter>
     </ClCompile>
@@ -51,10 +50,6 @@
     </ClCompile>
     <ClCompile Include="uiPrinting.cpp">
       <Filter>Source Files\NewFilter1</Filter>
-=======
-    <ClCompile Include="Incrementvariable.cpp">
-      <Filter>Source Files</Filter>
->>>>>>> Yuki's-variable-increment
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,11 +71,7 @@
     <ClInclude Include="allheaders.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="uiPrinting.hpp">
-=======
-    <ClInclude Include="Incrementvariable.h">
->>>>>>> Yuki's-variable-increment
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
