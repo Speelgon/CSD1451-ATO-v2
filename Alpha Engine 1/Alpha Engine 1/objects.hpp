@@ -20,8 +20,8 @@ void objectlevel1init(squareObject* object);
 
 void meshinit(squareObject* object, AEGfxVertexList** pMesh);
 
-void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui);
+void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, squareObject* collectibles);
 
 void textureinit(AEGfxTexture** pTex);
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh);
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, squareObject* collectibles);

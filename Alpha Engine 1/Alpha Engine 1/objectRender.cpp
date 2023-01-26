@@ -2,7 +2,7 @@
 #include "allheaders.hpp"
 #include "objects.hpp"
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh)
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, squareObject* collectibles) //added collectibles
 {
 	// Drawing object 1
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
@@ -56,6 +56,17 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[25], AE_GFX_MDM_TRIANGLES);
+
+	// collectibles
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	// Set position for object 3
+	AEGfxSetPosition(collectibles[0].x, collectibles[0].y);
+	// No tint
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	// Set texture
+	// EGfxTextureSet(pTex1, 0.0f, 0.0f);
+	// Drawing the mesh (list of triangles)
+	AEGfxMeshDraw(pMesh[5], AE_GFX_MDM_TRIANGLES);
 
 
 	//if (AEInputCheckCurr(AEVK_T))

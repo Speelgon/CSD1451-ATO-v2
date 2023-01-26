@@ -6,6 +6,7 @@
 #include "movement.hpp"
 #include "vpCollision.hpp"
 #include "collision.hpp"
+#include "collectibles.hpp"
 
 // ---------------------------------------------------------------------------
 // main
@@ -27,11 +28,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	square object[30];
 	square ui[5];
+	square collectibles[5];
 	AEGfxVertexList* pMesh[30];
 	AEGfxVertexList* uiMesh[30];
 	AEGfxTexture* pTex[30];
 
 	AEGfxTexture* pTex1 = 0;
+
 
 	objectinit(object);
 
@@ -40,6 +43,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	uilevel1init(ui);
 
 	objectlevel1init(object);
+
+	collectiblesinit(collectibles);
+	
 
 	textureinit(pTex);
 
@@ -57,16 +63,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	float gravity = 9.81;
 	int jumptoken = 1;
 
-	//object.x = 100;
-	//object.y = -100;
-	//object.width = 1000;
-	//object.height = 60;
-	//object.halfW = object.width / 2;
-	//object.halfH = object.height / 2;
+	/*object.x = 100;
+	object.y = -100;
+	object.width = 1000;
+	object.height = 60;
+	object.halfW = object.width / 2;
+	object.halfH = object.height / 2;*/
 
 	float playerSpeed = 3;
 
-
+	
 	//==================================================================
 	// Yuki's Variables
 	//==================================================================
@@ -124,7 +130,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh, ui);
+	meshinitlevel1(object, pMesh, ui, collectibles);
 
 	// Informing the library that we're about to start adding triangles
 	AEGfxMeshStart();
@@ -243,7 +249,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Game loop draw
 		//=============================================================================================
 		
-		objectrender(player, object, ui, pMesh);
+		objectrender(player, object, ui, pMesh, collectibles);
 
 		//=============================================================================================
 		// Game loop draw end

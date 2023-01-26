@@ -131,3 +131,12 @@ namespace {
 	{
 
 	}
+
+	//collectibles will always have same size and width
+	int playerOverCollectible(float px, float py, float cx, float cy, float cSize)
+		{
+		float cTopRight = cx + cSize;
+		float cBottomLeft = cy + cSize;
+		//float 
+		return 0;
+		}
