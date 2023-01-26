@@ -92,21 +92,7 @@ void objectinit(squareObject* object) {
 		object[i].lefttoken = 0;
 		object[i].righttoken = 0;
 	}
-}
 
-
-void collectibleinit(collectibleObject* collectible)
-{
-	for (int i = 0; i < maxCollectible; i++)
-	{
-		collectible[i].x = 2000;
-		collectible[i].y = -2000;
-		collectible[i].width = 10;
-		collectible[i].height = 10;
-		collectible[i].halfW = collectible[i].width / 2;
-		collectible[i].halfH = collectible[i].height / 2;
-		collectible[i].visibility = 1;
-	}
 }
 
 void objectlevel1init(squareObject* object){
@@ -141,17 +127,6 @@ void objectlevel1init(squareObject* object){
 
 }
 
-void collectiblelevel1init(collectibleObject* object) {
-
-	object[0].x = 300;
-	object[0].y = 400;
-	object[0].width = 30;
-	object[0].height = 30;
-	object[0].halfW = object[0].width / 2;
-	object[0].halfH = object[0].height / 2;
-	object[0].visibility = 1;
-}
-
 void textureinit(AEGfxTexture** pTex)
 {
 	for (int i = 0; i < maxObj; i++)
@@ -159,4 +134,3 @@ void textureinit(AEGfxTexture** pTex)
 		pTex = 0;
 	}
 }
-

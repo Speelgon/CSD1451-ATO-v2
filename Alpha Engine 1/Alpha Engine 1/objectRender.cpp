@@ -2,9 +2,7 @@
 #include "allheaders.hpp"
 #include "objects.hpp"
 
-
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible)
-
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, squareObject* collectibles) //added collectibles
 {
 	// Drawing object 1
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
@@ -48,20 +46,6 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[3], AE_GFX_MDM_TRIANGLES);
 
-	if(collectible[0].visibility == 1)
-	{
-		// Drawing object 3 - (first) - No tint
-		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-		// Set position for object 3
-		AEGfxSetPosition(collectible[0].x, collectible[0].y);
-		// No tint
-		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-		// Set texture
-		// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-		// Drawing the mesh (list of triangles)
-		AEGfxMeshDraw(pMesh[10], AE_GFX_MDM_TRIANGLES);
-	}
-
 	// Drawing object 3 - (first) - No tint
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 	// Set position for object 3
@@ -72,6 +56,17 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[25], AE_GFX_MDM_TRIANGLES);
+
+	// collectibles
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	// Set position for object 3
+	AEGfxSetPosition(collectibles[0].x, collectibles[0].y);
+	// No tint
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	// Set texture
+	// EGfxTextureSet(pTex1, 0.0f, 0.0f);
+	// Drawing the mesh (list of triangles)
+	AEGfxMeshDraw(pMesh[5], AE_GFX_MDM_TRIANGLES);
 
 
 	//if (AEInputCheckCurr(AEVK_T))
