@@ -31,8 +31,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	square object[30];
 	square ui[5];
-	collectible collectible[maxCollectible];
-
+	square collectibles[5];
 	AEGfxVertexList* pMesh[30];
 	AEGfxVertexList* uiMesh[30];
 	AEGfxTexture* pTex[30];
@@ -42,15 +41,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	objectinit(object);
 
-	collectibleinit(collectible);
-
-	collectiblelevel1init(collectible);
-
 	uiinit(ui);
 
 	uilevel1init(ui);
 
 	objectlevel1init(object);
+
+	collectiblesinit(collectibles);
+	
 
 	textureinit(pTex);
 
@@ -145,7 +143,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh, ui, collectible);
+	meshinitlevel1(object, pMesh, ui, collectibles);
 
 	// Informing the library that we're about to start adding triangles
 	AEGfxMeshStart();
@@ -256,11 +254,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
 		}
 
-		for (int i = 0; i < maxCollectible; i++)
-		{
-			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
-		}
-
 		playerEasingMovement(player.xvel,player.yvel, stabliser);
 
 		playerCollisionMapBoundary(player.x, player.y, object[0].x, object[0].y, player.halfW, player.halfH, object[0].halfW, object[0].halfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
@@ -287,7 +280,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Game loop draw
 		//=============================================================================================
 		
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of 1a84d7c (Merged with yuki's branch)
 		objectrender(player, object, ui, pMesh, collectible);
+=======
+		objectrender(player, object, ui, pMesh, collectibles);
+>>>>>>> parent of 32a4c43 (Deconflicted collectibles code)
 
 		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 
@@ -312,8 +313,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		item.direction.y = worldheight/2 + (mouseX - float(AEGetWindowWidth() / 2)) * sin(item.rotation) + (mouseY - float(AEGetWindowHeight() / 2)) * cos(item.rotation);
 		AEVec2Normalize(&item.direction, &item.direction);
 
-		AEMtx33Trans(&translate, 15 * item.direction.x + player.x, - 15 * item.direction.y + player.y);
-		
+		AEMtx33Trans(&translate, 30 * item.direction.x + player.x, 30 * item.direction.y + player.y);
+
 		// Concat the matrices
 		AEMtx33 transform = { 0 };
 		AEMtx33Concat(&transform, &rotate, &scale);
