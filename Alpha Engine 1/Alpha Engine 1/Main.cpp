@@ -6,6 +6,8 @@
 #include "movement.hpp"
 #include "vpCollision.hpp"
 #include "collision.hpp"
+#include "Incrementvariable.h"
+#include <iostream>
 
 // ---------------------------------------------------------------------------
 // main
@@ -24,9 +26,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	int gGameRunning = 1;
 	AEGfxVertexList* pMesh1 = 0;
 	AEGfxVertexList* pMesh2 = 0;
+	AEGfxVertexList* pMeshY1 = 0;
+	AEGfxVertexList* pMeshY2 = 0;
 	AEGfxVertexList* pMesh[30];
 	square object[30];
-
+	
 	for (int i = 0; i < meshMax; i++)
 	{
 		pMesh[i] = 0;
@@ -82,7 +86,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	float halfmapx= mapx / 2;
 	float halfmapy = mapy / 2;
 
+	//variables for passing over obj
+	int a;
+	int b;
 
+	int mousex = 0;
+	int mousey = 0;
+
+	float middlex = 30;
+	float middley = 220;
+	float optionside = 50;
+	float optionhalfside = optionside / 2;
+
+	int incrementobjintializer = 0;
 	/*float minWorldX = 10;
 	float minWorldY = 10;*/
 	
@@ -154,6 +170,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Creating Fonts end
 	//////////////////////////////////
 
+	//int keypressed = 0;
+
 	// Game Loop
 	while (gGameRunning)
 	{
@@ -171,13 +189,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//=============================================================================================
 
 
-
+		//keypressed = passedoverobj();
 
 
 		//=============================================================================================
 		// Game loop update	
 		//=============================================================================================
-
+		//drawing 2 rectangles for player to choose after passing over an object
+		//if (keypressed)
+		//{
+		incrementobjintializer = whichvariableincreased(incrementobjintializer,a, b, middlex, middley, optionhalfside, pMeshY1, pMeshY2, mousex, mousey);
+		//}
 		playerInputMovement(player.xvel,player.yvel,playerSpeed, jumptoken); //LOCATED IN movement.cpp
 
 		playerGravity(player.yvel, gravity);
@@ -217,6 +239,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Game loop draw
 		//=============================================================================================
 		
+
 		// Drawing object 1
 		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 		// Set position for object 1
