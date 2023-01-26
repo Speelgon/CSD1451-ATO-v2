@@ -11,7 +11,8 @@
 
 // ---------------------------------------------------------------------------
 // main
-
+#define screenwidth 800
+#define screenheight 600
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPWSTR    lpCmdLine,
@@ -92,6 +93,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	int mousex = 0;
 	int mousey = 0;
+	int truemousex = 0;
+	int truemousey = 0;
 
 	float middlex = 30;
 	float middley = 220;
@@ -110,7 +113,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Initialization
 
 	// Using custom window procedure
-	AESysInit(hInstance, nCmdShow, 800, 600, 1, 60, true, NULL);
+	AESysInit(hInstance, nCmdShow, screenwidth, screenheight, 1, 60, true, NULL);
 
 	// Changing the window title
 	AESysSetWindowTitle("My New Demo!");
@@ -198,7 +201,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//drawing 2 rectangles for player to choose after passing over an object
 		//if (keypressed)
 		//{
-		incrementobjintializer = whichvariableincreased(incrementobjintializer,a, b, middlex, middley, optionhalfside, pMeshY1, pMeshY2, mousex, mousey);
+
+		int* clickx = &mousex;
+		int* clicky = &mousey;
+		AEInputGetCursorPosition(clickx, clicky);
+		//std::cout << mousex - screenwidth/2 + player.x << '\n';
+		//std::cout << - mousey + screenheight/2 + player.y   << '\n';
+		truemousex = mousex - screenwidth / 2 + player.x;
+		truemousey = -mousey + screenheight / 2 + player.y;
+
+		incrementobjintializer = whichvariableincreased(incrementobjintializer,a, b, middlex, middley, optionhalfside, pMeshY1, pMeshY2, truemousex, truemousey);
 		//}
 		playerInputMovement(player.xvel,player.yvel,playerSpeed, jumptoken); //LOCATED IN movement.cpp
 

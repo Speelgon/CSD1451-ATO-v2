@@ -76,7 +76,6 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh) {
 
 	pMesh[2] = AEGfxMeshEnd();
 
-
 }
 
 void objectinit(squareObject* object) {

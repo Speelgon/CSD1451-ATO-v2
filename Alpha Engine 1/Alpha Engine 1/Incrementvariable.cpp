@@ -20,8 +20,7 @@ namespace {
 		mousepositionx = *click_x; 
 		mousepositiony = *click_y;*/
 	
-		float mousex = (float)click_x-400;
-		float mousey = (float)click_y-300;
+
 
 		float max_x = area_middleX + half_width;
 		float max_y = area_middleY + half_height;
@@ -31,8 +30,8 @@ namespace {
 
 		if (AEInputCheckCurr(AEVK_LBUTTON))
 		{
-			std::cout << "The L mouse works" << '\n';
-			if ((mousex > min_x) && (mousex < max_x) && (mousey > min_y) && (mousey < max_y))
+			std::cout << "The L mouse works   " << click_x << '\n';
+			if ((click_x > min_x) && (click_x < max_x) && (click_y > min_y) && (click_y < max_y))
 			{
 
 				std::cout << "detected in area" << '\n';
@@ -70,9 +69,7 @@ int whichvariableincreased(int incrementobjintializer, int& a, int& b, float mid
 	
 	if (incrementobjintializer)
 	{
-		int* clickx = &mousex;
-		int* clicky = &mousey;
-		AEInputGetCursorPosition(clickx, clicky);
+
 		
 		std::cout << mousey << '\n';
 		
