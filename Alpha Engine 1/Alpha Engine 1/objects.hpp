@@ -2,8 +2,9 @@
 #define maxObj 30
 #define meshMax 30
 #define maxUI 5
+#define maxCollectible 5
 typedef struct squareObject {
-	float x, y;
+	f32 x, y;
 	float width, height;
 	float halfW, halfH;
 	float xvel, yvel;
@@ -17,6 +18,14 @@ typedef struct rectangleObject {
 	float rotation;
 }rectangle;
 
+typedef struct collectibleObject {
+	f32 x, y;
+	float width, height;
+	float halfW, halfH;
+	float xvel, yvel;
+	int visibility;
+}collectible;
+
 void objectinit(squareObject* object);
 
 void uiinit(squareObject* ui);
@@ -27,8 +36,12 @@ void objectlevel1init(squareObject* object);
 
 void meshinit(squareObject* object, AEGfxVertexList** pMesh);
 
-void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, squareObject* collectibles);
+void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible);
 
 void textureinit(AEGfxTexture** pTex);
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, squareObject* collectibles);
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible);
+
+void collectibleinit(collectibleObject* object);
+
+void collectiblelevel1init(collectibleObject* object);
