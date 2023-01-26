@@ -51,6 +51,9 @@
     <ClCompile Include="uiPrinting.cpp">
       <Filter>Source Files\NewFilter1</Filter>
     </ClCompile>
+    <ClCompile Include="IncrementVariable.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.hpp">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="uiPrinting.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IncrementVariable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

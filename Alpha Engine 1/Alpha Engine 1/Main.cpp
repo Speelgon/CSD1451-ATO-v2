@@ -7,8 +7,10 @@
 #include "vpCollision.hpp"
 #include "collision.hpp"
 #include "collectibles.hpp"
+#include "IncrementVariable.hpp"
 #include <math.h>
-
+#define screenwidth 800
+#define screenheight 600
 
 // ---------------------------------------------------------------------------
 // main
@@ -28,7 +30,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AEGfxVertexList* pMesh1 = 0;
 	AEGfxVertexList* pMesh2 = 0;
 	AEGfxVertexList* itemMesh = 0;
-
+	AEGfxVertexList* pMeshY1 = 0;
+	AEGfxVertexList* pMeshY2 = 0;
 	square object[30];
 	square ui[5];
 	collectible collectible[maxCollectible];
@@ -85,6 +88,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	//store mouse position coordinates
 	s32 mouseX, mouseY;
 
+
 	float playerSpeed = 3;
 
 
@@ -92,6 +96,25 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Yuki's Variables
 	//==================================================================
 	// 
+	// 
+	// 
+
+	//variables for passing over obj
+	int a;
+	int b;
+
+	int mousex = 0;
+	int mousey = 0;
+	int truemousex = 0;
+	int truemousey = 0;
+
+	float middlex = 30;
+	float middley = 220;
+	float optionside = 50;
+	float optionhalfside = optionside / 2;
+
+	int incrementobjintializer = 0;
+
 	//viewport 
 	float viewportwidth = player.width + 100;
 	float viewportheight = player.width + 100;
@@ -241,6 +264,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//=============================================================================================
 		// Game loop update	
 		//=============================================================================================
+		
+		int* clickx = &mousex;
+		int* clicky = &mousey;
+		AEInputGetCursorPosition(clickx, clicky);
+		//std::cout << mousex - screenwidth/2 + player.x << '\n';
+		//std::cout << - mousey + screenheight/2 + player.y   << '\n';
+		truemousex = mousex - screenwidth / 2 + player.x;
+		truemousey = -mousey + screenheight / 2 + player.y;
+
+		incrementobjintializer = whichvariableincreased(incrementobjintializer, a, b, middlex, middley, optionhalfside, pMeshY1, pMeshY2, truemousex, truemousey);
+		
 		AEInputGetCursorPosition(&mouseX, &mouseY);
 
 		playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
