@@ -41,6 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AEGfxTexture* pTex[30];
 
 	AEGfxTexture* pTex1 = 0;
+	AEGfxTexture* pTex2 = 0;
 
 
 	objectinit(object);
@@ -175,15 +176,24 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// 1 triangle at a time
 	// X, Y, Color, texU, texV
+	//AEGfxTriAdd(
+	//	-player.halfW, -player.halfH, 0x00FF0000, 0.0f, 1.0f,
+	//	player.halfW, -player.halfH, 0x00FF0000, 1.0f, 1.0f,
+	//	-player.halfW, player.halfH, 0x00FF0000, 0.0f, 0.0f);
+
+	//AEGfxTriAdd(
+	//	player.halfW, -player.halfH, 0x0000FFFF, 1.0f, 1.0f,
+	//	player.halfW, player.halfH, 0x0000FFFF, 1.0f, 0.0f,
+	//	-player.halfW, player.halfH, 0x0000FFFF, 0.0f, 0.0f);
 	AEGfxTriAdd(
-		-player.halfW, -player.halfH, 0x00FF0000, 0.0f, 1.0f,
-		player.halfW, -player.halfH, 0x00FF0000, 1.0f, 1.0f,
-		-player.halfW, player.halfH, 0x00FF0000, 0.0f, 0.0f);
+		-30.0f, -30.0f, 0x00FF00FF, 0.0f, 1.0f,
+		30.0f, -30.0f, 0x00FFFF00, 1.0f, 1.0f,
+		-30.0f, 30.0f, 0x0000FFFF, 0.0f, 0.0f);
 
 	AEGfxTriAdd(
-		player.halfW, -player.halfH, 0x0000FFFF, 1.0f, 1.0f,
-		player.halfW, player.halfH, 0x0000FFFF, 1.0f, 0.0f,
-		-player.halfW, player.halfH, 0x0000FFFF, 0.0f, 0.0f);
+		30.0f, -30.0f, 0x00FFFFFF, 1.0f, 1.0f,
+		30.0f, 30.0f, 0x00FFFFFF, 1.0f, 0.0f,
+		-30.0f, 30.0f, 0x00FFFFFF, 0.0f, 0.0f);
 
 	// Saving the mesh (list of triangles) in pMesh1
 
@@ -214,8 +224,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Loading textures (images)
 
 	// Texture 1: From file
-	pTex1 = AEGfxTextureLoad("Assets/YellowTexture.png");
+	pTex1 = AEGfxTextureLoad("Assets/FCat_Front.png");
 	AE_ASSERT_MESG(pTex1, "Failed to create texture1!!");
+
+	pTex2 = AEGfxTextureLoad("Assets/FCat_Side.png");
+	AE_ASSERT_MESG(pTex2, "Failed to create texture2!!");
 
 	// Loading textures (images) end
 	//////////////////////////////////
@@ -243,6 +256,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
 
+	
 
 	while (gGameRunning)
 	{
@@ -321,7 +335,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Game loop draw
 		//=============================================================================================
 
-		objectrender(player, object, ui, pMesh, collectible);
+		
+
+		objectrender(player, object, ui, pMesh, collectible, pTex1);
+		
+		
+
 
 		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 
@@ -360,6 +379,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(itemMesh, AE_GFX_MDM_TRIANGLES);
 
+		AEGfxSetTransparency(1.0f);
+		if (AEInputCheckCurr(AEVK_D))
+
+			AEGfxTextureSet(pTex2, 0.0f, 0.0f);
+
+
+
 		//=============================================================================================
 		// Game loop draw end
 		//=============================================================================================
@@ -387,6 +413,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
 	AEGfxTextureUnload(pTex1);
+	AEGfxTextureUnload(pTex2);
 
 	// free the system
 	AESysExit();

@@ -40,7 +40,7 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 
 void textureinit(AEGfxTexture** pTex);
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible);
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex);
 
 void collectibleinit(collectibleObject* object);
 

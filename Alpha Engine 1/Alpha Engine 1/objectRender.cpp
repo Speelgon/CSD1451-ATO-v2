@@ -3,17 +3,24 @@
 #include "objects.hpp"
 
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible)
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex)
 
 {
+
+
 	// Drawing object 1
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	// Set position for object 1
 	AEGfxSetPosition(player.x, player.y);
-	// No texture for object 1
-	// AEGfxTextureSet(NULL, 0, 0);
+
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	// Texture for player
+	AEGfxTextureSet(pTex, 0.0f, 0.0f);
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
+
+	AEGfxSetTransparency(1.0f);
+
 
 	// Drawing object 2 - (first) - No tint
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
