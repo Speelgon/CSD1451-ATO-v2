@@ -40,8 +40,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AEGfxVertexList* uiMesh[30];
 	AEGfxTexture* pTex[30];
 
-	AEGfxTexture* pTex1 = 0;
-	AEGfxTexture* pTex2 = 0;
+	AEGfxTexture* pTexFront = 0;
+	AEGfxTexture* pTexRight = 0;
+	AEGfxTexture* pTexLeft = 0;
 
 
 	objectinit(object);
@@ -176,24 +177,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// 1 triangle at a time
 	// X, Y, Color, texU, texV
-	//AEGfxTriAdd(
-	//	-player.halfW, -player.halfH, 0x00FF0000, 0.0f, 1.0f,
-	//	player.halfW, -player.halfH, 0x00FF0000, 1.0f, 1.0f,
-	//	-player.halfW, player.halfH, 0x00FF0000, 0.0f, 0.0f);
-
-	//AEGfxTriAdd(
-	//	player.halfW, -player.halfH, 0x0000FFFF, 1.0f, 1.0f,
-	//	player.halfW, player.halfH, 0x0000FFFF, 1.0f, 0.0f,
-	//	-player.halfW, player.halfH, 0x0000FFFF, 0.0f, 0.0f);
 	AEGfxTriAdd(
-		-30.0f, -30.0f, 0x00FF00FF, 0.0f, 1.0f,
-		30.0f, -30.0f, 0x00FFFF00, 1.0f, 1.0f,
-		-30.0f, 30.0f, 0x0000FFFF, 0.0f, 0.0f);
+		-(player.width * 3), -player.halfH, 0x00FF0000, 0.0f, 1.0f,
+		player.width * 3, -player.halfH, 0x00FF0000, 1.0f, 1.0f,
+		-(player.width * 3), player.halfH, 0x00FF0000, 0.0f, 0.0f);
 
 	AEGfxTriAdd(
-		30.0f, -30.0f, 0x00FFFFFF, 1.0f, 1.0f,
-		30.0f, 30.0f, 0x00FFFFFF, 1.0f, 0.0f,
-		-30.0f, 30.0f, 0x00FFFFFF, 0.0f, 0.0f);
+		player.width * 3, -player.halfH, 0x0000FFFF, 1.0f, 1.0f,
+		player.width * 3, player.halfH, 0x0000FFFF, 1.0f, 0.0f,
+		-(player.width * 3), player.halfH, 0x0000FFFF, 0.0f, 0.0f);
+
 
 	// Saving the mesh (list of triangles) in pMesh1
 
@@ -224,11 +217,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Loading textures (images)
 
 	// Texture 1: From file
-	pTex1 = AEGfxTextureLoad("Assets/FCat_Front.png");
-	AE_ASSERT_MESG(pTex1, "Failed to create texture1!!");
+	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
+	AE_ASSERT_MESG(pTexFront, "Failed to create texture1!!");
 
-	pTex2 = AEGfxTextureLoad("Assets/FCat_Side.png");
-	AE_ASSERT_MESG(pTex2, "Failed to create texture2!!");
+	pTexRight = AEGfxTextureLoad("Assets/FCat_Right.png");
+	AE_ASSERT_MESG(pTexRight, "Failed to create texture2!!");
+
+	pTexLeft = AEGfxTextureLoad("Assets/FCat_Left.png");
+	AE_ASSERT_MESG(pTexLeft, "Failed to create texture2!!");
 
 	// Loading textures (images) end
 	//////////////////////////////////
@@ -335,10 +331,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Game loop draw
 		//=============================================================================================
 
-		
 
-		objectrender(player, object, ui, pMesh, collectible, pTex1);
-		
+		// Change texture base on where player is facing
+		if (AEInputCheckCurr(AEVK_D))
+		{
+			objectrender(player, object, ui, pMesh, collectible, pTexRight);
+		}
+		else if (AEInputCheckCurr(AEVK_A))
+		{
+			objectrender(player, object, ui, pMesh, collectible, pTexLeft);
+		}
+		else
+		{
+			objectrender(player, object, ui, pMesh, collectible, pTexFront);
+		}
 		
 
 
@@ -379,10 +385,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(itemMesh, AE_GFX_MDM_TRIANGLES);
 
-		AEGfxSetTransparency(1.0f);
-		if (AEInputCheckCurr(AEVK_D))
+		//AEGfxSetTransparency(1.0f);
+		//if (AEInputCheckCurr(AEVK_D))
 
-			AEGfxTextureSet(pTex2, 0.0f, 0.0f);
+		//	AEGfxTextureSet(pTex2, player.x, player.y);
+
 
 
 
@@ -412,8 +419,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}*/
 
 
-	AEGfxTextureUnload(pTex1);
-	AEGfxTextureUnload(pTex2);
+	AEGfxTextureUnload(pTexFront);
+	AEGfxTextureUnload(pTexRight);
+	AEGfxTextureUnload(pTexLeft);
 
 	// free the system
 	AESysExit();
