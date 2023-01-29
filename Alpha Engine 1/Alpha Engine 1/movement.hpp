@@ -1,4 +1,5 @@
 #pragma once
+#include "objects.hpp"
 
 
 void playerInputMovement(float& pX, float& pY, float playerSpeed, int& jumptoken);
