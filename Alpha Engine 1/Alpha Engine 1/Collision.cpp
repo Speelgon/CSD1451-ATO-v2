@@ -1,6 +1,6 @@
 #pragma once
 #include "allheaders.hpp"
-#include "collision.hpp"
+
 
 /*================================================================================================================================
 							THIS NAMESPACE CONTAINS THE FUNCTIONS USED TO CHECK THE BOARDERS 

@@ -24,7 +24,9 @@ typedef struct collectibleObject {
 	float halfW, halfH;
 	float xvel, yvel;
 	int visibility;
-}collectible;
+}collectible1;
+
+
 
 void objectinit(squareObject* object);
 
