@@ -25,9 +25,6 @@ extern int jumptoken;
 extern float gravity;
 extern float stabliser;
 
-
-
-
 //==========================================================================================================================
 	// Yuki's Variables
 	//==========================================================================================================================
@@ -272,6 +269,7 @@ void Level1_Free()
 	{
 		AEGfxMeshFree(pMesh[i]);
 	}
+	AEGfxMeshFree(itemMesh);
 }
 
 void Level1_Unload()
