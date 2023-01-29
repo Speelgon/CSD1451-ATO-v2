@@ -16,6 +16,9 @@
     <Filter Include="Source Files\NewFilter1">
       <UniqueIdentifier>{19f92809-de95-4530-9db7-6c90ba126105}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game State">
+      <UniqueIdentifier>{d2b87e31-9a01-4dc1-9da7-9510c1937e56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -54,6 +57,12 @@
     <ClCompile Include="IncrementVariable.cpp">
       <Filter>Source Files\NewFilter1</Filter>
     </ClCompile>
+    <ClCompile Include="GSM.cpp">
+      <Filter>Source Files\Game State</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1.cpp">
+      <Filter>Source Files\Game State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.hpp">
@@ -74,10 +83,19 @@
     <ClInclude Include="allheaders.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="uiPrinting.hpp">
+    <ClInclude Include="IncrementVariable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IncrementVariable.hpp">
+    <ClInclude Include="Level1.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GSM.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objectDeclarations.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objectDecs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

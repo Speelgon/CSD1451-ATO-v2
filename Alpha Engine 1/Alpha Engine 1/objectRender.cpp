@@ -6,8 +6,6 @@
 void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex)
 
 {
-
-
 	// Drawing object 1
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	// Set position for object 1
@@ -55,6 +53,17 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[3], AE_GFX_MDM_TRIANGLES);
 
+	// Drawing object 3 - (first) - No tint
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	// Set position for object 3
+	AEGfxSetPosition(object[3].x, object[3].y);
+	// No tint
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	// Set texture
+	// EGfxTextureSet(pTex1, 0.0f, 0.0f);
+	// Drawing the mesh (list of triangles)
+	AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
+
 	if(collectible[0].visibility == 1)
 	{
 		// Drawing object 3 - (first) - No tint
@@ -97,7 +106,7 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	//	// Set texture
 	//	AEGfxTextureSet(pTex1, 0.0f, 0.0f);
 	//	// Drawing the mesh (list of triangles)
-	//	AEGfxMeshDraw(pMesh[3], AE_GFX_MDM_TRIANGLES);
+	//	AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
 
 	//}
 

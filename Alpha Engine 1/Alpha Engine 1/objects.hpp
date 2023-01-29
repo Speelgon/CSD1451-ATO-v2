@@ -24,7 +24,7 @@ typedef struct collectibleObject {
 	float halfW, halfH;
 	float xvel, yvel;
 	int visibility;
-}collectible;
+}collectible1;
 
 void objectinit(squareObject* object);
 
@@ -36,7 +36,7 @@ void objectlevel1init(squareObject* object);
 
 void meshinit(squareObject* object, AEGfxVertexList** pMesh);
 
-void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible);
+void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible,squareObject player);
 
 void textureinit(AEGfxTexture** pTex);
 

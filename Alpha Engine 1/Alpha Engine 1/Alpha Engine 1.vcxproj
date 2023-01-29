@@ -100,11 +100,13 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClCompile Include="collectibles.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="IncrementVariable.cpp" />
+    <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="meshInit.cpp" />
     <ClCompile Include="movement.cpp" />
     <ClCompile Include="objectInitcpp.cpp" />
     <ClCompile Include="objectRender.cpp" />
+    <ClCompile Include="GSM.cpp" />
     <ClCompile Include="uiInit.cpp" />
     <ClCompile Include="uiPrinting.cpp" />
     <ClCompile Include="vpCollision.cpp" />
@@ -113,10 +115,13 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClInclude Include="allheaders.hpp" />
     <ClInclude Include="collectibles.hpp" />
     <ClInclude Include="collision.hpp" />
+    <ClInclude Include="GSM.hpp" />
     <ClInclude Include="IncrementVariable.hpp" />
+    <ClInclude Include="Level1.hpp" />
+    <ClInclude Include="objectDeclarations.hpp" />
+    <ClInclude Include="objectDecs.hpp" />
     <ClInclude Include="objects.hpp" />
     <ClInclude Include="movement.hpp" />
-    <ClInclude Include="uiPrinting.hpp" />
     <ClInclude Include="vpCollision.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
