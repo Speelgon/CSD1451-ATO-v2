@@ -231,14 +231,14 @@ void Level1_Draw()
 
 	// Create a rotation matrix
 	AEMtx33 rotate = { 0 };
-	AEMtx33Rot(&rotate, 360 - AERadToDeg(item.rotation) * 0.025);
+	AEMtx33Rot(&rotate, 360 - AERadToDeg(item.rotation) * AEFrameRateControllerGetFrameTime());
 
 	// Create a translation matrix that translates by
 	// 100 in the x-axis and 100 in the y-axis
 	AEMtx33 translate = { 0 };
 
-	item.direction.x = worldwidth / 2 + (mouseX - float(AEGetWindowWidth() / 2)) * cos(item.rotation) - (mouseY - float(AEGetWindowHeight() / 2)) * sin(item.rotation);
-	item.direction.y = worldheight / 2 + (mouseX - float(AEGetWindowWidth() / 2)) * sin(item.rotation) + (mouseY - float(AEGetWindowHeight() / 2)) * cos(item.rotation);
+	item.direction.x = (mouseX - worldwidth / 2) * cos(item.rotation) - (mouseY - worldheight/ 2) * sin(item.rotation);
+	item.direction.y = (mouseX - worldwidth / 2) * sin(item.rotation) + (mouseY - worldheight / 2) * cos(item.rotation);
 	AEVec2Normalize(&item.direction, &item.direction);
 
 	AEMtx33Trans(&translate, 15 * item.direction.x + player.x, -15 * item.direction.y + player.y);
