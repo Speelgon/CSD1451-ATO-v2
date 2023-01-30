@@ -2,6 +2,21 @@
 #include "allheaders.hpp"
 #include "objects.hpp"
 
+/*================================================================================================================================
+
+							INTSRUCTIONS FOR PRINTING SHAPES ON THE SCREEN
+							1. DECLARE & INITIALIZE OBJECT (OBJECTS ALREADY DECLARED IN
+							   objectDecs.hpp AND INITIALIZED IN objectinit()
+
+							2. SET OBJECT VARIABLES IN objectlevel1init()
+							   THIS MAY NOT BE objectlevel1init() IN THE FUTURE AS EACH
+							   LEVEL NEEDS ITS OWN OBJECT LOCATIONS
+							3. INITIALIZE MESHES (ALREADY INITIALIZED IN meshinit()
+							4. SET THE OBJECTS TO THEIR RESPECTIVE MESHES IN meshinitlevel1()
+							5. SET THE OBJECT TO RENDER IN objectrender()
+
+================================================================================================================================
+*/
 
 void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex)
 

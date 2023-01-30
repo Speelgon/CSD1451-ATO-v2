@@ -118,7 +118,6 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClInclude Include="GSM.hpp" />
     <ClInclude Include="IncrementVariable.hpp" />
     <ClInclude Include="Level1.hpp" />
-    <ClInclude Include="objectDeclarations.hpp" />
     <ClInclude Include="objectDecs.hpp" />
     <ClInclude Include="objects.hpp" />
     <ClInclude Include="movement.hpp" />

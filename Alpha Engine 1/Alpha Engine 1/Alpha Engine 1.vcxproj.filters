@@ -92,9 +92,6 @@
     <ClInclude Include="GSM.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="objectDeclarations.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="objectDecs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

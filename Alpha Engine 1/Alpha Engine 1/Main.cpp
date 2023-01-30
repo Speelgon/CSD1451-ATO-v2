@@ -9,7 +9,6 @@
 #include "collectibles.hpp"
 #include "IncrementVariable.hpp"
 #include <math.h>
-#include "objectDeclarations.hpp"
 #include "Level1.hpp"
 #include "GSM.hpp"
 #include "objectDecs.hpp"
