@@ -22,7 +22,7 @@ void objectinit(squareObject* object) {
 
 	for (int i = 0; i < maxObj; i++)
 	{
-		object[i].x = 2000;
+		object[i].x = 20000;
 		object[i].y = -2000;
 		object[i].width = 10;
 		object[i].height = 10;
@@ -38,7 +38,7 @@ void collectibleinit(collectibleObject* collectible)
 {
 	for (int i = 0; i < maxCollectible; i++)
 	{
-		collectible[i].x = 2000;
+		collectible[i].x = 20000;
 		collectible[i].y = -2000;
 		collectible[i].width = 10;
 		collectible[i].height = 10;
@@ -50,29 +50,29 @@ void collectibleinit(collectibleObject* collectible)
 
 void objectlevel1init(squareObject* object){
 
-	object[0].x = 100;
-	object[0].y = -100;
-	object[0].width = 1000;
-	object[0].height = 60;
+	object[0].x = -1000;
+	object[0].y = -275;
+	object[0].width = 700;
+	object[0].height = 30;
 	object[0].halfW = object[0].width / 2;
 	object[0].halfH = object[0].height / 2;
 
-	object[1].x = 400;
-	object[1].y = 150;
+	object[1].x = -850;
+	object[1].y = -200;
 	object[1].width = 200;
 	object[1].height = 30;
 	object[1].halfW = object[1].width / 2;
 	object[1].halfH = object[1].height / 2;
 
-	object[2].x = 100;
-	object[2].y = 100;
-	object[2].width = 400;
+	object[2].x = -650;
+	object[2].y = -125;
+	object[2].width = 200;
 	object[2].height = 30;
 	object[2].halfW = object[2].width / 2;
 	object[2].halfH = object[2].height / 2;
 
-	object[3].x = -300;
-	object[3].y = 100;
+	object[3].x = -450;
+	object[3].y = -75;
 	object[3].width = 100;
 	object[3].height = 30;
 	object[3].halfW = object[3].width / 2;
@@ -82,8 +82,8 @@ void objectlevel1init(squareObject* object){
 
 void collectiblelevel1init(collectibleObject* object) {
 
-	object[0].x = 400;
-	object[0].y = 100;
+	object[0].x = -450;
+	object[0].y = 0;
 	object[0].width = 30;
 	object[0].height = 30;
 	object[0].halfW = object[0].width / 2;

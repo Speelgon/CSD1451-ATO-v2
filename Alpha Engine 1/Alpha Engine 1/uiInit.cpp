@@ -19,7 +19,7 @@ void uiinit(squareObject* ui)
 
 void uilevel1init(squareObject* ui)
 {
-	ui[0].x = -100;
+	ui[0].x = 20000;
 	ui[0].y = 200;
 	ui[0].width = 200;
 	ui[0].height = 50;

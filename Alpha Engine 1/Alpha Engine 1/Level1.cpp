@@ -92,8 +92,8 @@ void Level1_Load()
 void Level1_Initialize()
 {
 
-	player.x = 0;
-	player.y = 0;
+	player.x = -1000;
+	player.y = -200;
 	player.xvel = 0;
 	player.yvel = 0;
 	player.width = 10;
@@ -191,10 +191,10 @@ void Level1_Update()
 
 	AEInputGetCursorPosition(&mouseX, &mouseY);
 
-	if(player.x<400 && player.x>-400 && player.y<400 && player.y > -300)
-	{
+	//if(player.x<400 && player.x>-400 && player.y<400 && player.y > -300)
+	//{
 		viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
-	}
+	//}
 
 }
 
