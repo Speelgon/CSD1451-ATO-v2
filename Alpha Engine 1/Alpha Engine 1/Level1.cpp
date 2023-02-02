@@ -10,6 +10,7 @@ extern square player;
 extern square object[30];
 extern square ui[5];
 extern collectible1 collectible[maxCollectible];
+extern portal1 portal[maxPortal];
 extern rectangle item;
 
 extern AEGfxVertexList* pMesh[30];
@@ -115,6 +116,10 @@ void Level1_Initialize()
 
 	collectiblelevel1init(collectible);
 
+	portalinit(portal);
+
+	portallevel1init(portal);
+
 	uiinit(ui);
 
 	uilevel1init(ui);
@@ -125,7 +130,7 @@ void Level1_Initialize()
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh, ui, collectible, player);
+	meshinitlevel1(object, pMesh, ui, collectible, player, portal);
 
 	AEGfxMeshStart();
 	AEGfxTriAdd(
@@ -177,6 +182,27 @@ void Level1_Update()
 		playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
 	}
 
+
+	playerCollisionPortal(player.x, player.y, portal[0].x, portal[0].y, player.halfW, player.halfH, portal[0].halfW, portal[0].halfH, portal[0].positiontoken);
+
+	if (portal[0].positiontoken == 0)
+	{
+		player.x = portal[1].x + portal[1].halfW + 20;
+		player.y = portal[1].y;
+		portal[0].positiontoken = 1;
+	}
+
+	playerCollisionPortal(player.x, player.y, portal[1].x, portal[1].y, player.halfW, player.halfH, portal[1].halfW, portal[1].halfH, portal[1].positiontoken);
+
+
+	if (portal[1].positiontoken == 0)
+	{
+		player.x = portal[0].x - portal[0].halfW - 20;
+		player.y = portal[0].y;
+		portal[1].positiontoken = 2;
+	}
+	
+
 	playerEasingMovement(player.xvel, player.yvel, stabliser);
 
 	playerCollisionMapBoundary(player.x, player.y, object[0].x, object[0].y, player.halfW, player.halfH, object[0].halfW, object[0].halfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
@@ -205,15 +231,15 @@ void Level1_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal);
 	}
 
 
