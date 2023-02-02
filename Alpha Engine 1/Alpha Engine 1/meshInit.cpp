@@ -179,9 +179,23 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 		portal[0].halfW, portal[0].halfH, 0x00FFFFFF, 1.0f, 0.0f,
 		-portal[0].halfW, portal[0].halfH, 0x00FFFFFF, 0.0f, 0.0f);
 
-	// Saving the mesh (list of triangles) in pMesh2
-
 	pMesh[11] = AEGfxMeshEnd();
+
+	//===============================================================
+
+	AEGfxMeshStart();
+
+	AEGfxTriAdd(
+		-portal[1].halfW, -portal[1].halfH, 0x00FF00FF, 0.0f, 1.0f,
+		portal[1].halfW, -portal[1].halfH, 0x00FFFF00, 1.0f, 1.0f,
+		-portal[1].halfW, portal[1].halfH, 0x0000FFFF, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		portal[1].halfW, -portal[1].halfH, 0x00FFFFFF, 1.0f, 1.0f,
+		portal[1].halfW, portal[1].halfH, 0x00FFFFFF, 1.0f, 0.0f,
+		-portal[1].halfW, portal[1].halfH, 0x00FFFFFF, 0.0f, 0.0f);
+
+	pMesh[12] = AEGfxMeshEnd();
 
 	//===================================================================================================================================================
 	//===================================================================================================================================================
