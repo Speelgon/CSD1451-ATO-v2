@@ -187,7 +187,7 @@ void Level1_Update()
 
 	if (portal[0].positiontoken == 0)
 	{
-		player.x = portal[1].x + portal[1].halfW + 10;
+		player.x = portal[1].x + portal[1].halfW + 20;
 		player.y = portal[1].y;
 		portal[0].positiontoken = 1;
 	}
@@ -197,7 +197,7 @@ void Level1_Update()
 
 	if (portal[1].positiontoken == 0)
 	{
-		player.x = portal[0].x - portal[0].halfW - 10;
+		player.x = portal[0].x - portal[0].halfW - 20;
 		player.y = portal[0].y;
 		portal[1].positiontoken = 2;
 	}
