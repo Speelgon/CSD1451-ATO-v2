@@ -33,6 +33,7 @@ typedef struct portalObject {
 	float width, height;
 	float halfW, halfH;
 	float xvel, yvel;
+	int positiontoken;
 
 }portal1;
 

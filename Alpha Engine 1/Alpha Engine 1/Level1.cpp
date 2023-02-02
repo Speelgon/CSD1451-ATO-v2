@@ -182,6 +182,27 @@ void Level1_Update()
 		playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
 	}
 
+
+	playerCollisionPortal(player.x, player.y, portal[0].x, portal[0].y, player.halfW, player.halfH, portal[0].halfW, portal[0].halfH, portal[0].positiontoken);
+
+	if (portal[0].positiontoken == 0)
+	{
+		player.x = portal[1].x + portal[1].halfW + 10;
+		player.y = portal[1].y;
+		portal[0].positiontoken = 1;
+	}
+
+	playerCollisionPortal(player.x, player.y, portal[1].x, portal[1].y, player.halfW, player.halfH, portal[1].halfW, portal[1].halfH, portal[1].positiontoken);
+
+
+	if (portal[1].positiontoken == 0)
+	{
+		player.x = portal[0].x - portal[0].halfW - 10;
+		player.y = portal[0].y;
+		portal[1].positiontoken = 2;
+	}
+	
+
 	playerEasingMovement(player.xvel, player.yvel, stabliser);
 
 	playerCollisionMapBoundary(player.x, player.y, object[0].x, object[0].y, player.halfW, player.halfH, object[0].halfW, object[0].halfH, playerSpeed + player.xvel, playerSpeed + player.yvel);

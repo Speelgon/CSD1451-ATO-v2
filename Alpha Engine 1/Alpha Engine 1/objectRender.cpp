@@ -21,6 +21,10 @@
 void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal)
 
 {
+	//===============================================================
+	// Player Drawing												 
+	//===============================================================
+	
 	// Drawing object 1
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	// Set position for object 1
@@ -33,7 +37,10 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
 
 	AEGfxSetTransparency(1.0f);
-
+	
+	//===============================================================
+	// Platform Drawing												 
+	//===============================================================
 
 	// Drawing object 2 - (first) - No tint
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
@@ -79,6 +86,10 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
 
+	//===============================================================
+	// Collectible Drawing												 
+	//===============================================================
+
 	if(collectible[0].visibility == 1)
 	{
 		// Drawing object 3 - (first) - No tint
@@ -93,6 +104,10 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 		AEGfxMeshDraw(pMesh[10], AE_GFX_MDM_TRIANGLES);
 	}
 
+	//===============================================================
+	// UI Drawing												 
+	//===============================================================
+
 	// Drawing object 3 - (first) - No tint
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 	// Set position for object 3
@@ -104,9 +119,9 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[25], AE_GFX_MDM_TRIANGLES);
 
-	//===============================================================//
-	// Portal Drawing												 //
-	//===============================================================//
+	//===============================================================
+	// Portal Drawing												 
+	//===============================================================
 
 	// Drawing object 3 - (first) - No tint
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
