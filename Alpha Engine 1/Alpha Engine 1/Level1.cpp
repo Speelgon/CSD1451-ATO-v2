@@ -10,6 +10,7 @@ extern square player;
 extern square object[30];
 extern square ui[5];
 extern collectible1 collectible[maxCollectible];
+extern portal1 portal[maxPortal];
 extern rectangle item;
 
 extern AEGfxVertexList* pMesh[30];
@@ -115,6 +116,10 @@ void Level1_Initialize()
 
 	collectiblelevel1init(collectible);
 
+	portalinit(portal);
+
+	portallevel1init(portal);
+
 	uiinit(ui);
 
 	uilevel1init(ui);
@@ -125,7 +130,7 @@ void Level1_Initialize()
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh, ui, collectible, player);
+	meshinitlevel1(object, pMesh, ui, collectible, player, portal);
 
 	AEGfxMeshStart();
 	AEGfxTriAdd(
@@ -205,15 +210,15 @@ void Level1_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal);
 	}
 
 

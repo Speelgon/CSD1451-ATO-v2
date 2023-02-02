@@ -91,6 +91,29 @@ void collectiblelevel1init(collectibleObject* object) {
 	object[0].visibility = 1;
 }
 
+void portalinit(portalObject* portal) {
+
+	for (int i = 0; i < maxPortal; i++)
+	{
+		portal[i].x = 20000;
+		portal[i].y = -2000;
+		portal[i].width = 10;
+		portal[i].height = 10;
+		portal[i].halfW = portal[i].width / 2;
+		portal[i].halfH = portal[i].height / 2;
+	}
+}
+
+void portallevel1init(portalObject* object) {
+
+	object[0].x = -250;
+	object[0].y = 0;
+	object[0].width = 60;
+	object[0].height = 60;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+}
+
 void textureinit(AEGfxTexture** pTex)
 {
 	for (int i = 0; i < maxObj; i++)

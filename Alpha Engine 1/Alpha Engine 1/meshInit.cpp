@@ -45,7 +45,7 @@ void meshinit(squareObject* object, AEGfxVertexList** pMesh) {
 	}
 }
 
-void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui,collectibleObject* collectible,squareObject player) {
+void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui,collectibleObject* collectible,squareObject player, portalObject* portal) {
 	
 	//======================================================IMPORTANT BEFORE YOU DECLARE MESHES==========================================================
 	//======================================================IMPORTANT BEFORE YOU DECLARE MESHES==========================================================
@@ -144,6 +144,8 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 	//===================================================================================================================================================
 	//===================================================================================================================================================
 
+	//Printing collectibles
+
 	AEGfxMeshStart();
 
 	AEGfxTriAdd(
@@ -159,6 +161,27 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 	// Saving the mesh (list of triangles) in pMesh2
 
 	pMesh[10] = AEGfxMeshEnd();
+
+	//===================================================================================================================================================
+	//===================================================================================================================================================
+
+	//Printing portals
+
+	AEGfxMeshStart();
+
+	AEGfxTriAdd(
+		-portal[0].halfW, -portal[0].halfH, 0x00FF00FF, 0.0f, 1.0f,
+		portal[0].halfW, -portal[0].halfH, 0x00FFFF00, 1.0f, 1.0f,
+		-portal[0].halfW, portal[0].halfH, 0x0000FFFF, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		portal[0].halfW, -portal[0].halfH, 0x00FFFFFF, 1.0f, 1.0f,
+		portal[0].halfW, portal[0].halfH, 0x00FFFFFF, 1.0f, 0.0f,
+		-portal[0].halfW, portal[0].halfH, 0x00FFFFFF, 0.0f, 0.0f);
+
+	// Saving the mesh (list of triangles) in pMesh2
+
+	pMesh[11] = AEGfxMeshEnd();
 
 	//===================================================================================================================================================
 	//===================================================================================================================================================
@@ -180,6 +203,6 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 
 	pMesh[25] = AEGfxMeshEnd();
 
-	//Printing collectibles
+	
 
 }

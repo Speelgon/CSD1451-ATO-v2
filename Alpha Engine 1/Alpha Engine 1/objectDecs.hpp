@@ -11,6 +11,7 @@ DECLARES THE VARIABLES WE NEED TO USE
 square object[30];
 square ui[5];
 collectible1 collectible[maxCollectible];
+portal1 portal[maxPortal];
 square player;
 
 rectangle item;

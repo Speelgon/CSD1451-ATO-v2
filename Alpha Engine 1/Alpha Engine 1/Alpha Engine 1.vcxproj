@@ -107,6 +107,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClCompile Include="objectInitcpp.cpp" />
     <ClCompile Include="objectRender.cpp" />
     <ClCompile Include="GSM.cpp" />
+    <ClCompile Include="portals.cpp" />
     <ClCompile Include="uiInit.cpp" />
     <ClCompile Include="uiPrinting.cpp" />
     <ClCompile Include="vpCollision.cpp" />
@@ -121,6 +122,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClInclude Include="objectDecs.hpp" />
     <ClInclude Include="objects.hpp" />
     <ClInclude Include="movement.hpp" />
+    <ClInclude Include="portals.hpp" />
     <ClInclude Include="vpCollision.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
