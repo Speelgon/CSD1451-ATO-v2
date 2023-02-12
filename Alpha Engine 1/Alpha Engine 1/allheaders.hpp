@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "Level1.hpp"
+#include "Mainmenu.hpp"
 
 #define screenwidth 800
 #define screenheight 600
@@ -15,7 +16,8 @@ extern FP fpLoad, fpInitialize, fpUpdate, fpDraw, fpFree, fpUnload;
 
 enum GS_STATES
 {
-	GS_LEVEL1 = 0,
+	GS_MAINMENU = 0,
+	GS_LEVEL1 = 1,
 	GS_LEVEL2,
 
 	GS_QUIT,

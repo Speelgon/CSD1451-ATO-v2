@@ -12,6 +12,7 @@
 #include "Level1.hpp"
 #include "GSM.hpp"
 #include "objectDecs.hpp"
+#include "Mainmenu.hpp"
 
 // ---------------------------------------------------------------------------
 // main
@@ -67,14 +68,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Loading textures (images)
 
 	// Texture 1: From file
-	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
+	/*pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
 	AE_ASSERT_MESG(pTexFront, "Failed to create texture1!!");
 
 	pTexRight = AEGfxTextureLoad("Assets/FCat_Right.png");
 	AE_ASSERT_MESG(pTexRight, "Failed to create texture2!!");
 
 	pTexLeft = AEGfxTextureLoad("Assets/FCat_Left.png");
-	AE_ASSERT_MESG(pTexLeft, "Failed to create texture2!!");
+	AE_ASSERT_MESG(pTexLeft, "Failed to create texture2!!");*/
 
 	// Loading textures (images) end
 	//////////////////////////////////
@@ -105,7 +106,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			current = previous;
 		}
 
-		Level1_Initialize();
+		Mainmenu_Initialize();
 
 		while (next == current)
 		{

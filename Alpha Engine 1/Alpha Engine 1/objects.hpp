@@ -45,3 +45,4 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 void collectibleinit(collectibleObject* object);
 
 void collectiblelevel1init(collectibleObject* object);
+
