@@ -68,13 +68,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// Texture 1: From file
 	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
-	AE_ASSERT_MESG(pTexFront, "Failed to create texture1!!");
+	AE_ASSERT_MESG(pTexFront, "Failed to create cat front texture!!");
 
 	pTexRight = AEGfxTextureLoad("Assets/FCat_Right.png");
-	AE_ASSERT_MESG(pTexRight, "Failed to create texture2!!");
+	AE_ASSERT_MESG(pTexRight, "Failed to create cat right texture!!");
 
 	pTexLeft = AEGfxTextureLoad("Assets/FCat_Left.png");
-	AE_ASSERT_MESG(pTexLeft, "Failed to create texture2!!");
+	AE_ASSERT_MESG(pTexLeft, "Failed to create cat left texture!!");
+
+	pTexPortal = AEGfxTextureLoad("Assets/portal.png");
+	AE_ASSERT_MESG(pTexPortal, "Failed to create portal texture!!");
 
 	// Loading textures (images) end
 	//////////////////////////////////
