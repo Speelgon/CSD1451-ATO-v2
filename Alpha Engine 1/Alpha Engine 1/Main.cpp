@@ -82,6 +82,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	pTexPlatform = AEGfxTextureLoad("Assets/platform.png");
 	AE_ASSERT_MESG(pTexPlatform, "Failed to create platform texture!!");
 
+	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
+	AE_ASSERT_MESG(pTexCollectible, "Failed to create collectible texture!!");
+
 	// Loading textures (images) end
 	//////////////////////////////////
 

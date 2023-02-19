@@ -23,6 +23,7 @@ extern AEGfxTexture* pTexRight;
 extern AEGfxTexture* pTexLeft;
 extern AEGfxTexture* pTexPortal;
 extern AEGfxTexture* pTexPlatform;
+extern AEGfxTexture* pTexCollectible;
 extern float playerSpeed;
 extern int jumptoken;
 extern float gravity;
@@ -233,15 +234,15 @@ void Level1_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible);
 	}
 
 
@@ -307,5 +308,6 @@ void Level1_Unload()
 	AEGfxTextureUnload(pTexLeft);
 	AEGfxTextureUnload(pTexPortal);
 	AEGfxTextureUnload(pTexPlatform);
+	AEGfxTextureUnload(pTexCollectible);
 }
 

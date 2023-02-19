@@ -18,7 +18,7 @@
 ================================================================================================================================
 */
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform)
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible)
 
 {
 	//===============================================================
@@ -43,51 +43,6 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	//===============================================================
 	// Platform Drawing												 
 	//===============================================================
-
-	//// Drawing object 2 - (first) - No tint
-	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	//// Set position for object 2
-	//AEGfxSetPosition(object[0].x, object[0].y);
-	//// No tint
-	//AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//// Set texture
-	//// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-	//// Drawing the mesh (list of triangles)
-	//AEGfxMeshDraw(pMesh[1], AE_GFX_MDM_TRIANGLES);
-
-	//// Drawing object 3 - (first) - No tint
-	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	//// Set position for object 3
-	//AEGfxSetPosition(object[1].x, object[1].y);
-	//// No tint
-	//AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//// Set texture
-	//// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-	//// Drawing the mesh (list of triangles)
-	//AEGfxMeshDraw(pMesh[2], AE_GFX_MDM_TRIANGLES);
-
-	//// Drawing object 3 - (first) - No tint
-	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	//// Set position for object 3
-	//AEGfxSetPosition(object[2].x, object[2].y);
-	//// No tint
-	//AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//// Set texture
-	//// EGfxTextureSet(pTex1, 0.0f, 0.0f);
-	//// Drawing the mesh (list of triangles)
-	//AEGfxMeshDraw(pMesh[3], AE_GFX_MDM_TRIANGLES);
-
-	//// Drawing object 3 - (first) - No tint
-	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	//// Set position for object 3
-	//AEGfxSetPosition(object[3].x, object[3].y);
-	//// No tint
-	//AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//// Set texture
-	//// EGfxTextureSet(pTex1, 0.0f, 0.0f);
-	//// Drawing the mesh (list of triangles)
-	//AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
-
 
 
 	// Drawing platform 1
@@ -148,14 +103,14 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 	if(collectible[0].visibility == 1)
 	{
-		// Drawing object 3 - (first) - No tint
-		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-		// Set position for object 3
+		// Drawing collectible
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		// Set position for collectible
 		AEGfxSetPosition(collectible[0].x, collectible[0].y);
 		// No tint
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Set texture
-		// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
+		 AEGfxTextureSet(pTexCollectible, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[10], AE_GFX_MDM_TRIANGLES);
 	}
@@ -164,9 +119,9 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// UI Drawing												 
 	//===============================================================
 
-	// Drawing object 3 - (first) - No tint
+	// Drawing UI
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	// Set position for object 3
+	// Set position for UI
 	AEGfxSetPosition(ui[0].x, ui[0].y);
 	// No tint
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -181,11 +136,11 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 	// Drawing portal 1
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	// Set position for object 1
+	// Set position for portal 1
 	AEGfxSetPosition(portal[0].x, portal[0].y);
 
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Texture for portal
+	// Texture for portal 1
 	AEGfxTextureSet(pTexPortal, 0.0f, 0.0f);
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[11], AE_GFX_MDM_TRIANGLES);
@@ -194,11 +149,11 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 	// Drawing portal 2
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	// Set position for object 1
+	// Set position for portal 2
 	AEGfxSetPosition(portal[1].x, portal[1].y);
 
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Texture for portal
+	// Texture for portal 2
 	AEGfxTextureSet(pTexPortal, 0.0f, 0.0f);
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[12], AE_GFX_MDM_TRIANGLES);
