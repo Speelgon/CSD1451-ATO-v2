@@ -41,8 +41,6 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
 
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-
 	AEGfxSetTransparency(1.0f);
 	
 	//===============================================================
@@ -169,7 +167,7 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 	// Drawing object 3 - (first) - No tint
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-		
+	AEGfxSetBlendMode(AE_GFX_BM_NONE);
 	AEGfxSetPosition(playerHook.x, playerHook.y);
 	// No tint
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -178,6 +176,7 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	AEGfxMeshDraw(pMesh[15], AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 	//// Drawing object 3 - (first) - No tint
 	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);

@@ -18,6 +18,11 @@ extern AEGfxVertexList* itemMesh;
 extern AEGfxTexture* pTexFront;
 extern AEGfxTexture* pTexRight;
 extern AEGfxTexture* pTexLeft;
+
+extern AEGfxTexture* pTexPortal;
+extern AEGfxTexture* pTexPlatform;
+extern AEGfxTexture* pTexCollectible;
+
 extern float playerSpeed;
 extern int jumptoken;
 extern float gravity;
