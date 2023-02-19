@@ -106,7 +106,7 @@ namespace {
 		if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY))
 		{
 			playerSpeedY = 0;
-			pY = oY + oSizeY+pSizeY;
+			pY = oY + oSizeY + pSizeY;
 			lefttoken = 0;
 			righttoken = 0;
 			jumptoken = 1;
@@ -115,7 +115,7 @@ namespace {
 		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
 		{
 			playerSpeedY = 0;
-			pY = oY + oSizeY;
+			pY = oY - oSizeY - pSizeY;
 			lefttoken = 0;
 			righttoken = 0;
 		}
