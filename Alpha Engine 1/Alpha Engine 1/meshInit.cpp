@@ -45,7 +45,7 @@ void meshinit(squareObject* object, AEGfxVertexList** pMesh) {
 	}
 }
 
-void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui,collectibleObject* collectible,squareObject player, portalObject* portal) {
+void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible, squareObject player, portalObject* portal, hook playerHook) {
 	
 	//======================================================IMPORTANT BEFORE YOU DECLARE MESHES==========================================================
 	//======================================================IMPORTANT BEFORE YOU DECLARE MESHES==========================================================
@@ -196,6 +196,24 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 		-portal[1].halfW, portal[1].halfH, 0x00FFFFFF, 0.0f, 0.0f);
 
 	pMesh[12] = AEGfxMeshEnd();
+
+	//===================================================================================================================================================
+	//===================================================================================================================================================
+
+	AEGfxMeshStart();
+
+	AEGfxTriAdd(
+		-playerHook.halfW, -playerHook.halfH, 0x00FF00FF, 0.0f, 1.0f,
+		playerHook.halfW, -playerHook.halfH, 0x00FFFF00, 1.0f, 1.0f,
+		-playerHook.halfW, playerHook.halfH, 0x0000FFFF, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		playerHook.halfW, -playerHook.halfH, 0x00FFFFFF, 1.0f, 1.0f,
+		playerHook.halfW, playerHook.halfH, 0x00FFFFFF, 1.0f, 0.0f,
+		-playerHook.halfW, playerHook.halfH, 0x00FFFFFF, 0.0f, 0.0f);
+
+	pMesh[15] = AEGfxMeshEnd();
+
 
 	//===================================================================================================================================================
 	//===================================================================================================================================================

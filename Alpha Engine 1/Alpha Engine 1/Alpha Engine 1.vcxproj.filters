@@ -19,40 +19,25 @@
     <Filter Include="Source Files\Game State">
       <UniqueIdentifier>{d2b87e31-9a01-4dc1-9da7-9510c1937e56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\UpdateObjects">
+      <UniqueIdentifier>{30933e52-a66f-44bc-8196-32b70d8ce9f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State\Level1">
+      <UniqueIdentifier>{12644218-ca02-4eb8-928c-ddcb9a12d556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InitializeObjects">
+      <UniqueIdentifier>{4d82ab33-ea40-40b2-bfbc-6348e21ce636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DrawObjects">
+      <UniqueIdentifier>{d457c502-b35a-4751-9060-e5fad3b53424}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="movement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="collectibles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="vpCollision.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="allheaders.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="objectInitcpp.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="objectRender.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="meshInit.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="uiInit.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="uiPrinting.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
     </ClCompile>
     <ClCompile Include="IncrementVariable.cpp">
       <Filter>Source Files\NewFilter1</Filter>
@@ -60,8 +45,35 @@
     <ClCompile Include="GSM.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\UpdateObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="movement.cpp">
+      <Filter>Source Files\UpdateObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="vpCollision.cpp">
+      <Filter>Source Files\UpdateObjects</Filter>
+    </ClCompile>
     <ClCompile Include="Level1.cpp">
-      <Filter>Source Files\Game State</Filter>
+      <Filter>Source Files\Game State\Level1</Filter>
+    </ClCompile>
+    <ClCompile Include="objectInitcpp.cpp">
+      <Filter>Source Files\InitializeObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="uiInit.cpp">
+      <Filter>Source Files\InitializeObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="objectRender.cpp">
+      <Filter>Source Files\DrawObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="meshUpdate.cpp">
+      <Filter>Source Files\UpdateObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="meshInit.cpp">
+      <Filter>Source Files\InitializeObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="HookUpdate.cpp">
+      <Filter>Source Files\UpdateObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,9 +84,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="collision.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="collectibles.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vpCollision.hpp">

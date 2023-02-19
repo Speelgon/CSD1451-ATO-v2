@@ -2,6 +2,9 @@
 #include "allheaders.hpp"
 #include "movement.hpp"
 
+extern f64 delta;
+extern f64 assumedFrameRate;
+//For the movement, the variables are passed in as functions, so the extern thing isn't really necessary here, thats also why its less complicated wrt variable placement
 
 void playerInputMovement(float& pX, float& pY, float playerSpeed,int& jumptoken) {
 
@@ -36,8 +39,8 @@ void playerActualMovement(float& pX, float& pY, float& pxvel, float& pyvel)
 	==================================================================================================================================
 	*/
 
-	pX += pxvel;
-	pY += pyvel;
+	pX += pxvel * assumedFrameRate * delta;
+	pY += pyvel * assumedFrameRate * delta;
 
 }
 
@@ -46,11 +49,11 @@ void playerEasingMovement(float& pxvel, float& pyvel, float stabilizer)
 {
 	if (pxvel > 0)
 	{
-		pxvel -= stabilizer;
+		pxvel -= stabilizer * delta * assumedFrameRate;
 	}
 	if (pxvel < 0)
 	{
-		pxvel += stabilizer;
+		pxvel += stabilizer * delta * assumedFrameRate;
 	}
 	//if (pyvel > 0)
 	//{
@@ -72,6 +75,5 @@ void playerEasingMovement(float& pxvel, float& pyvel, float stabilizer)
 
 void playerGravity(float& pY, float grav)
 {
-	pY -= grav * AEFrameRateControllerGetFrameTime();
+	pY -= grav;
 }
-

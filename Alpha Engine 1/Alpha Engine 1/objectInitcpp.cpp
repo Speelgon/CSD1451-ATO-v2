@@ -131,3 +131,16 @@ void textureinit(AEGfxTexture** pTex)
 	}
 }
 
+void hookinit(hook &playerHook)
+{
+	playerHook.x = 0;
+	playerHook.y = 0;
+	playerHook.width = 30;
+	playerHook.height = 30;
+	playerHook.halfW = playerHook.width/2;
+	playerHook.halfH = playerHook.height/2;
+	playerHook.active = 0;
+}
+
+
+
