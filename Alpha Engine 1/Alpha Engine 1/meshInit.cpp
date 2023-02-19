@@ -78,6 +78,8 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 		-(player.width * 3), player.halfH, 0x0000FFFF, 0.0f, 0.0f);
 
 	pMesh[0] = AEGfxMeshEnd();
+
+	//===============================================================
 	
 	AEGfxMeshStart();
 

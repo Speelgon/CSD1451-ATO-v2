@@ -107,20 +107,20 @@ void portalinit(portalObject* portal) {
 void portallevel1init(portalObject* object) {
 
 	object[0].x = -850;
-	object[0].y = -135;
-	object[0].width = 30;
-	object[0].height = 60;
+	object[0].y = -145;
+	object[0].width = 60;
+	object[0].height = 80;
 	object[0].halfW = object[0].width / 2;
 	object[0].halfH = object[0].height / 2;
 	object[0].positiontoken = 1;
 
 	object[1].x = -1300;
-	object[1].y = -200;
-	object[1].width = 30;
-	object[1].height = 60;
+	object[1].y = -220;
+	object[1].width = 60;
+	object[1].height = 80;
 	object[1].halfW = object[1].width / 2;
 	object[1].halfH = object[1].height / 2;
-	object[1].positiontoken = 2;
+	object[1].positiontoken = 1;
 }
 
 void textureinit(AEGfxTexture** pTex)

@@ -29,6 +29,9 @@ AEGfxVertexList* itemMesh = 0;
 AEGfxTexture* pTexFront = 0;
 AEGfxTexture* pTexRight = 0;
 AEGfxTexture* pTexLeft = 0;
+AEGfxTexture* pTexPortal;
+AEGfxTexture* pTexPlatform;
+AEGfxTexture* pTexCollectible;
 
 
 float stabliser = 0.25;
