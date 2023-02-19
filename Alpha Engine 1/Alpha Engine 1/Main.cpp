@@ -79,6 +79,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	pTexPortal = AEGfxTextureLoad("Assets/portal.png");
 	AE_ASSERT_MESG(pTexPortal, "Failed to create portal texture!!");
 
+	pTexPlatform = AEGfxTextureLoad("Assets/platform.png");
+	AE_ASSERT_MESG(pTexPlatform, "Failed to create platform texture!!");
+
 	// Loading textures (images) end
 	//////////////////////////////////
 
