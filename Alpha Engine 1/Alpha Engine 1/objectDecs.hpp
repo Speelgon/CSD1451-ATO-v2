@@ -40,7 +40,7 @@ int jumptoken = 1;
 float playerSpeed = 2;
 s32 mousePositionX, mousePositionY;
 s32 relativeMouseX, relativeMouseY;
-f64 delta = 1/60;
+f64 delta = 1.0/60.0;
 f64 assumedFrameRate = 60;
 //==========================================================================================================================
 	// Yuki's Variables

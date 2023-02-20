@@ -8,7 +8,7 @@ extern f64 assumedFrameRate;
 
 void playerInputMovement(float& pX, float& pY, float playerSpeed,int& jumptoken) {
 
-	if (AEInputCheckCurr(AEVK_SPACE)&& jumptoken == 1)
+	if (AEInputCheckCurr(AEVK_SPACE) && jumptoken == 1)
 	{
 		pY = 8;
 		jumptoken = 0;
@@ -38,6 +38,8 @@ void playerActualMovement(float& pX, float& pY, float& pxvel, float& pyvel)
 								* THE IF STATEMENTS INVOLVING THE STABILIZER
 	==================================================================================================================================
 	*/
+
+
 
 	pX += pxvel * assumedFrameRate * delta;
 	pY += pyvel * assumedFrameRate * delta;
@@ -75,5 +77,5 @@ void playerEasingMovement(float& pxvel, float& pyvel, float stabilizer)
 
 void playerGravity(float& pY, float grav)
 {
-	pY -= grav;
+	pY -= grav * assumedFrameRate * delta;
 }

@@ -15,6 +15,26 @@ extern f64 assumedFrameRate;
 void Level1_Load()
 {
 	std::cout << "GSM:Load\n";
+
+	// Texture 1: From file
+	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
+	AE_ASSERT_MESG(pTexFront, "Failed to create cat front texture!!");
+
+	pTexRight = AEGfxTextureLoad("Assets/FCat_Right.png");
+	AE_ASSERT_MESG(pTexRight, "Failed to create cat right texture!!");
+
+	pTexLeft = AEGfxTextureLoad("Assets/FCat_Left.png");
+	AE_ASSERT_MESG(pTexLeft, "Failed to create cat left texture!!");
+
+	pTexPortal = AEGfxTextureLoad("Assets/portal.png");
+	AE_ASSERT_MESG(pTexPortal, "Failed to create portal texture!!");
+
+	pTexPlatform = AEGfxTextureLoad("Assets/platform.png");
+	AE_ASSERT_MESG(pTexPlatform, "Failed to create platform texture!!");
+
+	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
+	AE_ASSERT_MESG(pTexCollectible, "Failed to create collectible texture!!");
+
 }
 
 // ----------------------------------------------------------------------------
@@ -87,8 +107,6 @@ void Level1_Update()
 
 	playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
-
-
 	meshUpdate();
 
 	hookUpdate();
@@ -132,6 +150,7 @@ void Level1_Update()
 		portal[1].positiontoken = 1;
 	}
 	
+	//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 	playerEasingMovement(player.xvel, player.yvel, stabliser);
 
@@ -145,7 +164,7 @@ void Level1_Update()
 	//{
 		viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
 	//}
-
+	
 }
 
 void Level1_Draw()
@@ -167,6 +186,8 @@ void Level1_Draw()
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
 	kwanEuItemRender();
+
+	
 }
 
 void Level1_Free()

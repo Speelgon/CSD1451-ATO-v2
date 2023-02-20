@@ -41,7 +41,7 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
 
-	AEGfxSetTransparency(1.0f);
+
 	
 	//===============================================================
 	// Platform Drawing												 
@@ -50,6 +50,9 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 	// Drawing platform 1
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxSetTransparency(1.0f);
+
 	// Set position for platform 1
 	AEGfxSetPosition(object[0].x, object[0].y);
 
