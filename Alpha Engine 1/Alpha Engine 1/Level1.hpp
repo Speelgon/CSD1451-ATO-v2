@@ -8,6 +8,7 @@ extern portal1 portal[maxPortal];
 extern blackhole1 blackhole[maxBlackhole];
 extern rectangle item;
 extern hook playerHook;
+extern node nodes[maxNodes];
 
 extern s32 mousePositionX, mousePositionY;
 extern s32 relativeMouseX, relativeMouseY;
