@@ -1,6 +1,7 @@
 #pragma once
 #define maxObj 150
 #define meshMax 50
+#define maxBlackhole 20
 #define maxUI 5
 #define maxCollectible 5
 #define maxPortal 2
@@ -52,7 +53,7 @@ typedef struct blackhole1 {
 	float halfW, halfH;
 	float gravPull;
 	float pullRadius;
-}blackhole;
+}blackhole1;
 
 typedef struct nodeObject {
 	f32 x, y;
@@ -70,11 +71,15 @@ void objectlevel1init(squareObject* object);
 
 void meshinit(squareObject* object, AEGfxVertexList** pMesh);
 
-void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible, squareObject player, portalObject* portal, hook playerHook);
+void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible, squareObject player, portalObject* portal, hook playerHook, blackhole1* blackhole);
 
 void textureinit(AEGfxTexture** pTex);
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, nodeObject *nodes, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible);
+void blackholeinit(blackhole1* object);
+
+void blackholelevel1init(blackhole1* object);
+
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes);
 
 void collectibleinit(collectibleObject* object);
 

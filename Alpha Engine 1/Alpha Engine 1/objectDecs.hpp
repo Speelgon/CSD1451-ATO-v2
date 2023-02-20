@@ -17,6 +17,7 @@ square object[maxObj];
 square ui[5];
 collectible1 collectible[maxCollectible];
 portal1 portal[maxPortal];
+blackhole1 blackhole[maxBlackhole];
 square player;
 hook playerHook;
 rectangle item;
@@ -41,7 +42,7 @@ int jumptoken = 1;
 float playerSpeed = 2;
 s32 mousePositionX, mousePositionY;
 s32 relativeMouseX, relativeMouseY;
-f64 delta = 1/60;
+f64 delta = 1.0/60.0;
 f64 assumedFrameRate = 60;
 //==========================================================================================================================
 	// Yuki's Variables

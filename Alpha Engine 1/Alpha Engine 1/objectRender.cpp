@@ -18,7 +18,8 @@
 ================================================================================================================================
 */
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, nodeObject *nodes, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible)
+
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject *nodes)
 
 {
 
@@ -41,7 +42,7 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
 
-	AEGfxSetTransparency(1.0f);
+
 	
 	//===============================================================
 	// Platform Drawing												 
@@ -50,6 +51,9 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 	// Drawing platform 1
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxSetTransparency(1.0f);
+
 	// Set position for platform 1
 	AEGfxSetPosition(object[0].x, object[0].y);
 
@@ -194,6 +198,26 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	AEGfxSetTransparency(1.0f);
 
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
+
+	//===============================================================
+	// Blackhole Drawing												 
+	//===============================================================
+
+	// Drawing object 3 - (first) - No tint
+	AEGfxSetBlendMode(AE_GFX_BM_NONE);
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	
+	AEGfxSetPosition(blackhole[0].x, blackhole[0].y);
+	// No tint
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxMeshDraw(pMesh[50], AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
+
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
 
 	//// Drawing object 3 - (first) - No tint
 	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
