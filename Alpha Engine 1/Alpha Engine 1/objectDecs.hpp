@@ -17,6 +17,7 @@ square object[maxObj];
 square ui[5];
 collectible1 collectible[maxCollectible];
 portal1 portal[maxPortal];
+blackhole1 blackhole[maxBlackhole];
 square player;
 hook playerHook;
 rectangle item;

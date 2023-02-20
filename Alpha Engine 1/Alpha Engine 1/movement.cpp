@@ -39,8 +39,6 @@ void playerActualMovement(float& pX, float& pY, float& pxvel, float& pyvel)
 	==================================================================================================================================
 	*/
 
-
-
 	pX += pxvel * assumedFrameRate * delta;
 	pY += pyvel * assumedFrameRate * delta;
 

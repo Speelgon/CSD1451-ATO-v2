@@ -78,11 +78,15 @@ void Level1_Initialize()
 
 	objectlevel1init(object);
 
+	blackholeinit(blackhole);
+
+	blackholelevel1init(blackhole);
+
 	textureinit(pTex);
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook);
+	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole);
 
 }
 
@@ -110,6 +114,7 @@ void Level1_Update()
 	meshUpdate();
 
 	hookUpdate();
+
 
 	//Bounding box type collision
 
@@ -173,15 +178,15 @@ void Level1_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling

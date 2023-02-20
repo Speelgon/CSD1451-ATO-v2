@@ -18,7 +18,7 @@
 ================================================================================================================================
 */
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible)
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole)
 
 {
 
@@ -180,6 +180,26 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	AEGfxSetTransparency(1.0f);
 
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
+
+	//===============================================================
+	// Blackhole Drawing												 
+	//===============================================================
+
+	// Drawing object 3 - (first) - No tint
+	AEGfxSetBlendMode(AE_GFX_BM_NONE);
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	
+	AEGfxSetPosition(blackhole[0].x, blackhole[0].y);
+	// No tint
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxMeshDraw(pMesh[50], AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
+
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
 
 	//// Drawing object 3 - (first) - No tint
 	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);

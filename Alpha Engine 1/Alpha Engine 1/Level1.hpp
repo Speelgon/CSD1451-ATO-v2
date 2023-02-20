@@ -5,6 +5,7 @@ extern square object[maxObj];
 extern square ui[5];
 extern collectible1 collectible[maxCollectible];
 extern portal1 portal[maxPortal];
+extern blackhole1 blackhole[maxBlackhole];
 extern rectangle item;
 extern hook playerHook;
 
