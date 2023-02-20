@@ -7,6 +7,7 @@ extern collectible1 collectible[maxCollectible];
 extern portal1 portal[maxPortal];
 extern rectangle item;
 extern hook playerHook;
+extern node nodes[maxNodes];
 
 extern s32 mousePositionX, mousePositionY;
 extern s32 relativeMouseX, relativeMouseY;

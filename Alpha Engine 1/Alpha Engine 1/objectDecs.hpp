@@ -20,6 +20,7 @@ portal1 portal[maxPortal];
 square player;
 hook playerHook;
 rectangle item;
+node nodes[maxNodes];
 
 AEGfxVertexList* pMesh[30];
 AEGfxVertexList* uiMesh[30];

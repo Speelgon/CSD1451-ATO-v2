@@ -143,6 +143,41 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 
 	pMesh[4] = AEGfxMeshEnd();
 
+
+	//=============== Print collision nodes ====================//
+	//node 1
+	AEGfxMeshStart();
+	
+	AEGfxTriAdd(
+		-25, -25, 0x00FF00FF, 0.0f, 1.0f,
+		25, -25, 0x00FFFF00, 1.0f, 1.0f,
+		-25, 25, 0x0000FFFF, 0.0f, 0.0f);
+	
+	AEGfxTriAdd(
+		25, -25, 0x00FFFFFF, 1.0f, 1.0f,
+		25, 25, 0x00FFFFFF, 1.0f, 0.0f,
+		-25, 25, 0x00FFFFFF, 0.0f, 0.0f);
+	
+	pMesh[5] = AEGfxMeshEnd();
+	
+	//node 2
+	AEGfxMeshStart();
+	
+	AEGfxTriAdd(
+		-25, -25, 0x00FF00FF, 0.0f, 1.0f,
+		25, -25, 0x00FFFF00, 1.0f, 1.0f,
+		-25, 25, 0x0000FFFF, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		25, -25, 0x00FFFFFF, 1.0f, 1.0f,
+		25, 25, 0x00FFFFFF, 1.0f, 0.0f,
+		-25, 25, 0x00FFFFFF, 0.0f, 0.0f);
+	
+	pMesh[6] = AEGfxMeshEnd();
+
+	//=============== End of printing collision node ================//
+
+
 	//===================================================================================================================================================
 	//===================================================================================================================================================
 

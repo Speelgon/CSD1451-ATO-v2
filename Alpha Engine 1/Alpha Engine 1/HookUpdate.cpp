@@ -3,8 +3,7 @@
 #include "Level1.hpp"
 
 void hookUpdate() {
-	/*playerHook.x = player.x + 50;
-	playerHook.y = player.y + 50;*/
+
 	playerHook.width = 30;
 	playerHook.height = 30;
 	playerHook.halfH = playerHook.height / 2;
@@ -17,3 +16,6 @@ void hookUpdate() {
 }
 
 
+void itemUpdate() {
+	
+}

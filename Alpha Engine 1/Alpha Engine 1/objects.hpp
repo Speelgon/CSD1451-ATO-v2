@@ -4,6 +4,7 @@
 #define maxUI 5
 #define maxCollectible 5
 #define maxPortal 2
+#define maxNodes 2
 
 typedef struct squareObject {
 	f32 x, y;
@@ -15,6 +16,7 @@ typedef struct squareObject {
 
 typedef struct rectangleObject {
 	//AEMtx33 scale{}, rotation{}, transform{};
+	f32 x, y;
 	AEVec2 direction;
 	float width, height;
 	float rotation;
@@ -52,6 +54,12 @@ typedef struct blackhole1 {
 	float pullRadius;
 }blackhole;
 
+typedef struct nodeObject {
+	f32 x, y;
+	float width, height;
+	float halfW, halfH;
+}node;
+
 void objectinit(squareObject* object);
 
 void uiinit(squareObject* ui);
@@ -66,7 +74,7 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 
 void textureinit(AEGfxTexture** pTex);
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible);
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, nodeObject *nodes, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible);
 
 void collectibleinit(collectibleObject* object);
 
@@ -83,3 +91,5 @@ void meshUpdate();
 void kwanEuItemRender();
 
 void hookUpdate();
+
+void nodeInit(nodeObject *nodes);

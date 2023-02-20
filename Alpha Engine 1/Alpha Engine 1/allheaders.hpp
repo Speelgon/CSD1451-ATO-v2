@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "Level1.hpp"
-
+#include "objects.hpp"
 #define screenwidth 800
 #define screenheight 600
 
