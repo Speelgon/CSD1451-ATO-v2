@@ -264,9 +264,4 @@ void kwanEuItemRender() {
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(itemMesh, AE_GFX_MDM_TRIANGLES);
 
-	//AEGfxSetTransparency(1.0f);
-	//if (AEInputCheckCurr(AEVK_D))
-
-	//	AEGfxTextureSet(pTex2, player.x, player.y);
-
 }

@@ -87,8 +87,6 @@ void Level1_Update()
 
 	playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
-
-
 	meshUpdate();
 
 	hookUpdate();
