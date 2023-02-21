@@ -195,16 +195,77 @@ Portal Collision
 
 
 	int playerHookCollision(node* nodes, hook* playerHook) {
+		//Bounding Boxes
+		// //Box A is on the right of Box B
+		//if (leftA > rightB) {
+		//	//no collision
+		//	return 0;
+		//}
+
+		////Box B is on the Right side of Box A
+		//if (leftB > rightA) {
+		//	//no collision
+		//	return 0;
+		//}
+
+		////Box A is beneath Box B
+		//if (topA < bottomB) {
+		//	//no collision
+		//	return 0;
+		//}
+
+		////Box B is beneath Box A
+		//if (topB < bottomA) {
+		//	//no collision
+		//	return 0;
+		//}
+		// 
+		// player hook is A, nodes are B
+		//=============== Node bounding box ==================//
+		//	LeftA												   BottomA
+		//f32 playerHookMinX = -(playerHook->halfW) + playerHook->x, playerHookMinY = -(playerHook->halfH) + playerHook->y;
+		////	RightA												   TopA
+		//f32 playerHookMaxX = +(playerHook->halfW) + playerHook->x, playerHookMaxY = +(playerHook->halfH) + playerHook->y;
+
+		////	LeftB		BottomB		RightB		TopB
+		//f32 nodeMinX{}, nodeMinY{}, nodeMaxX{}, nodeMaxY{};
+
 		f32 distance1{ 0 }, distance2{ 0 };
 
-		for (int i{ 0 }; i < 2; ++i) {
+		for (int i{ 0 }; i < maxNodes; ++i) {
+			//nodeMinX = -(nodes[i].halfW) + nodes[i].x;
+			//nodeMinY = -(nodes[i].halfH) + nodes[i].y;
+			//nodeMaxX = +(nodes[i].halfW) + nodes[i].x;
+			//nodeMaxY = +(nodes[i].halfH) + nodes[i].y;
+
+			////Left A > rightB
+			//if (playerHookMinX > nodeMaxX) {
+			//	return 0;
+			//}
+
+			////Left B > Right A
+			//if (nodeMinX > playerHookMaxX) {
+			//	return 0;
+			//}
+
+			////TopA < BottomB
+			//if (playerHookMaxY < nodeMinY) {
+			//	return 0;
+			//}
+
+			////TopB < BottomA
+			//if (nodeMaxY < playerHookMinY) {
+			//	return 0;
+			//}
+
 			distance1 = playerHook->x - nodes[i].x;
 			distance2 = playerHook->y - nodes[i].y;
 			if (distance1 < 0) distance1 = -distance1;
 			if (distance2 < 0) distance2 = -distance2;
-			if (distance1 <= nodes[i].halfW && distance2 <= nodes[i].halfH) {
+			if ((distance1 <= nodes[i].halfW) && (distance2 <= nodes[i].halfH)) {
 				return 1;
 			}
 		}
+		
 		return 0;
 	}
