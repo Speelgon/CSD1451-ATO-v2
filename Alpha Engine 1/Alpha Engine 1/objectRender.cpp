@@ -19,9 +19,7 @@
 */
 
 void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole)
-
 {
-
 	//===============================================================
 	// Player Drawing												 
 	//===============================================================
@@ -46,7 +44,6 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	//===============================================================
 	// Platform Drawing												 
 	//===============================================================
-
 
 	// Drawing platform 1
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);

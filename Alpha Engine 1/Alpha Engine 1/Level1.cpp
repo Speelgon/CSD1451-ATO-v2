@@ -9,6 +9,7 @@
 
 extern f64 delta;
 extern f64 assumedFrameRate;
+
 //==========================================================================================================================
 //==========================================================================================================================
 
@@ -109,6 +110,12 @@ void Level1_Update()
 
 	playerGravity(player.yvel, gravity);
 
+	if (AEInputCheckCurr(AEVK_LBUTTON)) {
+		std::cout << "Trigger";
+		//velocity converter function
+
+	}
+	
 	playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 	meshUpdate();

@@ -12,8 +12,8 @@
 							**NOTE**
 							* DON'T BOTHER LOOKING AT THESE FUNCTIONS AS THEY'RE A PAIN TO UNDERSTAND.
 							THE FUNCTION NAMES SHOULD BE SELF EXPLANATORY IF YOU WANT TO TAKE A LOOK*
-================================================================================================================================
-*/
+================================================================================================================================*/
+
 extern f64 delta;
 extern f64 assumedFrameRate;
 namespace {

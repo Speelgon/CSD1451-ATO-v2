@@ -2,7 +2,7 @@
 #include "objects.hpp"
 extern square player;
 extern square object[maxObj];
-extern square ui[5];
+extern square ui[maxUI];
 extern collectible1 collectible[maxCollectible];
 extern portal1 portal[maxPortal];
 extern blackhole1 blackhole[maxBlackhole];
@@ -11,8 +11,8 @@ extern hook playerHook;
 
 extern s32 mousePositionX, mousePositionY;
 extern s32 relativeMouseX, relativeMouseY;
-extern AEGfxVertexList* pMesh[30];
-extern AEGfxVertexList* uiMesh[30];
+extern AEGfxVertexList* pMesh[meshMax];
+extern AEGfxVertexList* uiMesh[maxUI];
 extern AEGfxTexture* pTex[30];
 
 extern AEGfxVertexList* itemMesh;
