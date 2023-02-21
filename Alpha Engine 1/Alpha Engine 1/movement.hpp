@@ -10,5 +10,5 @@ void playerEasingMovement(float& pxvel, float& pyvel, float stabilizer);
 
 void playerGravity(float& pY, float grav);
 
-
+void movementWhenHooked(float &pXvel, float &pYvel, float grav, rectangle item);
 

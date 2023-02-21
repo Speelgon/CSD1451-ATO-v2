@@ -4,6 +4,7 @@
 
 extern f64 delta;
 extern f64 assumedFrameRate;
+
 //For the movement, the variables are passed in as functions, so the extern thing isn't really necessary here, thats also why its less complicated wrt variable placement
 
 void playerInputMovement(float& pX, float& pY, float playerSpeed,int& jumptoken) {
@@ -76,4 +77,12 @@ void playerEasingMovement(float& pxvel, float& pyvel, float stabilizer)
 void playerGravity(float& pY, float grav)
 {
 	pY -= grav * assumedFrameRate * delta;
+}
+
+void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle item) {
+	
+	//pXvel += grav * cos(item.rotation);
+	//pYvel += grav * sin(item.rotation);
+	pXvel = 0;
+	pYvel = 0;
 }

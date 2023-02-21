@@ -112,10 +112,13 @@ void Level1_Update()
 
 	playerGravity(player.yvel, gravity);
 
-	if (AEInputCheckCurr(AEVK_LBUTTON)) {
-		std::cout << "Trigger";
-		//velocity converter function
-
+	if (AEInputCheckCurr(AEVK_LBUTTON))
+	{
+		if (playerHookCollision(nodes, &playerHook)) {
+			std::cout << "Collision\n";
+			//movement modification function
+			movementWhenHooked(player.xvel, player.yvel, gravity, item);
+		}
 	}
 	
 	playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
@@ -136,16 +139,7 @@ void Level1_Update()
 	{
 		playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
 	}
-	if (AEInputCheckCurr(AEVK_LBUTTON))
-	{
-		if (playerHookCollision(nodes, &playerHook)) {
-			std::cout << "Collision\n";
-		}
-		for (int i = 0; i < maxObj; i++)
-		{
-			
-		}
-	}
+
 
 
 	playerCollisionPortal(player.x, player.y, portal[0].x, portal[0].y, player.halfW, player.halfH, portal[0].halfW, portal[0].halfH, portal[0].positiontoken);
@@ -194,7 +188,7 @@ void Level1_Draw()
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes);
 	}
 	else
 	{
