@@ -21,6 +21,7 @@ blackhole1 blackhole[maxBlackhole];
 square player;
 hook playerHook;
 rectangle item;
+node nodes[maxNodes];
 
 AEGfxVertexList* pMesh[meshMax];
 AEGfxVertexList* uiMesh[maxUI];

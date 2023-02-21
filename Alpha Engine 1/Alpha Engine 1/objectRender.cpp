@@ -18,7 +18,11 @@
 ================================================================================================================================
 */
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole)
+
+
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject *nodes)
+
+
 {
 	//===============================================================
 	// Player Drawing												 
@@ -99,6 +103,23 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
 
 	AEGfxSetTransparency(1.0f);
+
+	//===============================================================
+	// Node Drawing												 
+	//===============================================================
+
+	//node 1
+	AEGfxSetBlendMode(AE_GFX_BM_NONE);
+
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetPosition(nodes[0].x, nodes[0].y);
+	AEGfxMeshDraw(pMesh[5], AE_GFX_MDM_TRIANGLES);
+
+
+	//node 2
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetPosition(nodes[1].x, nodes[1].y);
+	AEGfxMeshDraw(pMesh[6], AE_GFX_MDM_TRIANGLES);
 
 	//===============================================================
 	// Collectible Drawing												 
@@ -270,7 +291,7 @@ void kwanEuItemRender() {
 	item.direction.y = (mouseX - worldwidth / 2) * sin(item.rotation) + (mouseY - worldheight / 2) * cos(item.rotation);
 	AEVec2Normalize(&item.direction, &item.direction);
 
-	AEMtx33Trans(&translate, 15 * item.direction.x + player.x, -15 * item.direction.y + player.y);
+	AEMtx33Trans(&translate, 12* item.direction.x + player.x, -12* item.direction.y + player.y);
 
 	// Concat the matrices
 	AEMtx33 transform = { 0 };

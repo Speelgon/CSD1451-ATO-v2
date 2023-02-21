@@ -192,3 +192,19 @@ Portal Collision
 		//float 
 		return 0;
 		}
+
+
+	int playerHookCollision(node* nodes, hook* playerHook) {
+		f32 distance1{ 0 }, distance2{ 0 };
+
+		for (int i{ 0 }; i < 2; ++i) {
+			distance1 = playerHook->x - nodes[i].x;
+			distance2 = playerHook->y - nodes[i].y;
+			if (distance1 < 0) distance1 = -distance1;
+			if (distance2 < 0) distance2 = -distance2;
+			if (distance1 <= nodes[i].halfW && distance2 <= nodes[i].halfH) {
+				return 1;
+			}
+		}
+		return 0;
+	}
