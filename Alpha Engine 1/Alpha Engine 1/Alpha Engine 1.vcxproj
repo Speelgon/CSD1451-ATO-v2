@@ -99,7 +99,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClCompile Include="allheaders.cpp" />
     <ClCompile Include="collectibles.cpp" />
     <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="disappearingblocks.cpp" />
+    <ClCompile Include="utils.cpp" />
     <ClCompile Include="IncrementVariable.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -125,6 +125,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClInclude Include="objectDecs.hpp" />
     <ClInclude Include="objects.hpp" />
     <ClInclude Include="movement.hpp" />
+    <ClInclude Include="utils.h" />
     <ClInclude Include="vpCollision.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

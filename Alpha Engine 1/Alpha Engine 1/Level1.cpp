@@ -5,6 +5,7 @@
 #include "collision.hpp"
 #include "IncrementVariable.hpp"
 #include "vpCollision.hpp"
+#include "utils.h"
 
 extern square player;
 extern square object[30];
@@ -80,23 +81,24 @@ extern float halfmapy;
 
 
 enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
-//f64 elapsedtime;
-//int timer;
-int timer;
-f64 interval;
+
+
 f64 elapsedtime;
-int lasttimer;
+
 
 char strBuffer[100];
 f32 TextWidth, TextHeight;
 //==========================================================================================================================
 //==========================================================================================================================
-//f64 intervaltime;
+
 int LastJump = 0;
 int timerset = 0;
 
+//variables for normal timer
 f64 normalElapsedTime;
-
+int timer;
+f64 interval;
+int lasttimer;
 struct PlatformState
 {
 	int state;
@@ -128,16 +130,8 @@ int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
 
 
 
-int normalUpdateTimer(f64 * normalElapsedTime, int timer, f64 interval)
-{
-	*normalElapsedTime += AEFrameRateControllerGetFrameTime();
-	if (*normalElapsedTime >= interval)
-	{
-		timer--;
-		*normalElapsedTime = 0;
-	}
-	return timer;
-}
+
+
 void Level1_Load()
 {
 	std::cout << "GSM:Load\n";
