@@ -25,6 +25,7 @@ extern int jumptoken;
 extern float gravity;
 extern float stabliser;
 
+
 //==========================================================================================================================
 	// Yuki's Variables
 	//==========================================================================================================================
@@ -76,12 +77,81 @@ extern float mapy;
 extern float halfmapx;
 extern float halfmapy;
 
-//==========================================================================================================================
-//==========================================================================================================================
 
+
+enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
+//f64 elapsedtime;
+//int timer;
+int timer;
+f64 interval;
+f64 elapsedtime;
+int lasttimer;
+
+char strBuffer[100];
+f32 TextWidth, TextHeight;
+//==========================================================================================================================
+//==========================================================================================================================
+//f64 intervaltime;
+int LastJump = 0;
+int timerset = 0;
+
+f64 normalElapsedTime;
+
+struct PlatformState
+{
+	int state;
+	int timer;
+	f64 elapsedtime;
+	f64 interval;
+}platformstate[4] = {	CANTDISAPPEAR, 3, 0.0f, 1.0f,
+						CANDISAPPEAR, 3, 0.0f, 1.0f,
+						CANTDISAPPEAR, 3, 0.0f, 1.0f,
+						CANDISAPPEAR, 3, 0.0f, 1.0f
+					};
+
+int numberofplatforms = 4;
+
+int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		platformstate[i].elapsedtime += AEFrameRateControllerGetFrameTime();
+		if (elapsedtime >= platformstate[i].interval)
+		{
+			timer--;
+			elapsedtime = 0;
+		}
+	}
+	return timer;
+}
+
+
+
+
+int normalUpdateTimer(f64 * normalElapsedTime, int timer, f64 interval)
+{
+	*normalElapsedTime += AEFrameRateControllerGetFrameTime();
+	if (*normalElapsedTime >= interval)
+	{
+		timer--;
+		*normalElapsedTime = 0;
+	}
+	return timer;
+}
 void Level1_Load()
 {
 	std::cout << "GSM:Load\n";
+	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
+	AE_ASSERT_MESG(pTexFront, "Failed to create texture1!!");
+
+	pTexRight = AEGfxTextureLoad("Assets/FCat_Right.png");
+	AE_ASSERT_MESG(pTexRight, "Failed to create texture2!!");
+
+	pTexLeft = AEGfxTextureLoad("Assets/FCat_Left.png");
+	AE_ASSERT_MESG(pTexLeft, "Failed to create texture2!!");
+
+	
+	
 }
 
 // ----------------------------------------------------------------------------
@@ -91,7 +161,10 @@ void Level1_Load()
 
 void Level1_Initialize()
 {
-
+    ///fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
+	//fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
+	
+//C:\Users\Yuki\OneDrive\Documents\GitHub\CSD1451 - ATO - v2\Alpha Engine 1\Assets
 	player.x = -1000;
 	player.y = -200;
 	player.xvel = 0;
@@ -142,8 +215,38 @@ void Level1_Initialize()
 
 	itemMesh = AEGfxMeshEnd();
 	AE_ASSERT_MESG(itemMesh, "Failed to create Item Mesh!!");
+	//fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
+	//-------------------------------------------------------------------------------------------------------------------------------------------------
+	//make another array of max number of platforms size to keep track of which platforms cannot disappear, can disappear and have disappeared
+	//enum disappearstatus { CantDisappear = 0, CanDisappear, Disappeared };
+	//InitializeTimer(10, 1.0f);
+	//fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
+	lasttimer = timer = 60;
+	interval = 1.0f;
+	elapsedtime = 0.0f;
+	
+	/*platformstate[0].state = CANTDISAPPEAR;
+	platformstate[0].timer = 0;
+	platformstate[0].elapsedtime = 0.0f;
+	platformstate[0].interval = 0.0f;
 
+	platformstate[1].state = CANDISAPPEAR;
+	platformstate[1].timer = 3;
+	platformstate[1].elapsedtime = 0.0f;
+	platformstate[1].interval = 1.0f;
 
+	platformstate[2].state = CANTDISAPPEAR;
+	platformstate[2].timer = 0;
+	platformstate[2].elapsedtime = 0.0f;
+	platformstate[2].interval = 0.0f;
+
+	platformstate[3].state = CANTDISAPPEAR;
+	platformstate[3].timer = 0;
+	platformstate[3].elapsedtime = 0.0f;
+	platformstate[3].interval = 0.0f;*/
+
+	
+	
 }
 
 // ----------------------------------------------------------------------------
@@ -153,6 +256,7 @@ void Level1_Initialize()
 
 void Level1_Update()
 {
+
 	item.position.x = player.x;
 	item.position.y = player.y;
 	item.rotation = 0;
@@ -166,10 +270,71 @@ void Level1_Update()
 	playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 	//Bounding box type collision
-
+	
 	for (int i = 0; i < maxObj; i++)
 	{
-		playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
+		//if (i < 4)
+		//
+		//	if (platformstate[i].state == 0 && LastJump == 1)
+		//	{
+		//		if (timerset == 0)
+		//		{
+		//			//InitializeTimer(15, 1.0f);
+		//			timerset = 1;
+		//		}
+		//		
+		//	}
+		//}
+		if (i < numberofplatforms)
+		{
+			// if platform set to disappear upon finishing countdown of timer, need not to check for collision
+			if (platformstate[i].state != DISAPPEARED)
+			{
+
+				playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
+
+				// set the platform that can disappear to start timer upon player first landing on the platform
+				if (platformstate[i].state == CANDISAPPEAR && jumptoken && object[i].lefttoken == 0)
+				{
+					platformstate[i].state = TIMERSTARTED;
+					
+					std::cout << "platform " << i << "Timer started" << '\n';
+				}
+
+
+			}
+			else
+			{
+				object[i].lefttoken = 1;
+				object[i].righttoken = 1;
+			}
+		}
+		else
+		{
+			playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
+		}
+		
+	}
+
+	// run countdown for the platforms to disappear
+	for (int j = 0; j < numberofplatforms; j++)
+	{
+		if (platformstate[j].state == TIMERSTARTED)
+		{
+			platformstate[j].timer = normalUpdateTimer(&(platformstate[j]).elapsedtime, platformstate[j].timer, platformstate[j].interval);
+			if (platformstate[j].timer == 0)
+			{
+				platformstate[j].state = DISAPPEARED;
+			}
+			// std::cout << "platform: " << j << "Timer: " << platformstate[j].timer << '\n';
+			
+		}
+
+	}
+
+	if (timer > 0)
+	{
+		timer = normalUpdateTimer(&normalElapsedTime, timer, interval);
 	}
 
 	for (int i = 0; i < maxCollectible; i++)
@@ -195,7 +360,12 @@ void Level1_Update()
 	//{
 		viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
 	//}
-
+	/*if (UpdateTimer() == 0)
+	{
+		next = GS_RESTART;
+		timer = 10;
+	}*/
+	
 }
 
 
@@ -259,6 +429,28 @@ void Level1_Draw()
 	//if (AEInputCheckCurr(AEVK_D))
 
 	//	AEGfxTextureSet(pTex2, player.x, player.y);
+	/*timer -= (1 / AEFrameRateControllerGetFrameTime());
+	if (timer == 0)
+	{
+		std::cout << "OK" << '\n';
+	}*/
+	if (timer != lasttimer)
+	{
+		std::cout << timer << '\n';
+		lasttimer = timer;
+	   /*AEGfxGetPrintSize(fontId, strBuffer, 0.5f, TextWidth, TextHeight);
+	   memset(strBuffer, 0, 100 * sizeof(char));
+	   sprintf_s(strBuffer, "Time: %d", timer);
+	   AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	   AEGfxPrint(fontId, strBuffer, 0, 0.2, 1.0f, 255, 255, 255);*/
+	}
+
+	//PRINT "PLAY" TEXT
+	/*AEGfxGetPrintSize(fontId, strBufferPLAY, 0.5f, TextWidth, TextHeight);
+	memset(strBufferPLAY, 0, 100 * sizeof(char));
+	sprintf_s(strBufferPLAY, "Play");
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxPrint(fontId, strBufferPLAY, 0, 0.2, 1.0f, 1.f, 1.f, 1.f);*/
 
 }
 
@@ -270,6 +462,7 @@ void Level1_Free()
 		AEGfxMeshFree(pMesh[i]);
 	}
 	AEGfxMeshFree(itemMesh);
+	//AEGfxDestroyFont(fontId);
 }
 
 void Level1_Unload()
@@ -277,5 +470,7 @@ void Level1_Unload()
 	AEGfxTextureUnload(pTexFront);
 	AEGfxTextureUnload(pTexRight);
 	AEGfxTextureUnload(pTexLeft);
+
+
 }
 

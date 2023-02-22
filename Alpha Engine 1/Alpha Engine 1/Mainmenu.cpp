@@ -4,10 +4,10 @@
 
 square buttons;
 AEGfxVertexList* playMesh;
-s8 fontId = 0;
+//s8 fontId = 0;
 char strBufferPLAY[100];
 //char strBufferSettings[50];
-f32 TextWidth, TextHeight;
+//f32 TextWidth, TextHeight;
 extern int mousex;
 extern int mousey;
 extern int truemousex;
@@ -16,6 +16,7 @@ extern square player;
 f32 settingsbuttony;
 f32 creditsbuttony;
 f32 quitbuttony;
+
 
 
 
@@ -38,9 +39,7 @@ void Mainmenu_Initialize()
 	buttons.height = 40;
 	buttons.halfW = buttons.width / 2;
 	buttons.halfH = buttons.height / 2;
-	fontId = AEGfxCreateFont("C:/Users/Yuki/OneDrive/Documents/GitHub/CSD1451-ATO-v2/Alpha Engine 1/Assets/Roboto-Regular.ttf", 12);
-	
-
+	//fontId = AEGfxCreateFont("C:/Users/Yuki/OneDrive/Documents/GitHub/CSD1451-ATO-v2/Alpha Engine 1/Assets/Roboto-Regular.ttf", 12);
 
 	AEGfxMeshStart();
 	AEGfxTriAdd(
@@ -70,7 +69,7 @@ void Mainmenu_Update()
 	if (IsAreaClicked(buttons.x, buttons.y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
 		std::cout << "SWITCH TO LEVEL 1 STATE HOW" << '\n';
-		
+		next = GS_LEVEL1;
 	}
 
 	if (IsAreaClicked(buttons.x, settingsbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
@@ -121,12 +120,12 @@ void Mainmenu_Draw()
 	AEGfxTextureSet(NULL, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 
-	//PRINT "PLAY" TEXT
-	AEGfxGetPrintSize(fontId, strBufferPLAY, 0.5f, TextWidth, TextHeight);
-	memset(strBufferPLAY, 0, 100 * sizeof(char));
-	sprintf_s(strBufferPLAY, "Play");
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxPrint(fontId, strBufferPLAY, 0, 0.2, 1.0f, 1.f, 1.f, 1.f);
+	////PRINT "PLAY" TEXT
+	//AEGfxGetPrintSize(fontId, strBufferPLAY, 0.5f, TextWidth, TextHeight);
+	//memset(strBufferPLAY, 0, 100 * sizeof(char));
+	//sprintf_s(strBufferPLAY, "Play");
+	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	//AEGfxPrint(fontId, strBufferPLAY, 0, 0.2, 1.0f, 1.f, 1.f, 1.f);
 
 //	//PRINT "SETTINGS" TEXT
 //	AEGfxGetPrintSize(fontId, strBufferPLAY, 200.0f, TextWidth, TextHeight);
@@ -139,7 +138,7 @@ void Mainmenu_Draw()
 void Mainmenu_Free()
 {
 	AEGfxMeshFree(playMesh);
-	AEGfxDestroyFont(fontId);
+	//AEGfxDestroyFont(fontId);
 }
 
 void Mainmenu_Unload()

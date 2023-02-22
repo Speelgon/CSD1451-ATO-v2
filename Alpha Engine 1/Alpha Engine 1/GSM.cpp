@@ -31,21 +31,22 @@ void GSM_Update()
 	{
 	case GS_MAINMENU:			//Loads the function pointers for MAINMENU
 		
-		fpLoad = &Mainmenu_Load;
-		fpInitialize = &Mainmenu_Initialize;
-		fpUpdate = &Mainmenu_Update;
-		fpDraw = &Mainmenu_Draw;
-		fpFree = &Mainmenu_Free;
-		fpUnload = &Mainmenu_Unload;
+		fpLoad = Mainmenu_Load;
+		fpInitialize = Mainmenu_Initialize;
+		fpUpdate = Mainmenu_Update;
+		fpDraw = Mainmenu_Draw;
+		fpFree = Mainmenu_Free;
+		fpUnload = Mainmenu_Unload;
 		break;
 
 	case GS_LEVEL1:
-		fpLoad = &Level1_Load;
-		fpInitialize = &Level1_Initialize;
-		fpUpdate = &Level1_Update;
-		fpDraw = &Level1_Draw;
-		fpFree = &Level1_Free;
-		fpUnload = &Level1_Unload;
+		fpLoad = Level1_Load;
+		fpInitialize = Level1_Initialize;
+		fpUpdate = Level1_Update;
+		fpDraw = Level1_Draw;
+		fpFree = Level1_Free;
+		fpUnload = Level1_Unload;
+		break;
 
 	case GS_LEVEL2:			//Loads the function pointers for level 2
 		break;
