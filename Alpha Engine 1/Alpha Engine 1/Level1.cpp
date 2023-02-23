@@ -61,6 +61,8 @@ void Level1_Initialize()
 	item.width = 8.f;
 	item.height = 45.f;
 
+	mapBoundary.y = -600;
+
 	objectinit(object);
 
 	hookinit(playerHook);
@@ -178,7 +180,7 @@ void Level1_Update()
 	
 
 	// Out of bounds
-	playerOutofBounds(player.x, player.y);
+	playerOutofBounds(player.x, player.y, mapBoundary.y);
 }
 
 void Level1_Draw()

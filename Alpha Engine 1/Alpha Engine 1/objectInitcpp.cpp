@@ -170,6 +170,8 @@ void blackholelevel1init(blackhole1* object) {
 		object[0].pullRadius = 0;
 
 }
+
+
 void nodeInit(nodeObject* nodes) {
 	//node 1
 	nodes[0].x = { -950 };

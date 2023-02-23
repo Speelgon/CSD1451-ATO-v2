@@ -11,4 +11,4 @@ void playerCollisionPortal(float& pX, float& pY, float& oX, float& oY, float& pS
 
 int playerHookCollision(node *nodes, hook *playerHook);
 
-void playerOutofBounds(float& pX, float& pY);
+void playerOutofBounds(float& pX, float& pY, float& mY);

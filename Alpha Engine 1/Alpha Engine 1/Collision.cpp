@@ -214,12 +214,12 @@ Player out of bounds
 ==================================================================================================================================
 */
 
-	void playerOutofBounds(float& pX, float& pY)
+	void playerOutofBounds(float& pX, float& pY, float& mY)
 	{
-		if (pY < -600)
+		if (pY < mY)
 		{
 			pX = -1000;
 			pY = -200;
-			std::cout << "boundary";
+			std::cout << "Out-of-Bounds";
 		}
 	}

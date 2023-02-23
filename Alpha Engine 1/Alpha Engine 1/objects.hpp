@@ -61,6 +61,10 @@ typedef struct nodeObject {
 	float halfW, halfH;
 }node;
 
+typedef struct boundaryArea {
+	f32 y;
+}boundary;
+
 void objectinit(squareObject* object);
 
 void uiinit(squareObject* ui);
