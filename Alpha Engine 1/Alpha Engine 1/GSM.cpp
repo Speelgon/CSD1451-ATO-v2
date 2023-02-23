@@ -1,6 +1,5 @@
 #pragma once
 #include "allheaders.hpp"
-#include "Mainmenu.hpp"
 
 int current = 0, previous = 0, next = 0;
 
@@ -29,6 +28,16 @@ void GSM_Update()
 	std::cout << "GSM:Update\n";
 	switch (current)
 	{
+	case GS_SPLASHSCREEN:			//Loads the function pointers for MAINMENU
+
+		fpLoad = SplashScreen_Load;
+		fpInitialize = SplashScreen_Initialize;
+		fpUpdate = SplashScreen_Update;
+		fpDraw = SplashScreen_Draw;
+		fpFree = SplashScreen_Free;
+		fpUnload = SplashScreen_Unload;
+		break;
+
 	case GS_MAINMENU:			//Loads the function pointers for MAINMENU
 		
 		fpLoad = Mainmenu_Load;

@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Level1.hpp"
 #include "Mainmenu.hpp"
+#include "SplashScreen.hpp"
 
 #define screenwidth 800
 #define screenheight 600
@@ -16,7 +17,8 @@ extern FP fpLoad, fpInitialize, fpUpdate, fpDraw, fpFree, fpUnload;
 
 enum GS_STATES
 {
-	GS_MAINMENU = 0,
+	GS_SPLASHSCREEN = 0,
+	GS_MAINMENU,
 	GS_LEVEL1,
 	GS_LEVEL2,
 

@@ -66,8 +66,8 @@
     <ClCompile Include="Mainmenu.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
-    <ClCompile Include="disappearingblocks.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SplashScreen.cpp">
+      <Filter>Source Files\Game State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mainmenuinit.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SplashScreen.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -27,7 +27,7 @@ void Mainmenu_Load()
 
 void Mainmenu_Initialize()
 {
-
+	//AEGfxSetBackgroundColor(0.0f, 70.0f, 50.0f);
 	buttons.x = 0;
 	buttons.y = 50;
 	/*buttons.xvel = 0;
