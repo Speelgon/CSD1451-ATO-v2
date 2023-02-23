@@ -1,6 +1,6 @@
 #include <chrono> 
 #include "allheaders.hpp"
-
+#include "SplashScreen.hpp"
 //Variables Declaration 
 auto start_time{std::chrono::high_resolution_clock::now()}; //get the start time 
 double duration{};

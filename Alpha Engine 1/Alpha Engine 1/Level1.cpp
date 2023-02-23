@@ -12,13 +12,13 @@ extern f64 delta;
 extern f64 assumedFrameRate;
 
 extern square player;
-extern square object[30];
-extern square ui[5];
+extern square object[maxObj];
+extern square ui[maxUI];
 extern collectible1 collectible[maxCollectible];
 extern rectangle item;
 
-extern AEGfxVertexList* pMesh[30];
-extern AEGfxVertexList* uiMesh[30];
+extern AEGfxVertexList* pMesh[meshMax];
+extern AEGfxVertexList* uiMesh[maxUI];
 extern AEGfxTexture* pTex[30];
 
 extern AEGfxVertexList* itemMesh;
@@ -32,11 +32,11 @@ extern float stabliser;
 
 
 //==========================================================================================================================
-	// Yuki's Variables
-	//==========================================================================================================================
-	// 
-	// 
-	// 
+// Yuki's Variables
+//==========================================================================================================================
+// 
+// 
+// 
 
 extern AEGfxVertexList* pMeshY1;
 extern AEGfxVertexList* pMeshY2;
@@ -233,7 +233,7 @@ void Level1_Initialize()
 	platformstate[3].state = CANTDISAPPEAR;
 	platformstate[3].timer = 0;
 	platformstate[3].elapsedtime = 0.0f;
-	platformstate[3].interval = 0.0f;*/
+	platformstate[3].interval = 0.0f;
 
 	
 	

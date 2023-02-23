@@ -1,6 +1,7 @@
 #pragma once
 #include "allheaders.hpp"
-
+#include "Mainmenu.hpp"
+#include "SplashScreen.hpp"
 int current = 0, previous = 0, next = 0;
 
 FP fpLoad = nullptr, fpInitialize = nullptr, fpUpdate = nullptr, fpDraw = nullptr, fpFree = nullptr, fpUnload = nullptr;

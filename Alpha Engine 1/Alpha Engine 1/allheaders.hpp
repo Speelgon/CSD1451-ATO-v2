@@ -4,8 +4,8 @@
 #include <iostream>
 #include "Level1.hpp"
 #include "objects.hpp"
-#include "Mainmenu.hpp"
-#include "SplashScreen.hpp"
+
+
 
 #define screenwidth 800
 #define screenheight 600
