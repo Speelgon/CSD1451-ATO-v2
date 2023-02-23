@@ -213,7 +213,7 @@ Portal Collision
 		collisionFlag = 0;
 		return 0;
 	}
-<<<<<<< Updated upstream
+
 /*
 ==================================================================================================================================
 Player out of bounds
@@ -229,5 +229,4 @@ Player out of bounds
 			std::cout << "boundary";
 		}
 	}
-=======
->>>>>>> Stashed changes
+
