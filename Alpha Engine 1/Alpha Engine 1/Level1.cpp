@@ -114,13 +114,21 @@ void Level1_Update()
 
 	if (AEInputCheckCurr(AEVK_LBUTTON))
 	{
-		if (playerHookCollision(nodes, &playerHook)) {
+		if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
 			std::cout << "Collision\n";
-			//movement modification function
-			movementWhenHooked(player.xvel, player.yvel, gravity, item);
+			anglePlayerToNode(nodes[collidedNode]);
+			movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
+		}
+		else {
+			anglePlayerToMouse();
+			hookCollisionFlag = 0;
 		}
 	}
-	
+	else {
+		anglePlayerToMouse();
+		hookCollisionFlag = 0;
+	}
+
 	playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 	meshUpdate();

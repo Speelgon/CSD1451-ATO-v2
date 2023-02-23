@@ -29,6 +29,10 @@ extern float playerSpeed;
 extern int jumptoken;
 extern float gravity;
 extern float stabliser;
+extern int hookCollisionFlag;
+extern float pointHookStuckX;
+extern float pointHookStuckY;
+extern int collidedNode;
 
 //==========================================================================================================================
 	// Yuki's Variables

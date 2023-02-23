@@ -193,8 +193,8 @@ Portal Collision
 		return 0;
 		}
 
-
-	int playerHookCollision(node* nodes, hook* playerHook) {
+	int playerHookCollision(node* nodes, hook* playerHook, int &collisionFlag) {
+		
 		f32 distance1{ 0 }, distance2{ 0 };
 
 		for (int i{ 0 }; i < 2; ++i) {
@@ -203,11 +203,17 @@ Portal Collision
 			if (distance1 < 0) distance1 = -distance1;
 			if (distance2 < 0) distance2 = -distance2;
 			if (distance1 <= nodes[i].halfW && distance2 <= nodes[i].halfH) {
+				collisionFlag = 1;
+				collidedNode = i;
+				pointHookStuckX = nodes[i].x;
+				pointHookStuckY = nodes[i].y;
 				return 1;
 			}
 		}
+		collisionFlag = 0;
 		return 0;
 	}
+<<<<<<< Updated upstream
 /*
 ==================================================================================================================================
 Player out of bounds
@@ -223,3 +229,5 @@ Player out of bounds
 			std::cout << "boundary";
 		}
 	}
+=======
+>>>>>>> Stashed changes

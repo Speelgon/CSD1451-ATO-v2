@@ -40,10 +40,15 @@ float stabliser = 0.25;
 float gravity = 0.15;
 int jumptoken = 1;
 float playerSpeed = 2;
+int hookCollisionFlag = 0;
+int collidedNode = -1;
 s32 mousePositionX, mousePositionY;
 s32 relativeMouseX, relativeMouseY;
 f64 delta = 1/60.0;
 f64 assumedFrameRate = 60;
+float pointHookStuckX = 0;
+float pointHookStuckY = 0;
+
 //==========================================================================================================================
 	// Yuki's Variables
 	//==========================================================================================================================
