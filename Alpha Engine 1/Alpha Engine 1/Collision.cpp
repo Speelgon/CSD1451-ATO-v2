@@ -12,9 +12,10 @@
 							**NOTE**
 							* DON'T BOTHER LOOKING AT THESE FUNCTIONS AS THEY'RE A PAIN TO UNDERSTAND.
 							THE FUNCTION NAMES SHOULD BE SELF EXPLANATORY IF YOU WANT TO TAKE A LOOK*
-================================================================================================================================
-*/
+================================================================================================================================*/
 
+extern f64 delta;
+extern f64 assumedFrameRate;
 namespace {
 	
 	int playerBottomLessThanObjectTop(float playerY, float objectY, float playerSize, float objectSize)
@@ -91,20 +92,22 @@ namespace {
 	// Left side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX) && lefttoken == 1)
 		{
-			pX -= abs(playerSpeedX);
-			playerSpeedX = 0;
+			pX -= abs(playerSpeedX) * assumedFrameRate * delta;
+			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
+			//playerSpeedX = 0;
 		}
 	// Right side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && righttoken == 1)
 		{
-			pX += abs(playerSpeedX);
-			playerSpeedX = 0;
+			pX += abs(playerSpeedX)* assumedFrameRate * delta;
+			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
+			//playerSpeedX = 0;
 		}
 	// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
 		if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY))
 		{
-			pY += abs(playerSpeedY);
 			playerSpeedY = 0;
+			pY = oY + oSizeY + pSizeY;
 			lefttoken = 0;
 			righttoken = 0;
 			jumptoken = 1;
@@ -113,8 +116,8 @@ namespace {
 		// Bottom side collision	
 		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
 		{
-			pY -= abs(playerSpeedY);
 			playerSpeedY = 0;
+			pY = oY - oSizeY - pSizeY;
 			lefttoken = 0;
 			righttoken = 0;
 		}
@@ -148,6 +151,35 @@ namespace {
 		}
 	}
 
+/*
+==================================================================================================================================
+Portal Collision
+==================================================================================================================================
+*/
+
+	void playerCollisionPortal(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, int& positiontoken)
+	{
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX))
+		{
+			positiontoken = 0;
+		}
+		// Right side collision
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX))
+		{
+			positiontoken = 0;
+		}
+		// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
+		if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY))
+		{
+			positiontoken = 0;
+		}
+		// Bottom side collision	
+		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
+		{
+			positiontoken = 0;
+		}
+	}
+
 	void playerCollisionMapBoundary(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float playerSpeedX, float playerSpeedY)
 	{
 
@@ -161,3 +193,34 @@ namespace {
 		//float 
 		return 0;
 		}
+
+
+	int playerHookCollision(node* nodes, hook* playerHook) {
+		f32 distance1{ 0 }, distance2{ 0 };
+
+		for (int i{ 0 }; i < 2; ++i) {
+			distance1 = playerHook->x - nodes[i].x;
+			distance2 = playerHook->y - nodes[i].y;
+			if (distance1 < 0) distance1 = -distance1;
+			if (distance2 < 0) distance2 = -distance2;
+			if (distance1 <= nodes[i].halfW && distance2 <= nodes[i].halfH) {
+				return 1;
+			}
+		}
+		return 0;
+	}
+/*
+==================================================================================================================================
+Player out of bounds
+==================================================================================================================================
+*/
+
+	void playerOutofBounds(float& pX, float& pY)
+	{
+		if (pY < -600)
+		{
+			pX = -1000;
+			pY = -200;
+			std::cout << "boundary";
+		}
+	}

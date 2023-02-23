@@ -1,5 +1,6 @@
 #pragma once
 #include "allheaders.hpp"
+#include "Level1.hpp"
 #include "movement.hpp"
 #include "objects.hpp"
 #include "collision.hpp"
@@ -8,12 +9,10 @@
 #include "utils.h"
 #include "PlatformsDisappear.hpp"
 
-extern square player, object[30], ui[5];
+extern square player, ui[5];
 extern collectible1 collectible[maxCollectible];
 extern rectangle item;
 
-extern AEGfxVertexList* pMesh[30];
-extern AEGfxVertexList* uiMesh[30];
 extern AEGfxTexture* pTex[30];
 
 extern AEGfxVertexList* itemMesh;
@@ -68,6 +67,8 @@ extern float mapx;
 extern float mapy;
 extern float halfmapx;
 extern float halfmapy;
+extern f64 delta;
+extern f64 assumedFrameRate;
 
 
 
@@ -131,6 +132,25 @@ void Level1_Load()
 
 	
 	
+
+	// Texture 1: From file
+	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
+	AE_ASSERT_MESG(pTexFront, "Failed to create cat front texture!!");
+
+	pTexRight = AEGfxTextureLoad("Assets/FCat_Right.png");
+	AE_ASSERT_MESG(pTexRight, "Failed to create cat right texture!!");
+
+	pTexLeft = AEGfxTextureLoad("Assets/FCat_Left.png");
+	AE_ASSERT_MESG(pTexLeft, "Failed to create cat left texture!!");
+
+	pTexPortal = AEGfxTextureLoad("Assets/portal.png");
+	AE_ASSERT_MESG(pTexPortal, "Failed to create portal texture!!");
+
+	pTexPlatform = AEGfxTextureLoad("Assets/platform.png");
+	AE_ASSERT_MESG(pTexPlatform, "Failed to create platform texture!!");
+
+	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
+	AE_ASSERT_MESG(pTexCollectible, "Failed to create collectible texture!!");
 }
 
 // ----------------------------------------------------------------------------
@@ -155,17 +175,21 @@ void Level1_Initialize()
 	player.lefttoken = 0;
 	player.righttoken = 0;
 
-	item.position.x = player.x;
-	item.position.y = player.y;
 	item.rotation = 0;
 	item.width = 8.f;
 	item.height = 45.f;
 
 	objectinit(object);
 
+	hookinit(playerHook);
+
 	collectibleinit(collectible);
 
 	collectiblelevel1init(collectible);
+
+	portalinit(portal);
+
+	portallevel1init(portal);
 
 	uiinit(ui);
 
@@ -173,11 +197,17 @@ void Level1_Initialize()
 
 	objectlevel1init(object);
 
+	blackholeinit(blackhole);
+
+	blackholelevel1init(blackhole);
+
+	nodeInit(nodes);
+
 	textureinit(pTex);
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh, ui, collectible, player);
+	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole);
 
 	AEGfxMeshStart();
 	AEGfxTriAdd(
@@ -216,97 +246,142 @@ void Level1_Update()
 	item.rotation = 0;
 	item.width = 8.f;
 	item.height = 45.f;
-
-	playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
-
-	playerGravity(player.yvel, gravity);
-
-	playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
-
-	//Bounding box type collision
-	
-	for (int i = 0; i < maxObj; i++)
 	{
-		if (i < numberofplatforms)
+		delta = AEFrameRateControllerGetFrameTime();
+
+		if (AEInputCheckTriggered(AEVK_F))
 		{
-			// if platform set to disappear upon finishing countdown of timer, need not to check for collision
-			if (platformstate[i].state != DISAPPEARED)
+			item.height += 10.f;
+			std::cout << "Printing";
+		}
+
+		playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
+
+		playerGravity(player.yvel, gravity);
+
+		if (AEInputCheckCurr(AEVK_LBUTTON))
+		{
+			if (playerHookCollision(nodes, &playerHook)) {
+				std::cout << "Collision\n";
+				//movement modification function
+				movementWhenHooked(player.xvel, player.yvel, gravity, item);
+			}
+		}
+
+		playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
+
+		meshUpdate();
+
+		hookUpdate();
+
+
+		//Bounding box type collision
+
+		for (int i = 0; i < maxObj; i++)
+
+			for (int i = maxObj - 1; i >= 0; i--)
 			{
-
-				playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
-
-				// set the platform that can disappear to start timer upon player first landing on the platform
-				if (platformstate[i].state == CANDISAPPEAR && jumptoken && object[i].lefttoken == 0)
+				if (i < numberofplatforms)
 				{
-					platformstate[i].state = TIMERSTARTED;
-					
-					std::cout << "platform " << i << "Timer started" << '\n';
+					// if platform set to disappear upon finishing countdown of timer, need not to check for collision
+					if (platformstate[i].state != DISAPPEARED)
+					{
+
+						playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
+
+						// set the platform that can disappear to start timer upon player first landing on the platform
+						if (platformstate[i].state == CANDISAPPEAR && jumptoken && object[i].lefttoken == 0)
+						{
+							platformstate[i].state = TIMERSTARTED;
+
+							std::cout << "platform " << i << "Timer started" << '\n';
+						}
+
+
+					}
+					else
+					{
+						object[i].lefttoken = 1;
+						object[i].righttoken = 1;
+					}
+				}
+				else
+				{
+					playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
 				}
 
+			}
 
-			}
-			else
-			{
-				object[i].lefttoken = 1;
-				object[i].righttoken = 1;
-			}
-		}
-		else
+		// run countdown for the platforms to disappear
+		for (int j = 0; j < numberofplatforms; j++)
 		{
-			playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
-		}
-		
-	}
-
-	// run countdown for the platforms to disappear
-	for (int j = 0; j < numberofplatforms; j++)
-	{
-		if (platformstate[j].state == TIMERSTARTED)
-		{
-			platformstate[j].timer = normalUpdateTimer(&(platformstate[j]).elapsedtime, platformstate[j].timer, platformstate[j].interval);
-			if (platformstate[j].timer == 0)
+			if (platformstate[j].state == TIMERSTARTED)
 			{
-				platformstate[j].state = DISAPPEARED;
+				platformstate[j].timer = normalUpdateTimer(&(platformstate[j]).elapsedtime, platformstate[j].timer, platformstate[j].interval);
+				if (platformstate[j].timer == 0)
+				{
+					platformstate[j].state = DISAPPEARED;
+				}
 			}
 		}
-	}
 
-	if (timer > 0)
-	{
-		timer = normalUpdateTimer(&normalElapsedTime, timer, interval);
-	}
+		if (timer > 0)
+		{
+			timer = normalUpdateTimer(&normalElapsedTime, timer, interval);
+		}
 
-	for (int i = 0; i < maxCollectible; i++)
-	{
-		playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
-	}
+		for (int i = 0; i < maxCollectible; i++)
+		{
+			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
+		}
 
-	playerEasingMovement(player.xvel, player.yvel, stabliser);
 
-	playerCollisionMapBoundary(player.x, player.y, object[0].x, object[0].y, player.halfW, player.halfH, object[0].halfW, object[0].halfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
 
-	AEInputGetCursorPosition(clickx, clicky);
-	//std::cout << mousex - screenwidth/2 + player.x << '\n';
-	//std::cout << - mousey + screenheight/2 + player.y   << '\n';
-	truemousex = mousex - screenwidth / 2 + player.x;
-	truemousey = -mousey + screenheight / 2 + player.y;
+		playerCollisionPortal(player.x, player.y, portal[0].x, portal[0].y, player.halfW, player.halfH, portal[0].halfW, portal[0].halfH, portal[0].positiontoken);
 
-	incrementobjintializer = whichvariableincreased(incrementobjintializer, a, b, middlex, middley, optionhalfside, pMeshY1, pMeshY2, truemousex, truemousey);
+		if (portal[0].positiontoken == 0)
+		{
+			player.x = portal[1].x + portal[1].halfW + 20;
+			player.y = portal[1].y;
+			portal[0].positiontoken = 1;
+		}
 
-	AEInputGetCursorPosition(&mouseX, &mouseY);
+		playerCollisionPortal(player.x, player.y, portal[1].x, portal[1].y, player.halfW, player.halfH, portal[1].halfW, portal[1].halfH, portal[1].positiontoken);
 
-	//if(player.x<400 && player.x>-400 && player.y<400 && player.y > -300)
-	//{
+
+		if (portal[1].positiontoken == 0)
+		{
+			player.x = portal[0].x - portal[0].halfW - 20;
+			player.y = portal[0].y;
+			portal[1].positiontoken = 1;
+		}
+
+		//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
+
+		playerEasingMovement(player.xvel, player.yvel, stabliser);
+
+		playerCollisionMapBoundary(player.x, player.y, object[0].x, object[0].y, player.halfW, player.halfH, object[0].halfW, object[0].halfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
+
+		incrementobjintializer = whichvariableincreased(incrementobjintializer, a, b, middlex, middley, optionhalfside, pMeshY1, pMeshY2, truemousex, truemousey);
+
+		AEInputGetCursorPosition(&mouseX, &mouseY);
+
+		//if(player.x<400 && player.x>-400 && player.y<400 && player.y > -300)
+		//{
 		viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
-	//}
-	/*if (UpdateTimer() == 0)
-	{
-		next = GS_RESTART;
-		timer = 10;
-	}*/
-	
-}
+		//}
+		/*if (UpdateTimer() == 0)
+		{
+			next = GS_RESTART;
+			timer = 10;
+		}*/
 
+
+
+		// Out of bounds
+		playerOutofBounds(player.x, player.y);
+	}
+}
 
 void Level1_Draw()
 {
@@ -314,17 +389,19 @@ void Level1_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, platformstate);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, platformstate);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, platformstate);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate);
 	}
 
+	//This is the part of your code which does the matrix translations, rotations and scaling
+	kwanEuItemRender();
 
 
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
@@ -391,8 +468,8 @@ void Level1_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxPrint(fontId, strBufferPLAY, 0, 0.2, 1.0f, 1.f, 1.f, 1.f);*/
 
+	
 }
-
 
 void Level1_Free()
 {
@@ -411,5 +488,8 @@ void Level1_Unload()
 	AEGfxTextureUnload(pTexLeft);
 
 
+	AEGfxTextureUnload(pTexPortal);
+	AEGfxTextureUnload(pTexPlatform);
+	AEGfxTextureUnload(pTexCollectible);
 }
 

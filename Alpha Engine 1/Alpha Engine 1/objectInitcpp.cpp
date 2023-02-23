@@ -91,6 +91,38 @@ void collectiblelevel1init(collectibleObject* object) {
 	object[0].visibility = 1;
 }
 
+void portalinit(portalObject* portal) {
+
+	for (int i = 0; i < maxPortal; i++)
+	{
+		portal[i].x = 20000;
+		portal[i].y = -2000;
+		portal[i].width = 10;
+		portal[i].height = 10;
+		portal[i].halfW = portal[i].width / 2;
+		portal[i].halfH = portal[i].height / 2;
+	}
+}
+
+void portallevel1init(portalObject* object) {
+
+	object[0].x = -850;
+	object[0].y = -145;
+	object[0].width = 60;
+	object[0].height = 80;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+	object[0].positiontoken = 1;
+
+	object[1].x = -1300;
+	object[1].y = -220;
+	object[1].width = 60;
+	object[1].height = 80;
+	object[1].halfW = object[1].width / 2;
+	object[1].halfH = object[1].height / 2;
+	object[1].positiontoken = 1;
+}
+
 void textureinit(AEGfxTexture** pTex)
 {
 	for (int i = 0; i < maxObj; i++)
@@ -99,3 +131,59 @@ void textureinit(AEGfxTexture** pTex)
 	}
 }
 
+void hookinit(hook &playerHook)
+{
+	playerHook.x = 0;
+	playerHook.y = 0;
+	playerHook.width = 30;
+	playerHook.height = 30;
+	playerHook.halfW = playerHook.width/2;
+	playerHook.halfH = playerHook.height/2;
+	playerHook.active = 0;
+}
+
+void blackholeinit(blackhole1* object) {
+
+	for (int i = 0; i < maxBlackhole; i++)
+	{
+		object[i].x = 20000;
+		object[i].y = -2000;
+		object[i].width = 10;
+		object[i].height = 10;
+		object[i].halfW = object[i].width / 2;
+		object[i].halfH = object[i].height / 2;
+		object[i].gravPull = 0;
+		object[i].pullRadius = 0;
+	}
+}
+
+
+void blackholelevel1init(blackhole1* object) {
+
+		object[0].x = -1250;
+		object[0].y = 0;
+		object[0].width = 30;
+		object[0].height = 30;
+		object[0].halfW = object[0].width / 2;
+		object[0].halfH = object[0].height / 2;
+		object[0].gravPull = 0;
+		object[0].pullRadius = 0;
+
+}
+void nodeInit(nodeObject* nodes) {
+	//node 1
+	nodes[0].x = { -950 };
+	nodes[0].y = { -35 };
+	nodes[0].width = 25;
+	nodes[0].height = 25;
+	nodes[0].halfW = nodes[0].width / 2;
+	nodes[0].halfH = nodes[0].height / 2;
+	
+	//node 2
+	nodes[1].x = { -1120 };
+	nodes[1].y = { -15 };
+	nodes[1].width = 25;
+	nodes[1].height = 25;
+	nodes[1].halfW = nodes[0].width / 2;
+	nodes[1].halfH = nodes[0].height / 2;
+}

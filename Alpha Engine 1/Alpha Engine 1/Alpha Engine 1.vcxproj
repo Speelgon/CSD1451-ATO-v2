@@ -99,7 +99,6 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClCompile Include="allheaders.cpp" />
     <ClCompile Include="collectibles.cpp" />
     <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="PlatformsDisappear.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="IncrementVariable.cpp" />
     <ClCompile Include="Level1.cpp" />

@@ -6,7 +6,6 @@
 #include "movement.hpp"
 #include "vpCollision.hpp"
 #include "collision.hpp"
-#include "collectibles.hpp"
 #include "IncrementVariable.hpp"
 #include <math.h>
 #include "Level1.hpp"

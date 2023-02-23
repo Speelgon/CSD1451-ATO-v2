@@ -4,37 +4,46 @@
 #include "objects.hpp"
 
 /*================================================================================================================================
+ALL VARIABLES HERE WILL BE REQUIRED FOR EVERY LEVEL WE WILL BE USING
+================================================================================================================================
+*/
+
+/*================================================================================================================================
 DECLARES THE VARIABLES WE NEED TO USE
 ================================================================================================================================
 */
 
-square object[30];
-square ui[5];
+square object[maxObj];
+square ui[maxUI];
 collectible1 collectible[maxCollectible];
+portal1 portal[maxPortal];
+blackhole1 blackhole[maxBlackhole];
 square player;
-
+hook playerHook;
 rectangle item;
+node nodes[maxNodes];
 
-
-AEGfxVertexList* pMesh[30];
-AEGfxVertexList* uiMesh[30];
+AEGfxVertexList* pMesh[meshMax];
+AEGfxVertexList* uiMesh[maxUI];
 AEGfxTexture* pTex[30];
 
 AEGfxVertexList* itemMesh = 0;
 AEGfxTexture* pTexFront = 0;
 AEGfxTexture* pTexRight = 0;
 AEGfxTexture* pTexLeft = 0;
+AEGfxTexture* pTexPortal=0;
+AEGfxTexture* pTexPlatform=0;
+AEGfxTexture* pTexCollectible=0;
 
 
 float stabliser = 0.25;
-float gravity = 9.81;
+float gravity = 0.15;
 int jumptoken = 1;
-float playerSpeed = 3;
-
-
-
-
-
+float playerSpeed = 2;
+s32 mousePositionX, mousePositionY;
+s32 relativeMouseX, relativeMouseY;
+f64 delta = 1/60.0;
+f64 assumedFrameRate = 60;
 //==========================================================================================================================
 	// Yuki's Variables
 	//==========================================================================================================================
