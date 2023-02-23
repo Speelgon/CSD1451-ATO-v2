@@ -7,7 +7,7 @@
 //enable the selection of an increase of variable 1 or 2
 //use button press as condition for function to run 
 
-namespace {
+
 	//detects mouse click in a rectangular space
 	int IsAreaClicked(float area_middleX, float area_middleY, float half_width, float half_height, int click_x, int click_y)
 	{
@@ -43,7 +43,7 @@ namespace {
 
 		return 0;
 	}
-}
+
 
 bool passedoverobj()
 {
