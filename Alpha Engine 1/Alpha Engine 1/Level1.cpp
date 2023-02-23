@@ -176,6 +176,9 @@ void Level1_Update()
 		viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
 	//}
 	
+
+	// Out of bounds
+	playerOutofBounds(player.x, player.y);
 }
 
 void Level1_Draw()
