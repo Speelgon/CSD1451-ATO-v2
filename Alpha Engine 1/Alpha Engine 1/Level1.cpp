@@ -240,9 +240,6 @@ void Level1_Initialize()
 
 void Level1_Update()
 {
-
-	item.position.x = player.x;
-	item.position.y = player.y;
 	item.rotation = 0;
 	item.width = 8.f;
 	item.height = 45.f;
@@ -270,20 +267,14 @@ void Level1_Update()
 
 		playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
-		meshUpdate();
-
-		hookUpdate();
-
 
 		//Bounding box type collision
 
-		for (int i = 0; i < maxObj; i++)
-
-			for (int i = maxObj - 1; i >= 0; i--)
+		for (int i = maxObj - 1; i >= 0; i--)
 			{
 				if (i < numberofplatforms)
 				{
-					// if platform set to disappear upon finishing countdown of timer, need not to check for collision
+					// if platform is not in a disappear state, player can walk on it
 					if (platformstate[i].state != DISAPPEARED)
 					{
 

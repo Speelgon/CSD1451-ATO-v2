@@ -97,7 +97,6 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="allheaders.cpp" />
-    <ClCompile Include="collectibles.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="IncrementVariable.cpp" />
@@ -110,7 +109,6 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClCompile Include="objectRender.cpp" />
     <ClCompile Include="GSM.cpp" />
     <ClCompile Include="uiInit.cpp" />
-    <ClCompile Include="uiPrinting.cpp" />
     <ClCompile Include="vpCollision.cpp" />
   </ItemGroup>
   <ItemGroup>

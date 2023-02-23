@@ -30,9 +30,6 @@
     <ClCompile Include="movement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="collectibles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="vpCollision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -49,9 +46,6 @@
       <Filter>Source Files\NewFilter1</Filter>
     </ClCompile>
     <ClCompile Include="uiInit.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="uiPrinting.cpp">
       <Filter>Source Files\NewFilter1</Filter>
     </ClCompile>
     <ClCompile Include="IncrementVariable.cpp">
