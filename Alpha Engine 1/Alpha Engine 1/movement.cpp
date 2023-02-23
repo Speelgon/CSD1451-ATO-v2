@@ -4,7 +4,7 @@
 
 extern f64 delta;
 extern f64 assumedFrameRate;
-
+extern squareObject player;
 //For the movement, the variables are passed in as functions, so the extern thing isn't really necessary here, thats also why its less complicated wrt variable placement
 
 void playerInputMovement(float& pX, float& pY, float playerSpeed,int& jumptoken) {
@@ -79,10 +79,34 @@ void playerGravity(float& pY, float grav)
 	pY -= grav * assumedFrameRate * delta;
 }
 
-void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle item) {
+void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle item, node* collidingNode) {
 	
 	//pXvel += grav * cos(item.rotation);
 	//pYvel += grav * sin(item.rotation);
 	pXvel = 0;
 	pYvel = 0;
+	playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
+	player.x += player.xvel * sin(item.rotation);
+	player.y -= player.xvel * cos(item.rotation);
+	pXvel = 0;
+	pYvel = 0;
+	//float xdist = player.x - collidingNode->x;
+	//float ydist = player.y - collidingNode->y;
+	//if (player.x-collidingNode->x >= xdist)
+	//{
+	//	//player.x = xdist;
+	//}
+	//if (player.y-collidingNode->y >= ydist)
+	//{
+	//	//player.y = ydist;
+	//}
+
+	//AEVec2 tension;
+	//tension.x = 0;
+	//tension.y = 0;
+	//tension.x = (grav) * cos(item.rotation);
+	//tension.y = (grav) * sin(item.rotation);
+	//pXvel += tension.x;
+	//pYvel += tension.y;
+
 }

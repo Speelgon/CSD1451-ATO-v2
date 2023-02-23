@@ -11,9 +11,11 @@
 #include "Level1.hpp"
 #include "GSM.hpp"
 #include "objectDecs.hpp"
+#include "Mainmenu.hpp"
 
 // ---------------------------------------------------------------------------
 // main
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
@@ -38,6 +40,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	//set background color
 	AEGfxSetBackgroundColor(0.81f, 0.6f, 0.46f);
 
+	s8 fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
 	// Initialization end
 	/////////////////////
 
@@ -76,11 +79,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// Game Loop
 
-	
-
+	//current = previous = next = GS_LEVEL1;
 	while (gGameRunning)
 	{
-
+		// current = 1;
 		GSM_Initialize(current);
 
 		if (current != GS_RESTART)
@@ -94,9 +96,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			current = previous;
 		}
 
-		Level1_Initialize();
+		std::cout << "CURRENT IS:" << current << '\n';
 
-		while (next == current)
+		fpInitialize();
+
+		while (current == next)
 		{
 
 			// Informing the system about the loop's start
@@ -156,9 +160,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		previous = current;
 		current = next;
 
+		
+
 	}
 	// Freeing the objects and textures
-
+	AEGfxDestroyFont(fontId);
 	// free the system
 	AESysExit();
 }

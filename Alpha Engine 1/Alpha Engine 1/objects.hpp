@@ -97,6 +97,10 @@ void hookinit(hook &playerHook);
 
 void meshUpdate();
 
+void anglePlayerToMouse();
+
+void anglePlayerToNode(node nodes);
+
 void kwanEuItemRender();
 
 void hookUpdate();
