@@ -1,6 +1,4 @@
 #pragma once
-
-
 void Level1_Load();
 
 void Level1_Initialize();

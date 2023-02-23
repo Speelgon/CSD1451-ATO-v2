@@ -6,10 +6,9 @@
 #include "IncrementVariable.hpp"
 #include "vpCollision.hpp"
 #include "utils.h"
+#include "PlatformsDisappear.hpp"
 
-extern square player;
-extern square object[30];
-extern square ui[5];
+extern square player, object[30], ui[5];
 extern collectible1 collectible[maxCollectible];
 extern rectangle item;
 
@@ -46,31 +45,23 @@ extern int* clicky;
 extern int a;
 extern int b;
 
-extern int mousex;
-extern int mousey;
-extern int truemousex;
-extern int truemousey;
+extern int mousex, mousey;
+extern int truemousex, truemousey;
 
-extern float middlex;
-extern float middley;
+extern float middlex, middley;
 extern float optionside;
 extern float optionhalfside;
 
 extern int incrementobjintializer;
 
 //viewport 
-extern float viewportwidth;
-extern float viewportheight;
-extern float viewporthalfw;
-extern float viewporthalfh;
+extern float viewportwidth, viewportheight;
+extern float viewporthalfw, viewporthalfh;
 
 //float camX, camY; // Used to temporary store camera position
-extern float worldX;
-extern float worldY;
-extern float worldwidth;
-extern float worldheight;
-extern float worldhalfW;
-extern float worldhalfH;
+extern float worldX, worldY;
+extern float worldwidth, worldheight;
+extern float worldhalfW, worldhalfH;
 
 //MAPSIZE
 extern float mapx;
@@ -80,10 +71,7 @@ extern float halfmapy;
 
 
 
-enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
 
-
-f64 elapsedtime;
 
 
 char strBuffer[100];
@@ -91,26 +79,23 @@ f32 TextWidth, TextHeight;
 //==========================================================================================================================
 //==========================================================================================================================
 
-int LastJump = 0;
-int timerset = 0;
 
 //variables for normal timer
 f64 normalElapsedTime;
 int timer;
 f64 interval;
 int lasttimer;
-struct PlatformState
-{
-	int state;
-	int timer;
-	f64 elapsedtime;
-	f64 interval;
-}platformstate[4] = {	CANTDISAPPEAR, 3, 0.0f, 1.0f,
-						CANDISAPPEAR, 3, 0.0f, 1.0f,
-						CANTDISAPPEAR, 3, 0.0f, 1.0f,
-						CANDISAPPEAR, 3, 0.0f, 1.0f
-					};
 
+//make selected blocks disappear after a certain amount of time
+//----------------------------------------------------------------------------------------------------------------
+//enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
+f64 elapsedtime;
+struct PlatformState platformstate[4] = {	
+											CANTDISAPPEAR, 3, 0.0f, 1.0f,
+											CANDISAPPEAR, 3, 0.0f, 1.0f,
+											CANTDISAPPEAR, 3, 0.0f, 1.0f,
+											CANDISAPPEAR, 3, 0.0f, 1.0f
+										};
 int numberofplatforms = 4;
 
 int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
@@ -128,7 +113,7 @@ int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
 }
 
 
-
+//-------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -149,8 +134,8 @@ void Level1_Load()
 }
 
 // ----------------------------------------------------------------------------
-// This function initialized the variables used in level 1
-// prints Level1:Initialize to std output
+// This function initializes the variables used in level 1
+// prints Level1:Initialize to std::output
 // ----------------------------------------------------------------------------
 
 void Level1_Initialize()
@@ -209,38 +194,13 @@ void Level1_Initialize()
 
 	itemMesh = AEGfxMeshEnd();
 	AE_ASSERT_MESG(itemMesh, "Failed to create Item Mesh!!");
-	//fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
-	//-------------------------------------------------------------------------------------------------------------------------------------------------
-	//make another array of max number of platforms size to keep track of which platforms cannot disappear, can disappear and have disappeared
-	//enum disappearstatus { CantDisappear = 0, CanDisappear, Disappeared };
-	//InitializeTimer(10, 1.0f);
-	//fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
+	// ----------------------------------------------------------------------------
+	//make another array of max number of platforms size to keep track of which platforms
+	//cannot disappear, can disappear and have disappeared
+
 	lasttimer = timer = 60;
 	interval = 1.0f;
 	elapsedtime = 0.0f;
-	
-	/*platformstate[0].state = CANTDISAPPEAR;
-	platformstate[0].timer = 0;
-	platformstate[0].elapsedtime = 0.0f;
-	platformstate[0].interval = 0.0f;
-
-	platformstate[1].state = CANDISAPPEAR;
-	platformstate[1].timer = 3;
-	platformstate[1].elapsedtime = 0.0f;
-	platformstate[1].interval = 1.0f;
-
-	platformstate[2].state = CANTDISAPPEAR;
-	platformstate[2].timer = 0;
-	platformstate[2].elapsedtime = 0.0f;
-	platformstate[2].interval = 0.0f;
-
-	platformstate[3].state = CANTDISAPPEAR;
-	platformstate[3].timer = 0;
-	platformstate[3].elapsedtime = 0.0f;
-	platformstate[3].interval = 0.0f;*/
-
-	
-	
 }
 
 // ----------------------------------------------------------------------------
@@ -267,18 +227,6 @@ void Level1_Update()
 	
 	for (int i = 0; i < maxObj; i++)
 	{
-		//if (i < 4)
-		//
-		//	if (platformstate[i].state == 0 && LastJump == 1)
-		//	{
-		//		if (timerset == 0)
-		//		{
-		//			//InitializeTimer(15, 1.0f);
-		//			timerset = 1;
-		//		}
-		//		
-		//	}
-		//}
 		if (i < numberofplatforms)
 		{
 			// if platform set to disappear upon finishing countdown of timer, need not to check for collision
@@ -320,10 +268,7 @@ void Level1_Update()
 			{
 				platformstate[j].state = DISAPPEARED;
 			}
-			// std::cout << "platform: " << j << "Timer: " << platformstate[j].timer << '\n';
-			
 		}
-
 	}
 
 	if (timer > 0)
@@ -369,15 +314,15 @@ void Level1_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, platformstate);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, platformstate);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, platformstate);
 	}
 
 

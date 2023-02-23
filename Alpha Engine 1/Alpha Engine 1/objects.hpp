@@ -1,4 +1,5 @@
 #pragma once
+#include "PlatformsDisappear.hpp"
 #define maxObj 30
 #define meshMax 30
 #define maxUI 5
@@ -40,7 +41,7 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 
 void textureinit(AEGfxTexture** pTex);
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex);
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, PlatformState* platformstate);
 
 void collectibleinit(collectibleObject* object);
 

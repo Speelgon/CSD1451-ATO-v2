@@ -1,6 +1,9 @@
 #pragma once
 #include "allheaders.hpp"
 #include "objects.hpp"
+#include "Level1.hpp"
+#include "PlatformsDisappear.hpp"
+
 
 /*================================================================================================================================
 
@@ -18,66 +21,96 @@
 ================================================================================================================================
 */
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex)
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, PlatformState* platformstate)
 
 {
-	// Drawing object 1
-	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	// Set position for object 1
-	AEGfxSetPosition(player.x, player.y);
+	
+	
+		// Drawing object 1
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		// Set position for object 1
+		AEGfxSetPosition(player.x, player.y);
 
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Texture for player
-	AEGfxTextureSet(pTex, 0.0f, 0.0f);
-	// Drawing the mesh (list of triangles)
-	AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Texture for player
+		AEGfxTextureSet(pTex, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
 
-	AEGfxSetTransparency(1.0f);
+		AEGfxSetTransparency(1.0f);
+	
+	
+	
 
+	
+		//// Drawing object 1
+		//AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		//// Set position for object 1
+		//AEGfxSetPosition(player.x, player.y);
 
-	// Drawing object 2 - (first) - No tint
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	// Set position for object 2
-	AEGfxSetPosition(object[0].x, object[0].y);
-	// No tint
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Set texture
-	// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-	// Drawing the mesh (list of triangles)
-	AEGfxMeshDraw(pMesh[1], AE_GFX_MDM_TRIANGLES);
+		//AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		//// Texture for player
+		//AEGfxTextureSet(pTex, 0.0f, 0.0f);
+		//// Drawing the mesh (list of triangles)
+		//AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
 
-	// Drawing object 3 - (first) - No tint
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	// Set position for object 3
-	AEGfxSetPosition(object[1].x, object[1].y);
-	// No tint
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Set texture
-	// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-	// Drawing the mesh (list of triangles)
-	AEGfxMeshDraw(pMesh[2], AE_GFX_MDM_TRIANGLES);
+		//AEGfxSetTransparency(1.0f);
+	
+	if (platformstate[0].state != DISAPPEARED)
+	{
+		// Drawing object 2 - (first) - No tint
+		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+		// Set position for object 2
+		AEGfxSetPosition(object[0].x, object[0].y);
+		// No tint
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Set texture
+		// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[1], AE_GFX_MDM_TRIANGLES);
+	}
 
-	// Drawing object 3 - (first) - No tint
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	// Set position for object 3
-	AEGfxSetPosition(object[2].x, object[2].y);
-	// No tint
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Set texture
-	// EGfxTextureSet(pTex1, 0.0f, 0.0f);
-	// Drawing the mesh (list of triangles)
-	AEGfxMeshDraw(pMesh[3], AE_GFX_MDM_TRIANGLES);
+	if (platformstate[1].state != DISAPPEARED)
+	{
+		// Drawing object 3 - (first) - No tint
+		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+		// Set position for object 3
+		AEGfxSetPosition(object[1].x, object[1].y);
+		// No tint
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Set texture
+		// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[2], AE_GFX_MDM_TRIANGLES);
+	}
 
-	// Drawing object 3 - (first) - No tint
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	// Set position for object 3
-	AEGfxSetPosition(object[3].x, object[3].y);
-	// No tint
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Set texture
-	// EGfxTextureSet(pTex1, 0.0f, 0.0f);
-	// Drawing the mesh (list of triangles)
-	AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
+	if (platformstate[2].state != DISAPPEARED)
+	{
+		// Drawing object 3 - (first) - No tint
+		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+		// Set position for object 3
+		AEGfxSetPosition(object[2].x, object[2].y);
+		// No tint
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Set texture
+		// EGfxTextureSet(pTex1, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[3], AE_GFX_MDM_TRIANGLES);
+	}
+
+	if (platformstate[3].state != DISAPPEARED)
+	{
+		// Drawing object 3 - (first) - No tint
+		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+		// Set position for object 3
+		AEGfxSetPosition(object[3].x, object[3].y);
+		// No tint
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Set texture
+		// EGfxTextureSet(pTex1, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
+	}
 
 	if(collectible[0].visibility == 1)
 	{
@@ -92,6 +125,8 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[10], AE_GFX_MDM_TRIANGLES);
 	}
+
+	
 
 	// Drawing object 3 - (first) - No tint
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
@@ -122,7 +157,5 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	//	AEGfxTextureSet(pTex1, 0.0f, 0.0f);
 	//	// Drawing the mesh (list of triangles)
 	//	AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
-
 	//}
-
 }
