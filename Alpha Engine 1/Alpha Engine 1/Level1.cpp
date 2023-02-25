@@ -6,7 +6,7 @@
 #include "collision.hpp"
 #include "IncrementVariable.hpp"
 #include "vpCollision.hpp"
-
+#include "catdeath.hpp"
 
 extern f64 delta;
 extern f64 assumedFrameRate;
@@ -81,9 +81,6 @@ extern float mapx;
 extern float mapy;
 extern float halfmapx;
 extern float halfmapy;
-
-
-
 
 enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
 //f64 elapsedtime;
@@ -217,6 +214,10 @@ void Level1_Initialize()
 
 	blackholelevel1init(blackhole);
 
+	trampolineinit(trampoline);
+
+	trampolinelevel1init(trampoline);
+
 	nodeInit(nodes);
 
 	textureinit(pTex);
@@ -248,152 +249,166 @@ void Level1_Update()
 {	
 	delta = AEFrameRateControllerGetFrameTime();
 
-	if (AEInputCheckTriggered(AEVK_F))
+	if (AEInputCheckCurr(AEVK_L))
 	{
-		item.height += 10.f;
-		std::cout << "Printing";
+		catdeath();
 	}
 
-	playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
-
-	playerGravity(player.yvel, gravity);
-
-	if (AEInputCheckCurr(AEVK_LBUTTON))
+	else
 	{
-		if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
-			std::cout << "Collision\n";
-			anglePlayerToNode(nodes[collidedNode]);
-			movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
+		if (AEInputCheckTriggered(AEVK_F))
+		{
+			item.height += 10.f;
+			std::cout << "Printing";
+		}
+
+		playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
+
+		playerGravity(player.yvel, gravity);
+
+		if (AEInputCheckCurr(AEVK_LBUTTON))
+		{
+			if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
+				std::cout << "Collision\n";
+				anglePlayerToNode(nodes[collidedNode]);
+				movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
+			}
+			else {
+				anglePlayerToMouse();
+				hookCollisionFlag = 0;
+			}
 		}
 		else {
 			anglePlayerToMouse();
 			hookCollisionFlag = 0;
 		}
-	}
-	else {
-		anglePlayerToMouse();
-		hookCollisionFlag = 0;
-	}
 
-	playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
+		playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
-	meshUpdate();
+		meshUpdate();
 
-	hookUpdate();
+		hookUpdate();
 
 
-	//Bounding box type collision
+		//Bounding box type collision
 
-	for (int i = maxObj-1; i >= 0; i--)
-	{
-		//if (i < 4)
-		//
-		//	if (platformstate[i].state == 0 && LastJump == 1)
-		//	{
-		//		if (timerset == 0)
-		//		{
-		//			//InitializeTimer(15, 1.0f);
-		//			timerset = 1;
-		//		}
-		//		
-		//	}
-		//}
-		if (i < numberofplatforms)
+		for (int i = maxObj - 1; i >= 0; i--)
 		{
-			// if platform set to disappear upon finishing countdown of timer, need not to check for collision
-			if (platformstate[i].state != DISAPPEARED)
+			//if (i < 4)
+			//
+			//	if (platformstate[i].state == 0 && LastJump == 1)
+			//	{
+			//		if (timerset == 0)
+			//		{
+			//			//InitializeTimer(15, 1.0f);
+			//			timerset = 1;
+			//		}
+			//		
+			//	}
+			//}
+			if (i < numberofplatforms)
 			{
-
-				playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
-
-				// set the platform that can disappear to start timer upon player first landing on the platform
-				if (platformstate[i].state == CANDISAPPEAR && jumptoken && object[i].lefttoken == 0)
+				// if platform set to disappear upon finishing countdown of timer, need not to check for collision
+				if (platformstate[i].state != DISAPPEARED)
 				{
-					platformstate[i].state = TIMERSTARTED;
-					
-					std::cout << "platform " << i << "Timer started" << '\n';
+
+					playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
+
+					// set the platform that can disappear to start timer upon player first landing on the platform
+					if (platformstate[i].state == CANDISAPPEAR && jumptoken && object[i].lefttoken == 0)
+					{
+						platformstate[i].state = TIMERSTARTED;
+
+						std::cout << "platform " << i << "Timer started" << '\n';
+					}
+
+
 				}
-
-
+				else
+				{
+					object[i].lefttoken = 1;
+					object[i].righttoken = 1;
+				}
 			}
 			else
 			{
-				object[i].lefttoken = 1;
-				object[i].righttoken = 1;
+				playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
 			}
-		}
-		else
-		{
-			playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
-		}
-		
-	}
 
-	// run countdown for the platforms to disappear
-	for (int j = 0; j < numberofplatforms; j++)
-	{
-		if (platformstate[j].state == TIMERSTARTED)
+		}
+
+		// run countdown for the platforms to disappear
+		for (int j = 0; j < numberofplatforms; j++)
 		{
-			platformstate[j].timer = normalUpdateTimer(&(platformstate[j]).elapsedtime, platformstate[j].timer, platformstate[j].interval);
-			if (platformstate[j].timer == 0)
+			if (platformstate[j].state == TIMERSTARTED)
 			{
-				platformstate[j].state = DISAPPEARED;
+				platformstate[j].timer = normalUpdateTimer(&(platformstate[j]).elapsedtime, platformstate[j].timer, platformstate[j].interval);
+				if (platformstate[j].timer == 0)
+				{
+					platformstate[j].state = DISAPPEARED;
+				}
+				// std::cout << "platform: " << j << "Timer: " << platformstate[j].timer << '\n';
+
 			}
-			// std::cout << "platform: " << j << "Timer: " << platformstate[j].timer << '\n';
-			
+
 		}
 
-	}
-
-	if (timer > 0)
-	{
-		timer = normalUpdateTimer(&normalElapsedTime, timer, interval);
-	}
-
-	for (int i = 0; i < maxCollectible; i++)
-	{
-		playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
-	}
+		for (int i = maxTrampolines - 1; i >= 0; i--)
+		{
+			playerCollisionTrampoline(player.x, player.y, trampoline[i].x, trampoline[i].y, player.halfW, player.halfH, trampoline[i].halfW, trampoline[i].halfH, player.xvel, player.yvel, jumptoken, trampoline[i].lefttoken, trampoline[i].righttoken); //LOCATED IN Collision.cpp
+		}
 
 
+		if (timer > 0)
+		{
+			timer = normalUpdateTimer(&normalElapsedTime, timer, interval);
+		}
 
-	playerCollisionPortal(player.x, player.y, portal[0].x, portal[0].y, player.halfW, player.halfH, portal[0].halfW, portal[0].halfH, portal[0].positiontoken);
-
-	if (portal[0].positiontoken == 0)
-	{
-		player.x = portal[1].x + portal[1].halfW + 20;
-		player.y = portal[1].y;
-		portal[0].positiontoken = 1;
-	}
-
-	playerCollisionPortal(player.x, player.y, portal[1].x, portal[1].y, player.halfW, player.halfH, portal[1].halfW, portal[1].halfH, portal[1].positiontoken);
+		for (int i = 0; i < maxCollectible; i++)
+		{
+			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
+		}
 
 
-	if (portal[1].positiontoken == 0)
-	{
-		player.x = portal[0].x - portal[0].halfW - 20;
-		player.y = portal[0].y;
-		portal[1].positiontoken = 1;
-	}
-	
-	//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
-	playerEasingMovement(player.xvel, player.yvel, stabliser);
+		playerCollisionPortal(player.x, player.y, portal[0].x, portal[0].y, player.halfW, player.halfH, portal[0].halfW, portal[0].halfH, portal[0].positiontoken);
 
-	playerCollisionMapBoundary(player.x, player.y, object[0].x, object[0].y, player.halfW, player.halfH, object[0].halfW, object[0].halfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
+		if (portal[0].positiontoken == 0)
+		{
+			player.x = portal[1].x + portal[1].halfW + 20;
+			player.y = portal[1].y;
+			portal[0].positiontoken = 1;
+		}
 
-	incrementobjintializer = whichvariableincreased(incrementobjintializer, a, b, middlex, middley, optionhalfside, pMeshY1, pMeshY2, truemousex, truemousey);
+		playerCollisionPortal(player.x, player.y, portal[1].x, portal[1].y, player.halfW, player.halfH, portal[1].halfW, portal[1].halfH, portal[1].positiontoken);
 
-	AEInputGetCursorPosition(&mouseX, &mouseY);
 
-	//if(player.x<400 && player.x>-400 && player.y<400 && player.y > -300)
-	//{
+		if (portal[1].positiontoken == 0)
+		{
+			player.x = portal[0].x - portal[0].halfW - 20;
+			player.y = portal[0].y;
+			portal[1].positiontoken = 1;
+		}
+
+		//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
+
+		playerEasingMovement(player.xvel, player.yvel, stabliser);
+
+		playerCollisionMapBoundary(player.x, player.y, object[0].x, object[0].y, player.halfW, player.halfH, object[0].halfW, object[0].halfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
+
+		incrementobjintializer = whichvariableincreased(incrementobjintializer, a, b, middlex, middley, optionhalfside, pMeshY1, pMeshY2, truemousex, truemousey);
+
+		AEInputGetCursorPosition(&mouseX, &mouseY);
+
+		//if(player.x<400 && player.x>-400 && player.y<400 && player.y > -300)
+		//{
 		viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
-	//}
-	
+		//}
 
-	// Out of bounds
-	playerOutofBounds(player.x, player.y);
+
+		// Out of bounds
+		playerOutofBounds(player.x, player.y);
+	}
 }
 
 void Level1_Draw()
