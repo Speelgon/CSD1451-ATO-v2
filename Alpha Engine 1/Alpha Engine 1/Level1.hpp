@@ -10,6 +10,7 @@ extern rectangle item;
 extern hook playerHook;
 extern boundary mapBoundary;
 extern node nodes[maxNodes];
+extern tramp trampoline[maxTrampolines];
 
 extern s32 mousePositionX, mousePositionY;
 extern s32 relativeMouseX, relativeMouseY;
@@ -34,6 +35,8 @@ extern int hookCollisionFlag;
 extern float pointHookStuckX;
 extern float pointHookStuckY;
 extern int collidedNode;
+extern float deathSeconds;
+extern float timeDead;
 
 //==========================================================================================================================
 	// Yuki's Variables

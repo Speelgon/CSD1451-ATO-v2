@@ -23,6 +23,7 @@ hook playerHook;
 rectangle item;
 boundary mapBoundary;
 node nodes[maxNodes];
+tramp trampoline[maxTrampolines];
 
 AEGfxVertexList* pMesh[meshMax];
 AEGfxVertexList* uiMesh[maxUI];
@@ -49,6 +50,9 @@ f64 delta = 1/60.0;
 f64 assumedFrameRate = 60;
 float pointHookStuckX = 0;
 float pointHookStuckY = 0;
+
+float deathSeconds = 0.3;
+float timeDead = 0;
 
 //==========================================================================================================================
 	// Yuki's Variables

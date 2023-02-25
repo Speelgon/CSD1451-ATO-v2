@@ -218,6 +218,25 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
+	//===============================================================
+	// Trampoline Drawing												 
+	//===============================================================
+
+	// Drawing object 3 - (first) - No tint
+	AEGfxSetBlendMode(AE_GFX_BM_NONE);
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+
+	AEGfxSetPosition(trampoline[0].x, trampoline[0].y);
+	// No tint
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxMeshDraw(pMesh[30], AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
+
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
+
 
 	//// Drawing object 3 - (first) - No tint
 	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);

@@ -171,6 +171,30 @@ void blackholelevel1init(blackhole1* object) {
 
 }
 
+void trampolineinit(tramp* object) {
+	for (int i = 0; i < maxTrampolines; i++)
+	{
+		object[i].x = 20000;
+		object[i].y = -2000;
+		object[i].width = 10;
+		object[i].height = 10;
+		object[i].halfW = object[i].width / 2;
+		object[i].halfH = object[i].height / 2;
+		object[i].lefttoken = 0;
+		object[i].righttoken = 0;
+	}
+}
+
+void trampolinelevel1init(tramp* object) {
+	object[0].x = -1350;
+	object[0].y = -275;
+	object[0].width = 300;
+	object[0].height = 10;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+	object[0].lefttoken = 0;
+	object[0].righttoken = 0;
+}
 
 void nodeInit(nodeObject* nodes) {
 	//node 1

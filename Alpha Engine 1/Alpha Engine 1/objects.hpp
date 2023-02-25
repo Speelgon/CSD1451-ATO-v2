@@ -4,8 +4,9 @@
 #define maxBlackhole 20
 #define maxUI 5
 #define maxCollectible 5
-#define maxPortal 2
-#define maxNodes 2
+#define maxPortal 10
+#define maxNodes 10
+#define maxTrampolines 10
 
 typedef struct squareObject {
 	f32 x, y;
@@ -65,6 +66,14 @@ typedef struct boundaryArea {
 	f32 y;
 }boundary;
 
+typedef struct trampoline1 {
+	f32 x, y;
+	float width, height;
+	float halfW, halfH;
+	int lefttoken, righttoken;
+}tramp;
+
+
 void objectinit(squareObject* object);
 
 void uiinit(squareObject* ui);
@@ -82,6 +91,10 @@ void textureinit(AEGfxTexture** pTex);
 void blackholeinit(blackhole1* object);
 
 void blackholelevel1init(blackhole1* object);
+
+void trampolineinit(tramp* object);
+
+void trampolinelevel1init(tramp* object);
 
 void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes);
 
