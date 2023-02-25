@@ -141,6 +141,7 @@ int normalUpdateTimer(f64 * normalElapsedTime, int timer, f64 interval)
 	}
 	return timer;
 }
+
 void Level1_Load()
 {
 	std::cout << "GSM:Load\n";
@@ -175,6 +176,8 @@ void Level1_Initialize()
 {
     ///fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
 	//fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
+	AEGfxSetBackgroundColor(0.81f, 0.6f, 0.46f);
+
 	
 //C:\Users\Yuki\OneDrive\Documents\GitHub\CSD1451 - ATO - v2\Alpha Engine 1\Assets
 	player.x = -1000;
