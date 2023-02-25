@@ -2,6 +2,8 @@
 #include "allheaders.hpp"
 #include "Mainmenu.hpp"
 #include "SplashScreen.hpp"
+#include "PauseMenu.hpp"
+#include "WinScreen.hpp"
 int current = 0, previous = 0, next = 0;
 
 FP fpLoad = nullptr, fpInitialize = nullptr, fpUpdate = nullptr, fpDraw = nullptr, fpFree = nullptr, fpUnload = nullptr;
@@ -57,6 +59,20 @@ void GSM_Update()
 		fpFree = Level1_Free;
 		fpUnload = Level1_Unload;
 		break;
+	/*case GS_WINSCREEN:
+		fpLoad = Winscreen_Load;
+		fpInitialize = Winscreen_Initialize;
+		fpUpdate = Winscreen_Update;
+		fpDraw = Winscreen_Draw;
+		fpFree = Winscreen_Free;
+		fpUnload = Winscreen_Unload;
+	case GS_PAUSEMENU:
+		fpLoad = Pausemenu_Load;
+		fpInitialize = Pausemenu_Initialize;
+		fpUpdate = Pausemenu_Update;
+		fpDraw = Pausemenu_Draw;
+		fpFree = Pausemenu_Free;
+		fpUnload = Pausemenu_Unload;*/
 
 	case GS_LEVEL2:			//Loads the function pointers for level 2
 		break;

@@ -79,7 +79,10 @@ void Mainmenu_Update()
 
 	if (IsAreaClicked(buttons.x, creditsbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
-		std::cout << "ADA BABY" << '\n';
+		std::cout << "Are you sure you wanna quit?" << '\n';
+		//make confirmation prompt "Are you sure you wanna quit?" as a font drawn on a mesh, if button on mesh is pressed, 
+		next = GS_QUIT;
+
 	}
 	
 	
