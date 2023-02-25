@@ -207,6 +207,7 @@ Portal Collision
 				collidedNode = i;
 				pointHookStuckX = nodes[i].x;
 				pointHookStuckY = nodes[i].y;
+				jumptoken = 1;
 				return 1;
 			}
 		}
