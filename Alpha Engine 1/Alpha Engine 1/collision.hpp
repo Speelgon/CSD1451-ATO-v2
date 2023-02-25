@@ -9,7 +9,6 @@ void playerCollisionMapBoundary(float& pX, float& pY, float& oX, float& oY, floa
 
 void playerCollisionPortal(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, int& positiontoken);
 
-void playerOutofBounds(float& pX, float& pY, float& mY);
-
 int playerHookCollision(node *nodes, hook *playerHook, int &collisionFlag);
 
+int playerOutofBounds(float pY, float mY);

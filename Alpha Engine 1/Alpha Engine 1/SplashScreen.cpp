@@ -22,13 +22,13 @@ void SplashScreen_Initialize()
 
     // This shape has 2 triangles
     AEGfxTriAdd(
-        -30.0f, -30.0f, 0x00FF00FF, 0.0f, 0.0f,
-        30.0f, -30.0f, 0x00FFFF00, 0.0f, 0.0f,
+        -30.0f, -30.0f, 0x00FF00FF, 0.0f, 1.0f,
+        30.0f, -30.0f, 0x00FFFF00, 1.0f, 1.0f,
         -30.0f, 30.0f, 0x0000FFFF, 0.0f, 0.0f);
 
     AEGfxTriAdd(
-        30.0f, -30.0f, 0x00FFFFFF, 0.0f, 0.0f,
-        30.0f, 30.0f, 0x00FFFFFF, 0.0f, 0.0f,
+        30.0f, -30.0f, 0x00FFFFFF, 1.0f, 1.0f,
+        30.0f, 30.0f, 0x00FFFFFF, 1.0f, 0.0f,
         -30.0f, 30.0f, 0x00FFFFFF, 0.0f, 0.0f);
 
     // Saving the mesh (list of triangles) in pMesh2
@@ -80,6 +80,7 @@ void SplashScreen_Draw()
     AEGfxSetRenderMode(AE_GFX_RM_COLOR);
     // Set position for object 2
     AEGfxSetPosition(100.0f, -60.0f);
+    AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
     // No texture for object 2
     AEGfxTextureSet(NULL, 0, 0);
     // Drawing the mesh (list of triangles)

@@ -395,7 +395,10 @@ void Level1_Update()
 	
 
 	// Out of bounds
-	playerOutofBounds(player.x, player.y, mapBoundary.y);
+	if (playerOutofBounds(player.y, mapBoundary.y) == 1)
+	{
+		current = GS_RESTART;
+	}
 }
 
 void Level1_Draw()
