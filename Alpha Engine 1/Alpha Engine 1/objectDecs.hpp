@@ -21,6 +21,7 @@ blackhole1 blackhole[maxBlackhole];
 square player;
 hook playerHook;
 rectangle item;
+boundary mapBoundary;
 node nodes[maxNodes];
 tramp trampoline[maxTrampolines];
 

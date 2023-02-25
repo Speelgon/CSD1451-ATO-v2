@@ -11,7 +11,7 @@ void playerCollisionPortal(float& pX, float& pY, float& oX, float& oY, float& pS
 
 void playerCollisionTrampoline(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float& playerSpeedX, float& playerSpeedY, int& jumptoken, int& lefttoken, int& righttoken);
 
-void playerOutofBounds(float& pX, float& pY);
+int playerOutofBounds(float pY, float mY);
 
 int playerHookCollision(node *nodes, hook *playerHook, int &collisionFlag);
 

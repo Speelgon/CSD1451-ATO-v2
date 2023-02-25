@@ -56,6 +56,10 @@ typedef struct blackhole1 {
 	float pullRadius;
 }blackhole1;
 
+typedef struct boundaryArea {
+	f32 y;
+}boundary;
+
 typedef struct nodeObject {
 	f32 x, y;
 	float width, height;
