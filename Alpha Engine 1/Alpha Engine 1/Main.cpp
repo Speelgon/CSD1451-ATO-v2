@@ -15,7 +15,7 @@
 
 // ---------------------------------------------------------------------------
 // main
-
+s8 fontId;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
@@ -40,7 +40,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	//set background color
 	AEGfxSetBackgroundColor(0.81f, 0.6f, 0.46f);
 
-	s8 fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
+	fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 24);
 	// Initialization end
 	/////////////////////
 
