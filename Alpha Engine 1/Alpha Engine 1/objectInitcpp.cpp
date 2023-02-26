@@ -213,3 +213,27 @@ void nodeInit(nodeObject* nodes) {
 	nodes[1].halfW = nodes[0].width / 2;
 	nodes[1].halfH = nodes[0].height / 2;
 }
+
+void exitdoorinit(exitDoor* door) {
+
+	for (int i = 0; i < maxDoor; i++)
+	{
+		door[i].x = 20000;
+		door[i].y = -2000;
+		door[i].width = 10;
+		door[i].height = 10;
+		door[i].halfW = door[i].width / 2;
+		door[i].halfH = door[i].height / 2;
+	}
+}
+
+void exitdoorlevel1init(exitDoor* door) {
+
+	door[0].x = -1150;
+	door[0].y = -200;
+	door[0].width = 40;
+	door[0].height = 80;
+	door[0].halfW = door[0].width / 2;
+	door[0].halfH = door[0].height / 2;
+
+}
