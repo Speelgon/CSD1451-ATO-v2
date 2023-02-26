@@ -90,6 +90,10 @@ void Mainmenu_Update()
 
 void Mainmenu_Draw()
 {
+	//====================================//
+	//			 Button Drawing			  //
+	//====================================//
+	
 	// Drawing top "play" button
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 	// Set position 
@@ -121,12 +125,15 @@ void Mainmenu_Draw()
 	AEGfxTextureSet(NULL, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 
+	//====================================//
+	//			  TEXT PRINTING			  //
+	//====================================//
+	// 
 	//PRINT "LEAP CLIMBERS" TEXT
 	AEGfxGetPrintSize(fontId, strBufferTitle, f32(1), TextWidth, TextHeight);
 	memset(strBufferTitle, 0, 5 * sizeof(char));
 	sprintf_s(strBufferTitle, "LEAP CLIMBERS");
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	//800 W 600 H,    
 	AEGfxPrint(fontId, strBufferTitle, -0.22f, 0.5f, 1, 1.f, 1.f, 1.f);
 
 	//PRINT "PLAY" TEXT
@@ -134,7 +141,6 @@ void Mainmenu_Draw()
 	memset(strBufferPLAY, 0, 5 * sizeof(char));
 	sprintf_s(strBufferPLAY, "PLAY");
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	//800 W 600 H,    
 	AEGfxPrint(fontId, strBufferPLAY, -0.065f, 0.14f, 1, 0.f, 0.f, 0.f);
 
 	//PRINT "TUTORIAL" TEXT
