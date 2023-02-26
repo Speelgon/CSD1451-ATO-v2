@@ -221,14 +221,14 @@ Player out of bounds
 ==================================================================================================================================
 */
 
-	void playerOutofBounds(float& pX, float& pY)
+	int playerOutofBounds(float pY, float mY)
 	{
-		if (pY < -600)
+		if (pY < mY)
 		{
-			pX = -1000;
-			pY = -200;
-			std::cout << "boundary";
+			std::cout << "Out-of-Bounds" << '\n';
+			return 1;
 		}
+		return 0;
 	}
 
 
@@ -274,3 +274,34 @@ Player out of bounds
 		}
 	}
 
+
+	/*
+	==================================================================================================================================
+	Exit Door Collision
+	==================================================================================================================================
+	*/
+
+	int exitCollisionDoor(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY)
+	{
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX))
+		{
+			return 1;
+		}
+		// Right side collision
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX))
+		{
+			return 1;
+		}
+		// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
+		if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY))
+		{
+			return 1;
+		}
+		// Bottom side collision	
+		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
+		{
+			return 1;
+		}
+		return 0;
+		
+	}
