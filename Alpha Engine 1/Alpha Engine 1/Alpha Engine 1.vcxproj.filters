@@ -84,6 +84,9 @@
     <ClCompile Include="catdeath.cpp">
       <Filter>Source Files\UpdateObjects</Filter>
     </ClCompile>
+    <ClCompile Include="level1_new.cpp">
+      <Filter>Source Files\Game State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.hpp">
@@ -123,6 +126,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="catdeath.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="level1_new.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="moreyukivariables.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

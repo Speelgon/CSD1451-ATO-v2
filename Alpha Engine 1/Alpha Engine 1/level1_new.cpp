@@ -1,6 +1,6 @@
 #pragma once
 #include "allheaders.hpp"
-#include "Level1.hpp"
+#include "Level1_new.hpp"
 #include "movement.hpp"
 #include "objects.hpp"
 #include "collision.hpp"
@@ -8,92 +8,10 @@
 #include "vpCollision.hpp"
 #include "catdeath.hpp"
 
-extern f64 delta;
-extern f64 assumedFrameRate;
 
-extern square player;
-extern square object[maxObj];
-extern square ui[maxUI];
-extern collectible1 collectible[maxCollectible];
-extern rectangle item;
-
-extern AEGfxVertexList* pMesh[meshMax];
-extern AEGfxVertexList* uiMesh[maxUI];
-extern AEGfxTexture* pTex[30];
-
-extern AEGfxVertexList* itemMesh;
-extern AEGfxTexture* pTexFront;
-extern AEGfxTexture* pTexRight;
-extern AEGfxTexture* pTexLeft;
-extern float playerSpeed;
-extern int jumptoken;
-extern float gravity;
-extern float stabliser;
-
-
-//==========================================================================================================================
-// Yuki's Variables
-//==========================================================================================================================
-// 
-// 
-// 
-
-extern AEGfxVertexList* pMeshY1;
-extern AEGfxVertexList* pMeshY2;
-//store mouse position coordinates
-extern s32 mouseX, mouseY;
-
-extern int* clickx;
-extern int* clicky;
-
-//variables for passing over obj
-extern int a;
-extern int b;
-
-extern int mousex;
-extern int mousey;
-extern int truemousex;
-extern int truemousey;
-
-extern float middlex;
-extern float middley;
-extern float optionside;
-extern float optionhalfside;
-
-extern int incrementobjintializer;
-
-//viewport 
-extern float viewportwidth;
-extern float viewportheight;
-extern float viewporthalfw;
-extern float viewporthalfh;
-
-//float camX, camY; // Used to temporary store camera position
-extern float worldX;
-extern float worldY;
-extern float worldwidth;
-extern float worldheight;
-extern float worldhalfW;
-extern float worldhalfH;
-
-//MAPSIZE
-extern float mapx;
-extern float mapy;
-extern float halfmapx;
-extern float halfmapy;
 
 namespace {
 
-<<<<<<< Updated upstream
-//char strBuffer[100];
-//f32 TextWidth, TextHeight;
-//==========================================================================================================================
-//==========================================================================================================================
-//f64 intervaltime;
-int LastJump = 0;
-int timerset = 0;
-=======
->>>>>>> Stashed changes
 
 
 	enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
@@ -158,12 +76,12 @@ int timerset = 0;
 
 }
 
-void Level1_Load()
-{
-	std::cout << "GSM:Load\n";
 
-	// Texture 1: From file
-	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
+
+void Level1NEW_Load()
+{
+    {//Load Assets
+    pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
 	AE_ASSERT_MESG(pTexFront, "Failed to create cat front texture!!");
 
 	pTexRight = AEGfxTextureLoad("Assets/FCat_Right.png");
@@ -180,38 +98,35 @@ void Level1_Load()
 
 	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
 	AE_ASSERT_MESG(pTexCollectible, "Failed to create collectible texture!!");
-
+    }
 }
 
-// ----------------------------------------------------------------------------
-// This function initialized the variables used in level 1
-// prints Level1:Initialize to std output
-// ----------------------------------------------------------------------------
-
-void Level1_Initialize()
+void Level1NEW_Initialize()
 {
-    ///fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
-	//fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
-	AEGfxSetBackgroundColor(0.81f, 0.6f, 0.46f);
+    AEGfxSetBackgroundColor(0.81f, 0.6f, 0.46f); //set background color
 
-	
-//C:\Users\Yuki\OneDrive\Documents\GitHub\CSD1451 - ATO - v2\Alpha Engine 1\Assets
-	player.x = -1000;
-	player.y = -200;
-	player.xvel = 0;
-	player.yvel = 0;
-	player.width = 10;
-	player.height = 60;
-	player.halfW = player.width / 2;
-	player.halfH = player.height / 2;
-	player.lefttoken = 0;
-	player.righttoken = 0;
+    { //initialising of player stats
+        player.x = -1000;
+        player.y = -200;
+        player.xvel = 0;
+        player.yvel = 0;
+        player.width = 10;
+        player.height = 60;
+        player.halfW = player.width / 2;
+        player.halfH = player.height / 2;
+        player.lefttoken = 0;
+        player.righttoken = 0;
+    }
 
-	item.rotation = 0;
-	item.width = 8.f;
-	item.height = 45.f;
+	{//initialising of item stats
+        item.rotation = 0;
+        item.width = 8.f;
+        item.height = 45.f;
+    }
 
-	objectinit(object);
+    {//initialising using functions <objectinitcpp.cpp>
+
+    objectinit(object);
 
 	hookinit(playerHook);
 
@@ -219,25 +134,11 @@ void Level1_Initialize()
 
 	collectiblelevel1init(collectible);
 
-	portalinit(portal);
-
-	portallevel1init(portal);
-
 	uiinit(ui);
 
 	uilevel1init(ui);
 
 	objectlevel1init(object);
-
-	blackholeinit(blackhole);
-
-	blackholelevel1init(blackhole);
-
-	trampolineinit(trampoline);
-
-	trampolinelevel1init(trampoline);
-
-	nodeInit(nodes);
 
 	textureinit(pTex);
 
@@ -245,28 +146,12 @@ void Level1_Initialize()
 
 	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole);
 
-	platformstate[2].state = CANTDISAPPEAR;
-	platformstate[2].timer = 0;
-	platformstate[2].elapsedtime = 0.0f;
-	platformstate[2].interval = 0.0f;
+    }
+}//end of initialisation
 
-	platformstate[3].state = CANTDISAPPEAR;
-	platformstate[3].timer = 0;
-	platformstate[3].elapsedtime = 0.0f;
-	platformstate[3].interval = 0.0f;
-
-	
-	
-}
-
-// ----------------------------------------------------------------------------
-// This function updates the variables used in level 1 and
-// prints Level1:Update to std output
-// ----------------------------------------------------------------------------
-
-void Level1_Update()
-{	
-	delta = AEFrameRateControllerGetFrameTime();
+void Level1NEW_Update()
+{
+   delta = AEFrameRateControllerGetFrameTime();
 
 	if (AEInputCheckCurr(AEVK_L))
 	{
@@ -275,17 +160,18 @@ void Level1_Update()
 
 	else
 	{
-		if (AEInputCheckTriggered(AEVK_F))
+		
+        {////////////////////////////////////////start of grappling hook logic//////////////////////////////////////////////////////
+        if (AEInputCheckTriggered(AEVK_F)) //enlarges the hook
 		{
 			item.height += 10.f;
-			std::cout << "Printing";
 		}
 
 		playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
 
 		playerGravity(player.yvel, gravity);
 
-		if (AEInputCheckCurr(AEVK_LBUTTON))
+		if (AEInputCheckCurr(AEVK_LBUTTON)) //grappling hook
 		{
 			if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
 				anglePlayerToNode(nodes[collidedNode]);
@@ -301,12 +187,13 @@ void Level1_Update()
 			hookCollisionFlag = 0;
 		}
 
+        } ////////////////////////////////////// end of grappling hook logic////////////////////////////////////////////////////////
+
 		playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 		meshUpdate();
 
 		hookUpdate();
-
 
 		//Bounding box type collision
 
@@ -382,33 +269,12 @@ void Level1_Update()
 			timer = normalUpdateTimer(&normalElapsedTime, timer, interval);
 		}
 
-		for (int i = 0; i < maxCollectible; i++)
+
+		for (int i = 0; i < maxCollectible; i++) //checks for collectible collision
 		{
 			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
 		}
 
-
-
-		playerCollisionPortal(player.x, player.y, portal[0].x, portal[0].y, player.halfW, player.halfH, portal[0].halfW, portal[0].halfH, portal[0].positiontoken);
-
-		if (portal[0].positiontoken == 0)
-		{
-			player.x = portal[1].x + portal[1].halfW + 20;
-			player.y = portal[1].y;
-			portal[0].positiontoken = 1;
-		}
-
-		playerCollisionPortal(player.x, player.y, portal[1].x, portal[1].y, player.halfW, player.halfH, portal[1].halfW, portal[1].halfH, portal[1].positiontoken);
-
-
-		if (portal[1].positiontoken == 0)
-		{
-			player.x = portal[0].x - portal[0].halfW - 20;
-			player.y = portal[0].y;
-			portal[1].positiontoken = 1;
-		}
-
-		//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 		playerEasingMovement(player.xvel, player.yvel, stabliser);
 
@@ -426,13 +292,13 @@ void Level1_Update()
 
 		// Out of bounds
 		playerOutofBounds(player.x, player.y);
-	}
+    }
+
 }
 
-void Level1_Draw()
+void Level1NEW_Draw()
 {
-
-	// Change texture base on where player is facing
+    // Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
 		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes);
@@ -448,13 +314,11 @@ void Level1_Draw()
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
 	kwanEuItemRender();
-
-	
 }
 
-void Level1_Free()
+void Level1NEW_Free()
 {
-	for (int i = 0; i < meshMax; i++)
+    for (int i = 0; i < meshMax; i++)
 	{
 		AEGfxMeshFree(pMesh[i]);
 	}
@@ -462,13 +326,12 @@ void Level1_Free()
 	//AEGfxDestroyFont(fontId);
 }
 
-void Level1_Unload()
+void Level1NEW_Unload()
 {
-	AEGfxTextureUnload(pTexFront);
+    AEGfxTextureUnload(pTexFront);
 	AEGfxTextureUnload(pTexRight);
 	AEGfxTextureUnload(pTexLeft);
 	AEGfxTextureUnload(pTexPortal);
 	AEGfxTextureUnload(pTexPlatform);
 	AEGfxTextureUnload(pTexCollectible);
 }
-

@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Level1.hpp"
 #include "objects.hpp"
+#include "level1_new.hpp"
+
 
 
 
@@ -18,6 +20,7 @@ extern FP fpLoad, fpInitialize, fpUpdate, fpDraw, fpFree, fpUnload;
 
 enum GS_STATES
 {
+	
 	GS_SPLASHSCREEN,
 	GS_MAINMENU,
 	GS_LEVEL1,
