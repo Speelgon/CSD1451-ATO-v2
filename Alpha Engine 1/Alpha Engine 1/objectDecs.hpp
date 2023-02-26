@@ -22,6 +22,7 @@ square player;
 hook playerHook;
 rectangle item;
 boundary mapBoundary;
+exits exitdoor[maxDoor];
 node nodes[maxNodes];
 tramp trampoline[maxTrampolines];
 
@@ -55,11 +56,11 @@ float deathSeconds = 0.3;
 float timeDead = 0;
 
 //==========================================================================================================================
-	// Yuki's Variables
-	//==========================================================================================================================
-	// 
-	// 
-	// 
+// Yuki's Variables
+//==========================================================================================================================
+// 
+// 
+// 
 
 AEGfxVertexList* pMeshY1 = 0;
 AEGfxVertexList* pMeshY2 = 0;

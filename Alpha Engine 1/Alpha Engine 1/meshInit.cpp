@@ -45,7 +45,7 @@ void meshinit(squareObject* object, AEGfxVertexList** pMesh) {
 	}
 }
 
-void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible, squareObject player, portalObject* portal, hook playerHook, blackhole1* blackhole) {
+void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible, squareObject player, portalObject* portal, hook playerHook, blackhole1* blackhole, exitDoor *exitdoor) {
 	
 	//======================================================IMPORTANT BEFORE YOU DECLARE MESHES==========================================================
 	//======================================================IMPORTANT BEFORE YOU DECLARE MESHES==========================================================
@@ -311,6 +311,21 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 
 	pMesh[50] = AEGfxMeshEnd();
 
+	//===================================================================================================================================================
+
+	AEGfxMeshStart();
+
+	AEGfxTriAdd(
+		-exitdoor[0].halfW, -exitdoor[0].halfH, 0x00FF0000, 0.0f, 1.0f,
+		exitdoor[0].halfW, -exitdoor[0].halfH, 0x00FF0000, 1.0f, 1.0f,
+		-exitdoor[0].halfW, exitdoor[0].halfH, 0x00FF0000, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		exitdoor[0].halfW, -exitdoor[0].halfH, 0x0000FFFF, 1.0f, 1.0f,
+		exitdoor[0].halfW, exitdoor[0].halfH, 0x0000FFFF, 1.0f, 0.0f,
+		-exitdoor[0].halfW, exitdoor[0].halfH, 0x0000FFFF, 0.0f, 0.0f);
+
+	pMesh[60] = AEGfxMeshEnd();
 
 
 }

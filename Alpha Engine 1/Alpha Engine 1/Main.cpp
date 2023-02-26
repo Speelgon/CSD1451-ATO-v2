@@ -160,6 +160,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		previous = current;
 		current = next;
 
+		if (current == GS_QUIT)
+		{
+			gGameRunning = 0;
+		}
+
 		
 
 	}

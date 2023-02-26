@@ -16,6 +16,9 @@ extern square object[maxObj];
 extern square ui[maxUI];
 extern collectible1 collectible[maxCollectible];
 extern rectangle item;
+extern exits exitdoor[maxDoor];
+extern portal1 portal[maxPortal];
+extern boundary mapBoundary;
 
 extern AEGfxVertexList* pMesh[meshMax];
 extern AEGfxVertexList* uiMesh[maxUI];
@@ -197,6 +200,7 @@ void Level1_Initialize()
 
 	mapBoundary.y = -600;
 
+
 	objectinit(object);
 
 	hookinit(playerHook);
@@ -223,13 +227,17 @@ void Level1_Initialize()
 
 	trampolinelevel1init(trampoline);
 
+	exitdoorinit(exitdoor);
+
+	exitdoorlevel1init(exitdoor);
+
 	nodeInit(nodes);
 
 	textureinit(pTex);
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole);
+	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
 	platformstate[2].state = CANTDISAPPEAR;
 	platformstate[2].timer = 0;
@@ -417,6 +425,12 @@ void Level1_Update()
 			current = GS_RESTART;
 		}
 
+		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
+		{
+			next = GS_QUIT;
+		}
+	
+
 	}
 }
 
@@ -426,15 +440,15 @@ void Level1_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling

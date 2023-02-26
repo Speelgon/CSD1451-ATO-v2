@@ -15,3 +15,4 @@ int playerOutofBounds(float pY, float mY);
 
 int playerHookCollision(node *nodes, hook *playerHook, int &collisionFlag);
 
+int exitCollisionDoor(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY);

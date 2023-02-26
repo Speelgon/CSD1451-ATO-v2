@@ -7,7 +7,7 @@
 #define maxPortal 10
 #define maxNodes 10
 #define maxTrampolines 10
-
+#define maxDoor 5
 typedef struct squareObject {
 	f32 x, y;
 	float width, height;
@@ -73,6 +73,12 @@ typedef struct trampoline1 {
 	int lefttoken, righttoken;
 }tramp;
 
+typedef struct exitDoor {
+	f32 x, y;
+	float width, height;
+	float halfW, halfH;
+}exits;
+
 
 void objectinit(squareObject* object);
 
@@ -84,7 +90,7 @@ void objectlevel1init(squareObject* object);
 
 void meshinit(squareObject* object, AEGfxVertexList** pMesh);
 
-void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible, squareObject player, portalObject* portal, hook playerHook, blackhole1* blackhole);
+void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible, squareObject player, portalObject* portal, hook playerHook, blackhole1* blackhole, exitDoor* door);
 
 void textureinit(AEGfxTexture** pTex);
 
@@ -96,7 +102,7 @@ void trampolineinit(tramp* object);
 
 void trampolinelevel1init(tramp* object);
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes);
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, exitDoor* exitdoor);
 
 void collectibleinit(collectibleObject* object);
 
@@ -119,3 +125,7 @@ void kwanEuItemRender();
 void hookUpdate();
 
 void nodeInit(nodeObject *nodes);
+
+void exitdoorinit(exitDoor* door);
+
+void exitdoorlevel1init(exitDoor* door);

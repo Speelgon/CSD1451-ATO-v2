@@ -11,6 +11,7 @@ extern hook playerHook;
 extern boundary mapBoundary;
 extern node nodes[maxNodes];
 extern tramp trampoline[maxTrampolines];
+extern exits exitdoor[maxDoor];
 
 extern s32 mousePositionX, mousePositionY;
 extern s32 relativeMouseX, relativeMouseY;
