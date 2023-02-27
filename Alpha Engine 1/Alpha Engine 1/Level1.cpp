@@ -7,6 +7,9 @@
 #include "IncrementVariable.hpp"
 #include "vpCollision.hpp"
 #include "catdeath.hpp"
+#include "PlatformsDisappear.hpp"
+#include "utils.h"
+
 
 extern f64 delta;
 extern f64 assumedFrameRate;
@@ -85,36 +88,34 @@ extern float mapy;
 extern float halfmapx;
 extern float halfmapy;
 
-enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
-//f64 elapsedtime;
-//int timer;
-int timer;
-f64 interval;
-f64 elapsedtime;
-int lasttimer;
+
+
+
+
+
 
 //char strBuffer[100];
 //f32 TextWidth, TextHeight;
 //==========================================================================================================================
 //==========================================================================================================================
-//f64 intervaltime;
-int LastJump = 0;
-int timerset = 0;
 
+
+//variables for normal timer
 f64 normalElapsedTime;
+int timer;
+f64 interval;
+int lasttimer;
 
-struct PlatformState
-{
-	int state;
-	int timer;
-	f64 elapsedtime;
-	f64 interval;
-}platformstate[4] = {	CANTDISAPPEAR, 3, 0.0f, 1.0f,
-						CANDISAPPEAR, 3, 0.0f, 1.0f,
-						CANTDISAPPEAR, 3, 0.0f, 1.0f,
-						CANDISAPPEAR, 3, 0.0f, 1.0f
-					};
-
+//make selected blocks disappear after a certain amount of time
+//----------------------------------------------------------------------------------------------------------------
+//enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
+f64 elapsedtime;
+struct PlatformState platformstate[4] = {
+											CANTDISAPPEAR, 3, 0.0f, 1.0f,
+											CANDISAPPEAR, 3, 0.0f, 1.0f,
+											CANTDISAPPEAR, 3, 0.0f, 1.0f,
+											CANDISAPPEAR, 3, 0.0f, 1.0f
+};
 int numberofplatforms = 4;
 
 int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
@@ -127,20 +128,6 @@ int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
 			timer--;
 			elapsedtime = 0;
 		}
-	}
-	return timer;
-}
-
-
-
-
-int normalUpdateTimer(f64 * normalElapsedTime, int timer, f64 interval)
-{
-	*normalElapsedTime += AEFrameRateControllerGetFrameTime();
-	if (*normalElapsedTime >= interval)
-	{
-		timer--;
-		*normalElapsedTime = 0;
 	}
 	return timer;
 }
@@ -440,15 +427,15 @@ void Level1_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate, exitdoor);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate, exitdoor);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate, exitdoor);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
