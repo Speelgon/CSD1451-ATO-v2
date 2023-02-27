@@ -109,7 +109,7 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 
 
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor)
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor)
 {
 	//===============================================================
 	// Player Drawing												 
@@ -145,13 +145,17 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	//node 1
 	AEGfxSetBlendMode(AE_GFX_BM_NONE);
 
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetPosition(nodes[0].x, nodes[0].y);
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	AEGfxTextureSet(pTexNode, 0.0f, 0.0f);
 	AEGfxMeshDraw(pMesh[5], AE_GFX_MDM_TRIANGLES);
 
 	//node 2
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetPosition(nodes[1].x, nodes[1].y);
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	AEGfxTextureSet(pTexNode, 0.0f, 0.0f);
 	AEGfxMeshDraw(pMesh[6], AE_GFX_MDM_TRIANGLES);
 
 	//===============================================================
