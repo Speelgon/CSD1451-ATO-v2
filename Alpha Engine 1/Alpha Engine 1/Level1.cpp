@@ -427,7 +427,7 @@ void Level1_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate, exitdoor);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
@@ -435,7 +435,7 @@ void Level1_Draw()
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate, exitdoor);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
