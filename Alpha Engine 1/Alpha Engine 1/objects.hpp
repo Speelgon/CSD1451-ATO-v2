@@ -79,6 +79,26 @@ typedef struct exitDoor {
 	float halfW, halfH;
 }exits;
 
+/*
+enum that controls properties of a platform in a level.
+*/
+enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
+
+/*
+struct that contains all variables for the disappearing platform object.
+disappearstatus state: enum value that defines characteristic of platform on each frame
+int timer: Starting value of timer. Only applies to disappearing platforms
+f64 elapsedtime: Total elapsed time form moment player comes into contact with platform
+f64 interval: length of time between 2 values that are tracked in elapsedtime
+*/
+struct PlatformState
+{
+	disappearstatus state;
+	int timer;
+	f64 elapsedtime;
+	f64 interval;
+};
+
 
 void objectinit(squareObject* object);
 
@@ -108,7 +128,9 @@ void trampolineinit(tramp* object);
 
 void trampolinelevel1init(tramp* object);
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, exitDoor* exitdoor);
+void backgroundrender(squareObject player, AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground);
+
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor);
 
 void collectibleinit(collectibleObject* object);
 

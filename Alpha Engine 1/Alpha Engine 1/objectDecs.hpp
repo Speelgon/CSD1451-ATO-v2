@@ -37,7 +37,9 @@ AEGfxTexture* pTexLeft = 0;
 AEGfxTexture* pTexPortal=0;
 AEGfxTexture* pTexPlatform=0;
 AEGfxTexture* pTexCollectible=0;
-
+AEGfxTexture* pTexExitdoor = 0;
+AEGfxTexture* pTexBackground = 0;
+AEGfxTexture* pTexNode = 0;
 
 float stabliser = 0.25;
 float gravity = 0.15;

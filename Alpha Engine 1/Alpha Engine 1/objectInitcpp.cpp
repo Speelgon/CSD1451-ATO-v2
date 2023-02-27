@@ -444,9 +444,9 @@ void exitdoorinit(exitDoor* door) {
 
 void exitdoorlevel1init(exitDoor* door) {
 
-	door[0].x = -1000;
-	door[0].y = 465;
-	door[0].width = 40;
+	door[0].x = -1150;
+	door[0].y = -220;
+	door[0].width = 50;
 	door[0].height = 80;
 	door[0].halfW = door[0].width / 2;
 	door[0].halfH = door[0].height / 2;

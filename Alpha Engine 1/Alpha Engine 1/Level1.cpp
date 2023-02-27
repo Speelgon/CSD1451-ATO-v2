@@ -7,6 +7,9 @@
 #include "IncrementVariable.hpp"
 #include "vpCollision.hpp"
 #include "catdeath.hpp"
+#include "PlatformsDisappear.hpp"
+#include "utils.h"
+
 
 extern f64 delta;
 extern f64 assumedFrameRate;
@@ -27,7 +30,13 @@ extern AEGfxTexture* pTex[30];
 extern AEGfxVertexList* itemMesh;
 extern AEGfxTexture* pTexFront;
 extern AEGfxTexture* pTexRight;
-extern AEGfxTexture* pTexLeft;
+extern AEGfxTexture* pTexPortal;
+extern AEGfxTexture* pTexPlatform;
+extern AEGfxTexture* pTexCollectible;
+extern AEGfxTexture* pTexExitdoor;
+extern AEGfxTexture* pTexBackground;
+extern AEGfxTexture* pTexNode;
+	
 extern float playerSpeed;
 extern int jumptoken;
 extern float gravity;
@@ -85,76 +94,48 @@ extern float mapy;
 extern float halfmapx;
 extern float halfmapy;
 
-namespace {
+
+
+
+
 
 
 //char strBuffer[100];
 //f32 TextWidth, TextHeight;
 //==========================================================================================================================
 //==========================================================================================================================
-//f64 intervaltime;
 
 
+//variables for normal timer
+f64 normalElapsedTime;
+int timer;
+f64 interval;
+int lasttimer;
 
+//make selected blocks disappear after a certain amount of time
+//----------------------------------------------------------------------------------------------------------------
+//enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
+f64 elapsedtime;
+struct PlatformState platformstate[4] = {
+											CANTDISAPPEAR, 3, 0.0f, 1.0f,
+											CANDISAPPEAR, 3, 0.0f, 1.0f,
+											CANTDISAPPEAR, 3, 0.0f, 1.0f,
+											CANDISAPPEAR, 3, 0.0f, 1.0f
+};
+int numberofplatforms = 4;
 
-	enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
-	//f64 elapsedtime;
-	//int timer;
-	int timer;
-	f64 interval;
-	f64 elapsedtime;
-	int lasttimer;
-
-	char strBuffer[100];
-	f32 TextWidth, TextHeight;
-	//==========================================================================================================================
-	//==========================================================================================================================
-	
-
-	f64 normalElapsedTime;
-
-	struct PlatformState
+int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
+{
+	for (int i = 0; i < 4; i++)
 	{
-		int state;
-		int timer;
-		f64 elapsedtime;
-		f64 interval;
-	}platformstate[4] = { CANTDISAPPEAR, 3, 0.0f, 1.0f,
-							CANDISAPPEAR, 3, 0.0f, 1.0f,
-							CANTDISAPPEAR, 3, 0.0f, 1.0f,
-							CANDISAPPEAR, 3, 0.0f, 1.0f
-	};
-
-	int numberofplatforms = 4;
-
-	int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			platformstate[i].elapsedtime += AEFrameRateControllerGetFrameTime();
-			if (elapsedtime >= platformstate[i].interval)
-			{
-				timer--;
-				elapsedtime = 0;
-			}
-		}
-		return timer;
-	}
-
-
-
-
-	int normalUpdateTimer(f64* normalElapsedTime, int timer, f64 interval)
-	{
-		*normalElapsedTime += AEFrameRateControllerGetFrameTime();
-		if (*normalElapsedTime >= interval)
+		platformstate[i].elapsedtime += AEFrameRateControllerGetFrameTime();
+		if (elapsedtime >= platformstate[i].interval)
 		{
 			timer--;
-			*normalElapsedTime = 0;
+			elapsedtime = 0;
 		}
-		return timer;
 	}
-
+	return timer;
 }
 
 void Level1_Load()
@@ -179,6 +160,15 @@ void Level1_Load()
 
 	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
 	AE_ASSERT_MESG(pTexCollectible, "Failed to create collectible texture!!");
+
+	pTexExitdoor = AEGfxTextureLoad("Assets/exitdoor.png");
+	AE_ASSERT_MESG(pTexExitdoor, "Failed to create exitdoor texture!!");
+
+	pTexBackground = AEGfxTextureLoad("Assets/background.png");
+	AE_ASSERT_MESG(pTexBackground, "Failed to create background texture!!");
+
+	pTexNode = AEGfxTextureLoad("Assets/hookpoint.png");
+	AE_ASSERT_MESG(pTexNode, "Failed to create hookpoint texture!!");
 
 }
 
@@ -294,6 +284,7 @@ void Level1_Update()
 		if (AEInputCheckCurr(AEVK_LBUTTON))
 		{
 			if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
+				std::cout << "Collision\n";
 				anglePlayerToNode(nodes[collidedNode]);
 				movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
 			}
@@ -319,7 +310,7 @@ void Level1_Update()
 		for (int i = maxObj - 1; i >= 0; i--)
 		{
 			//if (i < 4)
-			//
+			//x
 			//	if (platformstate[i].state == 0 && LastJump == 1)
 			//	{
 			//		if (timerset == 0)
@@ -448,18 +439,20 @@ void Level1_Update()
 void Level1_Draw()
 {
 
+	backgroundrender(player, pMesh, pTexBackground);
+
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
@@ -486,5 +479,6 @@ void Level1_Unload()
 	AEGfxTextureUnload(pTexPortal);
 	AEGfxTextureUnload(pTexPlatform);
 	AEGfxTextureUnload(pTexCollectible);
+	AEGfxTextureUnload(pTexExitdoor);
 }
 

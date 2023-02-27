@@ -117,6 +117,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClCompile Include="GSM.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="uiInit.cpp" />
+    <ClCompile Include="utils.cpp" />
     <ClCompile Include="vpCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -135,7 +136,9 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClInclude Include="objectDecs.hpp" />
     <ClInclude Include="objects.hpp" />
     <ClInclude Include="movement.hpp" />
+    <ClInclude Include="PlatformsDisappear.hpp" />
     <ClInclude Include="SplashScreen.hpp" />
+    <ClInclude Include="utils.h" />
     <ClInclude Include="vpCollision.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
