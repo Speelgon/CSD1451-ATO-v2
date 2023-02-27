@@ -194,8 +194,8 @@ Portal Collision
 		return 0;
 		}
 
-
-	int playerHookCollision(node* nodes, hook* playerHook) {
+	int playerHookCollision(node* nodes, hook* playerHook, int &collisionFlag) {
+		
 		f32 distance1{ 0 }, distance2{ 0 };
 
 		for (int i{ 0 }; i < 2; ++i) {
@@ -204,23 +204,105 @@ Portal Collision
 			if (distance1 < 0) distance1 = -distance1;
 			if (distance2 < 0) distance2 = -distance2;
 			if (distance1 <= nodes[i].halfW && distance2 <= nodes[i].halfH) {
+				collisionFlag = 1;
+				collidedNode = i;
+				pointHookStuckX = nodes[i].x;
+				pointHookStuckY = nodes[i].y;
+				jumptoken = 1;
 				return 1;
 			}
 		}
+		collisionFlag = 0;
 		return 0;
 	}
+
 /*
 ==================================================================================================================================
 Player out of bounds
 ==================================================================================================================================
 */
 
-	void playerOutofBounds(float& pX, float& pY)
+	int playerOutofBounds(float pY, float mY)
 	{
-		if (pY < -600)
+		if (pY < mY)
 		{
-			pX = -1000;
-			pY = -200;
-			std::cout << "boundary";
+			std::cout << "Out-of-Bounds" << '\n';
+			return 1;
 		}
+		return 0;
+	}
+
+
+
+
+	void playerCollisionTrampoline(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float& playerSpeedX, float& playerSpeedY, int& jumptoken, int& lefttoken, int& righttoken)
+	{
+
+		// Left side collision
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX) && lefttoken == 1)
+		{
+			pX -= abs(playerSpeedX) * assumedFrameRate * delta;
+			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
+			//playerSpeedX = 0;
+		}
+		// Right side collision
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && righttoken == 1)
+		{
+			pX += abs(playerSpeedX) * assumedFrameRate * delta;
+			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
+			//playerSpeedX = 0;
+		}
+		// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
+		if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY))
+		{
+			playerSpeedY = 10;
+			lefttoken = 0;
+			righttoken = 0;
+			jumptoken = 1;
+		}
+		// Bottom side collision	
+		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
+		{
+			playerSpeedY = 0;
+			pY = oY - oSizeY - pSizeY;
+			lefttoken = 0;
+			righttoken = 0;
+		}
+		else
+		{
+			lefttoken = 1;
+			righttoken = 1;
+		}
+	}
+
+
+	/*
+	==================================================================================================================================
+	Exit Door Collision
+	==================================================================================================================================
+	*/
+
+	int exitCollisionDoor(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY)
+	{
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX))
+		{
+			return 1;
+		}
+		// Right side collision
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX))
+		{
+			return 1;
+		}
+		// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
+		if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY))
+		{
+			return 1;
+		}
+		// Bottom side collision	
+		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
+		{
+			return 1;
+		}
+		return 0;
+		
 	}

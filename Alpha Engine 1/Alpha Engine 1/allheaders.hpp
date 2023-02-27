@@ -16,7 +16,8 @@ extern FP fpLoad, fpInitialize, fpUpdate, fpDraw, fpFree, fpUnload;
 
 enum GS_STATES
 {
-	GS_MAINMENU = 0,
+	GS_SPLASHSCREEN,
+	GS_MAINMENU,
 	GS_LEVEL1,
 	GS_LEVEL2,
 

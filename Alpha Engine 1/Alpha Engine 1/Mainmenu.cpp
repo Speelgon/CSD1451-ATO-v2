@@ -1,13 +1,13 @@
 #include "allheaders.hpp"
-#include "objects.hpp"
+
 #include "IncrementVariable.hpp"
 
 square buttons;
 AEGfxVertexList* playMesh;
-//s8 fontId = 0;
-char strBufferPLAY[100];
+extern s8 fontId;
+char strBufferPLAY[5], strBufferHTP[12], strBufferCredits[8], strBufferQuit[5], strBufferTitle[14];
 //char strBufferSettings[50];
-//f32 TextWidth, TextHeight;
+f32 TextWidth, TextHeight;
 extern int mousex;
 extern int mousey;
 extern int truemousex;
@@ -27,7 +27,9 @@ void Mainmenu_Load()
 
 void Mainmenu_Initialize()
 {
-
+	TextWidth = 1;
+	TextHeight = 1;
+	//AEGfxSetBackgroundColor(0.0f, 70.0f, 50.0f);
 	buttons.x = 0;
 	buttons.y = 50;
 	/*buttons.xvel = 0;
@@ -39,7 +41,6 @@ void Mainmenu_Initialize()
 	buttons.height = 40;
 	buttons.halfW = buttons.width / 2;
 	buttons.halfH = buttons.height / 2;
-	//fontId = AEGfxCreateFont("C:/Users/Yuki/OneDrive/Documents/GitHub/CSD1451-ATO-v2/Alpha Engine 1/Assets/Roboto-Regular.ttf", 12);
 
 	AEGfxMeshStart();
 	AEGfxTriAdd(
@@ -89,6 +90,10 @@ void Mainmenu_Update()
 
 void Mainmenu_Draw()
 {
+	//====================================//
+	//			 Button Drawing			  //
+	//====================================//
+	
 	// Drawing top "play" button
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 	// Set position 
@@ -120,25 +125,49 @@ void Mainmenu_Draw()
 	AEGfxTextureSet(NULL, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 
-	////PRINT "PLAY" TEXT
-	//AEGfxGetPrintSize(fontId, strBufferPLAY, 0.5f, TextWidth, TextHeight);
-	//memset(strBufferPLAY, 0, 100 * sizeof(char));
-	//sprintf_s(strBufferPLAY, "Play");
-	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	//AEGfxPrint(fontId, strBufferPLAY, 0, 0.2, 1.0f, 1.f, 1.f, 1.f);
+	//====================================//
+	//			  TEXT PRINTING			  //
+	//====================================//
+	// 
+	//PRINT "LEAP CLIMBERS" TEXT
+	AEGfxGetPrintSize(fontId, strBufferTitle, f32(1), TextWidth, TextHeight);
+	memset(strBufferTitle, 0, 5 * sizeof(char));
+	sprintf_s(strBufferTitle, "LEAP CLIMBERS");
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxPrint(fontId, strBufferTitle, -0.22f, 0.5f, 1, 1.f, 1.f, 1.f);
 
-//	//PRINT "SETTINGS" TEXT
-//	AEGfxGetPrintSize(fontId, strBufferPLAY, 200.0f, TextWidth, TextHeight);
-//	memset(strBufferPLAY, 0, 100 * sizeof(char));
-//	sprintf_s(strBufferPLAY, "Play");
-//	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-//	AEGfxPrint(fontId, strBufferPLAY, 0, 0.2, 1.0f, 1.f, 1.f, 1.f);
+	//PRINT "PLAY" TEXT
+	AEGfxGetPrintSize(fontId, strBufferPLAY, f32(1), TextWidth, TextHeight);
+	memset(strBufferPLAY, 0, 5 * sizeof(char));
+	sprintf_s(strBufferPLAY, "PLAY");
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxPrint(fontId, strBufferPLAY, -0.065f, 0.14f, 1, 0.f, 0.f, 0.f);
+
+	//PRINT "TUTORIAL" TEXT
+	AEGfxGetPrintSize(fontId, strBufferHTP, f32(1), TextWidth, TextHeight);
+	memset(strBufferHTP, 0, 12 * sizeof(char));
+	sprintf_s(strBufferHTP, "TUTORIAL");
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxPrint(fontId, strBufferHTP, -0.14f, -0.13f, 1, 0.f, 0.f, 0.f);
+
+	//PRINT "CREDITS" TEXT
+	AEGfxGetPrintSize(fontId, strBufferCredits, f32(1), TextWidth, TextHeight);
+	memset(strBufferCredits, 0, 8 * sizeof(char));
+	sprintf_s(strBufferCredits, "CREDITS");
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxPrint(fontId, strBufferCredits, -0.12f, -0.4f, 1, 0.f, 0.f, 0.f);
+	
+	//PRINT "QUIT" TEXT
+	AEGfxGetPrintSize(fontId, strBufferQuit, f32(1), TextWidth, TextHeight);
+	memset(strBufferQuit, 0, 5 * sizeof(char));
+	sprintf_s(strBufferQuit, "QUIT");
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxPrint(fontId, strBufferQuit, -0.065f, -0.66f, 1, 0.f, 0.f, 0.f);
 }
 
 void Mainmenu_Free()
 {
 	AEGfxMeshFree(playMesh);
-	//AEGfxDestroyFont(fontId);
 }
 
 void Mainmenu_Unload()

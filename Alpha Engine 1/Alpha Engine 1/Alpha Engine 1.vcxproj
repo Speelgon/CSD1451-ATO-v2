@@ -70,7 +70,8 @@
     <PostBuildEvent>
       <Command>xcopy "$(SolutionDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q
 xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\freetype.dll" "$(OutDir)" /s /r /y /q
-xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_EngineD.dll" "$(OutDir)" /s /r /y /q</Command>
+xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_EngineD.dll" "$(OutDir)" /s /r /y /q
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -97,8 +98,10 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="allheaders.cpp" />
+    <ClCompile Include="catdeath.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="HookUpdate.cpp" />
     <ClCompile Include="IncrementVariable.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -108,12 +111,14 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClCompile Include="objectInitcpp.cpp" />
     <ClCompile Include="objectRender.cpp" />
     <ClCompile Include="GSM.cpp" />
+    <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="uiInit.cpp" />
     <ClCompile Include="vpCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allheaders.hpp" />
     <ClInclude Include="collectibles.hpp" />
+    <ClInclude Include="catdeath.hpp" />
     <ClInclude Include="collision.hpp" />
     <ClInclude Include="GSM.hpp" />
     <ClInclude Include="IncrementVariable.hpp" />
@@ -125,6 +130,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\Alpha_Engine.dll" "$(OutDir)" 
     <ClInclude Include="movement.hpp" />
     <ClInclude Include="PlatformsDisappear.hpp" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="SplashScreen.hpp" />
     <ClInclude Include="vpCollision.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

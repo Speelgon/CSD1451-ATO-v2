@@ -94,7 +94,7 @@ void DisappearingPlatformRender(PlatformState *platformstate, AEGfxTexture* pTex
 }
 
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject *nodes, PlatformState *platformstate)
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject *nodes, PlatformState *platformstate, exitDoor *exitdoor)
 
 
 {
@@ -237,6 +237,42 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
+	//===============================================================
+	// Trampoline Drawing												 
+	//===============================================================
+
+	// Drawing object 3 - (first) - No tint
+	AEGfxSetBlendMode(AE_GFX_BM_NONE);
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+
+	AEGfxSetPosition(trampoline[0].x, trampoline[0].y);
+	// No tint
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxMeshDraw(pMesh[30], AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
+
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
+	//===============================================================
+	// Exit Door Drawing												 
+	//===============================================================
+	
+	// Drawing object 3 - (first) - No tint
+	AEGfxSetBlendMode(AE_GFX_BM_NONE);
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+
+	AEGfxSetPosition(exitdoor[0].x, exitdoor[0].y);
+	// No tint
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxMeshDraw(pMesh[60], AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
+
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
 
 	//// Drawing object 3 - (first) - No tint
 	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
@@ -282,15 +318,32 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 }
 
-
-void kwanEuItemRender() {
-
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-
+void anglePlayerToMouse() {
 	item.direction.x = f32(mouseX) - f32(AEGetWindowWidth() / 2);
 	item.direction.y = f32(mouseY) - f32(AEGetWindowHeight() / 2);
 	AEVec2Normalize(&item.direction, &item.direction);
 	item.rotation = atan2(item.direction.y, item.direction.x);
+
+	item.direction.x = (mouseX - worldwidth / 2) * cos(item.rotation) - (mouseY - worldheight / 2) * sin(item.rotation);
+	item.direction.y = (mouseX - worldwidth / 2) * sin(item.rotation) + (mouseY - worldheight / 2) * cos(item.rotation);
+	AEVec2Normalize(&item.direction, &item.direction);
+
+}
+
+void anglePlayerToNode(node nodes) {
+	item.direction.x = f32(nodes.x) - f32(player.x);
+	item.direction.y = f32(nodes.y) - f32(player.y);
+	AEVec2Normalize(&item.direction, &item.direction);
+	item.rotation = atan2(item.direction.y, item.direction.x);
+
+	item.direction.x = (nodes.x - player.x) * cos(item.rotation) - (nodes.y - player.y) * sin(item.rotation);
+	item.direction.y = (nodes.x - player.x) * sin(item.rotation) + (nodes.y - player.y) * cos(item.rotation);
+	AEVec2Normalize(&item.direction, &item.direction);
+}
+
+void kwanEuItemRender() {
+
+	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 
 	// Set Scale for Item
 	AEMtx33 scale = { 0 };
@@ -305,9 +358,7 @@ void kwanEuItemRender() {
 	// 100 in the x-axis and 100 in the y-axis
 	AEMtx33 translate = { 0 };
 
-	item.direction.x = (mouseX - worldwidth / 2) * cos(item.rotation) - (mouseY - worldheight / 2) * sin(item.rotation);
-	item.direction.y = (mouseX - worldwidth / 2) * sin(item.rotation) + (mouseY - worldheight / 2) * cos(item.rotation);
-	AEVec2Normalize(&item.direction, &item.direction);
+	
 
 	AEMtx33Trans(&translate, 12* item.direction.x + player.x, -12* item.direction.y + player.y);
 

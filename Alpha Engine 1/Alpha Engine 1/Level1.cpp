@@ -10,9 +10,22 @@
 #include "PlatformsDisappear.hpp"
 
 extern square player, ui[5];
+#include "catdeath.hpp"
+
+extern f64 delta;
+extern f64 assumedFrameRate;
+
+extern square player;
+extern square object[maxObj];
+extern square ui[maxUI];
 extern collectible1 collectible[maxCollectible];
 extern rectangle item;
+extern exits exitdoor[maxDoor];
+extern portal1 portal[maxPortal];
+extern boundary mapBoundary;
 
+extern AEGfxVertexList* pMesh[meshMax];
+extern AEGfxVertexList* uiMesh[maxUI];
 extern AEGfxTexture* pTex[30];
 
 extern AEGfxVertexList* itemMesh;
@@ -26,11 +39,11 @@ extern float stabliser;
 
 
 //==========================================================================================================================
-	// Yuki's Variables
-	//==========================================================================================================================
-	// 
-	// 
-	// 
+// Yuki's Variables
+//==========================================================================================================================
+// 
+// 
+// 
 
 extern AEGfxVertexList* pMeshY1;
 extern AEGfxVertexList* pMeshY2;
@@ -75,8 +88,8 @@ extern f64 assumedFrameRate;
 
 
 
-char strBuffer[100];
-f32 TextWidth, TextHeight;
+//char strBuffer[100];
+//f32 TextWidth, TextHeight;
 //==========================================================================================================================
 //==========================================================================================================================
 
@@ -118,20 +131,20 @@ int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
 
 
 
+int normalUpdateTimer(f64 * normalElapsedTime, int timer, f64 interval)
+{
+	*normalElapsedTime += AEFrameRateControllerGetFrameTime();
+	if (*normalElapsedTime >= interval)
+	{
+		timer--;
+		*normalElapsedTime = 0;
+	}
+	return timer;
+}
+
 void Level1_Load()
 {
 	std::cout << "GSM:Load\n";
-	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
-	AE_ASSERT_MESG(pTexFront, "Failed to create texture1!!");
-
-	pTexRight = AEGfxTextureLoad("Assets/FCat_Right.png");
-	AE_ASSERT_MESG(pTexRight, "Failed to create texture2!!");
-
-	pTexLeft = AEGfxTextureLoad("Assets/FCat_Left.png");
-	AE_ASSERT_MESG(pTexLeft, "Failed to create texture2!!");
-
-	
-	
 
 	// Texture 1: From file
 	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
@@ -151,6 +164,7 @@ void Level1_Load()
 
 	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
 	AE_ASSERT_MESG(pTexCollectible, "Failed to create collectible texture!!");
+
 }
 
 // ----------------------------------------------------------------------------
@@ -162,6 +176,8 @@ void Level1_Initialize()
 {
     ///fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
 	//fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
+	AEGfxSetBackgroundColor(0.81f, 0.6f, 0.46f);
+
 	
 //C:\Users\Yuki\OneDrive\Documents\GitHub\CSD1451 - ATO - v2\Alpha Engine 1\Assets
 	player.x = -1000;
@@ -178,6 +194,9 @@ void Level1_Initialize()
 	item.rotation = 0;
 	item.width = 8.f;
 	item.height = 45.f;
+
+	mapBoundary.y = -600;
+
 
 	objectinit(object);
 
@@ -201,13 +220,21 @@ void Level1_Initialize()
 
 	blackholelevel1init(blackhole);
 
+	trampolineinit(trampoline);
+
+	trampolinelevel1init(trampoline);
+
+	exitdoorinit(exitdoor);
+
+	exitdoorlevel1init(exitdoor);
+
 	nodeInit(nodes);
 
 	textureinit(pTex);
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole);
+	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
 	AEGfxMeshStart();
 	AEGfxTriAdd(
@@ -231,6 +258,16 @@ void Level1_Initialize()
 	lasttimer = timer = 60;
 	interval = 1.0f;
 	elapsedtime = 0.0f;
+
+	// platformstate[2].state = CANTDISAPPEAR;
+	// platformstate[2].timer = 0;
+	// platformstate[2].elapsedtime = 0.0f;
+	// platformstate[2].interval = 0.0f;
+
+	// platformstate[3].state = CANTDISAPPEAR;
+	// platformstate[3].timer = 0;
+	// platformstate[3].elapsedtime = 0.0f;
+	// platformstate[3].interval = 0.0f;
 }
 
 // ----------------------------------------------------------------------------
@@ -246,6 +283,15 @@ void Level1_Update()
 	{
 		delta = AEFrameRateControllerGetFrameTime();
 
+
+
+	if (AEInputCheckCurr(AEVK_L))
+	{
+		catdeath();
+	}
+
+	else
+	{
 		if (AEInputCheckTriggered(AEVK_F))
 		{
 			item.height += 10.f;
@@ -258,50 +304,74 @@ void Level1_Update()
 
 		if (AEInputCheckCurr(AEVK_LBUTTON))
 		{
-			if (playerHookCollision(nodes, &playerHook)) {
+			if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
 				std::cout << "Collision\n";
-				//movement modification function
-				movementWhenHooked(player.xvel, player.yvel, gravity, item);
+				anglePlayerToNode(nodes[collidedNode]);
+				movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
 			}
+			else {
+				anglePlayerToMouse();
+				hookCollisionFlag = 0;
+			}
+		}
+		else {
+			anglePlayerToMouse();
+			hookCollisionFlag = 0;
 		}
 
 		playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
+
+		meshUpdate();
+
+		hookUpdate();
 
 
 		//Bounding box type collision
 
 		for (int i = maxObj - 1; i >= 0; i--)
+		{
+			//if (i < 4)
+			//
+			//	if (platformstate[i].state == 0 && LastJump == 1)
+			//	{
+			//		if (timerset == 0)
+			//		{
+			//			//InitializeTimer(15, 1.0f);
+			//			timerset = 1;
+			//		}
+			//		
+			//	}
+			//}
+			if (i < numberofplatforms)
 			{
-				if (i < numberofplatforms)
+				// if platform set to disappear upon finishing countdown of timer, need not to check for collision
+				if (platformstate[i].state != DISAPPEARED)
 				{
-					// if platform is not in a disappear state, player can walk on it
-					if (platformstate[i].state != DISAPPEARED)
+
+					playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
+
+					// set the platform that can disappear to start timer upon player first landing on the platform
+					if (platformstate[i].state == CANDISAPPEAR && jumptoken && object[i].lefttoken == 0)
 					{
+						platformstate[i].state = TIMERSTARTED;
 
-						playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
-
-						// set the platform that can disappear to start timer upon player first landing on the platform
-						if (platformstate[i].state == CANDISAPPEAR && jumptoken && object[i].lefttoken == 0)
-						{
-							platformstate[i].state = TIMERSTARTED;
-
-							std::cout << "platform " << i << "Timer started" << '\n';
-						}
-
-
+						std::cout << "platform " << i << "Timer started" << '\n';
 					}
-					else
-					{
-						object[i].lefttoken = 1;
-						object[i].righttoken = 1;
-					}
+
+
 				}
 				else
 				{
-					playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
+					object[i].lefttoken = 1;
+					object[i].righttoken = 1;
 				}
-
 			}
+			else
+			{
+				playerCollisionSquare(player.x, player.y, object[i].x, object[i].y, player.halfW, player.halfH, object[i].halfW, object[i].halfH, player.xvel, player.yvel, jumptoken, object[i].lefttoken, object[i].righttoken); //LOCATED IN Collision.cpp
+			}
+
+		}
 
 		// run countdown for the platforms to disappear
 		for (int j = 0; j < numberofplatforms; j++)
@@ -313,8 +383,17 @@ void Level1_Update()
 				{
 					platformstate[j].state = DISAPPEARED;
 				}
+				// std::cout << "platform: " << j << "Timer: " << platformstate[j].timer << '\n';
+
 			}
+
 		}
+
+		for (int i = maxTrampolines - 1; i >= 0; i--)
+		{
+			playerCollisionTrampoline(player.x, player.y, trampoline[i].x, trampoline[i].y, player.halfW, player.halfH, trampoline[i].halfW, trampoline[i].halfH, player.xvel, player.yvel, jumptoken, trampoline[i].lefttoken, trampoline[i].righttoken); //LOCATED IN Collision.cpp
+		}
+
 
 		if (timer > 0)
 		{
@@ -370,7 +449,21 @@ void Level1_Update()
 
 
 		// Out of bounds
-		playerOutofBounds(player.x, player.y);
+		//playerOutofBounds(player.x, player.y);
+
+
+		// Out of bounds
+		if (playerOutofBounds(player.y, mapBoundary.y) == 1)
+		{
+			current = GS_RESTART;
+		}
+
+		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
+		{
+			next = GS_QUIT;
+		}
+	
+
 	}
 }
 
@@ -380,15 +473,15 @@ void Level1_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate, exitdoor);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate, exitdoor);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, platformstate, exitdoor);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
