@@ -84,6 +84,9 @@
     <ClCompile Include="catdeath.cpp">
       <Filter>Source Files\UpdateObjects</Filter>
     </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files\NewFilter1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.hpp">
@@ -124,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="catdeath.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformsDisappear.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Source Files\NewFilter1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
