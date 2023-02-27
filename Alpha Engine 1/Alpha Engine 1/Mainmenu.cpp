@@ -69,18 +69,17 @@ void Mainmenu_Update()
 
 	if (IsAreaClicked(buttons.x, buttons.y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
-		std::cout << "SWITCH TO LEVEL 1 STATE HOW" << '\n';
 		next = GS_LEVEL1;
 	}
 
 	if (IsAreaClicked(buttons.x, settingsbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
-		std::cout << "FUOCK" << '\n';
+		
 	}
 
 	if (IsAreaClicked(buttons.x, creditsbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
-		std::cout << "ADA BABY" << '\n';
+		
 	}
 	
 	

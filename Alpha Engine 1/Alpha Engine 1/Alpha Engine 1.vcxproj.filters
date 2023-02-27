@@ -125,5 +125,8 @@
     <ClInclude Include="catdeath.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlatformsDisappear.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
