@@ -18,6 +18,23 @@
 ================================================================================================================================
 */
 
+void backgroundrender(squareObject player, AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground)
+{
+	// Drawing object 1
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	// Set position for object 1
+	// 
+	//Blend mode necessary to remove black backgound
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxSetTransparency(1.0f);
+	AEGfxSetPosition(-1000, -200);
+
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	// Texture for player
+	AEGfxTextureSet(pTexBackground, 0.0f, 0.0f);
+	// Drawing the mesh (list of triangles)
+	AEGfxMeshDraw(pMesh[120], AE_GFX_MDM_TRIANGLES);
+}
 
 void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTextPlatform)
 {
@@ -92,9 +109,7 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 
 
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, PlatformState* platformstate, exitDoor* exitdoor)
-
-
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor)
 {
 	//===============================================================
 	// Player Drawing												 
@@ -260,13 +275,13 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	
 	// Drawing object 3 - (first) - No tint
 	AEGfxSetBlendMode(AE_GFX_BM_NONE);
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 
 	AEGfxSetPosition(exitdoor[0].x, exitdoor[0].y);
 	// No tint
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxTextureSet(pTexExitdoor, 0.0f, 0.0f);
 	AEGfxMeshDraw(pMesh[60], AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
