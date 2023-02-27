@@ -327,5 +327,22 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 
 	pMesh[60] = AEGfxMeshEnd();
 
+	//===================================================================================================================================================
+	//Printing Background
+
+	AEGfxMeshStart();
+
+	AEGfxTriAdd(
+		-3000, -2000, 0x00FF0000, 0.0f, 12.0f,
+		3000, -2000, 0x00FF0000, 12.0f, 12.0f,
+		-3000, 2000, 0x00FF0000, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		3000, -2000, 0x0000FFFF, 12.0f, 12.0f,
+		3000, 2000, 0x0000FFFF, 12.0f, 0.0f,
+		-3000, 2000, 0x0000FFFF, 0.0f, 0.0f);
+
+	pMesh[120] = AEGfxMeshEnd();
+
 
 }
