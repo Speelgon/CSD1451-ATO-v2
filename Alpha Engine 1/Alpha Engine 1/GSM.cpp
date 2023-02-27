@@ -50,12 +50,12 @@ void GSM_Update()
 		break;
 
 	case GS_LEVEL1:
-		fpLoad = Level1NEW_Load;
-		fpInitialize = Level1NEW_Initialize;
-		fpUpdate = Level1NEW_Update;
-		fpDraw = Level1NEW_Draw;
-		fpFree = Level1NEW_Free;
-		fpUnload = Level1NEW_Unload;
+		fpLoad = Level3_Load;
+		fpInitialize = Level3_Initialize;
+		fpUpdate = Level3_Update;
+		fpDraw = Level3_Draw;
+		fpFree = Level3_Free;
+		fpUnload = Level3_Unload;
 		break;
 
 	case GS_LEVEL2:			//Loads the function pointers for level 2

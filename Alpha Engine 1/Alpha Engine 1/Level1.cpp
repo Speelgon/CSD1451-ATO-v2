@@ -87,16 +87,14 @@ extern float halfmapy;
 
 namespace {
 
-<<<<<<< Updated upstream
+
 //char strBuffer[100];
 //f32 TextWidth, TextHeight;
 //==========================================================================================================================
 //==========================================================================================================================
 //f64 intervaltime;
-int LastJump = 0;
-int timerset = 0;
-=======
->>>>>>> Stashed changes
+
+
 
 
 	enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
@@ -111,9 +109,7 @@ int timerset = 0;
 	f32 TextWidth, TextHeight;
 	//==========================================================================================================================
 	//==========================================================================================================================
-	//f64 intervaltime;
-	int LastJump = 0;
-	int timerset = 0;
+	
 
 	f64 normalElapsedTime;
 

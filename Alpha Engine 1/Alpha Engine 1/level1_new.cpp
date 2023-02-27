@@ -90,8 +90,7 @@ void Level1NEW_Load()
 	pTexLeft = AEGfxTextureLoad("Assets/FCat_Left.png");
 	AE_ASSERT_MESG(pTexLeft, "Failed to create cat left texture!!");
 
-	pTexPortal = AEGfxTextureLoad("Assets/portal.png");
-	AE_ASSERT_MESG(pTexPortal, "Failed to create portal texture!!");
+
 
 	pTexPlatform = AEGfxTextureLoad("Assets/platform.png");
 	AE_ASSERT_MESG(pTexPlatform, "Failed to create platform texture!!");
@@ -103,55 +102,88 @@ void Level1NEW_Load()
 
 void Level1NEW_Initialize()
 {
-    AEGfxSetBackgroundColor(0.81f, 0.6f, 0.46f); //set background color
+	///fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
+	//fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
+	AEGfxSetBackgroundColor(0.81f, 0.6f, 0.46f);
 
-    { //initialising of player stats
-        player.x = -1000;
-        player.y = -200;
-        player.xvel = 0;
-        player.yvel = 0;
-        player.width = 10;
-        player.height = 60;
-        player.halfW = player.width / 2;
-        player.halfH = player.height / 2;
-        player.lefttoken = 0;
-        player.righttoken = 0;
-    }
 
-	{//initialising of item stats
-        item.rotation = 0;
-        item.width = 8.f;
-        item.height = 45.f;
-    }
+	//C:\Users\Yuki\OneDrive\Documents\GitHub\CSD1451 - ATO - v2\Alpha Engine 1\Assets
+	player.x = -1000;
+	player.y = -200;
+	player.xvel = 0;
+	player.yvel = 0;
+	player.width = 10;
+	player.height = 60;
+	player.halfW = player.width / 2;
+	player.halfH = player.height / 2;
+	player.lefttoken = 0;
+	player.righttoken = 0;
 
-    {//initialising using functions <objectinitcpp.cpp>
+	item.rotation = 0;
+	item.width = 8.f;
+	item.height = 45.f;
 
-    objectinit(object);
+	mapBoundary.y = -600;
+
+
+	objectinit(object);
 
 	hookinit(playerHook);
 
 	collectibleinit(collectible);
 
-	collectiblelevel1init(collectible);
+	collectiblelevel1NEWinit(collectible);
 
 	uiinit(ui);
 
 	uilevel1init(ui);
 
-	objectlevel1init(object);
+	objectlevel1NEWinit(object);
+
+	exitdoorinit(exitdoor);
+
+	exitdoorlevel1NEWinit(exitdoor);
 
 	textureinit(pTex);
 
 	meshinit(object, pMesh);
 
-	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole);
+	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
-    }
+	platformstate[2].state = CANTDISAPPEAR;
+	platformstate[2].timer = 0;
+	platformstate[2].elapsedtime = 0.0f;
+	platformstate[2].interval = 0.0f;
+
+	platformstate[3].state = CANTDISAPPEAR;
+	platformstate[3].timer = 0;
+	platformstate[3].elapsedtime = 0.0f;
+	platformstate[3].interval = 0.0f;
+
+	player.x = -1000;
+	player.y = -200;
+	player.xvel = 0;
+	player.yvel = 0;
+	player.width = 10;
+	player.height = 60;
+	player.halfW = player.width / 2;
+	player.halfH = player.height / 2;
+	player.lefttoken = 0;
+	player.righttoken = 0;
+
+	item.rotation = 0;
+	item.width = 8.f;
+	item.height = 45.f;
+
+	mapBoundary.y = -600;
+
+    
+
 }//end of initialisation
 
 void Level1NEW_Update()
 {
-   delta = AEFrameRateControllerGetFrameTime();
+	delta = AEFrameRateControllerGetFrameTime();
 
 	if (AEInputCheckCurr(AEVK_L))
 	{
@@ -160,18 +192,17 @@ void Level1NEW_Update()
 
 	else
 	{
-		
-        {////////////////////////////////////////start of grappling hook logic//////////////////////////////////////////////////////
-        if (AEInputCheckTriggered(AEVK_F)) //enlarges the hook
+		if (AEInputCheckTriggered(AEVK_F))
 		{
 			item.height += 10.f;
+			std::cout << "Printing";
 		}
 
 		playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
 
 		playerGravity(player.yvel, gravity);
 
-		if (AEInputCheckCurr(AEVK_LBUTTON)) //grappling hook
+		if (AEInputCheckCurr(AEVK_LBUTTON))
 		{
 			if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
 				anglePlayerToNode(nodes[collidedNode]);
@@ -187,13 +218,12 @@ void Level1NEW_Update()
 			hookCollisionFlag = 0;
 		}
 
-        } ////////////////////////////////////// end of grappling hook logic////////////////////////////////////////////////////////
-
 		playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 		meshUpdate();
 
 		hookUpdate();
+
 
 		//Bounding box type collision
 
@@ -269,12 +299,16 @@ void Level1NEW_Update()
 			timer = normalUpdateTimer(&normalElapsedTime, timer, interval);
 		}
 
-
-		for (int i = 0; i < maxCollectible; i++) //checks for collectible collision
+		for (int i = 0; i < maxCollectible; i++)
 		{
 			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
 		}
 
+
+
+
+
+		//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 		playerEasingMovement(player.xvel, player.yvel, stabliser);
 
@@ -291,25 +325,36 @@ void Level1NEW_Update()
 
 
 		// Out of bounds
-		playerOutofBounds(player.x, player.y);
-    }
+		if (playerOutofBounds(player.y, mapBoundary.y) == 1)
+		{
+			current = GS_RESTART;
+		}
+
+		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
+		{
+			next = GS_QUIT;
+		}
+
+
+	}
+    
 
 }
 
 void Level1NEW_Draw()
 {
-    // Change texture base on where player is facing
+	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
@@ -328,10 +373,9 @@ void Level1NEW_Free()
 
 void Level1NEW_Unload()
 {
-    AEGfxTextureUnload(pTexFront);
+	AEGfxTextureUnload(pTexFront);
 	AEGfxTextureUnload(pTexRight);
 	AEGfxTextureUnload(pTexLeft);
-	AEGfxTextureUnload(pTexPortal);
 	AEGfxTextureUnload(pTexPlatform);
 	AEGfxTextureUnload(pTexCollectible);
 }

@@ -5,6 +5,9 @@
 #include "Level1.hpp"
 #include "objects.hpp"
 #include "level1_new.hpp"
+#include "Level2.hpp"
+#include "Level3.hpp"
+
 
 
 

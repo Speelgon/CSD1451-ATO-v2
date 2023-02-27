@@ -20,7 +20,7 @@
 
 void objectinit(squareObject* object) {
 
-	for (int i = 0; i < maxObj; i++)
+	for (int i = 1; i < maxObj; i++)
 	{
 		object[i].x = 20000;
 		object[i].y = -2000;
@@ -48,11 +48,107 @@ void collectibleinit(collectibleObject* collectible)
 	}
 }
 
-void objectlevel1init(squareObject* object){
+void objectlevel1init(squareObject* object) {
 
 	object[0].x = -1000;
 	object[0].y = -275;
 	object[0].width = 700;
+	object[0].height = 30;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+
+	object[1].x = -850;
+	object[1].y = -200;
+	object[1].width = 200;
+	object[1].height = 30;
+	object[1].halfW = object[1].width / 2;
+	object[1].halfH = object[1].height / 2;
+
+	object[2].x = -650;
+	object[2].y = -125;
+	object[2].width = 200;
+	object[2].height = 30;
+	object[2].halfW = object[2].width / 2;
+	object[2].halfH = object[2].height / 2;
+
+	object[3].x = -450;
+	object[3].y = -75;
+	object[3].width = 100;
+	object[3].height = 30;
+	object[3].halfW = object[3].width / 2;
+	object[3].halfH = object[3].height / 2;
+
+}
+
+void objectlevel2init(squareObject* object) {
+
+	object[0].x = -1000;
+	object[0].y = -275;
+	object[0].width = 300;
+	object[0].height = 30;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+
+	object[1].x = -950;
+	object[1].y = 100;
+	object[1].width = 200;
+	object[1].height = 30;
+	object[1].halfW = object[1].width / 2;
+	object[1].halfH = object[1].height / 2;
+
+	object[2].x = -950;
+	object[2].y = 100;
+	object[2].width = 200;
+	object[2].height = 30;
+	object[2].halfW = object[2].width / 2;
+	object[2].halfH = object[2].height / 2;
+
+	object[3].x = -1000;
+	object[3].y = 400;
+	object[3].width = 100;
+	object[3].height = 30;
+	object[3].halfW = object[3].width / 2;
+	object[3].halfH = object[3].height / 2;
+
+}
+
+void objectlevel3init(squareObject* object) {
+
+	object[0].x = -1000;
+	object[0].y = -275;
+	object[0].width = 300;
+	object[0].height = 30;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+
+	object[1].x = -1300;
+	object[1].y = -275;
+	object[1].width = 200;
+	object[1].height = 30;
+	object[1].halfW = object[1].width / 2;
+	object[1].halfH = object[1].height / 2;
+
+	object[2].x = -850;
+	object[2].y = 100;
+	object[2].width = 200;
+	object[2].height = 30;
+	object[2].halfW = object[2].width / 2;
+	object[2].halfH = object[2].height / 2;
+
+	object[3].x = -600;
+	object[3].y = 300;
+	object[3].width = 100;
+	object[3].height = 30;
+	object[3].halfW = object[3].width / 2;
+	object[3].halfH = object[3].height / 2;
+
+}
+
+void objectlevel1NEWinit(squareObject* object){
+
+	object[0].x = -1100;
+	object[0].y = -275;
+	object[0].width = 300;
 	object[0].height = 30;
 	object[0].halfW = object[0].width / 2;
 	object[0].halfH = object[0].height / 2;
@@ -91,6 +187,87 @@ void collectiblelevel1init(collectibleObject* object) {
 	object[0].visibility = 1;
 }
 
+void collectiblelevel1NEWinit(collectibleObject* object) {
+
+	object[0].x = -1100;
+	object[0].y = 0;
+	object[0].width = 30;
+	object[0].height = 30;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+	object[0].visibility = 1;
+
+	object[1].x = - 850;
+	object[1].y = -150;
+	object[1].width = 30;
+	object[1].height = 30;
+	object[1].halfW = object[1].width / 2;
+	object[1].halfH = object[1].height / 2;
+	object[1].visibility = 1;
+
+	object[2].x = -650;
+	object[2].y = -100;
+	object[2].width = 30;
+	object[2].height = 30;
+	object[2].halfW = object[2].width / 2;
+	object[2].halfH = object[2].height / 2;
+	object[2].visibility = 1;
+}
+
+void collectiblelevel2init(collectibleObject* object) {
+
+	object[0].x = -1100;
+	object[0].y = 0;
+	object[0].width = 30;
+	object[0].height = 30;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+	object[0].visibility = 1;
+
+	object[1].x = -850;
+	object[1].y = 300;
+	object[1].width = 30;
+	object[1].height = 30;
+	object[1].halfW = object[1].width / 2;
+	object[1].halfH = object[1].height / 2;
+	object[1].visibility = 1;
+
+	object[2].x = -1170;
+	object[2].y = 250;
+	object[2].width = 30;
+	object[2].height = 30;
+	object[2].halfW = object[2].width / 2;
+	object[2].halfH = object[2].height / 2;
+	object[2].visibility = 1;
+}
+
+void collectiblelevel3init(collectibleObject* object) {
+
+	object[0].x = -1100;
+	object[0].y = 0;
+	object[0].width = 30;
+	object[0].height = 30;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+	object[0].visibility = 1;
+
+	object[1].x = -800;
+	object[1].y = 300;
+	object[1].width = 30;
+	object[1].height = 30;
+	object[1].halfW = object[1].width / 2;
+	object[1].halfH = object[1].height / 2;
+	object[1].visibility = 1;
+
+	object[2].x = -1140;
+	object[2].y = 250;
+	object[2].width = 30;
+	object[2].height = 30;
+	object[2].halfW = object[2].width / 2;
+	object[2].halfH = object[2].height / 2;
+	object[2].visibility = 1;
+}
+
 void portalinit(portalObject* portal) {
 
 	for (int i = 0; i < maxPortal; i++)
@@ -116,6 +293,25 @@ void portallevel1init(portalObject* object) {
 
 	object[1].x = -1300;
 	object[1].y = -220;
+	object[1].width = 60;
+	object[1].height = 80;
+	object[1].halfW = object[1].width / 2;
+	object[1].halfH = object[1].height / 2;
+	object[1].positiontoken = 1;
+}
+
+void portallevel3init(portalObject* object) {
+
+	object[0].x = -1300;
+	object[0].y = -400;
+	object[0].width = 60;
+	object[0].height = 80;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+	object[0].positiontoken = 1;
+
+	object[1].x = -850;
+	object[1].y = 140;
 	object[1].width = 60;
 	object[1].height = 80;
 	object[1].halfW = object[1].width / 2;
@@ -207,7 +403,26 @@ void nodeInit(nodeObject* nodes) {
 	
 	//node 2
 	nodes[1].x = { -1120 };
-	nodes[1].y = { -15 };
+	nodes[1].y = { -0 };
+	nodes[1].width = 25;
+	nodes[1].height = 25;
+	nodes[1].halfW = nodes[0].width / 2;
+	nodes[1].halfH = nodes[0].height / 2;
+}
+
+void nodeInitlevel2(nodeObject* nodes) {
+	
+
+	////node 2
+	nodes[0].x = { -1120 };
+	nodes[0].y = { -15 };
+	nodes[0].width = 25;
+	nodes[0].height = 25;
+	nodes[0].halfW = nodes[0].width / 2;
+	nodes[0].halfH = nodes[0].height / 2;
+
+	nodes[1].x = { - 1100 };
+	nodes[1].y = { 250 };
 	nodes[1].width = 25;
 	nodes[1].height = 25;
 	nodes[1].halfW = nodes[0].width / 2;
@@ -218,7 +433,7 @@ void exitdoorinit(exitDoor* door) {
 
 	for (int i = 0; i < maxDoor; i++)
 	{
-		door[i].x = 20000;
+		door[i].x = 2000;
 		door[i].y = -2000;
 		door[i].width = 10;
 		door[i].height = 10;
@@ -229,8 +444,41 @@ void exitdoorinit(exitDoor* door) {
 
 void exitdoorlevel1init(exitDoor* door) {
 
-	door[0].x = -1150;
-	door[0].y = -200;
+	door[0].x = -1000;
+	door[0].y = 465;
+	door[0].width = 40;
+	door[0].height = 80;
+	door[0].halfW = door[0].width / 2;
+	door[0].halfH = door[0].height / 2;
+
+}
+
+void exitdoorlevel1NEWinit(exitDoor* door) {
+
+	door[0].x = -450;
+	door[0].y = -10;
+	door[0].width = 40;
+	door[0].height = 80;
+	door[0].halfW = door[0].width / 2;
+	door[0].halfH = door[0].height / 2;
+
+}
+
+void exitdoorlevel2init(exitDoor* door) {
+
+	door[0].x = -1000;
+	door[0].y = 465;
+	door[0].width = 40;
+	door[0].height = 80;
+	door[0].halfW = door[0].width / 2;
+	door[0].halfH = door[0].height / 2;
+
+}
+
+void exitdoorlevel3init(exitDoor* door) {
+
+	door[0].x = -600;
+	door[0].y = 360;
 	door[0].width = 40;
 	door[0].height = 80;
 	door[0].halfW = door[0].width / 2;
