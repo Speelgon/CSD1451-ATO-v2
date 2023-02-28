@@ -23,11 +23,12 @@ extern AEGfxTexture* pTex[30];
 extern AEGfxVertexList* itemMesh;
 extern AEGfxTexture* pTexFront;
 extern AEGfxTexture* pTexRight;
-extern AEGfxTexture* pTexLeft;
-
 extern AEGfxTexture* pTexPortal;
 extern AEGfxTexture* pTexPlatform;
 extern AEGfxTexture* pTexCollectible;
+extern AEGfxTexture* pTexExitdoor;
+extern AEGfxTexture* pTexBackground;
+extern AEGfxTexture* pTexNode;
 
 extern float playerSpeed;
 extern int jumptoken;

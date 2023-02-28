@@ -7,78 +7,30 @@
 #include "IncrementVariable.hpp"
 #include "vpCollision.hpp"
 #include "catdeath.hpp"
+#include "PlatformsDisappear.hpp"
+#include "utils.h"
+#include "objects.hpp"
 
 
+//char strBuffer[100];
+//f32 TextWidth, TextHeight;
+//==========================================================================================================================
+//==========================================================================================================================
+extern PlatformState platformstate[4];
 
-namespace {
+//variables for normal timer
+extern f64 normalElapsedTime;
+extern int timer;
+extern f64 interval;
+extern int lasttimer;
+extern int numberofplatforms;
+extern f64 elapsedtime;
 
-
-
-	enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
-	//f64 elapsedtime;
-	//int timer;
-	int timer;
-	f64 interval;
-	f64 elapsedtime;
-	int lasttimer;
-
-	char strBuffer[100];
-	f32 TextWidth, TextHeight;
-	//==========================================================================================================================
-	//==========================================================================================================================
-	//f64 intervaltime;
-	int LastJump = 0;
-	int timerset = 0;
-
-	f64 normalElapsedTime;
-
-	struct PlatformState
-	{
-		int state;
-		int timer;
-		f64 elapsedtime;
-		f64 interval;
-	}platformstate[4] = { CANTDISAPPEAR, 3, 0.0f, 1.0f,
-							CANDISAPPEAR, 3, 0.0f, 1.0f,
-							CANTDISAPPEAR, 3, 0.0f, 1.0f,
-							CANDISAPPEAR, 3, 0.0f, 1.0f
-	};
-
-	int numberofplatforms = 4;
-
-	int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			platformstate[i].elapsedtime += AEFrameRateControllerGetFrameTime();
-			if (elapsedtime >= platformstate[i].interval)
-			{
-				timer--;
-				elapsedtime = 0;
-			}
-		}
-		return timer;
-	}
-
-
-
-
-	int normalUpdateTimer(f64* normalElapsedTime, int timer, f64 interval)
-	{
-		*normalElapsedTime += AEFrameRateControllerGetFrameTime();
-		if (*normalElapsedTime >= interval)
-		{
-			timer--;
-			*normalElapsedTime = 0;
-		}
-		return timer;
-	}
-
-}
 
 void Level3_Load()
 {
-    pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
+	// Texture 1: From file
+	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
 	AE_ASSERT_MESG(pTexFront, "Failed to create cat front texture!!");
 
 	pTexRight = AEGfxTextureLoad("Assets/FCat_Right.png");
@@ -95,10 +47,27 @@ void Level3_Load()
 
 	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
 	AE_ASSERT_MESG(pTexCollectible, "Failed to create collectible texture!!");
+
+	pTexExitdoor = AEGfxTextureLoad("Assets/exitdoor.png");
+	AE_ASSERT_MESG(pTexExitdoor, "Failed to create exitdoor texture!!");
+
+	pTexBackground = AEGfxTextureLoad("Assets/background.png");
+	AE_ASSERT_MESG(pTexBackground, "Failed to create background texture!!");
+
+	pTexNode = AEGfxTextureLoad("Assets/hookpoint.png");
+	AE_ASSERT_MESG(pTexNode, "Failed to create hookpoint texture!!");
 }
 
 void Level3_Initialize()
 {
+	
+		platformstate[1].state = CANDISAPPEAR;
+		platformstate[1].timer = 3;
+		platformstate[1].elapsedtime = 0.0f;
+		platformstate[1].interval = 0.0f;
+
+	
+
     player.x = -1000;
 	player.y = -200;
 	player.xvel = 0;
@@ -154,6 +123,9 @@ void Level3_Initialize()
 	platformstate[3].timer = 0;
 	platformstate[3].elapsedtime = 0.0f;
 	platformstate[3].interval = 0.0f;
+
+	timer = 0;
+
 }
 
 void Level3_Update()
@@ -328,18 +300,20 @@ void Level3_Update()
 
 void Level3_Draw()
 {
-    // Change texture base on where player is facing
+	backgroundrender(player, pMesh, pTexBackground);
+
+	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, exitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
@@ -357,10 +331,11 @@ void Level3_Free()
 
 void Level3_Unload()
 {
-    AEGfxTextureUnload(pTexFront);
+	AEGfxTextureUnload(pTexFront);
 	AEGfxTextureUnload(pTexRight);
 	AEGfxTextureUnload(pTexLeft);
 	AEGfxTextureUnload(pTexPortal);
 	AEGfxTextureUnload(pTexPlatform);
 	AEGfxTextureUnload(pTexCollectible);
+	AEGfxTextureUnload(pTexExitdoor);
 }
