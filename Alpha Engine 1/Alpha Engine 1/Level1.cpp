@@ -9,6 +9,7 @@
 #include "catdeath.hpp"
 #include "PlatformsDisappear.hpp"
 #include "utils.h"
+#include "audio.hpp"
 
 
 extern f64 delta;
@@ -95,8 +96,8 @@ extern float halfmapx;
 extern float halfmapy;
 
 
-
-
+//extern AEAudio soundList[2];
+//extern AEAudioGroup soundGroups[2];
 
 
 
@@ -169,6 +170,8 @@ void Level1_Load()
 
 	pTexNode = AEGfxTextureLoad("Assets/hookpoint.png");
 	AE_ASSERT_MESG(pTexNode, "Failed to create hookpoint texture!!");
+
+
 
 }
 
@@ -251,7 +254,8 @@ void Level1_Initialize()
 	platformstate[3].elapsedtime = 0.0f;
 	platformstate[3].interval = 0.0f;
 
-	
+	initAudioList();
+
 	
 }
 
@@ -284,7 +288,6 @@ void Level1_Update()
 		if (AEInputCheckCurr(AEVK_LBUTTON))
 		{
 			if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
-				std::cout << "Collision\n";
 				anglePlayerToNode(nodes[collidedNode]);
 				movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
 			}
@@ -361,6 +364,7 @@ void Level1_Update()
 				if (platformstate[j].timer == 0)
 				{
 					platformstate[j].state = DISAPPEARED;
+					platformDisappear = true;
 				}
 				// std::cout << "platform: " << j << "Timer: " << platformstate[j].timer << '\n';
 
@@ -432,7 +436,7 @@ void Level1_Update()
 			next = GS_QUIT;
 		}
 	
-
+		updateSound();
 	}
 }
 
