@@ -1,5 +1,5 @@
 #include "allheaders.hpp"
-
+#include "Mainmenu.hpp"
 #include "IncrementVariable.hpp"
 
 square buttons;
@@ -16,7 +16,6 @@ extern square player;
 f32 settingsbuttony;
 f32 creditsbuttony;
 f32 quitbuttony;
-
 
 
 
@@ -87,6 +86,7 @@ void Mainmenu_Update()
 
 void Mainmenu_Draw()
 {
+
 	//====================================//
 	//			 Button Drawing			  //
 	//====================================//
@@ -165,9 +165,10 @@ void Mainmenu_Draw()
 void Mainmenu_Free()
 {
 	AEGfxMeshFree(playMesh);
+
 }
 
 void Mainmenu_Unload()
 {
-
+	
 }

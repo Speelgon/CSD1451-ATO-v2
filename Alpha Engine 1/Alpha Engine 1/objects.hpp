@@ -122,9 +122,9 @@ void trampolineinit(tramp* object);
 
 void trampolinelevel1init(tramp* object);
 
-void backgroundrender(squareObject player, AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground);
+void backgroundrender(AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground);
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor);
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor);
 
 void collectibleinit(collectibleObject* object);
 

@@ -18,7 +18,8 @@
 ================================================================================================================================
 */
 
-void backgroundrender(squareObject player, AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground)
+
+void backgroundrender( AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground)
 {
 	// Drawing object 1
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -36,7 +37,7 @@ void backgroundrender(squareObject player, AEGfxVertexList** pMesh, AEGfxTexture
 	AEGfxMeshDraw(pMesh[120], AE_GFX_MDM_TRIANGLES);
 }
 
-void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTextPlatform)
+void DisappearingPlatformRender(squareObject* object,PlatformState* platformstate, AEGfxVertexList** pMesh, AEGfxTexture* pTexPlatform)
 {
 	if (platformstate[0].state != DISAPPEARED)
 	{
@@ -50,7 +51,7 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Texture for platform
-		AEGfxTextureSet(pTextPlatform, 0.0f, 0.0f);
+		AEGfxTextureSet(pTexPlatform, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[1], AE_GFX_MDM_TRIANGLES);
 
@@ -62,12 +63,13 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 	{
 		// Drawing platform 2
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 		// Set position for platform 1
 		AEGfxSetPosition(object[1].x, object[1].y);
 
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Texture for platform
-		AEGfxTextureSet(pTextPlatform, 0.0f, 0.0f);
+		AEGfxTextureSet(pTexPlatform, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[2], AE_GFX_MDM_TRIANGLES);
 
@@ -77,12 +79,13 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 	{
 		// Drawing platform 3
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 		// Set position for platform 1
 		AEGfxSetPosition(object[2].x, object[2].y);
 
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Texture for platform
-		AEGfxTextureSet(pTextPlatform, 0.0f, 0.0f);
+		AEGfxTextureSet(pTexPlatform, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[3], AE_GFX_MDM_TRIANGLES);
 
@@ -94,12 +97,13 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 	{
 		// Drawing platform 4
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 		// Set position for platform 1
 		AEGfxSetPosition(object[3].x, object[3].y);
 
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Texture for platform
-		AEGfxTextureSet(pTextPlatform, 0.0f, 0.0f);
+		AEGfxTextureSet(pTexPlatform, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
 
@@ -109,7 +113,7 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 
 
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor)
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor)
 {
 	//===============================================================
 	// Player Drawing												 
@@ -136,7 +140,7 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// Platform Drawing												 
 	//===============================================================
 
-	DisappearingPlatformRender(platformstate, pTextPlatform);
+	DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform);
 
 	//===============================================================
 	// Node Drawing												 

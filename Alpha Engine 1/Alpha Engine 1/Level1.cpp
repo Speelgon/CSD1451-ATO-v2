@@ -155,7 +155,7 @@ void Level1_Load()
 	pTexPortal = AEGfxTextureLoad("Assets/portal.png");
 	AE_ASSERT_MESG(pTexPortal, "Failed to create portal texture!!");
 
-	pTexPlatform = AEGfxTextureLoad("Assets/platform.png");
+	pTexPlatform = AEGfxTextureLoad("Assets/platformMetal.png");
 	AE_ASSERT_MESG(pTexPlatform, "Failed to create platform texture!!");
 
 	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
@@ -439,7 +439,7 @@ void Level1_Update()
 void Level1_Draw()
 {
 
-	backgroundrender(player, pMesh, pTexBackground);
+	backgroundrender(pMesh, pTexBackground);
 
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
@@ -480,5 +480,6 @@ void Level1_Unload()
 	AEGfxTextureUnload(pTexPlatform);
 	AEGfxTextureUnload(pTexCollectible);
 	AEGfxTextureUnload(pTexExitdoor);
+	AEGfxTextureUnload(pTexBackground);
 }
 
