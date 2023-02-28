@@ -90,6 +90,8 @@ extern float mapy;
 extern float halfmapx;
 extern float halfmapy;
 
+extern bool portalled, collectibleHit, platformDisappear;
+
 void Level1_Load();
 
 void Level1_Initialize();
