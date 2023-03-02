@@ -64,7 +64,7 @@ void Level3_Initialize()
 		platformstate[1].state = CANDISAPPEAR;
 		platformstate[1].timer = 3;
 		platformstate[1].elapsedtime = 0.0f;
-		platformstate[1].interval = 0.0f;
+		platformstate[1].interval = 1.0f;
 
 	
 
@@ -111,6 +111,10 @@ void Level3_Initialize()
 	textureinit(pTex);
 
 	meshinit(object, pMesh);
+
+	nodeInit(nodes);
+
+	nodeInitlevel3(nodes);
 
 	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 

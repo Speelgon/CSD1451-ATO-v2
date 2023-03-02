@@ -394,20 +394,16 @@ void trampolinelevel1init(tramp* object) {
 
 void nodeInit(nodeObject* nodes) {
 	//node 1
-	nodes[0].x = { -950 };
-	nodes[0].y = { -35 };
-	nodes[0].width = 25;
-	nodes[0].height = 25;
-	nodes[0].halfW = nodes[0].width / 2;
-	nodes[0].halfH = nodes[0].height / 2;
-	
-	//node 2
-	nodes[1].x = { -1120 };
-	nodes[1].y = { -0 };
-	nodes[1].width = 25;
-	nodes[1].height = 25;
-	nodes[1].halfW = nodes[0].width / 2;
-	nodes[1].halfH = nodes[0].height / 2;
+	for (int i = 0; i < maxNodes; i++) {
+		////node 2
+		nodes[i].x = { -11200 };
+		nodes[i].y = { -15 };
+		nodes[i].width = 25;
+		nodes[i].height = 25;
+		nodes[i].halfW = nodes[0].width / 2;
+		nodes[i].halfH = nodes[0].height / 2;
+
+	}
 }
 
 void nodeInitlevel2(nodeObject* nodes) {
@@ -422,6 +418,25 @@ void nodeInitlevel2(nodeObject* nodes) {
 	nodes[0].halfH = nodes[0].height / 2;
 
 	nodes[1].x = { - 1100 };
+	nodes[1].y = { 250 };
+	nodes[1].width = 25;
+	nodes[1].height = 25;
+	nodes[1].halfW = nodes[0].width / 2;
+	nodes[1].halfH = nodes[0].height / 2;
+}
+
+void nodeInitlevel3(nodeObject* nodes) {
+
+
+	////node 2
+	//nodes[0].x = { -1120 };
+	//nodes[0].y = { -15 };
+	//nodes[0].width = 25;
+	//nodes[0].height = 25;
+	//nodes[0].halfW = nodes[0].width / 2;
+	//nodes[0].halfH = nodes[0].height / 2;
+
+	nodes[1].x = { -1100 };
 	nodes[1].y = { 250 };
 	nodes[1].width = 25;
 	nodes[1].height = 25;

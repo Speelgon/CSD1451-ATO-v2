@@ -78,6 +78,12 @@ void Level1NEW_Initialize()
 
 
 	//C:\Users\Yuki\OneDrive\Documents\GitHub\CSD1451 - ATO - v2\Alpha Engine 1\Assets
+	
+	platformstate[1].state = CANDISAPPEAR;
+	platformstate[1].timer = 3;
+	platformstate[1].elapsedtime = 0.0f;
+	platformstate[1].interval = 1.0f; 
+
 	player.x = -1000;
 	player.y = -200;
 	player.xvel = 0;

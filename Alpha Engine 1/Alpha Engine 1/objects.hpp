@@ -164,6 +164,7 @@ void nodeInit(nodeObject *nodes);
 
 void nodeInitlevel2(nodeObject* nodes);
 
+void nodeInitlevel3(nodeObject* nodes);
 
 void exitdoorinit(exitDoor* door);
 
