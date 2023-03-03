@@ -162,7 +162,7 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// Collectible Drawing												 
 	//===============================================================
 
-	if(collectible[0].visibility == 1)
+	if (collectible[0].visibility == 1)
 	{
 		// Drawing collectible
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -171,10 +171,41 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 		// No tint
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Set texture
-		 AEGfxTextureSet(pTexCollectible, 0.0f, 0.0f);
+		AEGfxTextureSet(pTexCollectible, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[10], AE_GFX_MDM_TRIANGLES);
+
 	}
+
+	if (collectible[1].visibility == 1)
+	{
+
+		// Drawing collectible
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		// Set position for collectible
+		AEGfxSetPosition(collectible[1].x, collectible[1].y);
+		// No tint
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Set texture
+		AEGfxTextureSet(pTexCollectible, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[13], AE_GFX_MDM_TRIANGLES);
+	}
+
+	if (collectible[2].visibility == 1)
+	{
+		// Drawing collectible
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		// Set position for collectible
+		AEGfxSetPosition(collectible[2].x, collectible[2].y);
+		// No tint
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Set texture
+		AEGfxTextureSet(pTexCollectible, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[14], AE_GFX_MDM_TRIANGLES);
+	}
+	
 
 	//===============================================================
 	// UI Drawing												 

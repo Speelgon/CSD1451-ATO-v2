@@ -50,16 +50,32 @@ void GSM_Update()
 		break;
 
 	case GS_LEVEL1:
-		fpLoad = Level1_Load;
-		fpInitialize = Level1_Initialize;
-		fpUpdate = Level1_Update;
-		fpDraw = Level1_Draw;
-		fpFree = Level1_Free;
-		fpUnload = Level1_Unload;
+		fpLoad = Level1NEW_Load;
+		fpInitialize = Level1NEW_Initialize;
+		fpUpdate = Level1NEW_Update;
+		fpDraw = Level1NEW_Draw;
+		fpFree = Level1NEW_Free;
+		fpUnload = Level1NEW_Unload;
 		break;
 
-	case GS_LEVEL2:			//Loads the function pointers for level 2
+	case GS_LEVEL2:	
+		fpLoad = Level2_Load;
+		fpInitialize = Level2_Initialize;
+		fpUpdate = Level2_Update;
+		fpDraw = Level2_Draw;
+		fpFree = Level2_Free;
+		fpUnload = Level2_Unload;
 		break;
+	
+	case GS_LEVEL3:
+		fpLoad = Level3_Load;
+		fpInitialize = Level3_Initialize;
+		fpUpdate = Level3_Update;
+		fpDraw = Level3_Draw;
+		fpFree = Level3_Free;
+		fpUnload = Level3_Unload;
+
+			
 	case GS_RESTART:		//Breaks the current case if the gamestate is required to restart
 		break;
 	case GS_QUIT:			//Breaks the current case if the gamestate is required to quit
