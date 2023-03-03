@@ -3,7 +3,9 @@
 #include "IncrementVariable.hpp"
 
 square buttons;
+square background;
 AEGfxVertexList* playMesh;
+AEGfxVertexList* backgroundMesh;
 extern s8 fontId;
 char strBufferPLAY[5], strBufferHTP[12], strBufferCredits[8], strBufferQuit[5], strBufferTitle[14];
 //char strBufferSettings[50];
@@ -13,10 +15,10 @@ extern int mousey;
 extern int truemousex;
 extern int truemousey;
 extern square player;
+extern AEGfxTexture* pTexBackground;
 f32 settingsbuttony;
 f32 creditsbuttony;
 f32 quitbuttony;
-
 
 
 void Mainmenu_Load()
@@ -41,6 +43,13 @@ void Mainmenu_Initialize()
 	buttons.halfW = buttons.width / 2;
 	buttons.halfH = buttons.height / 2;
 
+	background.x = 0;
+	background.y = 0;
+	background.width = 800;
+	background.height = 600;
+	background.halfW = background.width / 2;
+	background.halfH = background.height / 2;
+
 	AEGfxMeshStart();
 	AEGfxTriAdd(
 		-buttons.halfW, -buttons.halfH, 0xFFFFFF00, 0.0f, 1.0f,
@@ -57,6 +66,25 @@ void Mainmenu_Initialize()
 	playMesh = AEGfxMeshEnd();
 	AE_ASSERT_MESG(playMesh, "Failed to create playMesh!!");
 
+
+	AEGfxMeshStart();
+	AEGfxTriAdd(
+		-background.halfW, -background.halfH, 0xFFFFFF00, 0.0f, 1.0f,
+		background.halfW, -background.halfH, 0xFFFFFF00, 1.0f, 1.0f,
+		-background.halfW, background.halfH, 0xFFFFFF00, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		background.halfW, -background.halfH, 0xFFFFFFFF, 1.0f, 1.0f,
+		background.halfW, background.halfH, 0xFFFFFFFF, 1.0f, 0.0f,
+		-background.halfW, background.halfH, 0xFFFFFFFF, 0.0f, 0.0f);
+
+	// Saving the mesh (list of triangles) in pMesh1
+
+	backgroundMesh = AEGfxMeshEnd();
+	AE_ASSERT_MESG(backgroundMesh, "Failed to create backgroundMesh!!");
+	
+	pTexBackground = AEGfxTextureLoad("Assets/menu.png");
+	AE_ASSERT_MESG(pTexBackground, "Failed to create menu background texture!!");
 	
 }
 
@@ -86,6 +114,25 @@ void Mainmenu_Update()
 
 void Mainmenu_Draw()
 {
+	//====================================//
+	//			 Background Drawing		  //
+	//====================================//
+
+	// Drawing background
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxSetTransparency(1.0f);
+
+	// Set position for background
+	AEGfxSetPosition(background.x, background.y);
+
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	// Texture for platform
+	AEGfxTextureSet(pTexBackground, 0.0f, 0.0f);
+	// Drawing the mesh (list of triangles)
+	AEGfxMeshDraw(backgroundMesh, AE_GFX_MDM_TRIANGLES);
+
+	AEGfxSetTransparency(1.0f);
 
 	//====================================//
 	//			 Button Drawing			  //
@@ -127,11 +174,11 @@ void Mainmenu_Draw()
 	//====================================//
 	// 
 	//PRINT "LEAP CLIMBERS" TEXT
-	AEGfxGetPrintSize(fontId, strBufferTitle, f32(1), TextWidth, TextHeight);
-	memset(strBufferTitle, 0, 5 * sizeof(char));
-	sprintf_s(strBufferTitle, "LEAP CLIMBERS");
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxPrint(fontId, strBufferTitle, -0.22f, 0.5f, 1, 1.f, 1.f, 1.f);
+	//AEGfxGetPrintSize(fontId, strBufferTitle, f32(1), TextWidth, TextHeight);
+	//memset(strBufferTitle, 0, 5 * sizeof(char));
+	//sprintf_s(strBufferTitle, "LEAP CLIMBERS");
+	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	//AEGfxPrint(fontId, strBufferTitle, -0.22f, 0.5f, 1, 1.f, 1.f, 1.f);
 
 	//PRINT "PLAY" TEXT
 	AEGfxGetPrintSize(fontId, strBufferPLAY, f32(1), TextWidth, TextHeight);
@@ -165,10 +212,11 @@ void Mainmenu_Draw()
 void Mainmenu_Free()
 {
 	AEGfxMeshFree(playMesh);
+	AEGfxMeshFree(backgroundMesh);
 
 }
 
 void Mainmenu_Unload()
 {
-	
+	AEGfxTextureUnload(pTexBackground);
 }
