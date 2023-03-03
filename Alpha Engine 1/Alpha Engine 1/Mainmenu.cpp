@@ -15,7 +15,11 @@ extern int mousey;
 extern int truemousex;
 extern int truemousey;
 extern square player;
-extern AEGfxTexture* pTexBackground;
+extern AEGfxTexture* pTexMenuBackground = 0;
+extern AEGfxTexture* pTexPlay = 0;
+extern AEGfxTexture* pTexTutorial = 0;
+extern AEGfxTexture* pTexCredits = 0;
+extern AEGfxTexture* pTexQuit = 0;
 f32 settingsbuttony;
 f32 creditsbuttony;
 f32 quitbuttony;
@@ -32,14 +36,14 @@ void Mainmenu_Initialize()
 	TextHeight = 1;
 	//AEGfxSetBackgroundColor(0.0f, 70.0f, 50.0f);
 	buttons.x = 0;
-	buttons.y = 50;
+	buttons.y = 70;
 	/*buttons.xvel = 0;
 	buttons.yvel = 0;*/
 	settingsbuttony = buttons.y - 80;
 	creditsbuttony = buttons.y - 160;
 	quitbuttony = buttons.y - 240;
 	buttons.width = 120;
-	buttons.height = 40;
+	buttons.height = 60;
 	buttons.halfW = buttons.width / 2;
 	buttons.halfH = buttons.height / 2;
 
@@ -82,9 +86,22 @@ void Mainmenu_Initialize()
 
 	backgroundMesh = AEGfxMeshEnd();
 	AE_ASSERT_MESG(backgroundMesh, "Failed to create backgroundMesh!!");
+
 	
-	pTexBackground = AEGfxTextureLoad("Assets/menu.png");
-	AE_ASSERT_MESG(pTexBackground, "Failed to create menu background texture!!");
+	pTexMenuBackground = AEGfxTextureLoad("Assets/menu.png");
+	AE_ASSERT_MESG(pTexMenuBackground, "Failed to create menu background texture!!");
+
+	pTexPlay = AEGfxTextureLoad("Assets/button_play.png");
+	AE_ASSERT_MESG(pTexPlay, "Failed to create play button texture!!");
+
+	pTexTutorial = AEGfxTextureLoad("Assets/button_tutorial.png");
+	AE_ASSERT_MESG(pTexTutorial, "Failed to create tutorial button texture!!");
+
+	pTexCredits = AEGfxTextureLoad("Assets/button_credits.png");
+	AE_ASSERT_MESG(pTexCredits, "Failed to create credits button texture!!");
+
+	pTexQuit = AEGfxTextureLoad("Assets/button_quit.png");
+	AE_ASSERT_MESG(pTexQuit, "Failed to create quit button texture!!");
 	
 }
 
@@ -121,14 +138,13 @@ void Mainmenu_Draw()
 	// Drawing background
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxSetTransparency(1.0f);
-
+	
 	// Set position for background
 	AEGfxSetPosition(background.x, background.y);
 
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	// Texture for platform
-	AEGfxTextureSet(pTexBackground, 0.0f, 0.0f);
+	AEGfxTextureSet(pTexMenuBackground, 0.0f, 0.0f);
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(backgroundMesh, AE_GFX_MDM_TRIANGLES);
 
@@ -139,35 +155,43 @@ void Mainmenu_Draw()
 	//====================================//
 	
 	// Drawing top "play" button
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	// Set position 
 	AEGfxSetPosition(buttons.x, buttons.y);
-	AEGfxSetTintColor(0.0f, 0.5f, 1.0f, 1.0f);
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	// No texture 
-	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxTextureSet(pTexPlay, 0, 0);
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
 
 	//Drawing 2nd "settings" button
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(buttons.x, settingsbuttony);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxTextureSet(pTexTutorial, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
 
 	//Drawing 3rd "credits" button 
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(buttons.x, creditsbuttony);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxTextureSet(pTexCredits, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
 
 	//Drawing 4th "quit" button
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(buttons.x, quitbuttony);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxTextureSet(pTexQuit, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
 
 	//====================================//
 	//			  TEXT PRINTING			  //
@@ -181,32 +205,32 @@ void Mainmenu_Draw()
 	//AEGfxPrint(fontId, strBufferTitle, -0.22f, 0.5f, 1, 1.f, 1.f, 1.f);
 
 	//PRINT "PLAY" TEXT
-	AEGfxGetPrintSize(fontId, strBufferPLAY, f32(1), TextWidth, TextHeight);
-	memset(strBufferPLAY, 0, 5 * sizeof(char));
-	sprintf_s(strBufferPLAY, "PLAY");
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxPrint(fontId, strBufferPLAY, -0.065f, 0.14f, 1, 0.f, 0.f, 0.f);
+	//AEGfxGetPrintSize(fontId, strBufferPLAY, f32(1), TextWidth, TextHeight);
+	//memset(strBufferPLAY, 0, 5 * sizeof(char));
+	//sprintf_s(strBufferPLAY, "PLAY");
+	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	/*AEGfxPrint(fontId, strBufferPLAY, -0.065f, 0.14f, 1, 0.f, 0.f, 0.f);*/
 
-	//PRINT "TUTORIAL" TEXT
-	AEGfxGetPrintSize(fontId, strBufferHTP, f32(1), TextWidth, TextHeight);
-	memset(strBufferHTP, 0, 12 * sizeof(char));
-	sprintf_s(strBufferHTP, "TUTORIAL");
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxPrint(fontId, strBufferHTP, -0.14f, -0.13f, 1, 0.f, 0.f, 0.f);
+	////PRINT "TUTORIAL" TEXT
+	//AEGfxGetPrintSize(fontId, strBufferHTP, f32(1), TextWidth, TextHeight);
+	//memset(strBufferHTP, 0, 12 * sizeof(char));
+	//sprintf_s(strBufferHTP, "TUTORIAL");
+	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	//AEGfxPrint(fontId, strBufferHTP, -0.14f, -0.13f, 1, 0.f, 0.f, 0.f);
 
-	//PRINT "CREDITS" TEXT
-	AEGfxGetPrintSize(fontId, strBufferCredits, f32(1), TextWidth, TextHeight);
-	memset(strBufferCredits, 0, 8 * sizeof(char));
-	sprintf_s(strBufferCredits, "CREDITS");
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxPrint(fontId, strBufferCredits, -0.12f, -0.4f, 1, 0.f, 0.f, 0.f);
-	
-	//PRINT "QUIT" TEXT
-	AEGfxGetPrintSize(fontId, strBufferQuit, f32(1), TextWidth, TextHeight);
-	memset(strBufferQuit, 0, 5 * sizeof(char));
-	sprintf_s(strBufferQuit, "QUIT");
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxPrint(fontId, strBufferQuit, -0.065f, -0.66f, 1, 0.f, 0.f, 0.f);
+	////PRINT "CREDITS" TEXT
+	//AEGfxGetPrintSize(fontId, strBufferCredits, f32(1), TextWidth, TextHeight);
+	//memset(strBufferCredits, 0, 8 * sizeof(char));
+	//sprintf_s(strBufferCredits, "CREDITS");
+	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	//AEGfxPrint(fontId, strBufferCredits, -0.12f, -0.4f, 1, 0.f, 0.f, 0.f);
+	//
+	////PRINT "QUIT" TEXT
+	//AEGfxGetPrintSize(fontId, strBufferQuit, f32(1), TextWidth, TextHeight);
+	//memset(strBufferQuit, 0, 5 * sizeof(char));
+	//sprintf_s(strBufferQuit, "QUIT");
+	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	//AEGfxPrint(fontId, strBufferQuit, -0.065f, -0.66f, 1, 0.f, 0.f, 0.f);
 }
 
 void Mainmenu_Free()
@@ -218,5 +242,9 @@ void Mainmenu_Free()
 
 void Mainmenu_Unload()
 {
-	AEGfxTextureUnload(pTexBackground);
+	AEGfxTextureUnload(pTexMenuBackground);
+	AEGfxTextureUnload(pTexPlay);
+	AEGfxTextureUnload(pTexTutorial);
+	AEGfxTextureUnload(pTexCredits);
+	AEGfxTextureUnload(pTexQuit);
 }
