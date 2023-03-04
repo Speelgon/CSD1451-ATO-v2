@@ -108,6 +108,12 @@ void uilevel1init(squareObject* ui);
 
 void objectlevel1init(squareObject* object);
 
+void objectlevel1NEWinit(squareObject* object);
+
+void objectlevel2init(squareObject* object);
+
+void objectlevel3init(squareObject* object);
+
 void meshinit(squareObject* object, AEGfxVertexList** pMesh);
 
 void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible, squareObject player, portalObject* portal, hook playerHook, blackhole1* blackhole, exitDoor* door);
@@ -130,9 +136,17 @@ void collectibleinit(collectibleObject* object);
 
 void collectiblelevel1init(collectibleObject* object);
 
+void collectiblelevel1NEWinit(collectibleObject* object);
+
+void collectiblelevel2init(collectibleObject* object);
+
+void collectiblelevel3init(collectibleObject* object);
+
 void portalinit(portalObject* object);
 
 void portallevel1init(portalObject* object);
+
+void portallevel3init(portalObject* object);
 
 void hookinit(hook &playerHook);
 
@@ -148,6 +162,19 @@ void hookUpdate();
 
 void nodeInit(nodeObject *nodes);
 
+void nodeInitlevel2(nodeObject* nodes);
+
+void nodeInitlevel3(nodeObject* nodes);
+
 void exitdoorinit(exitDoor* door);
 
 void exitdoorlevel1init(exitDoor* door);
+
+void exitdoorlevel1NEWinit(exitDoor* door);
+
+void exitdoorlevel2init(exitDoor* door);
+
+void exitdoorlevel3init(exitDoor* door);
+
+
+
