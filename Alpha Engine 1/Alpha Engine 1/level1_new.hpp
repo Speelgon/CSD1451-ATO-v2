@@ -6,6 +6,7 @@
 //==========================================================================================================================
 extern f64 delta;
 extern f64 assumedFrameRate;
+extern s8 fontId;
 
 extern square player;
 extern square object[maxObj];
@@ -29,6 +30,8 @@ extern AEGfxTexture* pTexCollectible;
 extern AEGfxTexture* pTexExitdoor;
 extern AEGfxTexture* pTexBackground;
 extern AEGfxTexture* pTexNode;
+extern AEGfxTexture* pTexHook;
+extern AEGfxTexture* pTexStick;
 
 extern float playerSpeed;
 extern int jumptoken;
@@ -40,6 +43,8 @@ extern float pointHookStuckY;
 extern int collidedNode;
 extern float deathSeconds;
 extern float timeDead;
+
+
 
 //==========================================================================================================================
 // Yuki's Variables

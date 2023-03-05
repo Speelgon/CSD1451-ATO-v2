@@ -113,7 +113,7 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor)
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook)
 {
 	//===============================================================
 	// Player Drawing												 
@@ -259,17 +259,18 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	//===============================================================
 
 	// Drawing object 3 - (first) - No tint
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	AEGfxSetBlendMode(AE_GFX_BM_NONE);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
 	AEGfxSetPosition(playerHook.x, playerHook.y);
 	// No tint
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	
-	AEGfxTextureSet(NULL, 0, 0);
-	AEGfxMeshDraw(pMesh[15], AE_GFX_MDM_TRIANGLES);
-	AEGfxSetTransparency(1.0f);
+	AEGfxTextureSet(pTexHook, 0, 0);
 
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxMeshDraw(pMesh[15], AE_GFX_MDM_TRIANGLES);
+
+	AEGfxSetTransparency(1.0f);
 
 
 	//===============================================================
@@ -395,9 +396,10 @@ void anglePlayerToNode(node nodes) {
 	AEVec2Normalize(&item.direction, &item.direction);
 }
 
-void kwanEuItemRender() {
+void kwanEuItemRender(AEGfxTexture* pTexStick) {
 
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 	// Set Scale for Item
 	AEMtx33 scale = { 0 };
@@ -424,7 +426,7 @@ void kwanEuItemRender() {
 	// Choose the transform to use
 	AEGfxSetTransform(transform.m);
 	// No texture for object 1
-	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxTextureSet(pTexStick, 0, 0);
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(itemMesh, AE_GFX_MDM_TRIANGLES);
 

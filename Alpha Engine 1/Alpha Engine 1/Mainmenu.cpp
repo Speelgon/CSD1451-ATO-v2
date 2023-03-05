@@ -9,7 +9,7 @@ AEGfxVertexList* backgroundMesh;
 extern s8 fontId;
 char strBufferPLAY[5], strBufferHTP[12], strBufferCredits[8], strBufferQuit[5], strBufferTitle[14];
 //char strBufferSettings[50];
-f32 TextWidth, TextHeight;
+//f32 TextWidth, TextHeight;
 extern int mousex;
 extern int mousey;
 extern int truemousex;
@@ -32,8 +32,8 @@ void Mainmenu_Load()
 
 void Mainmenu_Initialize()
 {
-	TextWidth = 1;
-	TextHeight = 1;
+	/*TextWidth = 1;
+	TextHeight = 1;*/
 	//AEGfxSetBackgroundColor(0.0f, 70.0f, 50.0f);
 	buttons.x = 0;
 	buttons.y = 70;

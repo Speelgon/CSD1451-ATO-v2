@@ -25,6 +25,7 @@ extern f64 interval;
 extern int lasttimer;
 extern int numberofplatforms;
 extern f64 elapsedtime;
+extern int collectible_count;
 
 void Level2_Load()
 {
@@ -57,6 +58,14 @@ void Level2_Load()
 
 	pTexNode = AEGfxTextureLoad("Assets/hookpoint.png");
 	AE_ASSERT_MESG(pTexNode, "Failed to create hookpoint texture!!");
+
+	pTexHook = AEGfxTextureLoad("Assets/pickaxe_hook.png");
+	AE_ASSERT_MESG(pTexHook, "Failed to create hook texture!!");
+
+	pTexStick = AEGfxTextureLoad("Assets/pickaxe_stick.png");
+	AE_ASSERT_MESG(pTexStick, "Failed to create stick texture!!");
+
+	collectible_count = 0;
 }
 
 void Level2_Initialize()
@@ -236,7 +245,8 @@ void Level2_Update()
 
 		for (int i = 0; i < maxCollectible; i++)
 		{
-			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
+			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility, collectible_count);
+			std::cout << collectible_count << '\n';
 		}
 
 
@@ -298,19 +308,34 @@ void Level2_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
-	kwanEuItemRender();
+	kwanEuItemRender(pTexStick);
+
+	//====================================//
+	//			  TEXT PRINTING			  //
+	//====================================//
+
+	char strBufferCollectible[100];
+	memset(strBufferCollectible, 0, 100 * sizeof(char));
+	sprintf_s(strBufferCollectible, "Coins:  %d", collectible_count);
+
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
+	f32 TextWidth, TextHeight;
+	AEGfxGetPrintSize(fontId, strBufferCollectible, 1.0f, TextWidth, TextHeight);
+	AEGfxPrint(fontId, strBufferCollectible, -0.90f, 0.8f, 1, 1.f, 1.f, 1.f);
+
 }
 
 void Level2_Free()
@@ -331,5 +356,8 @@ void Level2_Unload()
 	AEGfxTextureUnload(pTexPlatform);
 	AEGfxTextureUnload(pTexCollectible);
 	AEGfxTextureUnload(pTexExitdoor);
+	AEGfxTextureUnload(pTexNode);
+	AEGfxTextureUnload(pTexHook);
+	AEGfxTextureUnload(pTexStick);
 }
 
