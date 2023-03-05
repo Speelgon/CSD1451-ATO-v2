@@ -145,6 +145,51 @@ void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject*
 		-object[3].halfW, object[3].halfH, 0x00FFFFFF, 0.0f, 0.0f);
 
 	pMesh[4] = AEGfxMeshEnd();
+	//===============================================================
+
+	AEGfxMeshStart();
+
+	AEGfxTriAdd(
+		-object[3].halfW, -object[3].halfH, 0x00FF00FF, 0.0f, 1.0f,
+		object[3].halfW, -object[3].halfH, 0x00FFFF00, 1.0f, 1.0f,
+		-object[3].halfW, object[3].halfH, 0x0000FFFF, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		object[3].halfW, -object[3].halfH, 0x00FFFFFF, 1.0f, 1.0f,
+		object[3].halfW, object[3].halfH, 0x00FFFFFF, 1.0f, 0.0f,
+		-object[3].halfW, object[3].halfH, 0x00FFFFFF, 0.0f, 0.0f);
+
+	pMesh[7] = AEGfxMeshEnd();
+	//===============================================================
+
+	AEGfxMeshStart();
+
+	AEGfxTriAdd(
+		-object[3].halfW, -object[3].halfH, 0x00FF00FF, 0.0f, 1.0f,
+		object[3].halfW, -object[3].halfH, 0x00FFFF00, 1.0f, 1.0f,
+		-object[3].halfW, object[3].halfH, 0x0000FFFF, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		object[3].halfW, -object[3].halfH, 0x00FFFFFF, 1.0f, 1.0f,
+		object[3].halfW, object[3].halfH, 0x00FFFFFF, 1.0f, 0.0f,
+		-object[3].halfW, object[3].halfH, 0x00FFFFFF, 0.0f, 0.0f);
+
+	pMesh[8] = AEGfxMeshEnd();
+	//===============================================================
+
+	AEGfxMeshStart();
+
+	AEGfxTriAdd(
+		-object[3].halfW, -object[3].halfH, 0x00FF00FF, 0.0f, 1.0f,
+		object[3].halfW, -object[3].halfH, 0x00FFFF00, 1.0f, 1.0f,
+		-object[3].halfW, object[3].halfH, 0x0000FFFF, 0.0f, 0.0f);
+
+	AEGfxTriAdd(
+		object[3].halfW, -object[3].halfH, 0x00FFFFFF, 1.0f, 1.0f,
+		object[3].halfW, object[3].halfH, 0x00FFFFFF, 1.0f, 0.0f,
+		-object[3].halfW, object[3].halfH, 0x00FFFFFF, 0.0f, 0.0f);
+
+	pMesh[9] = AEGfxMeshEnd();
 
 
 	//=============== Print collision nodes ====================//

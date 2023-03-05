@@ -295,7 +295,7 @@ void Level3_Update()
 
 		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
 		{
-			next = GS_QUIT;
+			next = GS_LEVEL4;
 		}
 	
 
