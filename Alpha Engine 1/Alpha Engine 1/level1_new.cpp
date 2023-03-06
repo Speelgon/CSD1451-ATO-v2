@@ -290,7 +290,7 @@ void Level1NEW_Update()
 		for (int i = 0; i < maxCollectible; i++)
 		{
 			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility, collectible_count);
-			std::cout << collectible_count << '\n';
+
 		}
 		
 		
