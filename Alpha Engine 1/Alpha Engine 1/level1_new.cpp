@@ -67,8 +67,8 @@ void Level1NEW_Load()
 	pTexStick = AEGfxTextureLoad("Assets/pickaxe_stick.png");
 	AE_ASSERT_MESG(pTexStick, "Failed to create stick texture!!");
 
-	/*pTexDisappearingPlat = AEGfxTextureLoad("Assets/platform.png");
-	AE_ASSERT_MESG(pTexDisappearingPlat, "Failed to create stick texture!!");*/
+	pTexDisappearingPlat = AEGfxTextureLoad("Assets/platform.png");
+	AE_ASSERT_MESG(pTexDisappearingPlat, "Failed to create stick texture!!");
 	
 	
 }
@@ -81,8 +81,6 @@ void Level1NEW_Initialize()
 	//----------------------------------------------------------------------------------------------------------------
 	//enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
 	elapsedtime=0;
-	///fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
-	//fontId = AEGfxCreateFont("Assets/Roboto-Regular.ttf", 12);
 	AEGfxSetBackgroundColor(0.81f, 0.6f, 0.46f);
 
 	//C:\Users\Yuki\OneDrive\Documents\GitHub\CSD1451 - ATO - v2\Alpha Engine 1\Assets
@@ -338,15 +336,15 @@ void Level1NEW_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
@@ -386,7 +384,7 @@ void Level1NEW_Free()
 		AEGfxMeshFree(pMesh[i]);
 	}
 	AEGfxMeshFree(itemMesh);
-	//AEGfxDestroyFont(fontId);
+	/*AEGfxDestroyFont(fontId);*/
 }
 
 void Level1NEW_Unload()
@@ -402,5 +400,5 @@ void Level1NEW_Unload()
 	AEGfxTextureUnload(pTexNode);
 	AEGfxTextureUnload(pTexHook);
 	AEGfxTextureUnload(pTexStick);
-	/*AEGfxTextureUnload(pTexDisappearingPlat);*/
+	AEGfxTextureUnload(pTexDisappearingPlat);
 }		

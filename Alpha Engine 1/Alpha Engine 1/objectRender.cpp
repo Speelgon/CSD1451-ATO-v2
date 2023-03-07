@@ -37,9 +37,9 @@ void backgroundrender( AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground)
 	AEGfxMeshDraw(pMesh[120], AE_GFX_MDM_TRIANGLES);
 }
 
-void DisappearingPlatformRender(squareObject* object,PlatformState* platformstate, AEGfxVertexList** pMesh, AEGfxTexture* pTexPlatform)
+void DisappearingPlatformRender(squareObject* object,PlatformState* platformstate, AEGfxVertexList** pMesh, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexDisappearingPlat)
 {
-	if (platformstate[0].state != DISAPPEARED)
+	if (platformstate[0].state != DISAPPEARED && platformstate[0].state == CANTDISAPPEAR)
 	{
 		// Drawing platform 1
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -57,9 +57,27 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 		AEGfxSetTransparency(1.0f);
 	}
+	else if (platformstate[0].state != DISAPPEARED && platformstate[0].state == CANDISAPPEAR)
+	{
+		// Drawing platform 1
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+		AEGfxSetTransparency(1.0f);
+
+		// Set position for platform 1
+		AEGfxSetPosition(object[0].x, object[0].y);
+
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Texture for platform
+		AEGfxTextureSet(pTexDisappearingPlat, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[1], AE_GFX_MDM_TRIANGLES);
+
+		AEGfxSetTransparency(1.0f);
+	}
 
 
-	if (platformstate[1].state != DISAPPEARED)
+	if (platformstate[1].state != DISAPPEARED && platformstate[1].state == CANTDISAPPEAR)
 	{
 		// Drawing platform 2
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -75,7 +93,25 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 		AEGfxSetTransparency(1.0f);
 	}
-	if (platformstate[2].state != DISAPPEARED)
+	else if (platformstate[1].state != DISAPPEARED && platformstate[1].state == CANDISAPPEAR)
+	{
+		// Drawing platform 2
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+		// Set position for platform 1
+		AEGfxSetPosition(object[1].x, object[1].y);
+
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Texture for platform
+		AEGfxTextureSet(pTexDisappearingPlat, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[2], AE_GFX_MDM_TRIANGLES);
+
+		AEGfxSetTransparency(1.0f);
+	
+	}
+
+	if (platformstate[2].state != DISAPPEARED && platformstate[2].state == CANTDISAPPEAR)
 	{
 		// Drawing platform 3
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -92,8 +128,25 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 		AEGfxSetTransparency(1.0f);
 	}
 
+	else if (platformstate[2].state != DISAPPEARED && platformstate[2].state == CANDISAPPEAR)
+	{
+		// Drawing platform 3
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+		// Set position for platform 1
+		AEGfxSetPosition(object[2].x, object[2].y);
 
-	if (platformstate[3].state != DISAPPEARED)
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Texture for platform
+		AEGfxTextureSet(pTexDisappearingPlat, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[3], AE_GFX_MDM_TRIANGLES);
+
+		AEGfxSetTransparency(1.0f);
+	}
+
+
+	if (platformstate[3].state != DISAPPEARED && platformstate[3].state == CANTDISAPPEAR)
 	{
 		// Drawing platform 4
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -109,11 +162,27 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 		AEGfxSetTransparency(1.0f);
 	}
+	else if (platformstate[3].state != DISAPPEARED && platformstate[3].state == CANDISAPPEAR)
+	{
+		// Drawing platform 4
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+		// Set position for platform 1
+		AEGfxSetPosition(object[3].x, object[3].y);
+
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Texture for platform
+		AEGfxTextureSet(pTexDisappearingPlat, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
+
+		AEGfxSetTransparency(1.0f);
+	}
 }
 
 
 
-void objectrender(squareObject player, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal,  AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook)
+void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook, AEGfxTexture* pTexDisappearingPlat)
 {
 	//===============================================================
 	// Player Drawing												 
@@ -136,11 +205,11 @@ void objectrender(squareObject player, squareObject* ui, AEGfxVertexList** pMesh
 
 
 	
-	////===============================================================
-	//// Platform Drawing												 
-	////===============================================================
+	//===============================================================
+	// Platform Drawing												 
+	//===============================================================
 
-	//DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform);
+	DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform, pTexDisappearingPlat);
 
 	//===============================================================
 	// Node Drawing												 
