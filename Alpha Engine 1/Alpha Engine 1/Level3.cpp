@@ -43,7 +43,7 @@ void Level3_Load()
 	pTexPortal = AEGfxTextureLoad("Assets/portal.png");
 	AE_ASSERT_MESG(pTexPortal, "Failed to create portal texture!!");
 
-	pTexPlatform = AEGfxTextureLoad("Assets/platform.png");
+	pTexPlatform = AEGfxTextureLoad("Assets/platformMetal.png");
 	AE_ASSERT_MESG(pTexPlatform, "Failed to create platform texture!!");
 
 	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
@@ -64,7 +64,6 @@ void Level3_Load()
 	pTexStick = AEGfxTextureLoad("Assets/pickaxe_stick.png");
 	AE_ASSERT_MESG(pTexStick, "Failed to create stick texture!!");
 
-	collectible_count = 0;
 }
 
 void Level3_Initialize()
@@ -94,6 +93,7 @@ void Level3_Initialize()
 
 	mapBoundary.y = -600;
 
+	collectible_count = 0;
 
 	objectinit(object);
 
@@ -315,18 +315,20 @@ void Level3_Draw()
 {
 	backgroundrender(pMesh, pTexBackground);
 
+	DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform);
+
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
@@ -366,6 +368,7 @@ void Level3_Unload()
 	AEGfxTextureUnload(pTexPlatform);
 	AEGfxTextureUnload(pTexCollectible);
 	AEGfxTextureUnload(pTexExitdoor);
+	AEGfxTextureUnload(pTexBackground);
 	AEGfxTextureUnload(pTexNode);
 	AEGfxTextureUnload(pTexHook);
 	AEGfxTextureUnload(pTexStick);

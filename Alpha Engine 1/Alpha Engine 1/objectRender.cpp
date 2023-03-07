@@ -113,7 +113,7 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook)
+void objectrender(squareObject player, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal,  AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook)
 {
 	//===============================================================
 	// Player Drawing												 
@@ -136,11 +136,11 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 
 	
-	//===============================================================
-	// Platform Drawing												 
-	//===============================================================
+	////===============================================================
+	//// Platform Drawing												 
+	////===============================================================
 
-	DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform);
+	//DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform);
 
 	//===============================================================
 	// Node Drawing												 
@@ -326,29 +326,6 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	AEGfxSetTransparency(1.0f);
 
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-
-
-	//// Drawing object 3 - (first) - No tint
-	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	//// Set position for object 3
-	//AEGfxSetPosition(portal[0].x, portal[0].y);
-	//// No tint
-	//AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//// Set texture
-	//// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-	//// Drawing the mesh (list of triangles)
-	//AEGfxMeshDraw(pMesh[11], AE_GFX_MDM_TRIANGLES);
-
-	//// Drawing object 3 - (first) - No tint
-	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	//// Set position for object 3
-	//AEGfxSetPosition(portal[1].x, portal[1].y);
-	//// No tint
-	//AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//// Set texture
-	//// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-	//// Drawing the mesh (list of triangles)
-	//AEGfxMeshDraw(pMesh[12], AE_GFX_MDM_TRIANGLES);
 
 
 	//if (AEInputCheckCurr(AEVK_T))

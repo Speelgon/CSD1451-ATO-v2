@@ -445,18 +445,20 @@ void Level1_Draw()
 
 	backgroundrender(pMesh, pTexBackground);
 
+	DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform);
+
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling

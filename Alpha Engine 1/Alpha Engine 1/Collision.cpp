@@ -131,6 +131,8 @@ namespace {
 	{
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX))
 		{
+			// Increment collectible count when collided and when visible
+			// Added check for visibility and the counter will continue to increment when collided because of the other collision checks
 			if (visibility == 1) {
 				count += 1;
 			}
