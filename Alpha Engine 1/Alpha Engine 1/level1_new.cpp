@@ -67,7 +67,7 @@ void Level1NEW_Load()
 	pTexStick = AEGfxTextureLoad("Assets/pickaxe_stick.png");
 	AE_ASSERT_MESG(pTexStick, "Failed to create stick texture!!");
 
-	pTexDisappearingPlat = AEGfxTextureLoad("Assets/platform.png");
+	pTexDisappearingPlat = AEGfxTextureLoad("Assets/disappearingplat.png");
 	AE_ASSERT_MESG(pTexDisappearingPlat, "Failed to create stick texture!!");
 	
 	
