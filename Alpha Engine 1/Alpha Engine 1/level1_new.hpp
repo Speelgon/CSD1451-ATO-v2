@@ -25,7 +25,7 @@ extern AEGfxVertexList* itemMesh;
 extern AEGfxTexture* pTexFront;
 extern AEGfxTexture* pTexRight;
 extern AEGfxTexture* pTexPortal;
-extern AEGfxTexture* pTexPlatform;
+extern AEGfxTexture* pTexPlatform1;
 extern AEGfxTexture* pTexCollectible;
 extern AEGfxTexture* pTexExitdoor;
 extern AEGfxTexture* pTexBackground;

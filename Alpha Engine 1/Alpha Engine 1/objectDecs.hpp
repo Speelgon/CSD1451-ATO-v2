@@ -36,6 +36,7 @@ AEGfxTexture* pTexRight = 0;
 AEGfxTexture* pTexLeft = 0;
 AEGfxTexture* pTexPortal = 0;
 AEGfxTexture* pTexPlatform = 0;
+AEGfxTexture* pTexPlatform1 = 0;
 AEGfxTexture* pTexCollectible = 0;
 AEGfxTexture* pTexExitdoor = 0;
 AEGfxTexture* pTexBackground = 0;
