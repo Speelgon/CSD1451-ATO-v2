@@ -450,7 +450,7 @@ void Level1_Draw()
 
 
 	// Change texture base on where player is facing
-	if (AEInputCheckCurr(AEVK_D))
+	/*if (AEInputCheckCurr(AEVK_D))
 	{
 		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
 	}
@@ -461,7 +461,7 @@ void Level1_Draw()
 	else
 	{
 		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
-	}
+	}*/
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
 	kwanEuItemRender(pTexStick);

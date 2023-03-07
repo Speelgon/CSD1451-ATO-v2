@@ -182,7 +182,7 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook, AEGfxTexture* pTexDisappearingPlat)
+void objectrender(squareObject player,  squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook)
 {
 	//===============================================================
 	// Player Drawing												 
@@ -209,7 +209,7 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	// Platform Drawing												 
 	//===============================================================
 
-	DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform, pTexDisappearingPlat);
+	/*DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform, pTexDisappearingPlat);*/
 
 	//===============================================================
 	// Node Drawing												 
