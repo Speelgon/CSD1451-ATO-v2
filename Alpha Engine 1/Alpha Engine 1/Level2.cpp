@@ -315,11 +315,11 @@ void Level2_Draw()
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling

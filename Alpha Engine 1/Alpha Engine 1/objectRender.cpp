@@ -57,7 +57,7 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 		AEGfxSetTransparency(1.0f);
 	}
-	else if (platformstate[0].state != DISAPPEARED && platformstate[0].state == CANDISAPPEAR)
+	else if (platformstate[0].state != DISAPPEARED )
 	{
 		// Drawing platform 1
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -93,7 +93,7 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 		AEGfxSetTransparency(1.0f);
 	}
-	else if (platformstate[1].state != DISAPPEARED && platformstate[1].state == CANDISAPPEAR)
+	else if (platformstate[1].state != DISAPPEARED )
 	{
 		// Drawing platform 2
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -128,7 +128,7 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 		AEGfxSetTransparency(1.0f);
 	}
 
-	else if (platformstate[2].state != DISAPPEARED && platformstate[2].state == CANDISAPPEAR)
+	else if (platformstate[2].state != DISAPPEARED)
 	{
 		// Drawing platform 3
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -162,7 +162,7 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 		AEGfxSetTransparency(1.0f);
 	}
-	else if (platformstate[3].state != DISAPPEARED && platformstate[3].state == CANDISAPPEAR)
+	else if (platformstate[3].state != DISAPPEARED)
 	{
 		// Drawing platform 4
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
