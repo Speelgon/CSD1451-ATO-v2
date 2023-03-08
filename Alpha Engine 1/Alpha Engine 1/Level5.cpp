@@ -130,6 +130,8 @@ void Level5_Initialize()
 
 	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
+	trampolinelevel5init(trampoline);
+
 	platformstate[2].state = CANTDISAPPEAR;
 	platformstate[2].timer = 0;
 	platformstate[2].elapsedtime = 0.0;

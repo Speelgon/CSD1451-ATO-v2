@@ -132,6 +132,9 @@ void trampolineinit(tramp* object);
 
 void trampolinelevel1init(tramp* object);
 
+void trampolinelevel4init(tramp* object);
+void trampolinelevel5init(tramp* object);
+
 void backgroundrender(AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground);
 
 void DisappearingPlatformRender(squareObject* object, PlatformState* platformstate, AEGfxVertexList** pMesh, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexDisappearingPlat);

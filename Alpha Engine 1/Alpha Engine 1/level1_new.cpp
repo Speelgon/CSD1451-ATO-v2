@@ -110,6 +110,8 @@ void Level1NEW_Initialize()
 	collectibleinit(collectible);
 
 	collectiblelevel1NEWinit(collectible);
+	
+	nodeInit(nodes);
 
 	uiinit(ui);
 

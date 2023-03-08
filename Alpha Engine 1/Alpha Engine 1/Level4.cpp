@@ -125,7 +125,11 @@ void Level4_Initialize()
 
 	nodeInit(nodes);
 
-	nodeInitlevel4(nodes);
+
+	trampolineinit(trampoline);
+
+	trampolinelevel4init(trampoline);
+
 
 	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
