@@ -7,6 +7,8 @@
 #include "level1_new.hpp"
 #include "Level2.hpp"
 #include "Level3.hpp"
+#include "Level4.hpp"
+#include "Level5.hpp"
 
 
 
@@ -29,6 +31,8 @@ enum GS_STATES
 	GS_LEVEL1,
 	GS_LEVEL2,
 	GS_LEVEL3,
+	GS_LEVEL4,
+	GS_LEVEL5,
 
 	GS_QUIT,
 	GS_RESTART

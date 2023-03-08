@@ -33,7 +33,6 @@ void Level1NEW_Load()
 {
 	std::cout << "GSM:Load\n";
 
-	// Texture 1: From file
 	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
 	AE_ASSERT_MESG(pTexFront, "Failed to create cat front texture!!");
 
@@ -69,21 +68,12 @@ void Level1NEW_Load()
 
 	pTexDisappearingPlat = AEGfxTextureLoad("Assets/disappearingplat.png");
 	AE_ASSERT_MESG(pTexDisappearingPlat, "Failed to create stick texture!!");
-	
-	
 }
 
 void Level1NEW_Initialize()
 {
 	
-
-	//make selected blocks disappear after a certain amount of time
-	//----------------------------------------------------------------------------------------------------------------
-	//enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
-	elapsedtime=0;
-	AEGfxSetBackgroundColor(0.81f, 0.6f, 0.46f);
-
-	//C:\Users\Yuki\OneDrive\Documents\GitHub\CSD1451 - ATO - v2\Alpha Engine 1\Assets
+	elapsedtime = 0;
 	
 	platformstate[1].state = CANDISAPPEAR;
 	platformstate[1].timer = 3;
@@ -112,6 +102,8 @@ void Level1NEW_Initialize()
 
 	objectinit(object);
 
+	objectlevel1NEWinit(object);
+
 	hookinit(playerHook);
 
 	collectibleinit(collectible);
@@ -121,8 +113,6 @@ void Level1NEW_Initialize()
 	uiinit(ui);
 
 	uilevel1init(ui);
-
-	objectlevel1NEWinit(object);
 
 	exitdoorinit(exitdoor);
 
@@ -339,6 +329,7 @@ void Level1NEW_Draw()
 	// Draw background
 	backgroundrender( pMesh, pTexBackground);
 
+	// Draw platforms
 	DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform1, pTexDisappearingPlat);
 
 	// Change texture base on where player is facing
@@ -357,8 +348,6 @@ void Level1NEW_Draw()
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
 	kwanEuItemRender(pTexStick);
-
-
 	
 	// Print number of collectible collected
 	char strBufferCollectible[100];
@@ -372,15 +361,15 @@ void Level1NEW_Draw()
 	AEGfxPrint(fontId, strBufferCollectible, -0.90f, 0.8f, 1, 1.f, 1.f, 1.f);
 
 	// Timer for disappearing platform
-	//char strBuffertest[100];
-	//memset(strBuffertest, 0, 100 * sizeof(char));
-	//sprintf_s(strBuffertest, "%d", platformstate[1].timer);
+	/*char strBuffertest[100];
+	memset(strBuffertest, 0, 100 * sizeof(char));
+	sprintf_s(strBuffertest, "%d", platformstate[1].timer);
 
-	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
-	//
-	//AEGfxGetPrintSize(fontId, strBuffertest, 1.0f, TextWidth, TextHeight);
-	//AEGfxPrint(fontId, strBuffertest, 0.0f, 0.8f, 1, 1.f, 1.f, 1.f);
+	
+	AEGfxGetPrintSize(fontId, strBuffertest, 1.0f, TextWidth, TextHeight);
+	AEGfxPrint(fontId, strBuffertest, 0.0f, 0.8f, 1, 1.f, 1.f, 1.f);*/
 
 
 }

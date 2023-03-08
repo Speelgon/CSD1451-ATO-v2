@@ -88,7 +88,7 @@ void Mainmenu_Initialize()
 	AE_ASSERT_MESG(backgroundMesh, "Failed to create backgroundMesh!!");
 
 	
-	pTexMenuBackground = AEGfxTextureLoad("Assets/menu.png");
+	pTexMenuBackground = AEGfxTextureLoad("Assets/MenuBackground.png");
 	AE_ASSERT_MESG(pTexMenuBackground, "Failed to create menu background texture!!");
 
 	pTexPlay = AEGfxTextureLoad("Assets/button_play.png");
