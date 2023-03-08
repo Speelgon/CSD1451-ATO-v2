@@ -29,6 +29,9 @@ extern AEGfxTexture* pTexCollectible;
 extern AEGfxTexture* pTexExitdoor;
 extern AEGfxTexture* pTexBackground;
 extern AEGfxTexture* pTexNode;
+extern AEGfxTexture* pTexHook;
+extern AEGfxTexture* pTexStick;
+extern AEGfxTexture* pTexDisappearingPlat;
 
 extern float playerSpeed;
 extern int jumptoken;
