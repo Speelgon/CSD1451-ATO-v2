@@ -89,22 +89,22 @@ void objectlevel2init(squareObject* object) {
 	object[0].halfW = object[0].width / 2;
 	object[0].halfH = object[0].height / 2;
 
-	object[1].x = -950;
-	object[1].y = 100;
+	/*object[1].x = -1300;
+	object[1].y = -275;
 	object[1].width = 200;
 	object[1].height = 30;
 	object[1].halfW = object[1].width / 2;
-	object[1].halfH = object[1].height / 2;
+	object[1].halfH = object[1].height / 2;*/
 
-	object[2].x = -950;
+	/*object[2].x = -850;
 	object[2].y = 100;
 	object[2].width = 200;
 	object[2].height = 30;
 	object[2].halfW = object[2].width / 2;
-	object[2].halfH = object[2].height / 2;
+	object[2].halfH = object[2].height / 2;*/
 
-	object[3].x = -1000;
-	object[3].y = 400;
+	object[3].x = -600;
+	object[3].y = 300;
 	object[3].width = 100;
 	object[3].height = 30;
 	object[3].halfW = object[3].width / 2;
@@ -288,7 +288,7 @@ void collectiblelevel2init(collectibleObject* object) {
 	object[0].halfH = object[0].height / 2;
 	object[0].visibility = 1;
 
-	object[1].x = -850;
+	object[1].x = -800;
 	object[1].y = 300;
 	object[1].width = 30;
 	object[1].height = 30;
@@ -296,8 +296,8 @@ void collectiblelevel2init(collectibleObject* object) {
 	object[1].halfH = object[1].height / 2;
 	object[1].visibility = 1;
 
-	object[2].x = -1170;
-	object[2].y = 250;
+	object[2].x = -950;
+	object[2].y = 100;
 	object[2].width = 30;
 	object[2].height = 30;
 	object[2].halfW = object[2].width / 2;
@@ -548,16 +548,16 @@ void nodeInit(nodeObject* nodes) {
 void nodeInitlevel2(nodeObject* nodes) {
 	
 
-	////node 2
-	nodes[0].x = { -1120 };
+	//node 2
+	nodes[0].x = { -1050 };
 	nodes[0].y = { -15 };
 	nodes[0].width = 25;
 	nodes[0].height = 25;
 	nodes[0].halfW = nodes[0].width / 2;
 	nodes[0].halfH = nodes[0].height / 2;
 
-	nodes[1].x = { - 1100 };
-	nodes[1].y = { 250 };
+	nodes[1].x = { -850 };
+	nodes[1].y = { 240 };
 	nodes[1].width = 25;
 	nodes[1].height = 25;
 	nodes[1].halfW = nodes[0].width / 2;
@@ -658,8 +658,8 @@ void exitdoorlevel1NEWinit(exitDoor* door) {
 
 void exitdoorlevel2init(exitDoor* door) {
 
-	door[0].x = -1000;
-	door[0].y = 465;
+	door[0].x = -600;
+	door[0].y = 360;
 	door[0].width = 40;
 	door[0].height = 80;
 	door[0].halfW = door[0].width / 2;
