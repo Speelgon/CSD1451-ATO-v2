@@ -171,6 +171,9 @@ void Level1_Load()
 	pTexNode = AEGfxTextureLoad("Assets/hookpoint.png");
 	AE_ASSERT_MESG(pTexNode, "Failed to create hookpoint texture!!");
 
+	pTexDisappearingPlat = AEGfxTextureLoad("Assets/platform.png");
+	AE_ASSERT_MESG(pTexDisappearingPlat, "Failed to create stick texture!!");
+
 	collectible_count = 0;
 
 }
@@ -445,19 +448,20 @@ void Level1_Draw()
 
 	backgroundrender(pMesh, pTexBackground);
 
+
 	// Change texture base on where player is facing
-	if (AEInputCheckCurr(AEVK_D))
+	/*if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
-	}
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook, pTexDisappearingPlat);
+	}*/
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
 	kwanEuItemRender(pTexStick);

@@ -6,6 +6,7 @@
 //==========================================================================================================================
 extern f64 delta;
 extern f64 assumedFrameRate;
+extern s8 fontId;
 
 extern square player;
 extern square object[maxObj];
@@ -31,6 +32,7 @@ extern AEGfxTexture* pTexBackground;
 extern AEGfxTexture* pTexNode;
 extern AEGfxTexture* pTexHook;
 extern AEGfxTexture* pTexStick;
+extern AEGfxTexture* pTexDisappearingPlat;
 
 
 extern float playerSpeed;
