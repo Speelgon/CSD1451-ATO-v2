@@ -47,7 +47,7 @@
 
 bool passedoverobj()
 {
-	float show = 1;
+	s32 show = 1;
 	//show the mouse cursor on screen
 	AEInputShowCursor(show);
 	//condition for if player has passed over an object

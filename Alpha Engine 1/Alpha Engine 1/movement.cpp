@@ -40,8 +40,8 @@ void playerActualMovement(float& pX, float& pY, float& pxvel, float& pyvel)
 	==================================================================================================================================
 	*/
 
-	pX += pxvel * assumedFrameRate * delta;
-	pY += pyvel * assumedFrameRate * delta;
+	pX += (float)(pxvel * assumedFrameRate * delta);
+	pY += (float)(pyvel * assumedFrameRate * delta);
 
 }
 
@@ -50,11 +50,11 @@ void playerEasingMovement(float& pxvel, float& pyvel, float stabilizer)
 {
 	if (pxvel > 0)
 	{
-		pxvel -= stabilizer * delta * assumedFrameRate;
+		pxvel -= (float)(stabilizer * delta * assumedFrameRate);
 	}
 	if (pxvel < 0)
 	{
-		pxvel += stabilizer * delta * assumedFrameRate;
+		pxvel += (float)(stabilizer * delta * assumedFrameRate);
 	}
 	//if (pyvel > 0)
 	//{
@@ -76,7 +76,7 @@ void playerEasingMovement(float& pxvel, float& pyvel, float stabilizer)
 
 void playerGravity(float& pY, float grav)
 {
-	pY -= grav * assumedFrameRate * delta;
+	pY -= (float)(grav * assumedFrameRate * delta);
 }
 
 void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle item, node* collidingNode) {
@@ -86,8 +86,8 @@ void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle item, n
 	pXvel = 0;
 	pYvel = 0;
 	playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
-	player.x -= player.xvel * sin(item.rotation) * assumedFrameRate * delta;
-	player.y += player.xvel * cos(item.rotation) * assumedFrameRate * delta;
+	player.x -= (f32)(player.xvel * sin(item.rotation) * assumedFrameRate * delta);
+	player.y += (f32)(player.xvel * cos(item.rotation) * assumedFrameRate * delta);
 	pXvel = 0;
 	pYvel = 0;
 	//float xdist = player.x - collidingNode->x;

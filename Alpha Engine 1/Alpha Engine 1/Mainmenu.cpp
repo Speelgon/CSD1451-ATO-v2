@@ -104,8 +104,8 @@ void Mainmenu_Initialize()
 void Mainmenu_Update()
 {
 	AEInputGetCursorPosition(&mousex, &mousey);
-	truemousex = mousex - screenwidth / 2 + player.x;
-	truemousey = -mousey + screenheight / 2 + player.y;
+	truemousex = (int)(mousex - screenwidth / 2 + player.x);
+	truemousey = (int) ( - mousey + screenheight / 2 + player.y);
 
 	if (IsAreaClicked(buttons.x, buttons.y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{

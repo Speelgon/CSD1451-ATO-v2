@@ -92,14 +92,14 @@ namespace {
 	// Left side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX) && lefttoken == 1)
 		{
-			pX -= abs(playerSpeedX) * assumedFrameRate * delta;
+			pX -= (float)(abs(playerSpeedX) * assumedFrameRate * delta);
 			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
 			//playerSpeedX = 0;
 		}
 	// Right side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && righttoken == 1)
 		{
-			pX += abs(playerSpeedX)* assumedFrameRate * delta;
+			pX += (float)(abs(playerSpeedX)* assumedFrameRate * delta);
 			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
 			//playerSpeedX = 0;
 		}
@@ -185,8 +185,8 @@ Portal Collision
 
 	void playerCollisionPortal(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, int& positiontoken)
 	{
-		if (AEInputCheckTriggered(AEVK_E))
-		{
+		
+		
 			if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX))
 			{
 				positiontoken = 0;
@@ -210,7 +210,7 @@ Portal Collision
 				positiontoken = 0;
 				portalled = true;
 			}
-		}
+		
 	}
 
 	void playerCollisionMapBoundary(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float playerSpeedX, float playerSpeedY)
@@ -274,14 +274,14 @@ Player out of bounds
 		// Left side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX) && lefttoken == 1)
 		{
-			pX -= abs(playerSpeedX) * assumedFrameRate * delta;
+			pX -= (float)(abs(playerSpeedX) * assumedFrameRate * delta);
 			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
 			//playerSpeedX = 0;
 		}
 		// Right side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && righttoken == 1)
 		{
-			pX += abs(playerSpeedX) * assumedFrameRate * delta;
+			pX += (float)(abs(playerSpeedX) * assumedFrameRate * delta);
 			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
 			//playerSpeedX = 0;
 		}

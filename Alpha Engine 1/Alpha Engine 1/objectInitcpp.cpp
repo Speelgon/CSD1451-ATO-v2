@@ -567,13 +567,13 @@ void nodeInitlevel2(nodeObject* nodes) {
 void nodeInitlevel3(nodeObject* nodes) {
 
 
-	////node 2
-	//nodes[0].x = { -1120 };
-	//nodes[0].y = { -15 };
-	//nodes[0].width = 25;
-	//nodes[0].height = 25;
-	//nodes[0].halfW = nodes[0].width / 2;
-	//nodes[0].halfH = nodes[0].height / 2;
+	//node 2
+	nodes[0].x = { -1120 };
+	nodes[0].y = { -15 };
+	nodes[0].width = 25;
+	nodes[0].height = 25;
+	nodes[0].halfW = nodes[0].width / 2;
+	nodes[0].halfH = nodes[0].height / 2;
 
 	nodes[1].x = { -1100 };
 	nodes[1].y = { 250 };

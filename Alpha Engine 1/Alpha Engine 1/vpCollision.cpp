@@ -99,7 +99,7 @@ namespace {
 
 void viewportCollision(float& vX, float& vY, float worldX, float worldY, float& vW, float& vH, float worldhalfw, float worldhalfh, float playerSpeedX, float playerSpeedY)
 {
-	float camX, camY;
+	//float camX, camY;
 	//cam position follows player.x, player.y
 	AEGfxSetCamPosition(vX, vY);
 	if (VplayerTopGreaterThanObjectBottom(vY, worldY, vH, worldhalfh) && VplayerBottomLessThanObjectTop(vY, worldY, vH, worldhalfh) && VplayerRightGreaterThanObjectLeft(vX, worldX, vW, worldhalfw) && VplayerRightLessThanObjectRight(vX, worldX, vW, worldhalfw) && leftToken == 1)
