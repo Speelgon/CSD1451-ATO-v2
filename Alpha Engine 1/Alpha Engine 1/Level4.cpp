@@ -97,6 +97,8 @@ void Level4_Initialize()
 
 	collectible_count = 0;
 
+	initAudioList();
+
 	objectinit(object);
 
     objectlevel4init(object);
@@ -243,6 +245,7 @@ void Level4_Update()
 				if (platformstate[j].timer == 0)
 				{
 					platformstate[j].state = DISAPPEARED;
+					platformDisappear = true;
 				}
 				// std::cout << "platform: " << j << "Timer: " << platformstate[j].timer << '\n';
 
@@ -314,7 +317,7 @@ void Level4_Update()
 			next = GS_LEVEL5;
 		}
 	
-
+		updateSound();
 	}
 }
 
@@ -362,6 +365,8 @@ void Level4_Free()
 		AEGfxMeshFree(pMesh[i]);
 	}
 	AEGfxMeshFree(itemMesh);
+	freeSound();
+
 }
 
 void Level4_Unload()
