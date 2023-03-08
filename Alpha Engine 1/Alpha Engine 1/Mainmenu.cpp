@@ -28,17 +28,28 @@ f32 quitbuttony;
 void Mainmenu_Load()
 {
 	std::cout << "GSM:Load\n";
+
+	pTexMenuBackground = AEGfxTextureLoad("Assets/MenuBackground.png");
+	AE_ASSERT_MESG(pTexMenuBackground, "Failed to create menu background texture!!");
+
+	pTexPlay = AEGfxTextureLoad("Assets/button_play.png");
+	AE_ASSERT_MESG(pTexPlay, "Failed to create play button texture!!");
+
+	pTexTutorial = AEGfxTextureLoad("Assets/button_tutorial.png");
+	AE_ASSERT_MESG(pTexTutorial, "Failed to create tutorial button texture!!");
+
+	pTexCredits = AEGfxTextureLoad("Assets/button_credits.png");
+	AE_ASSERT_MESG(pTexCredits, "Failed to create credits button texture!!");
+
+	pTexQuit = AEGfxTextureLoad("Assets/button_quit.png");
+	AE_ASSERT_MESG(pTexQuit, "Failed to create quit button texture!!");
 }
 
 void Mainmenu_Initialize()
 {
-	/*TextWidth = 1;
-	TextHeight = 1;*/
-	//AEGfxSetBackgroundColor(0.0f, 70.0f, 50.0f);
+
 	buttons.x = 0;
 	buttons.y = 70;
-	/*buttons.xvel = 0;
-	buttons.yvel = 0;*/
 	settingsbuttony = buttons.y - 80;
 	creditsbuttony = buttons.y - 160;
 	quitbuttony = buttons.y - 240;
@@ -83,25 +94,10 @@ void Mainmenu_Initialize()
 		-background.halfW, background.halfH, 0xFFFFFFFF, 0.0f, 0.0f);
 
 	// Saving the mesh (list of triangles) in pMesh1
-
 	backgroundMesh = AEGfxMeshEnd();
 	AE_ASSERT_MESG(backgroundMesh, "Failed to create backgroundMesh!!");
 
-	
-	pTexMenuBackground = AEGfxTextureLoad("Assets/MenuBackground.png");
-	AE_ASSERT_MESG(pTexMenuBackground, "Failed to create menu background texture!!");
 
-	pTexPlay = AEGfxTextureLoad("Assets/button_play.png");
-	AE_ASSERT_MESG(pTexPlay, "Failed to create play button texture!!");
-
-	pTexTutorial = AEGfxTextureLoad("Assets/button_tutorial.png");
-	AE_ASSERT_MESG(pTexTutorial, "Failed to create tutorial button texture!!");
-
-	pTexCredits = AEGfxTextureLoad("Assets/button_credits.png");
-	AE_ASSERT_MESG(pTexCredits, "Failed to create credits button texture!!");
-
-	pTexQuit = AEGfxTextureLoad("Assets/button_quit.png");
-	AE_ASSERT_MESG(pTexQuit, "Failed to create quit button texture!!");
 	
 }
 
