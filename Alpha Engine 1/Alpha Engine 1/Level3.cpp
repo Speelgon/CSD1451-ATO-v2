@@ -98,6 +98,8 @@ void Level3_Initialize()
 
 	collectible_count = 0;
 
+	initAudioList();
+
 	objectinit(object);
 
     objectlevel3init(object);
@@ -246,6 +248,7 @@ void Level3_Update()
 				if (platformstate[j].timer == 0)
 				{
 					platformstate[j].state = DISAPPEARED;
+					platformDisappear = true;
 				}
 				// std::cout << "platform: " << j << "Timer: " << platformstate[j].timer << '\n';
 
@@ -317,7 +320,7 @@ void Level3_Update()
 			next = GS_LEVEL4;
 		}
 	
-
+		updateSound();
 	}
 }
 
@@ -364,8 +367,9 @@ void Level3_Free()
 	{
 		AEGfxMeshFree(pMesh[i]);
 	}
-	AEGfxMeshFree(itemMesh);
-	/*AEGfxDestroyFont(fontId);*/
+	AEGfxMeshFree(itemMesh);	
+	freeSound();
+
 }
 
 void Level3_Unload()
