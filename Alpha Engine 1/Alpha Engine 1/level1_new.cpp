@@ -98,6 +98,7 @@ void Level1NEW_Initialize()
 	mapBoundary.y = -600;
 
 	collectible_count = 0;
+	initAudioList();
 
 
 	objectinit(object);
@@ -258,6 +259,7 @@ void Level1NEW_Update()
 				if (platformstate[j].timer == 0)
 				{
 					platformstate[j].state = DISAPPEARED;
+					platformDisappear = true;
 				}
 				// std::cout << "platform: " << j << "Timer: " << platformstate[j].timer << '\n';
 
@@ -283,10 +285,6 @@ void Level1NEW_Update()
 		}
 		
 		
-
-
-
-
 
 		//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
@@ -316,6 +314,7 @@ void Level1NEW_Update()
 			next = GS_LEVEL2;
 		}
 
+		updateSound();
 
 	}
     
@@ -381,6 +380,7 @@ void Level1NEW_Free()
 		AEGfxMeshFree(pMesh[i]);
 	}
 	AEGfxMeshFree(itemMesh);
+	freeSound();
 	/*AEGfxDestroyFont(fontId);*/
 }
 

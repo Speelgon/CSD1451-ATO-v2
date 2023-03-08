@@ -477,6 +477,7 @@ void Level1_Free()
 	}
 	AEGfxMeshFree(itemMesh);
 	//AEGfxDestroyFont(fontId);
+	freeSound();
 }
 
 void Level1_Unload()

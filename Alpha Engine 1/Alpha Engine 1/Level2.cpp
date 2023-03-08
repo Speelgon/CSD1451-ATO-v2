@@ -90,6 +90,7 @@ void Level2_Initialize()
 	mapBoundary.y = -600;
 
 	collectible_count = 0;
+	initAudioList();
 
 	objectinit(object);
 
@@ -234,6 +235,7 @@ void Level2_Update()
 				if (platformstate[j].timer == 0)
 				{
 					platformstate[j].state = DISAPPEARED;
+					platformDisappear = true;
 				}
 				// std::cout << "platform: " << j << "Timer: " << platformstate[j].timer << '\n';
 
@@ -306,7 +308,7 @@ void Level2_Update()
 			next = GS_LEVEL3;
 		}
 	
-
+		updateSound();
 	}
 }
 
@@ -354,7 +356,7 @@ void Level2_Free()
 		AEGfxMeshFree(pMesh[i]);
 	}
 	AEGfxMeshFree(itemMesh);
-	/*AEGfxDestroyFont(fontId);*/
+	freeSound();
 }
 
 void Level2_Unload()
