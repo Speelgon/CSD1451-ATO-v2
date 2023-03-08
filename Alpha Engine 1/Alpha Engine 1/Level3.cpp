@@ -16,7 +16,7 @@
 //f32 TextWidth, TextHeight;
 //==========================================================================================================================
 //==========================================================================================================================
-extern PlatformState platformstate[4];
+extern PlatformState platformstate[maxObj];
 
 //variables for normal timer
 extern f64 normalElapsedTime;
@@ -167,6 +167,10 @@ void Level3_Update()
 				if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
 					anglePlayerToNode(nodes[collidedNode]);
 					movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
+				}
+				else {
+					anglePlayerToMouse();
+					hookCollisionFlag = 0;
 				}
 			}
 			else {
