@@ -49,8 +49,8 @@ void Mainmenu_Initialize()
 
 	background.x = 0;
 	background.y = 0;
-	background.width = 800;
-	background.height = 600;
+	background.width = screenwidth;
+	background.height = screenheight;
 	background.halfW = background.width / 2;
 	background.halfH = background.height / 2;
 
