@@ -9,7 +9,7 @@ extern squareObject player;
 
 void playerInputMovement(float& pX, float& pY, float playerSpeed,int& jumptoken) {
 
-	if (AEInputCheckCurr(AEVK_SPACE) && jumptoken == 1)
+	if (AEInputCheckCurr(AEVK_W) && jumptoken == 1)
 	{
 		pY = 8;
 		jumptoken = 0;
@@ -86,8 +86,8 @@ void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle item, n
 	pXvel = 0;
 	pYvel = 0;
 	playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
-	player.x += player.xvel * sin(item.rotation) * assumedFrameRate * delta;
-	player.y -= player.xvel * cos(item.rotation) * assumedFrameRate * delta;
+	player.x -= player.xvel * sin(item.rotation) * assumedFrameRate * delta;
+	player.y += player.xvel * cos(item.rotation) * assumedFrameRate * delta;
 	pXvel = 0;
 	pYvel = 0;
 	//float xdist = player.x - collidingNode->x;

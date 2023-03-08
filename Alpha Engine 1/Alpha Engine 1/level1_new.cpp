@@ -185,9 +185,12 @@ void Level1NEW_Update()
 
 		if (AEInputCheckCurr(AEVK_LBUTTON))
 		{
-			if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
-				anglePlayerToNode(nodes[collidedNode]);
-				movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
+			if (!AEInputCheckCurr(AEVK_W))
+			{
+				if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
+					anglePlayerToNode(nodes[collidedNode]);
+					movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
+				}
 			}
 			else {
 				anglePlayerToMouse();
