@@ -355,15 +355,15 @@ void Level1NEW_Draw()
 	AEGfxPrint(fontId, strBufferCollectible, -0.90f, 0.8f, 1, 1.f, 1.f, 1.f);
 
 	// Timer for disappearing platform
-	//char strBuffertest[100];
-	//memset(strBuffertest, 0, 100 * sizeof(char));
-	//sprintf_s(strBuffertest, "%d", platformstate[1].timer);
+	/*char strBuffertest[100];
+	memset(strBuffertest, 0, 100 * sizeof(char));
+	sprintf_s(strBuffertest, "%d", platformstate[1].timer);
 
-	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
-	//
-	//AEGfxGetPrintSize(fontId, strBuffertest, 1.0f, TextWidth, TextHeight);
-	//AEGfxPrint(fontId, strBuffertest, 0.0f, 0.8f, 1, 1.f, 1.f, 1.f);
+	
+	AEGfxGetPrintSize(fontId, strBuffertest, 1.0f, TextWidth, TextHeight);
+	AEGfxPrint(fontId, strBuffertest, 0.0f, 0.8f, 1, 1.f, 1.f, 1.f);*/
 
 
 }
