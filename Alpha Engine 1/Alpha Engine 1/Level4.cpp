@@ -1,6 +1,6 @@
 #pragma once
 #include "allheaders.hpp"
-#include "Level3.hpp"
+#include "Level4.hpp"
 #include "movement.hpp"
 #include "objects.hpp"
 #include "collision.hpp"
@@ -25,10 +25,9 @@ extern f64 interval;
 extern int lasttimer;
 extern int numberofplatforms;
 extern f64 elapsedtime;
-extern int collectible_count;
 
 
-void Level3_Load()
+void Level4_Load()
 {
 	// Texture 1: From file
 	pTexFront = AEGfxTextureLoad("Assets/FCat_Front.png");
@@ -43,8 +42,8 @@ void Level3_Load()
 	pTexPortal = AEGfxTextureLoad("Assets/portal.png");
 	AE_ASSERT_MESG(pTexPortal, "Failed to create portal texture!!");
 
-	pTexPlatform1 = AEGfxTextureLoad("Assets/platformMetal.png");
-	AE_ASSERT_MESG(pTexPlatform1, "Failed to create platform texture!!");
+	pTexPlatform = AEGfxTextureLoad("Assets/platform.png");
+	AE_ASSERT_MESG(pTexPlatform, "Failed to create platform texture!!");
 
 	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
 	AE_ASSERT_MESG(pTexCollectible, "Failed to create collectible texture!!");
@@ -57,25 +56,15 @@ void Level3_Load()
 
 	pTexNode = AEGfxTextureLoad("Assets/hookpoint.png");
 	AE_ASSERT_MESG(pTexNode, "Failed to create hookpoint texture!!");
-
-	pTexHook = AEGfxTextureLoad("Assets/pickaxe_hook.png");
-	AE_ASSERT_MESG(pTexHook, "Failed to create hook texture!!");
-
-	pTexStick = AEGfxTextureLoad("Assets/pickaxe_stick.png");
-	AE_ASSERT_MESG(pTexStick, "Failed to create stick texture!!");
-
-	pTexDisappearingPlat = AEGfxTextureLoad("Assets/disappearingplat.png");
-	AE_ASSERT_MESG(pTexDisappearingPlat, "Failed to create stick texture!!");
-
 }
 
-void Level3_Initialize()
+void Level4_Initialize()
 {
 	
-	platformstate[1].state = CANDISAPPEAR;
-	platformstate[1].timer = 3;
-	platformstate[1].elapsedtime = 0.0f;
-	platformstate[1].interval = 1.0f;
+		platformstate[1].state = CANDISAPPEAR;
+		platformstate[1].timer = 3;
+		platformstate[1].elapsedtime = 0.0f;
+		platformstate[1].interval = 1.0f;
 
 	
 
@@ -96,21 +85,18 @@ void Level3_Initialize()
 
 	mapBoundary.y = -600;
 
-	collectible_count = 0;
 
 	objectinit(object);
 
-    objectlevel3init(object);
+    objectlevel4init(object);
 
 	hookinit(playerHook);
 
 	collectibleinit(collectible);
 
-	collectiblelevel3init(collectible);
+	collectiblelevel4init(collectible);
 
 	portalinit(portal);
-
-    portallevel3init(portal);
 
 	uiinit(ui);
 
@@ -118,7 +104,7 @@ void Level3_Initialize()
 
 	exitdoorinit(exitdoor);
 
-	exitdoorlevel3init(exitdoor);
+	exitdoorlevel4init(exitdoor);
 
 	textureinit(pTex);
 
@@ -126,7 +112,7 @@ void Level3_Initialize()
 
 	nodeInit(nodes);
 
-	nodeInitlevel3(nodes);
+	nodeInitlevel4(nodes);
 
 	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
@@ -144,7 +130,7 @@ void Level3_Initialize()
 
 }
 
-void Level3_Update()
+void Level4_Update()
 {
     delta = AEFrameRateControllerGetFrameTime();
 
@@ -259,7 +245,7 @@ void Level3_Update()
 
 		for (int i = 0; i < maxCollectible; i++)
 		{
-			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility, collectible_count);
+			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility);
 		}
 
 
@@ -307,72 +293,51 @@ void Level3_Update()
 
 		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
 		{
-			next = GS_LEVEL4;
+			next = GS_LEVEL5;
 		}
 	
 
 	}
 }
 
-void Level3_Draw()
+void Level4_Draw()
 {
-	// Draw background
-	backgroundrender(pMesh, pTexBackground);
-
-	DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform1, pTexDisappearingPlat);
+	backgroundrender(player, pMesh, pTexBackground);
 
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, object, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, object, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
 	}
 	else
 	{
-		objectrender(player, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
-	kwanEuItemRender(pTexStick);
-
-	// Print number of collectible collected
-	char strBufferCollectible[100];
-	memset(strBufferCollectible, 0, 100 * sizeof(char));
-	sprintf_s(strBufferCollectible, "Coins:  %d", collectible_count);
-
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-
-	f32 TextWidth, TextHeight;
-	AEGfxGetPrintSize(fontId, strBufferCollectible, 1.0f, TextWidth, TextHeight);
-	AEGfxPrint(fontId, strBufferCollectible, -0.90f, 0.8f, 1, 1.f, 1.f, 1.f);
-
+	kwanEuItemRender();
 }
 
-void Level3_Free()
+void Level4_Free()
 {
     for (int i = 0; i < meshMax; i++)
 	{
 		AEGfxMeshFree(pMesh[i]);
 	}
 	AEGfxMeshFree(itemMesh);
-	/*AEGfxDestroyFont(fontId);*/
 }
 
-void Level3_Unload()
+void Level4_Unload()
 {
 	AEGfxTextureUnload(pTexFront);
 	AEGfxTextureUnload(pTexRight);
 	AEGfxTextureUnload(pTexLeft);
 	AEGfxTextureUnload(pTexPortal);
-	AEGfxTextureUnload(pTexPlatform1);
+	AEGfxTextureUnload(pTexPlatform);
 	AEGfxTextureUnload(pTexCollectible);
 	AEGfxTextureUnload(pTexExitdoor);
-	AEGfxTextureUnload(pTexBackground);
-	AEGfxTextureUnload(pTexNode);
-	AEGfxTextureUnload(pTexHook);
-	AEGfxTextureUnload(pTexStick);
-	AEGfxTextureUnload(pTexDisappearingPlat);
 }

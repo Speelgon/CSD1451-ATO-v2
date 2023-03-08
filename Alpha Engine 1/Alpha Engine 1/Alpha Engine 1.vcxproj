@@ -108,6 +108,8 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClCompile Include="level1_new.cpp" />
     <ClCompile Include="Level2.cpp" />
     <ClCompile Include="Level3.cpp" />
+    <ClCompile Include="Level4.cpp" />
+    <ClCompile Include="Level5.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mainmenu.cpp" />
     <ClCompile Include="meshInit.cpp" />
@@ -132,6 +134,8 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClInclude Include="level1_new.hpp" />
     <ClInclude Include="Level2.hpp" />
     <ClInclude Include="Level3.hpp" />
+    <ClInclude Include="Level4.hpp" />
+    <ClInclude Include="Level5.hpp" />
     <ClInclude Include="Mainmenu.hpp" />
     <ClInclude Include="mainmenuinit.hpp" />
     <ClInclude Include="moreyukivariables.hpp" />
