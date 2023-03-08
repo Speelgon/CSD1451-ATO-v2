@@ -65,7 +65,9 @@ void Level2_Load()
 	pTexStick = AEGfxTextureLoad("Assets/pickaxe_stick.png");
 	AE_ASSERT_MESG(pTexStick, "Failed to create stick texture!!");
 
-	collectible_count = 0;
+	pTexDisappearingPlat = AEGfxTextureLoad("Assets/disappearingplat.png");
+	AE_ASSERT_MESG(pTexDisappearingPlat, "Failed to create stick texture!!");
+
 }
 
 void Level2_Initialize()
@@ -88,6 +90,7 @@ void Level2_Initialize()
 
 	mapBoundary.y = -600;
 
+	collectible_count = 0;
 
 	objectinit(object);
 
@@ -303,29 +306,29 @@ void Level2_Update()
 
 void Level2_Draw()
 {
+	// Draw background
 	backgroundrender(pMesh, pTexBackground);
+
+	DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform1, pTexDisappearingPlat);
 
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
 	}
 	else
 	{
-		objectrender(player, object, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexPlatform1, pTexCollectible, blackhole, nodes, pTexNode, platformstate, exitdoor, pTexExitdoor, pTexHook);
+		objectrender(player, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
 	kwanEuItemRender(pTexStick);
 
-	//====================================//
-	//			  TEXT PRINTING			  //
-	//====================================//
-
+	// Print number of collectible collected
 	char strBufferCollectible[100];
 	memset(strBufferCollectible, 0, 100 * sizeof(char));
 	sprintf_s(strBufferCollectible, "Coins:  %d", collectible_count);
@@ -345,6 +348,7 @@ void Level2_Free()
 		AEGfxMeshFree(pMesh[i]);
 	}
 	AEGfxMeshFree(itemMesh);
+	/*AEGfxDestroyFont(fontId);*/
 }
 
 void Level2_Unload()
@@ -356,8 +360,10 @@ void Level2_Unload()
 	AEGfxTextureUnload(pTexPlatform1);
 	AEGfxTextureUnload(pTexCollectible);
 	AEGfxTextureUnload(pTexExitdoor);
+	AEGfxTextureUnload(pTexBackground);
 	AEGfxTextureUnload(pTexNode);
 	AEGfxTextureUnload(pTexHook);
 	AEGfxTextureUnload(pTexStick);
+	AEGfxTextureUnload(pTexDisappearingPlat);
 }
 
