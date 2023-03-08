@@ -233,7 +233,7 @@ Portal Collision
 			distance2 = playerHook->y - nodes[i].y;
 			if (distance1 < 0) distance1 = -distance1;
 			if (distance2 < 0) distance2 = -distance2;
-			if (distance1 <= nodes[i].halfW && distance2 <= nodes[i].halfH) {
+			if (distance1 <= (nodes[i].halfW*2.0) && distance2 <= (nodes[i].halfH*2.0)) {
 				collisionFlag = 1;
 				collidedNode = i;
 				pointHookStuckX = nodes[i].x;

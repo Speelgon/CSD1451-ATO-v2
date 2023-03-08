@@ -205,7 +205,6 @@ void Level1NEW_Update()
 
 		hookUpdate();
 
-
 		//Bounding box type collision
 
 		for (int i = maxObj - 1; i >= 0; i--)
