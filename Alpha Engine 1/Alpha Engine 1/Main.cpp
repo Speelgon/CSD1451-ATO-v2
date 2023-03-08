@@ -29,7 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 // Initialization
 
 // Using custom window procedure
-	AESysInit(hInstance, nCmdShow, 800, 600, 1, 60, true, NULL);
+	AESysInit(hInstance, nCmdShow, screenwidth, screenheight, 1, 60, true, NULL);
 
 	// Changing the window title
 	AESysSetWindowTitle("My New Demo!");
@@ -111,6 +111,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			//=============================================================================================
 
 			AEInputUpdate();
+
+			AEAudioUpdate();
 
 			//=============================================================================================
 			// Input Loop end

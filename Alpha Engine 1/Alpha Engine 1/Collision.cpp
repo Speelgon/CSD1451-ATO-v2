@@ -92,14 +92,14 @@ namespace {
 	// Left side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX) && lefttoken == 1)
 		{
-			pX -= abs(playerSpeedX) * assumedFrameRate * delta;
+			pX -= (float)(abs(playerSpeedX) * assumedFrameRate * delta);
 			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
 			//playerSpeedX = 0;
 		}
 	// Right side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && righttoken == 1)
 		{
-			pX += abs(playerSpeedX)* assumedFrameRate * delta;
+			pX += (float)(abs(playerSpeedX)* assumedFrameRate * delta);
 			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
 			//playerSpeedX = 0;
 		}
@@ -127,26 +127,53 @@ namespace {
 		}
 	}
 
-	void playerCollisionCollectible(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, int& visibility)
+	void playerCollisionCollectible(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, int& visibility, int &count)
 	{
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX))
 		{
+			// Increment collectible count when collided and when visible
+			// Added check for visibility and the counter will continue to increment when collided because of the other collision checks
+			if (visibility == 1) {
+				count += 1;
+			}
 			visibility = 0;
+			collectibleHit = true;
+			
+			
+			
 		}
 		// Right side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX))
 		{
+			if (visibility == 1) {
+				count += 1;
+			}
 			visibility = 0;
+			collectibleHit = true;
+			
+			
 		}
 		// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
 		if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY))
 		{
+			if (visibility == 1) {
+				count += 1;
+			}
 			visibility = 0;
+			collectibleHit = true;
+			
+			
 		}
 		// Bottom side collision	
 		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
 		{
+			if (visibility == 1) {
+				count += 1;
+			}
 			visibility = 0;
+			collectibleHit = true;
+			
+			
 		}
 	}
 
@@ -158,25 +185,32 @@ Portal Collision
 
 	void playerCollisionPortal(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, int& positiontoken)
 	{
-		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX))
-		{
-			positiontoken = 0;
-		}
-		// Right side collision
-		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX))
-		{
-			positiontoken = 0;
-		}
-		// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
-		if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY))
-		{
-			positiontoken = 0;
-		}
-		// Bottom side collision	
-		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
-		{
-			positiontoken = 0;
-		}
+		
+		
+			if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX))
+			{
+				positiontoken = 0;
+				portalled = true;
+			}
+			// Right side collision
+			if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX))
+			{
+				positiontoken = 0;
+				portalled = true;
+			}
+			// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
+			if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY))
+			{
+				positiontoken = 0;
+				portalled = true;
+			}
+			// Bottom side collision	
+			else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
+			{
+				positiontoken = 0;
+				portalled = true;
+			}
+		
 	}
 
 	void playerCollisionMapBoundary(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float playerSpeedX, float playerSpeedY)
@@ -202,7 +236,7 @@ Portal Collision
 			distance2 = playerHook->y - nodes[i].y;
 			if (distance1 < 0) distance1 = -distance1;
 			if (distance2 < 0) distance2 = -distance2;
-			if (distance1 <= nodes[i].halfW && distance2 <= nodes[i].halfH) {
+			if (distance1 <= (nodes[i].halfW*2.0) && distance2 <= (nodes[i].halfH*2.0)) {
 				collisionFlag = 1;
 				collidedNode = i;
 				pointHookStuckX = nodes[i].x;
@@ -240,14 +274,14 @@ Player out of bounds
 		// Left side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX) && lefttoken == 1)
 		{
-			pX -= abs(playerSpeedX) * assumedFrameRate * delta;
+			pX -= (float)(abs(playerSpeedX) * assumedFrameRate * delta);
 			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
 			//playerSpeedX = 0;
 		}
 		// Right side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && righttoken == 1)
 		{
-			pX += abs(playerSpeedX) * assumedFrameRate * delta;
+			pX += (float)(abs(playerSpeedX) * assumedFrameRate * delta);
 			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
 			//playerSpeedX = 0;
 		}

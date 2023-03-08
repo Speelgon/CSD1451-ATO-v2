@@ -9,13 +9,14 @@
 #include "Level3.hpp"
 #include "Level4.hpp"
 #include "Level5.hpp"
+#include "audio.hpp"
 
 
 
 
 
-#define screenwidth 800
-#define screenheight 600
+#define screenwidth 1600
+#define screenheight 900
 
 typedef void(*FP)(void);
 

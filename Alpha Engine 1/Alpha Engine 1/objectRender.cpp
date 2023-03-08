@@ -18,7 +18,8 @@
 ================================================================================================================================
 */
 
-void backgroundrender(squareObject player, AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground)
+
+void backgroundrender( AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground)
 {
 	// Drawing object 1
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -36,9 +37,9 @@ void backgroundrender(squareObject player, AEGfxVertexList** pMesh, AEGfxTexture
 	AEGfxMeshDraw(pMesh[120], AE_GFX_MDM_TRIANGLES);
 }
 
-void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTextPlatform)
+void DisappearingPlatformRender(squareObject* object,PlatformState* platformstate, AEGfxVertexList** pMesh, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexDisappearingPlat)
 {
-	if (platformstate[0].state != DISAPPEARED)
+	if (platformstate[0].state != DISAPPEARED && platformstate[0].state == CANTDISAPPEAR)
 	{
 		// Drawing platform 1
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -50,7 +51,25 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Texture for platform
-		AEGfxTextureSet(pTextPlatform, 0.0f, 0.0f);
+		AEGfxTextureSet(pTexPlatform, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[1], AE_GFX_MDM_TRIANGLES);
+
+		AEGfxSetTransparency(1.0f);
+	}
+	else if (platformstate[0].state != DISAPPEARED )
+	{
+		// Drawing platform 1
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+		AEGfxSetTransparency(1.0f);
+
+		// Set position for platform 1
+		AEGfxSetPosition(object[0].x, object[0].y);
+
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Texture for platform
+		AEGfxTextureSet(pTexDisappearingPlat, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[1], AE_GFX_MDM_TRIANGLES);
 
@@ -58,31 +77,68 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 	}
 
 
-	if (platformstate[1].state != DISAPPEARED)
+	if (platformstate[1].state != DISAPPEARED && platformstate[1].state == CANTDISAPPEAR)
 	{
 		// Drawing platform 2
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 		// Set position for platform 1
 		AEGfxSetPosition(object[1].x, object[1].y);
 
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Texture for platform
-		AEGfxTextureSet(pTextPlatform, 0.0f, 0.0f);
+		AEGfxTextureSet(pTexPlatform, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[2], AE_GFX_MDM_TRIANGLES);
 
 		AEGfxSetTransparency(1.0f);
 	}
-	if (platformstate[2].state != DISAPPEARED)
+	else if (platformstate[1].state != DISAPPEARED )
+	{
+		// Drawing platform 2
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+		// Set position for platform 1
+		AEGfxSetPosition(object[1].x, object[1].y);
+
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Texture for platform
+		AEGfxTextureSet(pTexDisappearingPlat, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[2], AE_GFX_MDM_TRIANGLES);
+
+		AEGfxSetTransparency(1.0f);
+	
+	}
+
+	if (platformstate[2].state != DISAPPEARED && platformstate[2].state == CANTDISAPPEAR)
 	{
 		// Drawing platform 3
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 		// Set position for platform 1
 		AEGfxSetPosition(object[2].x, object[2].y);
 
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Texture for platform
-		AEGfxTextureSet(pTextPlatform, 0.0f, 0.0f);
+		AEGfxTextureSet(pTexPlatform, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[3], AE_GFX_MDM_TRIANGLES);
+
+		AEGfxSetTransparency(1.0f);
+	}
+
+	else if (platformstate[2].state != DISAPPEARED)
+	{
+		// Drawing platform 3
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+		// Set position for platform 1
+		AEGfxSetPosition(object[2].x, object[2].y);
+
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Texture for platform
+		AEGfxTextureSet(pTexDisappearingPlat, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[3], AE_GFX_MDM_TRIANGLES);
 
@@ -90,16 +146,34 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 	}
 
 
-	if (platformstate[3].state != DISAPPEARED)
+	if (platformstate[3].state != DISAPPEARED && platformstate[3].state == CANTDISAPPEAR)
 	{
 		// Drawing platform 4
+
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 		// Set position for platform 1
 		AEGfxSetPosition(object[3].x, object[3].y);
 
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Texture for platform
-		AEGfxTextureSet(pTextPlatform, 0.0f, 0.0f);
+		AEGfxTextureSet(pTexPlatform, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
+
+		AEGfxSetTransparency(1.0f);
+	}
+	else if (platformstate[3].state != DISAPPEARED)
+	{
+		// Drawing platform 4
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+		// Set position for platform 1
+		AEGfxSetPosition(object[3].x, object[3].y);
+
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Texture for platform
+		AEGfxTextureSet(pTexDisappearingPlat, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh[4], AE_GFX_MDM_TRIANGLES);
 
@@ -109,34 +183,14 @@ void DisappearingPlatformRender(PlatformState* platformstate, AEGfxTexture* pTex
 
 
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor)
+void objectrender(squareObject player,  squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook)
 {
-	//===============================================================
-	// Player Drawing												 
-	//===============================================================
-	
-	// Drawing object 1
-	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	// Set position for object 1
-	// 
-	//Blend mode necessary to remove black backgound
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxSetTransparency(1.0f);
-	AEGfxSetPosition(player.x, player.y);
-
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Texture for player
-	AEGfxTextureSet(pTex, 0.0f, 0.0f);
-	// Drawing the mesh (list of triangles)
-	AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
-
-
 	
 	//===============================================================
 	// Platform Drawing												 
 	//===============================================================
 
-	DisappearingPlatformRender(platformstate, pTextPlatform);
+	/*DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform, pTexDisappearingPlat);*/
 
 	//===============================================================
 	// Node Drawing												 
@@ -255,17 +309,18 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 	//===============================================================
 
 	// Drawing object 3 - (first) - No tint
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	AEGfxSetBlendMode(AE_GFX_BM_NONE);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
 	AEGfxSetPosition(playerHook.x, playerHook.y);
 	// No tint
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	
-	AEGfxTextureSet(NULL, 0, 0);
-	AEGfxMeshDraw(pMesh[15], AE_GFX_MDM_TRIANGLES);
-	AEGfxSetTransparency(1.0f);
+	AEGfxTextureSet(pTexHook, 0, 0);
 
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxMeshDraw(pMesh[15], AE_GFX_MDM_TRIANGLES);
+
+	AEGfxSetTransparency(1.0f);
 
 
 	//===============================================================
@@ -322,28 +377,27 @@ void objectrender(squareObject player, squareObject* object, squareObject* ui, A
 
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
+	//===============================================================
+	// Player Drawing												 
+	//===============================================================
 
-	//// Drawing object 3 - (first) - No tint
-	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	//// Set position for object 3
-	//AEGfxSetPosition(portal[0].x, portal[0].y);
-	//// No tint
-	//AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//// Set texture
-	//// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-	//// Drawing the mesh (list of triangles)
-	//AEGfxMeshDraw(pMesh[11], AE_GFX_MDM_TRIANGLES);
+	// Drawing object 1
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	// Set position for object 1
+	// 
+	//Blend mode necessary to remove black backgound
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxSetTransparency(1.0f);
+	AEGfxSetPosition(player.x, player.y);
 
-	//// Drawing object 3 - (first) - No tint
-	//AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-	//// Set position for object 3
-	//AEGfxSetPosition(portal[1].x, portal[1].y);
-	//// No tint
-	//AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//// Set texture
-	//// AEGfxTextureSet(pTex1, 0.0f, 0.0f);
-	//// Drawing the mesh (list of triangles)
-	//AEGfxMeshDraw(pMesh[12], AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	// Texture for player
+	AEGfxTextureSet(pTex, 0.0f, 0.0f);
+	// Drawing the mesh (list of triangles)
+	AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
+
+
+
 
 
 	//if (AEInputCheckCurr(AEVK_T))
@@ -391,9 +445,10 @@ void anglePlayerToNode(node nodes) {
 	AEVec2Normalize(&item.direction, &item.direction);
 }
 
-void kwanEuItemRender() {
+void kwanEuItemRender(AEGfxTexture* pTexStick) {
 
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 	// Set Scale for Item
 	AEMtx33 scale = { 0 };
@@ -420,7 +475,7 @@ void kwanEuItemRender() {
 	// Choose the transform to use
 	AEGfxSetTransform(transform.m);
 	// No texture for object 1
-	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxTextureSet(pTexStick, 0, 0);
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(itemMesh, AE_GFX_MDM_TRIANGLES);
 

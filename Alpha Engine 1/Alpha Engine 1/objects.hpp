@@ -132,9 +132,11 @@ void trampolineinit(tramp* object);
 
 void trampolinelevel1init(tramp* object);
 
-void backgroundrender(squareObject player, AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground);
+void backgroundrender(AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground);
 
-void objectrender(squareObject player, squareObject* object, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTextPlatform, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, PlatformState* platformstate, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor);
+void DisappearingPlatformRender(squareObject* object, PlatformState* platformstate, AEGfxVertexList** pMesh, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexDisappearingPlat);
+
+void objectrender(squareObject player, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook);
 
 void collectibleinit(collectibleObject* object);
 
@@ -166,7 +168,7 @@ void anglePlayerToMouse();
 
 void anglePlayerToNode(node nodes);
 
-void kwanEuItemRender();
+void kwanEuItemRender(AEGfxTexture* pTexStick);
 
 void hookUpdate();
 

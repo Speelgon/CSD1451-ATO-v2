@@ -27,6 +27,9 @@ extern AEGfxTexture* pTexLeft;
 extern AEGfxTexture* pTexPortal;
 extern AEGfxTexture* pTexPlatform;
 extern AEGfxTexture* pTexCollectible;
+extern AEGfxTexture* pTexExitdoor;
+extern AEGfxTexture* pTexBackground;
+extern AEGfxTexture* pTexNode;
 
 extern float playerSpeed;
 extern int jumptoken;
@@ -89,6 +92,8 @@ extern float mapx;
 extern float mapy;
 extern float halfmapx;
 extern float halfmapy;
+
+extern bool portalled, collectibleHit, platformDisappear;
 
 void Level1_Load();
 

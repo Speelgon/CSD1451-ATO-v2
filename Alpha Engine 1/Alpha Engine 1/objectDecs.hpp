@@ -34,12 +34,16 @@ AEGfxVertexList* itemMesh = 0;
 AEGfxTexture* pTexFront = 0;
 AEGfxTexture* pTexRight = 0;
 AEGfxTexture* pTexLeft = 0;
-AEGfxTexture* pTexPortal=0;
-AEGfxTexture* pTexPlatform=0;
-AEGfxTexture* pTexCollectible=0;
+AEGfxTexture* pTexPortal = 0;
+AEGfxTexture* pTexPlatform = 0;
+AEGfxTexture* pTexPlatform1 = 0;
+AEGfxTexture* pTexCollectible = 0;
 AEGfxTexture* pTexExitdoor = 0;
 AEGfxTexture* pTexBackground = 0;
 AEGfxTexture* pTexNode = 0;
+AEGfxTexture* pTexHook = 0;
+AEGfxTexture* pTexStick = 0;
+AEGfxTexture* pTexDisappearingPlat = 0;
 
 float stabliser = 0.25;
 float gravity = 0.15;
@@ -107,5 +111,6 @@ float mapy = 400;
 float halfmapx = mapx / 2;
 float halfmapy = mapy / 2;
 
+bool portalled{ false }, collectibleHit{ false }, platformDisappear{ false };
 //==========================================================================================================================
 //==========================================================================================================================

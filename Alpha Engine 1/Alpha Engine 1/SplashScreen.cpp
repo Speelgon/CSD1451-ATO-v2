@@ -2,7 +2,8 @@
 //Variables Declaration 
 AEGfxVertexList* pMesh_logo = nullptr;
 AEGfxTexture* Tex_logo;
-f32 alpha{}, max_alpha{ 1.0f }, rate{0.01};
+f32 alpha{}, max_alpha{ 1.0f };
+double rate{ 0.01 };
 int loops{};
 
 
@@ -51,7 +52,6 @@ void SplashScreen_Update()
         
 
         //if mouse clicked/ spacebar/ enter is clicked also jump to the next game state 
-        //jump release from the hook automatically
         if (AEInputCheckCurr(AEVK_LBUTTON) || AEInputCheckCurr(AEVK_SPACE))
         {
             next = GS_MAINMENU;
@@ -65,8 +65,9 @@ void SplashScreen_Update()
     } // end of Logic of Splash Screen
 
     {//alpha update
-       alpha += rate;
+       alpha += (f32)rate;
 
+       //repeats fade but we not using it
        if (alpha >= 1)
        {
            alpha = 0;

@@ -5,14 +5,14 @@ extern f64 delta;
 extern f64 assumedFrameRate;
 
 void catdeath() {
-	if ((timeDead += delta) < deathSeconds)
+	if ((timeDead += (float)delta) < deathSeconds)
 	{
-		player.yvel += 0.3;
-		player.y += player.yvel * delta * assumedFrameRate;
+		player.yvel += (float)0.3;
+		player.y += (f32)(player.yvel * delta * assumedFrameRate);
 	}
 	else 
 	{
 		player.yvel -= 2*gravity;
-		player.y += player.yvel * delta * assumedFrameRate;
+		player.y += (f32)(player.yvel * delta * assumedFrameRate);
 	}
 }
