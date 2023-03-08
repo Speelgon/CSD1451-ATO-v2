@@ -15,7 +15,7 @@
 //==========================================================================================================================
 //==========================================================================================================================
 
-extern PlatformState platformstate[4];
+extern PlatformState platformstate[maxObj];
 
 //variables for normal timer
 extern f64 normalElapsedTime;
@@ -150,9 +150,16 @@ void Level2_Update()
 
 		if (AEInputCheckCurr(AEVK_LBUTTON))
 		{
-			if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
-				anglePlayerToNode(nodes[collidedNode]);
-				movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
+			if (!AEInputCheckCurr(AEVK_W))
+			{
+				if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
+					anglePlayerToNode(nodes[collidedNode]);
+					movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
+				}
+				else {
+					anglePlayerToMouse();
+					hookCollisionFlag = 0;
+				}
 			}
 			else {
 				anglePlayerToMouse();

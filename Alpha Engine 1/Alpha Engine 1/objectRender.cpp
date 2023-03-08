@@ -185,26 +185,6 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 void objectrender(squareObject player,  squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook)
 {
-	//===============================================================
-	// Player Drawing												 
-	//===============================================================
-	
-	// Drawing object 1
-	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	// Set position for object 1
-	// 
-	//Blend mode necessary to remove black backgound
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxSetTransparency(1.0f);
-	AEGfxSetPosition(player.x, player.y);
-
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Texture for player
-	AEGfxTextureSet(pTex, 0.0f, 0.0f);
-	// Drawing the mesh (list of triangles)
-	AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
-
-
 	
 	//===============================================================
 	// Platform Drawing												 
@@ -396,6 +376,28 @@ void objectrender(squareObject player,  squareObject* ui, AEGfxVertexList** pMes
 	AEGfxSetTransparency(1.0f);
 
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
+	//===============================================================
+	// Player Drawing												 
+	//===============================================================
+
+	// Drawing object 1
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	// Set position for object 1
+	// 
+	//Blend mode necessary to remove black backgound
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxSetTransparency(1.0f);
+	AEGfxSetPosition(player.x, player.y);
+
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	// Texture for player
+	AEGfxTextureSet(pTex, 0.0f, 0.0f);
+	// Drawing the mesh (list of triangles)
+	AEGfxMeshDraw(pMesh[0], AE_GFX_MDM_TRIANGLES);
+
+
+
 
 
 	//if (AEInputCheckCurr(AEVK_T))

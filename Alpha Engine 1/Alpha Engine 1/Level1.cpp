@@ -117,13 +117,13 @@ int lasttimer;
 //----------------------------------------------------------------------------------------------------------------
 //enum disappearstatus { CANTDISAPPEAR = 0, CANDISAPPEAR, DISAPPEARED, TIMERSTARTED };
 f64 elapsedtime;
-struct PlatformState platformstate[4] = {
+struct PlatformState platformstate[maxObj] = {
 											CANTDISAPPEAR, 3, 0.0f, 1.0f,
 											CANDISAPPEAR, 3, 0.0f, 1.0f,
 											CANTDISAPPEAR, 3, 0.0f, 1.0f,
 											CANDISAPPEAR, 3, 0.0f, 1.0f
 };
-int numberofplatforms = 4;
+int numberofplatforms = maxObj;
 
 int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
 {

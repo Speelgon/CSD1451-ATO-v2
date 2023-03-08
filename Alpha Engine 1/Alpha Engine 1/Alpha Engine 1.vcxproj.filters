@@ -84,23 +84,25 @@
     <ClCompile Include="level1_new.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
-    <ClCompile Include="objectInitcpp.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Level2.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
     <ClCompile Include="Level3.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Level4.cpp">
       <Filter>Source Files\Game State</Filter>
     </ClCompile>
     <ClCompile Include="Level5.cpp">
       <Filter>Source Files\Game State</Filter>
+    <ClCompile Include="audio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objectInitcpp.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +155,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Level3.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PlatformsDisappear.hpp">
