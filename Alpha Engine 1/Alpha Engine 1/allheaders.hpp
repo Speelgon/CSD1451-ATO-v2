@@ -14,8 +14,8 @@
 
 
 
-#define screenwidth 800
-#define screenheight 600
+#define screenwidth 1600
+#define screenheight 900
 
 typedef void(*FP)(void);
 

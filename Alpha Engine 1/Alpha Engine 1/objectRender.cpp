@@ -149,6 +149,7 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 	if (platformstate[3].state != DISAPPEARED && platformstate[3].state == CANTDISAPPEAR)
 	{
 		// Drawing platform 4
+
 		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 		// Set position for platform 1
