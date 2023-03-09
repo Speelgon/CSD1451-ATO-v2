@@ -535,7 +535,7 @@ void trampolinelevel4init(tramp* object) {
 	object[0].x = -800;
 	object[0].y = 100;
 	object[0].width = 100;
-	object[0].height = 10;
+	object[0].height = 20;
 	object[0].halfW = object[0].width / 2;
 	object[0].halfH = object[0].height / 2;
 	object[0].lefttoken = 0;
@@ -546,7 +546,7 @@ void trampolinelevel5init(tramp* object) {
 	object[0].x = -800;
 	object[0].y = -80;
 	object[0].width = 100;
-	object[0].height = 10;
+	object[0].height = 20;
 	object[0].halfW = object[0].width / 2;
 	object[0].halfH = object[0].height / 2;
 	object[0].lefttoken = 0;
