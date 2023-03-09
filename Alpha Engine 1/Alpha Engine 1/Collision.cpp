@@ -162,7 +162,7 @@ namespace {
 			visibility = 0;
 			collectibleHit = true;
 			
-			
+	
 		}
 		// Bottom side collision	
 		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
@@ -274,14 +274,14 @@ Player out of bounds
 		// Left side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX) && lefttoken == 1)
 		{
-			pX -= (float)(abs(playerSpeedX) * assumedFrameRate * delta);
+			//pX -= (float)(abs(playerSpeedX) * assumedFrameRate * delta);
 			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
 			//playerSpeedX = 0;
 		}
 		// Right side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && righttoken == 1)
 		{
-			pX += (float)(abs(playerSpeedX) * assumedFrameRate * delta);
+			//pX += (float)(abs(playerSpeedX) * assumedFrameRate * delta);
 			//Making the player's speed zero caused some problems so Im temporarily removing it and now it works fine...  
 			//playerSpeedX = 0;
 		}
@@ -296,8 +296,7 @@ Player out of bounds
 		// Bottom side collision	
 		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
 		{
-			playerSpeedY = 0;
-			pY = oY - oSizeY - pSizeY;
+			playerSpeedY = playerSpeedY;
 			lefttoken = 0;
 			righttoken = 0;
 		}

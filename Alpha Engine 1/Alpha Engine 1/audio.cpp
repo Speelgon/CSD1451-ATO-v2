@@ -71,13 +71,13 @@ void updateSound() {
 	if (!bgmPlayed) {
 		switch (current) {
 		case GS_LEVEL1:
-			playAudio(soundList[1], soundGroups[BGM], 0.4, 1, -1);
+			playAudio(soundList[1], soundGroups[BGM], 0.4f, 1, -1);
 			break;
 		case GS_LEVEL2:
-			playAudio(soundList[1], soundGroups[BGM], 0.4, 1, -1);
+			playAudio(soundList[1], soundGroups[BGM], 0.4f, 1, -1);
 			break;
 		case GS_LEVEL3:
-			playAudio(soundList[1], soundGroups[BGM], 0.4, 1, -1);
+			playAudio(soundList[1], soundGroups[BGM], 0.4f, 1, -1);
 			break;
 		/*case GS_LEVEL4: break;
 		case GS_LEVEL5: break;

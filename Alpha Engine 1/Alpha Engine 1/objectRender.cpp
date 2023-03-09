@@ -457,7 +457,7 @@ void kwanEuItemRender(AEGfxTexture* pTexStick) {
 	// Create a rotation matrix
 	AEMtx33 rotate = { 0 };
 	//Replaced the dt with 1/60 so the thing object doesn't stutter every second
-	AEMtx33Rot(&rotate, 360 - AERadToDeg(item.rotation) * 1/60);
+	AEMtx33Rot(&rotate, 360 - AERadToDeg(item.rotation) * 1 / 60);
 
 	// Create a translation matrix that translates by
 	// 100 in the x-axis and 100 in the y-axis
