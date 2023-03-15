@@ -386,4 +386,6 @@ void Level3_Unload()
 	AEGfxTextureUnload(pTexHook);
 	AEGfxTextureUnload(pTexStick);
 	AEGfxTextureUnload(pTexDisappearingPlat);
+	freeSound();
+
 }
