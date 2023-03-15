@@ -352,7 +352,6 @@ void Level1NEW_Free()
 		AEGfxMeshFree(pMesh[i]);
 	}
 	AEGfxMeshFree(itemMesh);
-	freeSound();
 	/*AEGfxDestroyFont(fontId);*/
 }
 
@@ -370,4 +369,6 @@ void Level1NEW_Unload()
 	AEGfxTextureUnload(pTexHook);
 	AEGfxTextureUnload(pTexStick);
 	AEGfxTextureUnload(pTexDisappearingPlat);
+	freeSound();
+
 }		

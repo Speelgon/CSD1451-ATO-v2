@@ -175,6 +175,10 @@ namespace {
 			
 			
 		}
+		if (visibility == 0) {
+			oX = -999.f;
+			oY = -999.f;
+		}
 	}
 
 /*
@@ -292,6 +296,7 @@ Player out of bounds
 			lefttoken = 0;
 			righttoken = 0;
 			jumptoken = 1;
+			trampolined = true;
 		}
 		// Bottom side collision	
 		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
@@ -299,6 +304,7 @@ Player out of bounds
 			playerSpeedY = playerSpeedY;
 			lefttoken = 0;
 			righttoken = 0;
+			
 		}
 		else
 		{

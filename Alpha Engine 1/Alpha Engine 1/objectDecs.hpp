@@ -111,6 +111,6 @@ float mapy = 400;
 float halfmapx = mapx / 2;
 float halfmapy = mapy / 2;
 
-bool portalled{ false }, collectibleHit{ false }, platformDisappear{ false };
+bool portalled{ false }, collectibleHit{ false }, platformDisappear{ false }, trampolined{ false };
 //==========================================================================================================================
 //==========================================================================================================================
