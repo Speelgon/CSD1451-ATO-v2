@@ -95,6 +95,24 @@ void GSM_Update()
 		fpUnload = Level5_Unload;
 		break;
 
+	case GS_LEVEL6:
+		fpLoad = Level6_Load;
+		fpInitialize = Level6_Initialize;
+		fpUpdate = Level6_Update;
+		fpDraw = Level6_Draw;
+		fpFree = Level6_Free;
+		fpUnload = Level6_Unload;
+		break;
+
+
+	case GS_LEVEL7:
+		fpLoad = Level7_Load;
+		fpInitialize = Level7_Initialize;
+		fpUpdate = Level7_Update;
+		fpDraw = Level7_Draw;
+		fpFree = Level7_Free;
+		fpUnload = Level7_Unload;
+		break;
 			
 	case GS_RESTART:		//Breaks the current case if the gamestate is required to restart
 		break;

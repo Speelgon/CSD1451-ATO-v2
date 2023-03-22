@@ -1,6 +1,6 @@
 #pragma once
 #include "allheaders.hpp"
-#include "Level5.hpp"
+#include "Level7.hpp"
 #include "movement.hpp"
 #include "objects.hpp"
 #include "collision.hpp"
@@ -26,7 +26,7 @@ extern f64 elapsedtime;
 extern int collectible_count;
 
 
-void Level5_Load()
+void Level7_Load()
 {
 	std::cout << "GSM:Load\n";
 
@@ -67,17 +67,17 @@ void Level5_Load()
 	AE_ASSERT_MESG(pTexDisappearingPlat, "Failed to create stick texture!!");
 }
 
-void Level5_Initialize()
+void Level7_Initialize()
 {
-	
+
 	platformstate[1].state = CANTDISAPPEAR;
 	platformstate[1].timer = 3;
 	platformstate[1].elapsedtime = 0.0f;
 	platformstate[1].interval = 1.0f;
 
-	
 
-    player.x = -1000;
+
+	player.x = -1000;
 	player.y = -200;
 	player.xvel = 0;
 	player.yvel = 0;
@@ -100,7 +100,7 @@ void Level5_Initialize()
 
 	objectinit(object);
 
-    objectlevel5init(object);
+	objectlevel5init(object);
 
 	hookinit(playerHook);
 
@@ -146,9 +146,9 @@ void Level5_Initialize()
 
 }
 
-void Level5_Update()
+void Level7_Update()
 {
-    delta = AEFrameRateControllerGetFrameTime();
+	delta = AEFrameRateControllerGetFrameTime();
 
 	if (AEInputCheckCurr(AEVK_L))
 	{
@@ -317,14 +317,14 @@ void Level5_Update()
 
 		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
 		{
-			next = GS_LEVEL6;
+			next = GS_QUIT;
 		}
-	
+
 		updateSound();
 	}
 }
 
-void Level5_Draw()
+void Level7_Draw()
 {
 	// Draw background
 	backgroundrender(pMesh, pTexBackground);
@@ -361,9 +361,9 @@ void Level5_Draw()
 	AEGfxPrint(fontId, strBufferCollectible, -0.90f, 0.8f, 1, 1.f, 1.f, 1.f);
 }
 
-void Level5_Free()
+void Level7_Free()
 {
-    for (int i = 0; i < meshMax; i++)
+	for (int i = 0; i < meshMax; i++)
 	{
 		AEGfxMeshFree(pMesh[i]);
 	}
@@ -371,7 +371,7 @@ void Level5_Free()
 	freeSound();
 }
 
-void Level5_Unload()
+void Level7_Unload()
 {
 	AEGfxTextureUnload(pTexFront);
 	AEGfxTextureUnload(pTexRight);
