@@ -7,7 +7,7 @@ square background;
 AEGfxVertexList* playMesh;
 AEGfxVertexList* backgroundMesh;
 extern s8 fontId;
-char strBufferPLAY[5], strBufferHTP[12], strBufferCredits[8], strBufferQuit[5], strBufferTitle[14];
+//char strBufferPLAY[5], strBufferHTP[12], strBufferCredits[8], strBufferQuit[5], strBufferTitle[14];
 //char strBufferSettings[50];
 //f32 TextWidth, TextHeight;
 extern int mousex;
@@ -97,7 +97,7 @@ void Mainmenu_Initialize()
 	backgroundMesh = AEGfxMeshEnd();
 	AE_ASSERT_MESG(backgroundMesh, "Failed to create backgroundMesh!!");
 
-
+	initAudioList();
 	
 }
 
@@ -122,6 +122,7 @@ void Mainmenu_Update()
 		
 	}
 	
+	updateSound();
 
 }
 
@@ -243,4 +244,5 @@ void Mainmenu_Unload()
 	AEGfxTextureUnload(pTexTutorial);
 	AEGfxTextureUnload(pTexCredits);
 	AEGfxTextureUnload(pTexQuit);
+	freeSound();
 }

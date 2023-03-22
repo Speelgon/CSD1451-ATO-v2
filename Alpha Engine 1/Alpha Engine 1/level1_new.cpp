@@ -209,18 +209,7 @@ void Level1NEW_Update()
 
 		for (int i = maxObj - 1; i >= 0; i--)
 		{
-			//if (i < 4)
-			//
-			//	if (platformstate[i].state == 0 && LastJump == 1)
-			//	{
-			//		if (timerset == 0)
-			//		{
-			//			//InitializeTimer(15, 1.0f);
-			//			timerset = 1;
-			//		}
-			//		
-			//	}
-			//}
+
 			if (i < numberofplatforms)
 			{
 				// if platform set to disappear upon finishing countdown of timer, need not to check for collision
@@ -286,9 +275,6 @@ void Level1NEW_Update()
 
 		}
 		
-		
-
-		//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 		playerEasingMovement(player.xvel, player.yvel, stabliser);
 
@@ -298,11 +284,7 @@ void Level1NEW_Update()
 
 		AEInputGetCursorPosition(&mouseX, &mouseY);
 
-		//if(player.x<400 && player.x>-400 && player.y<400 && player.y > -300)
-		//{
 		viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
-		//}
-
 
 		//Respawn player if out of bounds
 		if (playerOutofBounds(player.y, mapBoundary.y) == 1)
@@ -361,18 +343,6 @@ void Level1NEW_Draw()
 	AEGfxGetPrintSize(fontId, strBufferCollectible, 1.0f, TextWidth, TextHeight);
 	AEGfxPrint(fontId, strBufferCollectible, -0.90f, 0.8f, 1, 1.f, 1.f, 1.f);
 
-	// Timer for disappearing platform
-	/*char strBuffertest[100];
-	memset(strBuffertest, 0, 100 * sizeof(char));
-	sprintf_s(strBuffertest, "%d", platformstate[1].timer);
-
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-
-	
-	AEGfxGetPrintSize(fontId, strBuffertest, 1.0f, TextWidth, TextHeight);
-	AEGfxPrint(fontId, strBuffertest, 0.0f, 0.8f, 1, 1.f, 1.f, 1.f);*/
-
-
 }
 
 void Level1NEW_Free()
@@ -382,7 +352,6 @@ void Level1NEW_Free()
 		AEGfxMeshFree(pMesh[i]);
 	}
 	AEGfxMeshFree(itemMesh);
-	freeSound();
 	/*AEGfxDestroyFont(fontId);*/
 }
 
@@ -400,4 +369,6 @@ void Level1NEW_Unload()
 	AEGfxTextureUnload(pTexHook);
 	AEGfxTextureUnload(pTexStick);
 	AEGfxTextureUnload(pTexDisappearingPlat);
+	freeSound();
+
 }		
