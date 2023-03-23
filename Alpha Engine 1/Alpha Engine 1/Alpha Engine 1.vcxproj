@@ -120,10 +120,12 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClCompile Include="objectInitcpp.cpp" />
     <ClCompile Include="objectRender.cpp" />
     <ClCompile Include="GSM.cpp" />
+    <ClCompile Include="invertGravity.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="uiInit.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="vpCollision.cpp" />
+    <ClCompile Include="winScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allheaders.hpp" />
@@ -132,6 +134,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClInclude Include="collision.hpp" />
     <ClInclude Include="GSM.hpp" />
     <ClInclude Include="IncrementVariable.hpp" />
+    <ClInclude Include="invertGravity.hpp" />
     <ClInclude Include="Level1.hpp" />
     <ClInclude Include="level1_new.hpp" />
     <ClInclude Include="Level2.hpp" />
@@ -150,6 +153,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClInclude Include="SplashScreen.hpp" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="vpCollision.hpp" />
+    <ClInclude Include="winScreen.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

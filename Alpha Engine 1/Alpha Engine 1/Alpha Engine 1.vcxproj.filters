@@ -27,6 +27,8 @@
     <ClCompile Include="vpCollision.cpp" />
     <ClCompile Include="Level6.cpp" />
     <ClCompile Include="Level7.cpp" />
+    <ClCompile Include="invertGravity.cpp" />
+    <ClCompile Include="winScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allheaders.hpp" />
@@ -53,5 +55,7 @@
     <ClInclude Include="vpCollision.hpp" />
     <ClInclude Include="Level6.hpp" />
     <ClInclude Include="Level7.hpp" />
+    <ClInclude Include="invertGravity.hpp" />
+    <ClInclude Include="winScreen.hpp" />
   </ItemGroup>
 </Project>

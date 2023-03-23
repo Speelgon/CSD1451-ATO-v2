@@ -12,7 +12,6 @@
 
 
 
-
 //==========================================================================================================================
 //==========================================================================================================================
 
@@ -26,8 +25,8 @@ extern f64 interval;
 extern int lasttimer;
 extern int numberofplatforms;
 extern f64 elapsedtime;
-extern int collectible_count = 0;
-
+extern int collectible_count;
+extern GS_STATES previousState;
 
 void Level1NEW_Load()
 {
@@ -72,7 +71,8 @@ void Level1NEW_Load()
 
 void Level1NEW_Initialize()
 {
-	
+	previousState = GS_LEVEL1;
+
 	elapsedtime = 0;
 	
 	platformstate[1].state = CANDISAPPEAR;
@@ -168,8 +168,7 @@ void Level1NEW_Update()
 	{
 		if (AEInputCheckTriggered(AEVK_F))
 		{
-			item.height += 10.f;
-			std::cout << "Printing";
+			invertGravity();
 		}
 
 		playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
@@ -295,7 +294,7 @@ void Level1NEW_Update()
 		//Go to next level when player touches exit door
 		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
 		{
-			next = GS_LEVEL2;
+			next = GS_WINSCREEN;
 		}
 
 		updateSound();

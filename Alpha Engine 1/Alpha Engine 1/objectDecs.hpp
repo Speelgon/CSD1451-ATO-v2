@@ -47,6 +47,7 @@ AEGfxTexture* pTexDisappearingPlat = 0;
 
 float stabliser = 0.25;
 float gravity = 0.15;
+float jumpspeed = 8;
 int jumptoken = 1;
 float playerSpeed = 2;
 int hookCollisionFlag = 0;
@@ -57,9 +58,11 @@ f64 delta = 1/60.0;
 f64 assumedFrameRate = 60;
 float pointHookStuckX = 0;
 float pointHookStuckY = 0;
-
+int collectible_count = 0;
 float deathSeconds = 0.3;
 float timeDead = 0;
+
+GS_STATES previousState = GS_MAINMENU;
 
 //==========================================================================================================================
 // Yuki's Variables

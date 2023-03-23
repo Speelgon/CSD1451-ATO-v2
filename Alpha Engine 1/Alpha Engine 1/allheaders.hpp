@@ -12,10 +12,8 @@
 #include "Level6.hpp"
 #include "Level7.hpp"
 #include "audio.hpp"
-
-
-
-
+#include "invertGravity.hpp"
+#include "winScreen.hpp"
 
 #define screenwidth 1600
 #define screenheight 900
@@ -39,6 +37,7 @@ enum GS_STATES
 	GS_LEVEL6,
 	GS_LEVEL7,
 
+	GS_WINSCREEN,
 	GS_QUIT,
 	GS_RESTART
 };

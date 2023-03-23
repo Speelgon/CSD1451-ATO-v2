@@ -58,6 +58,8 @@ void Mainmenu_Initialize()
 	buttons.halfW = buttons.width / 2;
 	buttons.halfH = buttons.height / 2;
 
+
+
 	background.x = 0;
 	background.y = 0;
 	background.width = screenwidth;
@@ -120,6 +122,11 @@ void Mainmenu_Update()
 	if (IsAreaClicked(buttons.x, creditsbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
 		
+	}
+
+	if (IsAreaClicked(buttons.x, quitbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
+	{
+		next = GS_QUIT;
 	}
 	
 	updateSound();

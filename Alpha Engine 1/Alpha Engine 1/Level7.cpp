@@ -24,6 +24,7 @@ extern int lasttimer;
 extern int numberofplatforms;
 extern f64 elapsedtime;
 extern int collectible_count;
+extern GS_STATES previousState;
 
 
 void Level7_Load()
@@ -69,6 +70,8 @@ void Level7_Load()
 
 void Level7_Initialize()
 {
+
+	previousState = GS_LEVEL7;
 
 	platformstate[1].state = CANTDISAPPEAR;
 	platformstate[1].timer = 3;
@@ -317,7 +320,7 @@ void Level7_Update()
 
 		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
 		{
-			next = GS_QUIT;
+			next = GS_MAINMENU;
 		}
 
 		updateSound();

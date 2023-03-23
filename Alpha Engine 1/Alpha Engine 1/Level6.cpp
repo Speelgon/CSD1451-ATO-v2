@@ -24,7 +24,7 @@ extern int lasttimer;
 extern int numberofplatforms;
 extern f64 elapsedtime;
 extern int collectible_count;
-
+extern GS_STATES previousState;
 
 void Level6_Load()
 {
@@ -70,6 +70,8 @@ void Level6_Load()
 void Level6_Initialize()
 {
 
+	previousState = GS_LEVEL6;
+
 	platformstate[1].state = CANTDISAPPEAR;
 	platformstate[1].timer = 3;
 	platformstate[1].elapsedtime = 0.0f;
@@ -100,13 +102,13 @@ void Level6_Initialize()
 
 	objectinit(object);
 
-	objectlevel5init(object);
+	objectlevel6init(object);
 
 	hookinit(playerHook);
 
 	collectibleinit(collectible);
 
-	collectiblelevel5init(collectible);
+	collectiblelevel6init(collectible);
 
 	portalinit(portal);
 
@@ -317,7 +319,7 @@ void Level6_Update()
 
 		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
 		{
-			next = GS_LEVEL7;
+			next = GS_WINSCREEN;
 		}
 
 		updateSound();
