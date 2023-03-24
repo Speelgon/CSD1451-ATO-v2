@@ -44,6 +44,7 @@ AEGfxTexture* pTexNode = 0;
 AEGfxTexture* pTexHook = 0;
 AEGfxTexture* pTexStick = 0;
 AEGfxTexture* pTexDisappearingPlat = 0;
+AEGfxTexture* pTexTrampoline = 0;
 
 float stabliser = 0.25;
 float gravity = 0.15;
