@@ -33,6 +33,7 @@ extern AEGfxTexture* pTexNode;
 extern AEGfxTexture* pTexHook;
 extern AEGfxTexture* pTexStick;
 extern AEGfxTexture* pTexDisappearingPlat;
+extern AEGfxTexture* pTexTrampoline;
 
 
 extern float playerSpeed;

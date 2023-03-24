@@ -27,10 +27,9 @@ extern int truemousex;
 extern int truemousey;
 extern square player;
 extern AEGfxTexture* pTexMenuBackground;
-extern AEGfxTexture* pTexPlay;
-extern AEGfxTexture* pTexTutorial;
-extern AEGfxTexture* pTexCredits;
-extern AEGfxTexture* pTexQuit;
+extern AEGfxTexture* pTexNext = 0;
+extern AEGfxTexture* pTexRestart = 0;
+extern AEGfxTexture* pTexReturn = 0;
 extern f32 settingsbuttony;
 extern f32 creditsbuttony;
 extern f32 quitbuttony;
@@ -49,6 +48,15 @@ void winScreen_Load()
 
 	pTexCollectible = AEGfxTextureLoad("Assets/collectible.png");
 	AE_ASSERT_MESG(pTexCollectible, "Failed to create play button texture!!");
+
+	pTexNext = AEGfxTextureLoad("Assets/button_next.png");
+	AE_ASSERT_MESG(pTexNext, "Failed to create play button next!!");
+
+	pTexRestart = AEGfxTextureLoad("Assets/button_restart.png");
+	AE_ASSERT_MESG(pTexNext, "Failed to create restart button next!!");
+
+	pTexReturn = AEGfxTextureLoad("Assets/button_return.png");
+	AE_ASSERT_MESG(pTexNext, "Failed to create return button next!!");
 
 }
 
@@ -274,7 +282,7 @@ void winScreen_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(next_level_button.x, next_level_button.y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexCollectible, 0, 0);
+	AEGfxTextureSet(pTexNext, 0, 0);
 	AEGfxMeshDraw(buttonMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -283,7 +291,7 @@ void winScreen_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(restart_button.x, restart_button.y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexCollectible, 0, 0);
+	AEGfxTextureSet(pTexRestart, 0, 0);
 	AEGfxMeshDraw(buttonMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -292,7 +300,7 @@ void winScreen_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(main_menu_button.x, main_menu_button.y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexCollectible, 0, 0);
+	AEGfxTextureSet(pTexReturn, 0, 0);
 	AEGfxMeshDraw(buttonMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -349,4 +357,7 @@ void winScreen_Unload()
 {
 	AEGfxTextureUnload(pTexMenuBackground);
 	AEGfxTextureUnload(pTexCollectible);
+	AEGfxTextureUnload(pTexNext);
+	AEGfxTextureUnload(pTexRestart);
+	AEGfxTextureUnload(pTexReturn);
 }
