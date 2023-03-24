@@ -1,6 +1,7 @@
 
 #include "allheaders.hpp"
-
+#include "Mainmenu.hpp"
+#include "IncrementVariable.hpp"
 
 //Timer
 int normalUpdateTimer(f64* normalElapsedTime, int timer, f64 interval)
@@ -62,3 +63,6 @@ int normalUpdateTimer(f64* normalElapsedTime, int timer, f64 interval)
 //
 //	return 0;
 //}
+
+
+

@@ -2,6 +2,7 @@
 #include "allheaders.hpp"
 #include "Mainmenu.hpp"
 #include "SplashScreen.hpp"
+#include "Quit_Confirm.hpp"
 int current = GS_SPLASHSCREEN, previous = 0, next = 0;
 
 FP fpLoad = nullptr, fpInitialize = nullptr, fpUpdate = nullptr, fpDraw = nullptr, fpFree = nullptr, fpUnload = nullptr;
@@ -127,6 +128,14 @@ void GSM_Update()
 	case GS_RESTART:		//Breaks the current case if the gamestate is required to restart
 		break;
 	case GS_QUIT:			//Breaks the current case if the gamestate is required to quit
+		break;
+	case GS_QUITCONFIRM:
+		fpLoad = quit_confirm_Load;
+		fpInitialize = quit_confirm_Initialize;
+		fpUpdate = quit_confirm_Update;
+		fpDraw = quit_confirm_Draw;
+		fpFree = quit_confirm_Free;
+		fpUnload = quit_confirm_Unload;
 		break;
 	default:
 		break;

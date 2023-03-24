@@ -29,6 +29,7 @@
     <ClCompile Include="Level7.cpp" />
     <ClCompile Include="invertGravity.cpp" />
     <ClCompile Include="winScreen.cpp" />
+    <ClCompile Include="Quit_Confirm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allheaders.hpp" />
@@ -57,5 +58,6 @@
     <ClInclude Include="Level7.hpp" />
     <ClInclude Include="invertGravity.hpp" />
     <ClInclude Include="winScreen.hpp" />
+    <ClInclude Include="Quit_Confirm.hpp" />
   </ItemGroup>
 </Project>

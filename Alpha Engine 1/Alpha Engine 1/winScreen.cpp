@@ -3,7 +3,7 @@
 #include "allheaders.hpp"
 #include "Mainmenu.hpp"
 #include "IncrementVariable.hpp"
-
+#include "utils.h"
 square collected1;
 square collected2;
 square collected3;
@@ -35,6 +35,9 @@ extern f32 settingsbuttony;
 extern f32 creditsbuttony;
 extern f32 quitbuttony;
 
+//for quit confirmation prompt
+int state_for_quit_confirm;
+
 
 
 void winScreen_Load()
@@ -51,7 +54,7 @@ void winScreen_Load()
 
 void winScreen_Initialize()
 {
-	
+	state_for_quit_confirm = current;
 	collected1.x = -200;
 	collected1.y = 0;
 
@@ -185,10 +188,20 @@ void winScreen_Update()
 		next = previousState;
 	}
 
+	//include quit confirmation prompt
 	if (IsAreaClicked(main_menu_button.x, main_menu_button.y, main_menu_button.halfW, main_menu_button.halfH, truemousex, truemousey))
 	{
-		next = GS_MAINMENU;
+		//std::cout << "quit button clicked" << '\n';
+		//quit_confirm = 1;
+		//state_for_quit_confirm = 
+		next = GS_QUITCONFIRM;
 	}
+
+	/*if (quit_confirm == 1)
+	{
+		std::cout << "Entered quit confirm" << '\n';
+		quit_confirmation_prompt(quit_confirm);
+	}*/
 
 	updateSound();
 
