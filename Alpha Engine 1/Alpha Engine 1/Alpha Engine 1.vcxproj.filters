@@ -1,176 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\NewFilter1">
-      <UniqueIdentifier>{19f92809-de95-4530-9db7-6c90ba126105}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game State">
-      <UniqueIdentifier>{d2b87e31-9a01-4dc1-9da7-9510c1937e56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\UpdateObjects">
-      <UniqueIdentifier>{30933e52-a66f-44bc-8196-32b70d8ce9f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game State\Level1">
-      <UniqueIdentifier>{12644218-ca02-4eb8-928c-ddcb9a12d556}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\InitializeObjects">
-      <UniqueIdentifier>{4d82ab33-ea40-40b2-bfbc-6348e21ce636}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\DrawObjects">
-      <UniqueIdentifier>{d457c502-b35a-4751-9060-e5fad3b53424}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="allheaders.cpp" />
+    <ClCompile Include="audio.cpp" />
+    <ClCompile Include="catdeath.cpp" />
+    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="HookUpdate.cpp" />
+    <ClCompile Include="IncrementVariable.cpp" />
+    <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="level1_new.cpp" />
+    <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="Level3.cpp" />
+    <ClCompile Include="Level4.cpp" />
+    <ClCompile Include="Level5.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Mainmenu.cpp" />
+    <ClCompile Include="meshInit.cpp" />
+    <ClCompile Include="meshUpdate.cpp" />
+    <ClCompile Include="movement.cpp" />
+    <ClCompile Include="objectInitcpp.cpp" />
+    <ClCompile Include="objectRender.cpp" />
+    <ClCompile Include="GSM.cpp" />
+    <ClCompile Include="SplashScreen.cpp" />
+    <ClCompile Include="uiInit.cpp" />
+    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="vpCollision.cpp" />
+    <ClCompile Include="Level6.cpp" />
+    <ClCompile Include="Level7.cpp" />
+    <ClCompile Include="invertGravity.cpp" />
+    <ClCompile Include="winScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="allheaders.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IncrementVariable.cpp">
-      <Filter>Source Files\NewFilter1</Filter>
-    </ClCompile>
-    <ClCompile Include="GSM.cpp">
-      <Filter>Source Files\Game State</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files\UpdateObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="movement.cpp">
-      <Filter>Source Files\UpdateObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="vpCollision.cpp">
-      <Filter>Source Files\UpdateObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Level1.cpp">
-      <Filter>Source Files\Game State\Level1</Filter>
-    </ClCompile>
-    <ClCompile Include="uiInit.cpp">
-      <Filter>Source Files\InitializeObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="objectRender.cpp">
-      <Filter>Source Files\DrawObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="meshUpdate.cpp">
-      <Filter>Source Files\UpdateObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="meshInit.cpp">
-      <Filter>Source Files\InitializeObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="HookUpdate.cpp">
-      <Filter>Source Files\UpdateObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Mainmenu.cpp">
-      <Filter>Source Files\Game State</Filter>
-    </ClCompile>
-    <ClCompile Include="SplashScreen.cpp">
-      <Filter>Source Files\Game State</Filter>
-    </ClCompile>
-    <ClCompile Include="catdeath.cpp">
-      <Filter>Source Files\UpdateObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="level1_new.cpp">
-      <Filter>Source Files\Game State</Filter>
-    </ClCompile>
-    <ClCompile Include="Level2.cpp">
-      <Filter>Source Files\Game State</Filter>
-    </ClCompile>
-    <ClCompile Include="Level3.cpp">
-      <Filter>Source Files\Game State</Filter>
-    </ClCompile>
-    <ClCompile Include="Level4.cpp">
-      <Filter>Source Files\Game State</Filter>
-    </ClCompile>
-    <ClCompile Include="Level5.cpp">
-      <Filter>Source Files\Game State</Filter>
-    <ClCompile Include="audio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="objectInitcpp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="objects.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="movement.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="collision.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vpCollision.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="allheaders.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IncrementVariable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level1.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GSM.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="objectDecs.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mainmenu.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mainmenuinit.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SplashScreen.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="catdeath.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="level1_new.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="moreyukivariables.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level2.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level3.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="audio.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlatformsDisappear.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level4.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level5.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="allheaders.hpp" />
+    <ClInclude Include="audio.hpp" />
+    <ClInclude Include="catdeath.hpp" />
+    <ClInclude Include="collision.hpp" />
+    <ClInclude Include="GSM.hpp" />
+    <ClInclude Include="IncrementVariable.hpp" />
+    <ClInclude Include="Level1.hpp" />
+    <ClInclude Include="level1_new.hpp" />
+    <ClInclude Include="Level2.hpp" />
+    <ClInclude Include="Level3.hpp" />
+    <ClInclude Include="Level4.hpp" />
+    <ClInclude Include="Level5.hpp" />
+    <ClInclude Include="Mainmenu.hpp" />
+    <ClInclude Include="mainmenuinit.hpp" />
+    <ClInclude Include="moreyukivariables.hpp" />
+    <ClInclude Include="objectDecs.hpp" />
+    <ClInclude Include="objects.hpp" />
+    <ClInclude Include="movement.hpp" />
+    <ClInclude Include="PlatformsDisappear.hpp" />
+    <ClInclude Include="SplashScreen.hpp" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="vpCollision.hpp" />
+    <ClInclude Include="Level6.hpp" />
+    <ClInclude Include="Level7.hpp" />
+    <ClInclude Include="invertGravity.hpp" />
+    <ClInclude Include="winScreen.hpp" />
   </ItemGroup>
 </Project>

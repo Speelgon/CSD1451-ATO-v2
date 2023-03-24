@@ -5,13 +5,14 @@
 extern f64 delta;
 extern f64 assumedFrameRate;
 extern squareObject player;
+extern float jumpspeed;
 //For the movement, the variables are passed in as functions, so the extern thing isn't really necessary here, thats also why its less complicated wrt variable placement
 
 void playerInputMovement(float& pX, float& pY, float playerSpeed,int& jumptoken) {
 
 	if (AEInputCheckCurr(AEVK_W) && jumptoken == 1)
 	{
-		pY = 8;
+		pY = jumpspeed;
 		jumptoken = 0;
 	}
 

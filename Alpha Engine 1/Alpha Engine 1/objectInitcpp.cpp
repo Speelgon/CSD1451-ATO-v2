@@ -208,6 +208,24 @@ void objectlevel5init(squareObject* object) {
 
 }
 
+void objectlevel6init(squareObject* object) {
+
+	object[0].x = -1000; //starting block
+	object[0].y = -275;
+	object[0].width = 200;
+	object[0].height = 30;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+
+	object[1].x = -500;
+	object[1].y = -275;
+	object[1].width = 200;
+	object[1].height = 30;
+	object[1].halfW = object[1].width / 2;
+	object[1].halfH = object[1].height / 2;
+
+}
+
 void objectlevel1NEWinit(squareObject* object){
 
 	object[0].x = -1100;
@@ -386,7 +404,32 @@ void collectiblelevel5init(collectibleObject* object) {
 	object[2].visibility = 1;
 }
 
+void collectiblelevel6init(collectibleObject* object) {
 
+	object[0].x = -1740;
+	object[0].y = -100;
+	object[0].width = 30;
+	object[0].height = 30;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+	object[0].visibility = 1;
+
+	object[1].x = -760;
+	object[1].y = 370;
+	object[1].width = 30;
+	object[1].height = 30;
+	object[1].halfW = object[1].width / 2;
+	object[1].halfH = object[1].height / 2;
+	object[1].visibility = 1;
+
+	object[2].x = -1450;
+	object[2].y = 200;
+	object[2].width = 30;
+	object[2].height = 30;
+	object[2].halfW = object[2].width / 2;
+	object[2].halfH = object[2].height / 2;
+	object[2].visibility = 1;
+}
 
 void portalinit(portalObject* portal) {
 

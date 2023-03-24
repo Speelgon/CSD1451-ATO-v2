@@ -1,6 +1,6 @@
 #pragma once
 #include "allheaders.hpp"
-#include "Level1_new.hpp"
+#include "Level7.hpp"
 #include "movement.hpp"
 #include "objects.hpp"
 #include "collision.hpp"
@@ -9,14 +9,12 @@
 #include "catdeath.hpp"
 #include "PlatformsDisappear.hpp"
 #include "utils.h"
-
+#include "objects.hpp"
 
 
 //==========================================================================================================================
 //==========================================================================================================================
-
-
-extern PlatformState platformstate[maxObj];
+extern PlatformState platformstate[4];
 
 //variables for normal timer
 extern f64 normalElapsedTime;
@@ -28,7 +26,8 @@ extern f64 elapsedtime;
 extern int collectible_count;
 extern GS_STATES previousState;
 
-void Level1NEW_Load()
+
+void Level7_Load()
 {
 	std::cout << "GSM:Load\n";
 
@@ -69,16 +68,17 @@ void Level1NEW_Load()
 	AE_ASSERT_MESG(pTexDisappearingPlat, "Failed to create stick texture!!");
 }
 
-void Level1NEW_Initialize()
+void Level7_Initialize()
 {
-	previousState = GS_LEVEL1;
 
-	elapsedtime = 0;
-	
-	platformstate[1].state = CANDISAPPEAR;
+	previousState = GS_LEVEL7;
+
+	platformstate[1].state = CANTDISAPPEAR;
 	platformstate[1].timer = 3;
 	platformstate[1].elapsedtime = 0.0f;
-	platformstate[1].interval = 1.0f; 
+	platformstate[1].interval = 1.0f;
+
+
 
 	player.x = -1000;
 	player.y = -200;
@@ -98,20 +98,22 @@ void Level1NEW_Initialize()
 	mapBoundary.y = -600;
 
 	collectible_count = 0;
-	initAudioList();
 
+	initAudioList();
 
 	objectinit(object);
 
-	objectlevel1NEWinit(object);
+	objectlevel5init(object);
 
 	hookinit(playerHook);
 
 	collectibleinit(collectible);
 
-	collectiblelevel1NEWinit(collectible);
-	
-	nodeInit(nodes);
+	collectiblelevel5init(collectible);
+
+	portalinit(portal);
+
+	portallevel5init(portal);
 
 	uiinit(ui);
 
@@ -119,17 +121,23 @@ void Level1NEW_Initialize()
 
 	exitdoorinit(exitdoor);
 
-	exitdoorlevel1NEWinit(exitdoor);
+	exitdoorlevel5init(exitdoor);
 
 	textureinit(pTex);
 
 	meshinit(object, pMesh);
 
+	nodeInit(nodes);
+
+	nodeInitlevel5(nodes);
+
 	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+
+	trampolinelevel5init(trampoline);
 
 	platformstate[2].state = CANTDISAPPEAR;
 	platformstate[2].timer = 0;
-	platformstate[2].elapsedtime = 0.0f;
+	platformstate[2].elapsedtime = 0.0;
 	platformstate[2].interval = 0.0f;
 
 	platformstate[3].state = CANTDISAPPEAR;
@@ -137,25 +145,11 @@ void Level1NEW_Initialize()
 	platformstate[3].elapsedtime = 0.0f;
 	platformstate[3].interval = 0.0f;
 
-	player.x = -1000;
-	player.y = -200;
-	player.xvel = 0;
-	player.yvel = 0;
-	player.width = 10;
-	player.height = 60;
-	player.halfW = player.width / 2;
-	player.halfH = player.height / 2;
-	player.lefttoken = 0;
-	player.righttoken = 0;
+	timer = 0;
 
-	item.rotation = 0;
-	item.width = 8.f;
-	item.height = 45.f;
-	
+}
 
-}//end of initialisation
-
-void Level1NEW_Update()
+void Level7_Update()
 {
 	delta = AEFrameRateControllerGetFrameTime();
 
@@ -166,10 +160,6 @@ void Level1NEW_Update()
 
 	else
 	{
-		if (AEInputCheckTriggered(AEVK_F))
-		{
-			invertGravity();
-		}
 
 		playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
 
@@ -204,11 +194,23 @@ void Level1NEW_Update()
 
 		hookUpdate();
 
+
 		//Bounding box type collision
 
 		for (int i = maxObj - 1; i >= 0; i--)
 		{
-
+			//if (i < 4)
+			//
+			//	if (platformstate[i].state == 0 && LastJump == 1)
+			//	{
+			//		if (timerset == 0)
+			//		{
+			//			//InitializeTimer(15, 1.0f);
+			//			timerset = 1;
+			//		}
+			//		
+			//	}
+			//}
 			if (i < numberofplatforms)
 			{
 				// if platform set to disappear upon finishing countdown of timer, need not to check for collision
@@ -271,9 +273,30 @@ void Level1NEW_Update()
 		for (int i = 0; i < maxCollectible; i++)
 		{
 			playerCollisionCollectible(player.x, player.y, collectible[i].x, collectible[i].y, player.halfW, player.halfH, collectible[i].halfW, collectible[i].halfH, collectible[i].visibility, collectible_count);
-
 		}
-		
+
+
+
+		playerCollisionPortal(player.x, player.y, portal[0].x, portal[0].y, player.halfW, player.halfH, portal[0].halfW, portal[0].halfH, portal[0].positiontoken);
+
+		if (portal[0].positiontoken == 0)
+		{
+			player.x = portal[1].x + portal[1].halfW + 20;
+			player.y = portal[1].y;
+			portal[0].positiontoken = 1;
+		}
+
+		playerCollisionPortal(player.x, player.y, portal[1].x, portal[1].y, player.halfW, player.halfH, portal[1].halfW, portal[1].halfH, portal[1].positiontoken);
+
+
+		if (portal[1].positiontoken == 0)
+		{
+			player.x = portal[0].x - portal[0].halfW - 20;
+			player.y = portal[0].y;
+			portal[1].positiontoken = 1;
+		}
+
+		//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 		playerEasingMovement(player.xvel, player.yvel, stabliser);
 
@@ -283,33 +306,31 @@ void Level1NEW_Update()
 
 		AEInputGetCursorPosition(&mouseX, &mouseY);
 
+		//if(player.x<400 && player.x>-400 && player.y<400 && player.y > -300)
+		//{
 		viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
+		//}
 
-		//Respawn player if out of bounds
+
+		// Out of bounds
 		if (playerOutofBounds(player.y, mapBoundary.y) == 1)
 		{
 			current = GS_RESTART;
 		}
 
-		//Go to next level when player touches exit door
 		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
 		{
-			next = GS_WINSCREEN;
+			next = GS_MAINMENU;
 		}
 
 		updateSound();
-
 	}
-    
-
-
-
 }
 
-void Level1NEW_Draw()
+void Level7_Draw()
 {
 	// Draw background
-	backgroundrender( pMesh, pTexBackground);
+	backgroundrender(pMesh, pTexBackground);
 
 	// Draw platforms
 	DisappearingPlatformRender(object, platformstate, pMesh, pTexPlatform1, pTexDisappearingPlat);
@@ -330,7 +351,7 @@ void Level1NEW_Draw()
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
 	kwanEuItemRender(pTexStick);
-	
+
 	// Print number of collectible collected
 	char strBufferCollectible[100];
 	memset(strBufferCollectible, 0, 100 * sizeof(char));
@@ -341,20 +362,19 @@ void Level1NEW_Draw()
 	f32 TextWidth, TextHeight;
 	AEGfxGetPrintSize(fontId, strBufferCollectible, 1.0f, TextWidth, TextHeight);
 	AEGfxPrint(fontId, strBufferCollectible, -0.90f, 0.8f, 1, 1.f, 1.f, 1.f);
-
 }
 
-void Level1NEW_Free()
+void Level7_Free()
 {
-    for (int i = 0; i < meshMax; i++)
+	for (int i = 0; i < meshMax; i++)
 	{
 		AEGfxMeshFree(pMesh[i]);
 	}
 	AEGfxMeshFree(itemMesh);
-	/*AEGfxDestroyFont(fontId);*/
+	freeSound();
 }
 
-void Level1NEW_Unload()
+void Level7_Unload()
 {
 	AEGfxTextureUnload(pTexFront);
 	AEGfxTextureUnload(pTexRight);
@@ -370,4 +390,4 @@ void Level1NEW_Unload()
 	AEGfxTextureUnload(pTexDisappearingPlat);
 	freeSound();
 
-}		
+}

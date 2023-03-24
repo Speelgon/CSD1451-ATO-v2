@@ -2,7 +2,7 @@
 #include "allheaders.hpp"
 #include "Mainmenu.hpp"
 #include "SplashScreen.hpp"
-int current = 0, previous = 0, next = 0;
+int current = GS_SPLASHSCREEN, previous = 0, next = 0;
 
 FP fpLoad = nullptr, fpInitialize = nullptr, fpUpdate = nullptr, fpDraw = nullptr, fpFree = nullptr, fpUnload = nullptr;
 
@@ -95,7 +95,35 @@ void GSM_Update()
 		fpUnload = Level5_Unload;
 		break;
 
+	case GS_LEVEL6:
+		fpLoad = Level6_Load;
+		fpInitialize = Level6_Initialize;
+		fpUpdate = Level6_Update;
+		fpDraw = Level6_Draw;
+		fpFree = Level6_Free;
+		fpUnload = Level6_Unload;
+		break;
+
+
+	case GS_LEVEL7:
+		fpLoad = Level7_Load;
+		fpInitialize = Level7_Initialize;
+		fpUpdate = Level7_Update;
+		fpDraw = Level7_Draw;
+		fpFree = Level7_Free;
+		fpUnload = Level7_Unload;
+		break;
 			
+	case GS_WINSCREEN:
+		fpLoad = winScreen_Load;
+		fpInitialize = winScreen_Initialize;
+		fpUpdate = winScreen_Update;
+		fpDraw = winScreen_Draw;
+		fpFree = winScreen_Free;
+		fpUnload = winScreen_Unload;
+		break;
+
+
 	case GS_RESTART:		//Breaks the current case if the gamestate is required to restart
 		break;
 	case GS_QUIT:			//Breaks the current case if the gamestate is required to quit
