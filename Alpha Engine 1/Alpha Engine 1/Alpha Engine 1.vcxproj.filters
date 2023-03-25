@@ -30,7 +30,11 @@
     <ClCompile Include="invertGravity.cpp" />
     <ClCompile Include="winScreen.cpp" />
     <ClCompile Include="Quit_Confirm.cpp" />
+<<<<<<< Updated upstream
     <ClCompile Include="HowToPlay.cpp" />
+=======
+    <ClCompile Include="PauseScreen.cpp" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allheaders.hpp" />
@@ -60,6 +64,10 @@
     <ClInclude Include="invertGravity.hpp" />
     <ClInclude Include="winScreen.hpp" />
     <ClInclude Include="Quit_Confirm.hpp" />
+<<<<<<< Updated upstream
     <ClInclude Include="howToPlay.hpp" />
+=======
+    <ClInclude Include="PauseScreen.hpp" />
+>>>>>>> Stashed changes
   </ItemGroup>
 </Project>

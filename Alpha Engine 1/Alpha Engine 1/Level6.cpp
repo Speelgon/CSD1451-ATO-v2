@@ -323,6 +323,10 @@ void Level6_Update()
 			next = GS_WINSCREEN;
 		}
 
+		if (AEInputCheckTriggered(AEVK_ESCAPE))
+		{
+			next = GS_PAUSEMENU;
+		}
 		updateSound();
 	}
 }

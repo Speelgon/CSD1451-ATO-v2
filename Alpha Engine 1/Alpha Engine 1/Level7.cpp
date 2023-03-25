@@ -326,6 +326,10 @@ void Level7_Update()
 			next = GS_MAINMENU;
 		}
 
+		if (AEInputCheckTriggered(AEVK_ESCAPE))
+		{
+			next = GS_PAUSEMENU;
+		}
 		updateSound();
 	}
 }

@@ -3,6 +3,7 @@
 #include "Mainmenu.hpp"
 #include "SplashScreen.hpp"
 #include "Quit_Confirm.hpp"
+#include "PauseScreen.hpp"
 int current = GS_SPLASHSCREEN, previous = 0, next = 0;
 
 FP fpLoad = nullptr, fpInitialize = nullptr, fpUpdate = nullptr, fpDraw = nullptr, fpFree = nullptr, fpUnload = nullptr;
@@ -38,6 +39,7 @@ void GSM_Update()
 		fpDraw = SplashScreen_Draw;
 		fpFree = SplashScreen_Free;
 		fpUnload = SplashScreen_Unload;
+		
 		break;
 
 	case GS_MAINMENU:			//Loads the function pointers for MAINMENU
@@ -146,6 +148,15 @@ void GSM_Update()
 		fpDraw = quit_confirm_Draw;
 		fpFree = quit_confirm_Free;
 		fpUnload = quit_confirm_Unload;
+		break;
+
+	case GS_PAUSEMENU:
+		fpLoad = Pausemenu_Load;
+		fpInitialize = Pausemenu_Initialize;
+		fpUpdate = Pausemenu_Update;
+		fpDraw = Pausemenu_Draw;
+		fpFree = Pausemenu_Free;
+		fpUnload = Pausemenu_Unload;
 		break;
 	default:
 		break;

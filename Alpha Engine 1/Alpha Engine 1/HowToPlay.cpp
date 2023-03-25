@@ -18,6 +18,8 @@ extern int truemousey;
 extern square player;
 extern AEGfxTexture* pTexMenuBackground;
 extern AEGfxTexture* pTexPlay;
+extern GS_STATES previousState;
+
 
 void howToPlay_Load()
 {
@@ -89,7 +91,7 @@ void howToPlay_Update()
 
 	if (IsAreaClicked(buttons.x, buttons.y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
-		next = GS_LEVEL1;
+		next = previousState;
 	}
 
 	updateSound();
