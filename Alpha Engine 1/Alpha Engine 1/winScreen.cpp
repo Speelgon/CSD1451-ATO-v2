@@ -18,9 +18,7 @@ extern square background;
 extern AEGfxVertexList* playMesh;
 extern AEGfxVertexList* backgroundMesh;
 extern s8 fontId;
-//char strBufferPLAY[5], strBufferHTP[12], strBufferCredits[8], strBufferQuit[5], strBufferTitle[14];
-//char strBufferSettings[50];
-//f32 TextWidth, TextHeight;
+
 extern int mousex;
 extern int mousey;
 extern int truemousex;
@@ -276,6 +274,7 @@ void winScreen_Draw()
 		AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 		AEGfxSetTransparency(1.0f);
 	}
+
 	//Drawing next level button 
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);

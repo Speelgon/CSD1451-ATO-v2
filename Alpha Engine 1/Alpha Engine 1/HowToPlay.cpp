@@ -1,11 +1,12 @@
 #include "allheaders.hpp"
 #include "Mainmenu.hpp"
 #include "IncrementVariable.hpp"
+#include "howToPlay.hpp"
 
-square buttons;
-square background;
-AEGfxVertexList* playMesh;
-AEGfxVertexList* backgroundMesh;
+extern square buttons;
+extern square background;
+extern AEGfxVertexList* playMesh;
+extern AEGfxVertexList* backgroundMesh;
 extern s8 fontId;
 //char strBufferPLAY[5], strBufferHTP[12], strBufferCredits[8], strBufferQuit[5], strBufferTitle[14];
 //char strBufferSettings[50];
@@ -15,52 +16,24 @@ extern int mousey;
 extern int truemousex;
 extern int truemousey;
 extern square player;
-extern AEGfxTexture* pTexMenuBackground = 0;
-extern AEGfxTexture* pTexPlay = 0;
-extern AEGfxTexture* pTexTutorial = 0;
-extern AEGfxTexture* pTexCredits = 0;
-extern AEGfxTexture* pTexQuit = 0;
-f32 settingsbuttony;
-f32 creditsbuttony;
-f32 quitbuttony;
+extern AEGfxTexture* pTexMenuBackground;
+extern AEGfxTexture* pTexPlay;
 
-
-void Mainmenu_Load()
+void howToPlay_Load()
 {
 	std::cout << "GSM:Load\n";
 
-	pTexMenuBackground = AEGfxTextureLoad("Assets/MenuBackground.png");
+	pTexMenuBackground = AEGfxTextureLoad("Assets/how_to_play.png");
 	AE_ASSERT_MESG(pTexMenuBackground, "Failed to create menu background texture!!");
 
 	pTexPlay = AEGfxTextureLoad("Assets/button_play.png");
 	AE_ASSERT_MESG(pTexPlay, "Failed to create play button texture!!");
 
-	pTexTutorial = AEGfxTextureLoad("Assets/button_tutorial.png");
-	AE_ASSERT_MESG(pTexTutorial, "Failed to create tutorial button texture!!");
 
-	pTexCredits = AEGfxTextureLoad("Assets/button_credits.png");
-	AE_ASSERT_MESG(pTexCredits, "Failed to create credits button texture!!");
-
-	pTexQuit = AEGfxTextureLoad("Assets/button_quit.png");
-	AE_ASSERT_MESG(pTexQuit, "Failed to create quit button texture!!");
 }
 
-void Mainmenu_Initialize()
+void howToPlay_Initialize()
 {
-
-
-
-	buttons.x = 0;
-	buttons.y = 70;
-	settingsbuttony = buttons.y - 80;
-	creditsbuttony = buttons.y - 160;
-	quitbuttony = buttons.y - 240;
-	buttons.width = 120;
-	buttons.height = 60;
-	buttons.halfW = buttons.width / 2;
-	buttons.halfH = buttons.height / 2;
-
-
 
 	background.x = 0;
 	background.y = 0;
@@ -78,7 +51,7 @@ void Mainmenu_Initialize()
 	AEGfxTriAdd(
 		buttons.halfW, -buttons.halfH, 0xFFFFFFFF, 1.0f, 1.0f,
 		buttons.halfW, buttons.halfH, 0xFFFFFFFF, 1.0f, 0.0f,
-		-buttons.halfW,buttons.halfH, 0xFFFFFFFF, 0.0f, 0.0f);
+		-buttons.halfW, buttons.halfH, 0xFFFFFFFF, 0.0f, 0.0f);
 
 	// Saving the mesh (list of triangles) in pMesh1
 
@@ -102,43 +75,28 @@ void Mainmenu_Initialize()
 	AE_ASSERT_MESG(backgroundMesh, "Failed to create backgroundMesh!!");
 
 	initAudioList();
-	
+
 }
 
-void Mainmenu_Update()
+void howToPlay_Update()
 {
 
 	AEGfxSetCamPosition(0, 0);
 
 	AEInputGetCursorPosition(&mousex, &mousey);
 	truemousex = (int)(mousex - screenwidth / 2);
-	truemousey = (int) ( - mousey + screenheight / 2);
+	truemousey = (int)(-mousey + screenheight / 2);
 
 	if (IsAreaClicked(buttons.x, buttons.y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
 		next = GS_LEVEL1;
 	}
 
-	if (IsAreaClicked(buttons.x, settingsbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
-	{
-		next = GS_HOWTOPLAY;
-	}
-
-	if (IsAreaClicked(buttons.x, creditsbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
-	{
-		
-	}
-
-	if (IsAreaClicked(buttons.x, quitbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
-	{
-		next = GS_QUIT;
-	}
-	
 	updateSound();
 
 }
 
-void Mainmenu_Draw()
+void howToPlay_Draw()
 {
 	//====================================//
 	//			 Background Drawing		  //
@@ -147,7 +105,7 @@ void Mainmenu_Draw()
 	// Drawing background
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	
+
 	// Set position for background
 	AEGfxSetPosition(background.x, background.y);
 
@@ -162,7 +120,7 @@ void Mainmenu_Draw()
 	//====================================//
 	//			 Button Drawing			  //
 	//====================================//
-	
+
 	// Drawing top "play" button
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
@@ -175,32 +133,6 @@ void Mainmenu_Draw()
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
-	//Drawing 2nd "settings" button
-	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxSetPosition(buttons.x, settingsbuttony);
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexTutorial, 0, 0);
-	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
-	AEGfxSetTransparency(1.0f);
-
-	//Drawing 3rd "credits" button 
-	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxSetPosition(buttons.x, creditsbuttony);
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexCredits, 0, 0);
-	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
-	AEGfxSetTransparency(1.0f);
-
-	//Drawing 4th "quit" button
-	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxSetPosition(buttons.x, quitbuttony);
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexQuit, 0, 0);
-	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
-	AEGfxSetTransparency(1.0f);
 
 	//====================================//
 	//			  TEXT PRINTING			  //
@@ -242,19 +174,18 @@ void Mainmenu_Draw()
 	//AEGfxPrint(fontId, strBufferQuit, -0.065f, -0.66f, 1, 0.f, 0.f, 0.f);
 }
 
-void Mainmenu_Free()
+void howToPlay_Free()
 {
 	AEGfxMeshFree(playMesh);
 	AEGfxMeshFree(backgroundMesh);
 
 }
 
-void Mainmenu_Unload()
+void howToPlay_Unload()
 {
 	AEGfxTextureUnload(pTexMenuBackground);
 	AEGfxTextureUnload(pTexPlay);
-	AEGfxTextureUnload(pTexTutorial);
-	AEGfxTextureUnload(pTexCredits);
-	AEGfxTextureUnload(pTexQuit);
+
+
 	freeSound();
 }

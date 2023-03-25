@@ -103,6 +103,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClCompile Include="catdeath.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="HookUpdate.cpp" />
+    <ClCompile Include="HowToPlay.cpp" />
     <ClCompile Include="IncrementVariable.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="level1_new.cpp" />
@@ -134,6 +135,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClInclude Include="catdeath.hpp" />
     <ClInclude Include="collision.hpp" />
     <ClInclude Include="GSM.hpp" />
+    <ClInclude Include="howToPlay.hpp" />
     <ClInclude Include="IncrementVariable.hpp" />
     <ClInclude Include="invertGravity.hpp" />
     <ClInclude Include="Level1.hpp" />

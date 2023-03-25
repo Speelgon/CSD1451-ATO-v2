@@ -14,6 +14,7 @@
 #include "audio.hpp"
 #include "invertGravity.hpp"
 #include "winScreen.hpp"
+#include "howToPlay.hpp"
 
 #define screenwidth 1600
 #define screenheight 900
@@ -29,6 +30,7 @@ enum GS_STATES
 	
 	GS_SPLASHSCREEN,
 	GS_MAINMENU,
+	GS_HOWTOPLAY,
 	GS_LEVEL1,
 	GS_LEVEL2,
 	GS_LEVEL3,

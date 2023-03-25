@@ -125,6 +125,16 @@ void GSM_Update()
 		break;
 
 
+	case GS_HOWTOPLAY:
+		fpLoad = howToPlay_Load;
+		fpInitialize = howToPlay_Initialize;
+		fpUpdate = howToPlay_Update;
+		fpDraw = howToPlay_Draw;
+		fpFree = howToPlay_Free;
+		fpUnload = howToPlay_Unload;
+		break;
+
+
 	case GS_RESTART:		//Breaks the current case if the gamestate is required to restart
 		break;
 	case GS_QUIT:			//Breaks the current case if the gamestate is required to quit

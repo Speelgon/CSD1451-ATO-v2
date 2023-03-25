@@ -30,6 +30,7 @@
     <ClCompile Include="invertGravity.cpp" />
     <ClCompile Include="winScreen.cpp" />
     <ClCompile Include="Quit_Confirm.cpp" />
+    <ClCompile Include="HowToPlay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allheaders.hpp" />
@@ -59,5 +60,6 @@
     <ClInclude Include="invertGravity.hpp" />
     <ClInclude Include="winScreen.hpp" />
     <ClInclude Include="Quit_Confirm.hpp" />
+    <ClInclude Include="howToPlay.hpp" />
   </ItemGroup>
 </Project>
