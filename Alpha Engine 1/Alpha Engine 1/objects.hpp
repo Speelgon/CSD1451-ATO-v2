@@ -120,6 +120,8 @@ void objectlevel5init(squareObject* object);
 
 void objectlevel6init(squareObject* object);
 
+void objectlevel7init(squareObject* object);
+
 void meshinit(squareObject* object, AEGfxVertexList** pMesh);
 
 void meshinitlevel1(squareObject* object, AEGfxVertexList** pMesh, squareObject* ui, collectibleObject* collectible, squareObject player, portalObject* portal, hook playerHook, blackhole1* blackhole, exitDoor* door);
@@ -135,9 +137,10 @@ void trampolineinit(tramp* object);
 void trampolinelevel1init(tramp* object);
 
 void trampolinelevel4init(tramp* object);
+
 void trampolinelevel5init(tramp* object);
 
-void trampolinelevel6init(tramp* object);
+void trampolinelevel7init(tramp* object);
 
 void backgroundrender(AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground);
 
@@ -161,6 +164,8 @@ void collectiblelevel5init(collectibleObject* object);
 
 void collectiblelevel6init(collectibleObject* object);
 
+void collectiblelevel7init(collectibleObject* object);
+
 void portalinit(portalObject* object);
 
 void portallevel1init(portalObject* object);
@@ -170,6 +175,8 @@ void portallevel3init(portalObject* object);
 void portallevel5init(portalObject* object);
 
 void portallevel6init(portalObject* object);
+
+void portallevel7init(portalObject* object);
 
 void hookinit(hook &playerHook);
 
@@ -195,6 +202,8 @@ void nodeInitlevel5(nodeObject* nodes);
 
 void nodeInitlevel6(nodeObject* nodes);
 
+void nodeInitlevel7(nodeObject* nodes);
+
 void exitdoorinit(exitDoor* door);
 
 void exitdoorlevel1init(exitDoor* door);
@@ -211,5 +220,5 @@ void exitdoorlevel5init(exitDoor* door);
 
 void exitdoorlevel6init(exitDoor* door);
 
-
+void exitdoorlevel7init(exitDoor* door);
 

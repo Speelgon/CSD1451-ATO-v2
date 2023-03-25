@@ -115,7 +115,7 @@ void Level6_Initialize()
 
 	portalinit(portal);
 
-	portallevel5init(portal);
+	portallevel6init(portal);
 
 	uiinit(ui);
 
@@ -123,7 +123,7 @@ void Level6_Initialize()
 
 	exitdoorinit(exitdoor);
 
-	exitdoorlevel5init(exitdoor);
+	exitdoorlevel6init(exitdoor);
 
 	textureinit(pTex);
 
@@ -131,11 +131,9 @@ void Level6_Initialize()
 
 	nodeInit(nodes);
 
-	nodeInitlevel5(nodes);
+	nodeInitlevel6(nodes);
 
 	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
-
-	trampolinelevel5init(trampoline);
 
 	platformstate[2].state = CANTDISAPPEAR;
 	platformstate[2].timer = 0;

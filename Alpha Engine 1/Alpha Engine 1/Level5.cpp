@@ -73,7 +73,7 @@ void Level5_Load()
 void Level5_Initialize()
 {
 	
-	previousState = GS_LEVEL4;
+	previousState = GS_LEVEL5;
 
 	platformstate[1].state = CANTDISAPPEAR;
 	platformstate[1].timer = 3;
@@ -136,6 +136,8 @@ void Level5_Initialize()
 	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
 	trampolinelevel5init(trampoline);
+
+
 
 	platformstate[2].state = CANTDISAPPEAR;
 	platformstate[2].timer = 0;

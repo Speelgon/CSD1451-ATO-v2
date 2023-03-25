@@ -98,7 +98,7 @@ void Level7_Initialize()
 	item.width = 8.f;
 	item.height = 45.f;
 
-	mapBoundary.y = -600;
+	mapBoundary.y = -1500;
 
 	collectible_count = 0;
 
@@ -106,17 +106,17 @@ void Level7_Initialize()
 
 	objectinit(object);
 
-	objectlevel5init(object);
+	objectlevel7init(object);
 
 	hookinit(playerHook);
 
 	collectibleinit(collectible);
 
-	collectiblelevel5init(collectible);
+	collectiblelevel7init(collectible);
 
 	portalinit(portal);
 
-	portallevel5init(portal);
+	portallevel7init(portal);
 
 	uiinit(ui);
 
@@ -124,7 +124,7 @@ void Level7_Initialize()
 
 	exitdoorinit(exitdoor);
 
-	exitdoorlevel5init(exitdoor);
+	exitdoorlevel7init(exitdoor);
 
 	textureinit(pTex);
 
@@ -132,11 +132,11 @@ void Level7_Initialize()
 
 	nodeInit(nodes);
 
-	nodeInitlevel5(nodes);
+	nodeInitlevel7(nodes);
+
+	trampolinelevel7init(trampoline);
 
 	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
-
-	trampolinelevel5init(trampoline);
 
 	platformstate[2].state = CANTDISAPPEAR;
 	platformstate[2].timer = 0;

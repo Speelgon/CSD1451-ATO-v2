@@ -48,6 +48,8 @@ void Mainmenu_Load()
 void Mainmenu_Initialize()
 {
 
+
+
 	buttons.x = 0;
 	buttons.y = 70;
 	settingsbuttony = buttons.y - 80;
@@ -105,9 +107,12 @@ void Mainmenu_Initialize()
 
 void Mainmenu_Update()
 {
+
+	AEGfxSetCamPosition(0, 0);
+
 	AEInputGetCursorPosition(&mousex, &mousey);
-	truemousex = (int)(mousex - screenwidth / 2 + player.x);
-	truemousey = (int) ( - mousey + screenheight / 2 + player.y);
+	truemousex = (int)(mousex - screenwidth / 2);
+	truemousey = (int) ( - mousey + screenheight / 2);
 
 	if (IsAreaClicked(buttons.x, buttons.y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{

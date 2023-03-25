@@ -180,11 +180,10 @@ void winScreen_Initialize()
 void winScreen_Update()
 {
 	AEGfxSetCamPosition(0, 0);
-	player.x = 0;
-	player.y = 0;
+
 	AEInputGetCursorPosition(&mousex, &mousey);
-	truemousex = (int)(mousex - screenwidth / 2 + player.x);
-	truemousey = (int)(-mousey + screenheight / 2 + player.y);
+	truemousex = (int)(mousex - screenwidth / 2);
+	truemousey = (int)(-mousey + screenheight / 2);
 
 	if (IsAreaClicked(next_level_button.x, next_level_button.y, next_level_button.halfW, next_level_button.halfH, truemousex, truemousey))
 	{
