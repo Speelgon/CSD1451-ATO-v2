@@ -16,11 +16,11 @@ extern int mousey;
 extern int truemousex;
 extern int truemousey;
 extern s8 fontId;
-extern AEGfxTexture* pTexMenuBackground;
-extern AEGfxTexture* pTexResume;
+extern AEGfxTexture* pTexPauseBackground = 0;
+extern AEGfxTexture* pTexResume = 0;
 extern AEGfxTexture* pTexRestart;
 extern AEGfxTexture* pTexTutorial;
-extern AEGfxTexture* pTexMainMenu;
+extern AEGfxTexture* pTexMainMenu = 0;
 extern AEGfxTexture* pTexQuit;
 
 extern AEGfxVertexList* backgroundMesh;
@@ -34,23 +34,23 @@ void Pausemenu_Load()
 
 	//Change the AEGfxTextureLoad to right file path for all 
 	
-	/*pTexMenuBackground = AEGfxTextureLoad("Assets/MenuBackground.png");
-	AE_ASSERT_MESG(pTexMenuBackground, "Failed to create menu background texture!!");
+	pTexPauseBackground = AEGfxTextureLoad("Assets/pause_background.png");
+	AE_ASSERT_MESG(pTexPauseBackground, "Failed to create pause background texture!!");
 
-	pTexResume = AEGfxTextureLoad("Assets/collectible.png");
-	AE_ASSERT_MESG(pTexResume, "Failed to create resume button texture!!");*/
+	pTexResume = AEGfxTextureLoad("Assets/button_resume.png");
+	AE_ASSERT_MESG(pTexResume, "Failed to create resume button texture!!");
 
-	pTexRestart = AEGfxTextureLoad("Assets/button_next.png");
-	AE_ASSERT_MESG(pTexRestart, "Failed to create tutorial button next!!");
+	pTexRestart = AEGfxTextureLoad("Assets/button_restart.png");
+	AE_ASSERT_MESG(pTexRestart, "Failed to create restart button next!!");
 
-	pTexTutorial = AEGfxTextureLoad("Assets/button_next.png");
+	pTexTutorial = AEGfxTextureLoad("Assets/button_tutorial.png");
 	AE_ASSERT_MESG(pTexTutorial, "Failed to create tutorial button next!!");
 
-	//pTexMainMenu = AEGfxTextureLoad("Assets/button_restart.png");
-	//AE_ASSERT_MESG(pTexMainMenu, "Failed to create restart button next!!");
+	pTexMainMenu = AEGfxTextureLoad("Assets/button_menu.png");
+	AE_ASSERT_MESG(pTexMainMenu, "Failed to create main menu button next!!");
 
-	pTexQuit = AEGfxTextureLoad("Assets/button_return.png");
-	AE_ASSERT_MESG(pTexQuit, "Failed to create return button next!!");
+	pTexQuit = AEGfxTextureLoad("Assets/button_quit.png");
+	AE_ASSERT_MESG(pTexQuit, "Failed to create quit button next!!");
 	
 }
 
@@ -176,20 +176,20 @@ void Pausemenu_Draw()
 	//			 Background Drawing		  //
 	//====================================//
 
-	//// Drawing background
-	//AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	// Drawing background
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
-	//// Set position for background
-	//AEGfxSetPosition(background.x, background.y);
+	// Set position for background
+	AEGfxSetPosition(background.x, background.y);
 
-	//AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//// Texture for platform
-	//AEGfxTextureSet(pTexMenuBackground, 0.0f, 0.0f);
-	//// Drawing the mesh (list of triangles)
-	//AEGfxMeshDraw(backgroundMesh, AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	// Texture for platform
+	AEGfxTextureSet(pTexPauseBackground, 0.0f, 0.0f);
+	// Drawing the mesh (list of triangles)
+	AEGfxMeshDraw(backgroundMesh, AE_GFX_MDM_TRIANGLES);
 
-	//AEGfxSetTransparency(1.0f);
+	AEGfxSetTransparency(1.0f);
 
 
 	//====================================//
@@ -199,50 +199,48 @@ void Pausemenu_Draw()
 
 
 	// Drawing "resume" button
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	// Set position 
 	AEGfxSetPosition(resume_button.x, resume_button.y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// No texture 
-	//AEGfxTextureSet(pTexResume, 0, 0);
+	AEGfxTextureSet(pTexResume, 0, 0);
 	//Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(buttonMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
 
 
-
 	//Drawing "restart" button
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(restartpause_button.x, restartpause_button.y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//AEGfxTextureSet(pTexRestart, 0, 0);
+	AEGfxTextureSet(pTexRestart, 0, 0);
 	AEGfxMeshDraw(buttonMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
 
 	//Drawing "howtoplay" button 
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(howtoplay_button.x, howtoplay_button.y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//AEGfxTextureSet(pTexTutorial, 0, 0);
+	AEGfxTextureSet(pTexTutorial, 0, 0);
 	AEGfxMeshDraw(buttonMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
-	////Drawing "mainmenu" button 
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	//Drawing "mainmenu" button 
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(mainmenu_button.x, mainmenu_button.y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	//AEGfxTextureSet(pTexNext, 0, 0);
+	AEGfxTextureSet(pTexMainMenu, 0, 0);
 	AEGfxMeshDraw(buttonMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
 	//Drawing "quit" button
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(quit_button.x, quit_button.y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -263,11 +261,10 @@ void Pausemenu_Free()
 
 void Pausemenu_Unload()
 {
-	
+	AEGfxTextureUnload(pTexPauseBackground);
 	AEGfxTextureUnload(pTexRestart);
 	AEGfxTextureUnload(pTexTutorial);
 	AEGfxTextureUnload(pTexQuit);
-	
-
-
+	AEGfxTextureUnload(pTexResume);
+	AEGfxTextureUnload(pTexMainMenu);
 }
