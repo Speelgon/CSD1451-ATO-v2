@@ -14,7 +14,7 @@ enum soundGrouping {
 //			Sound Types enum		 //
 //===================================//
 enum soundType {
-	bounce, menubgm, level1bgm, level4bgm, level5bgm, nodeCollide, portalCollision, collectibleCollision, platformDisappeared, spawn, MAXASSETS
+	bounce, menubgm, level1bgm, level4bgm, level5bgm, level7bgm, nodeCollide, portalCollision, collectibleCollision, platformDisappeared, win, spawn, MAXASSETS
 };
 
 AEAudio soundList[MAXASSETS];
@@ -26,6 +26,8 @@ AEAudioGroup soundGroups[MAXGROUPS];
 
 bool bgmPlayed{ false }, jumped{ false }, hooked{ true };
 
+HWND windowHandle;
+
 void initAudioList() {
 	//soundListVector.push_back(AEAudioLoadSound("Assets/Sound/bounce.wav"));
 	soundList[bounce] = AEAudioLoadSound("Assets/Sound/bounce.wav");
@@ -33,11 +35,14 @@ void initAudioList() {
 	soundList[level1bgm] = AEAudioLoadSound("Assets/Sound/level1bgm.wav");
 	soundList[level4bgm] = AEAudioLoadSound("Assets/Sound/level4bgm.wav");
 	soundList[level5bgm] = AEAudioLoadSound("Assets/Sound/level5bgm.wav");
+	soundList[level7bgm] = AEAudioLoadSound("Assets/Sound/level7bgm.wav");
 	soundList[nodeCollide] = AEAudioLoadSound("Assets/Sound/nodeCollide.wav");
 	soundList[portalCollision] = AEAudioLoadSound("Assets/Sound/portalCollision.wav");
 	soundList[collectibleCollision] = AEAudioLoadSound("Assets/Sound/collectibleCollision.wav");
 	soundList[platformDisappeared] = AEAudioLoadSound("Assets/Sound/platformDisappear.wav");
 	soundList[spawn] = AEAudioLoadSound("Assets/Sound/spawn.wav");
+	soundList[win] = AEAudioLoadSound("Assets/Sound/win.wav");
+
 
 	//check that all audio is valid, else exit
 	for (int i{ 0 }; i < MAXASSETS; ++i) {	
@@ -88,12 +93,22 @@ void updateSound() {
 		case GS_LEVEL5:
 			playAudio(soundList[level5bgm], soundGroups[BGM], 0.4f, 1, -1);
 			break;
+		case GS_LEVEL6: 
+			playAudio(soundList[level5bgm], soundGroups[BGM], 0.4f, 0.9f, -1);
+			break;
+		case GS_LEVEL7: 
+			playAudio(soundList[level7bgm], soundGroups[BGM], 0.4f, 1, -1);
+			break;
 		case GS_MAINMENU:
 			playAudio(soundList[menubgm], soundGroups[BGM], 0.4f, 1, -1);
 			break;
-		/*case GS_LEVEL6: break;
-		case GS_LEVEL7: break;
-		case GS_LEVEL8: break;
+		case GS_WINSCREEN:
+			playAudio(soundList[win], soundGroups[SFX], 0.4f, 1, 0);
+			break;
+		/*
+		case GS_LEVEL8: 
+		playAudio(soundList[level7bgm], soundGroups[BGM], 0.4f, 0.9f, -1);
+		break;
 		case GS_LEVEL9: break;
 		case GS_LEVEL10: break;*/
 		}
@@ -134,8 +149,6 @@ void updateSound() {
 		trampolined = false;
 	}
 	//========================================//
-	
-	
 
 	
 	//======= Input detection =======//
@@ -149,15 +162,27 @@ void updateSound() {
 		}
 	}
 
-	
 	//if (AEInputCheckTriggered(AEVK_E)) {
-		if (portalled) {
-			playAudio(soundList[portalCollision], soundGroups[SFX], 0.4);
-			portalled = false;
-		}
+	if (portalled) {
+		playAudio(soundList[portalCollision], soundGroups[SFX], 0.4);
+		portalled = false;
+	}
 	//}
 	//===============================//
 
+	//======== Window Minimized Check =========//
+	windowHandle = AESysGetWindowHandle();
+	if (IsIconic(windowHandle)) {
+		for (int i{ 0 }; i < MAXGROUPS; ++i) {
+			AEAudioPauseGroup(soundGroups[i]);
+		}
+	}
+	else {
+		for (int i{ 0 }; i < MAXGROUPS; ++i) {
+			AEAudioResumeGroup(soundGroups[i]);
+		}
+	}
+	//============================================//
 }
 
 void freeSound() {

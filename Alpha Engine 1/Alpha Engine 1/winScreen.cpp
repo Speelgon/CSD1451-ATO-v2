@@ -348,7 +348,7 @@ void winScreen_Free()
 	AEGfxMeshFree(playMesh);
 	AEGfxMeshFree(backgroundMesh);
 	AEGfxMeshFree(buttonMesh);
-
+	freeSound();
 }
 
 void winScreen_Unload()

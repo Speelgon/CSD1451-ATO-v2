@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <Windows.h>
 //=========== AE AUDIO VARIABLES ===========//
 extern int current;
 extern bool portalled;
