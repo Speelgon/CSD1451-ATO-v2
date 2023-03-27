@@ -22,6 +22,8 @@ void quit_confirm_Load()
 
 void quit_confirm_Initialize()
 {
+	AEGfxSetBackgroundColor(0.8f, 0.6f, 0.2f);
+
 	no_buttonx = -150;
 	no_buttony = 50;
 
@@ -75,6 +77,8 @@ void quit_confirm_Update()
 
 void quit_confirm_Draw()
 {
+	
+
 	//draw yes mesh
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 	//AEGfxSetBlendMode(AE_GFX_BM_BLEND);

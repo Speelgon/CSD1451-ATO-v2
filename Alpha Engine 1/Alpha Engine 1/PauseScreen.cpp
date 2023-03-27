@@ -56,6 +56,8 @@ void Pausemenu_Load()
 
 void Pausemenu_Initialize()
 {
+	AEGfxSetBackgroundColor(0.8f, 0.6f, 0.2f);
+
 	resume_button.x = 0;
 	resume_button.y = 200;
 	resume_button.width = 140;
