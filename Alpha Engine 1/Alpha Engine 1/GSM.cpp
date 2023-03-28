@@ -117,6 +117,16 @@ void GSM_Update()
 		fpUnload = Level7_Unload;
 		break;
 			
+	case GS_LEVELSELECTOR:
+		fpLoad = levelSelector_Load;
+		fpInitialize = levelSelector_Initialize;
+		fpUpdate = levelSelector_Update;
+		fpDraw = levelSelector_Draw;
+		fpFree = levelSelector_Free;
+		fpUnload = levelSelector_Unload;
+		break;
+
+
 	case GS_WINSCREEN:
 		fpLoad = winScreen_Load;
 		fpInitialize = winScreen_Initialize;

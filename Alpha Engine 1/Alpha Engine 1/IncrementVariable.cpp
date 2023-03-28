@@ -29,7 +29,7 @@
 		float min_y = area_middleY - half_height;
 
 
-		if (AEInputCheckCurr(AEVK_LBUTTON))
+		if (AEInputCheckTriggered(AEVK_LBUTTON))
 		{
 			std::cout << "The L mouse works   " << click_x << '\n';
 			if ((click_x > min_x) && (click_x < max_x) && (click_y > min_y) && (click_y < max_y))
