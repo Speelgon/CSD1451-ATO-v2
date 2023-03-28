@@ -93,7 +93,7 @@ extern float mapy;
 extern float halfmapx;
 extern float halfmapy;
 
-extern bool portalled, collectibleHit, platformDisappear;
+extern bool portalled, collectibleHit, platformDisappear, blackholeTouched;
 
 void Level1_Load();
 

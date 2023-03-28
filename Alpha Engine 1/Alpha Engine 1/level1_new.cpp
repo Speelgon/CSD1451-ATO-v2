@@ -76,7 +76,11 @@ void Level1NEW_Initialize()
 {
 	previousState = GS_LEVEL1;
 
+	
+
 	elapsedtime = 0;
+	blackholeTouched = 0;
+	timeDead = 0;
 	
 	platformstate[1].state = CANDISAPPEAR;
 	platformstate[1].timer = 3;
@@ -120,6 +124,8 @@ void Level1NEW_Initialize()
 
 	uilevel1init(ui);
 
+	blackholelevel1init(blackhole);
+
 	exitdoorinit(exitdoor);
 
 	exitdoorlevel1NEWinit(exitdoor);
@@ -162,9 +168,16 @@ void Level1NEW_Update()
 {
 	delta = AEFrameRateControllerGetFrameTime();
 
-	if (AEInputCheckCurr(AEVK_L))
+	if (blackholeTouched)
 	{
+		
 		catdeath();
+		hookUpdate();
+		if (playerOutofBounds(player.y, mapBoundary.y) == 1)
+		{
+			current = GS_RESTART;
+		}
+		
 	}
 
 	else
@@ -304,6 +317,15 @@ void Level1NEW_Update()
 		{
 			next = GS_PAUSEMENU;
 		}
+
+		for (int i{ 0 }; i < maxBlackhole; ++i)
+		{
+			blackholeCollision(player.x, player.y, blackhole[i].x, blackhole[i].y, player.halfW, player.halfH, blackhole[i].halfW, blackhole[i].halfH);
+			blackholeCollisionResponse(player.x, player.y, player.halfW, player.halfH, blackhole[i].x, blackhole[i].y, blackhole[i].halfW, blackhole[i].halfH);
+		}
+		/*else {
+			gravity = 0.15;
+		}*/
 
 		updateSound();
 

@@ -628,9 +628,9 @@ void blackholeinit(blackhole1* object) {
 
 void blackholelevel1init(blackhole1* object) {
 
-		object[0].x = -1250;
-		object[0].y = 0;
-		object[0].width = 30;
+		object[0].x = -1050;
+		object[0].y = -130;
+		object[0].width = 50;
 		object[0].height = 30;
 		object[0].halfW = object[0].width / 2;
 		object[0].halfH = object[0].height / 2;
