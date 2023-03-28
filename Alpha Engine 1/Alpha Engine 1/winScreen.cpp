@@ -199,7 +199,7 @@ void winScreen_Update()
 		//std::cout << "quit button clicked" << '\n';
 		//quit_confirm = 1;
 		//state_for_quit_confirm = 
-		next = GS_QUITCONFIRM;
+		next = GS_MAINMENU;
 	}
 
 	/*if (quit_confirm == 1)
