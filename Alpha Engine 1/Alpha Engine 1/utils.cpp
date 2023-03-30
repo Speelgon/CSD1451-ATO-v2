@@ -14,6 +14,17 @@ int normalUpdateTimer(f64* normalElapsedTime, int timer, f64 interval)
 	}
 	return timer;
 }
+
+float PortalTimer(f64* normalElapsedTime, int timer, f64 interval)
+{
+	*normalElapsedTime += AEFrameRateControllerGetFrameTime();
+	if (*normalElapsedTime >= interval)
+	{
+		timer++;
+		*normalElapsedTime = 0;
+	}
+	return timer;
+}
 //put below code in your update
 //if (timer > 0)
 //{
