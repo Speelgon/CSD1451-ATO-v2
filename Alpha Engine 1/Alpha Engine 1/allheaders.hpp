@@ -16,6 +16,7 @@
 #include "winScreen.hpp"
 #include "howToPlay.hpp"
 #include "levelSelector.hpp"
+#include "Credits.hpp"
 
 #define screenwidth 1600
 #define screenheight 900
@@ -39,6 +40,7 @@ enum GS_STATES
 	GS_LEVEL5,
 	GS_LEVEL6,
 	GS_LEVEL7,
+	GS_CREDITS,
 
 	GS_LEVELSELECTOR,
 	GS_WINSCREEN,

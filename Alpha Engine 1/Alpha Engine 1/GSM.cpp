@@ -146,6 +146,14 @@ void GSM_Update()
 		fpUnload = howToPlay_Unload;
 		break;
 
+	case GS_CREDITS:
+		fpLoad = Credits_Load;
+		fpInitialize = Credits_Initialize;
+		fpUpdate = Credits_Update;
+		fpDraw = Credits_Draw;
+		fpFree = Credits_Free;
+		fpUnload = Credits_Unload;
+		break;
 
 	case GS_RESTART:		//Breaks the current case if the gamestate is required to restart
 		break;

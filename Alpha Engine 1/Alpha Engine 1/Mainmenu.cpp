@@ -134,7 +134,7 @@ void Mainmenu_Update()
 
 	if (IsAreaClicked(buttons.x, creditsbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
-		
+		next = GS_CREDITS;
 	}
 
 	if (IsAreaClicked(buttons.x, quitbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
@@ -146,7 +146,6 @@ void Mainmenu_Update()
 	{
 		next = GS_LEVELSELECTOR;
 	}
-
 
 	updateSound();
 

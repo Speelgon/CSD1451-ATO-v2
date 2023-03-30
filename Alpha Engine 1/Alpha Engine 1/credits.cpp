@@ -1,7 +1,7 @@
 #include "allheaders.hpp"
 #include "IncrementVariable.hpp"
 
-square levels[10];
+extern square levels[10];
 
 extern square buttons;
 extern square background;
@@ -14,7 +14,7 @@ extern int mousey;
 extern int truemousex;
 extern int truemousey;
 extern square player;
-extern AEGfxTexture* pTexMenuBackground ;
+extern AEGfxTexture* pTexMenuBackground;
 extern AEGfxTexture* pTexPlay;
 extern AEGfxTexture* pTexTutorial;
 extern AEGfxTexture* pTexCredits;
@@ -24,7 +24,7 @@ extern f32 creditsbuttony;
 extern f32 quitbuttony;
 
 
-void levelSelector_Load()
+void Credits_Load()
 {
 	std::cout << "GSM:Load\n";
 
@@ -44,7 +44,7 @@ void levelSelector_Load()
 	AE_ASSERT_MESG(pTexQuit, "Failed to create quit button texture!!");
 }
 
-void levelSelector_Initialize()
+void Credits_Initialize()
 {
 
 	for (int i = 0; i < 10; i++) {
@@ -143,7 +143,7 @@ void levelSelector_Initialize()
 
 }
 
-void levelSelector_Update()
+void Credits_Update()
 {
 
 	AEGfxSetCamPosition(0, 0);
@@ -192,7 +192,7 @@ void levelSelector_Update()
 
 }
 
-void levelSelector_Draw()
+void Credits_Draw()
 {
 	//====================================//
 	//			 Background Drawing		  //
@@ -327,14 +327,14 @@ void levelSelector_Draw()
 	//AEGfxPrint(fontId, strBufferQuit, -0.065f, -0.66f, 1, 0.f, 0.f, 0.f);
 }
 
-void levelSelector_Free()
+void Credits_Free()
 {
 	AEGfxMeshFree(playMesh);
 	AEGfxMeshFree(backgroundMesh);
 
 }
 
-void levelSelector_Unload()
+void Credits_Unload()
 {
 	AEGfxTextureUnload(pTexMenuBackground);
 	AEGfxTextureUnload(pTexPlay);

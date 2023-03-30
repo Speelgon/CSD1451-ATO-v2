@@ -102,6 +102,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="catdeath.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="credits.cpp" />
     <ClCompile Include="HookUpdate.cpp" />
     <ClCompile Include="HowToPlay.cpp" />
     <ClCompile Include="IncrementVariable.cpp" />
@@ -136,6 +137,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClInclude Include="audio.hpp" />
     <ClInclude Include="catdeath.hpp" />
     <ClInclude Include="collision.hpp" />
+    <ClInclude Include="Credits.hpp" />
     <ClInclude Include="GSM.hpp" />
     <ClInclude Include="howToPlay.hpp" />
     <ClInclude Include="IncrementVariable.hpp" />

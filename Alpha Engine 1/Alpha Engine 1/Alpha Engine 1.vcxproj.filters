@@ -33,6 +33,7 @@
     <ClCompile Include="vpCollision.cpp" />
     <ClCompile Include="winScreen.cpp" />
     <ClCompile Include="levelSelector.cpp" />
+    <ClCompile Include="credits.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allheaders.hpp" />
@@ -65,5 +66,6 @@
     <ClInclude Include="vpCollision.hpp" />
     <ClInclude Include="winScreen.hpp" />
     <ClInclude Include="levelSelector.hpp" />
+    <ClInclude Include="Credits.hpp" />
   </ItemGroup>
 </Project>
