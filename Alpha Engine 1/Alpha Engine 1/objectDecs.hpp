@@ -64,6 +64,7 @@ float deathSeconds = 0.3;
 float resetCheck = 0.0;
 float timeDead = 0;
 
+
 GS_STATES previousState = GS_MAINMENU;
 
 //==========================================================================================================================

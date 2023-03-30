@@ -26,6 +26,7 @@ extern int numberofplatforms;
 extern f64 elapsedtime;
 extern int collectible_count;
 extern GS_STATES previousState;
+extern int previouslyPaused;
 
 
 void Level4_Load()
@@ -76,80 +77,134 @@ void Level4_Initialize()
 {
 	
 	previousState = GS_LEVEL4;
+	if (previouslyPaused)
+	{
+		previouslyPaused = 0;
+		RestorePlayerPosition();
 
-	platformstate[1].state = CANDISAPPEAR;
-	platformstate[1].timer = 3;
-	platformstate[1].elapsedtime = 0.0f;
-	platformstate[1].interval = 1.0f;
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
 
-	
+		mapBoundary.y = -600;
 
-    player.x = -1000;
-	player.y = -200;
-	player.xvel = 0;
-	player.yvel = 0;
-	player.width = 10;
-	player.height = 60;
-	player.halfW = player.width / 2;
-	player.halfH = player.height / 2;
-	player.lefttoken = 0;
-	player.righttoken = 0;
+		initAudioList();
 
-	item.rotation = 0;
-	item.width = 8.f;
-	item.height = 45.f;
+		objectinit(object);
 
-	mapBoundary.y = -600;
+		objectlevel4init(object);
 
-	collectible_count = 0;
+		hookinit(playerHook);
 
-	initAudioList();
+		portalinit(portal);
 
-	objectinit(object);
+		uiinit(ui);
 
-    objectlevel4init(object);
+		uilevel1init(ui);
 
-	hookinit(playerHook);
+		exitdoorinit(exitdoor);
 
-	collectibleinit(collectible);
+		exitdoorlevel4init(exitdoor);
 
-	collectiblelevel4init(collectible);
+		textureinit(pTex);
 
-	portalinit(portal);
+		meshinit(object, pMesh);
 
-	uiinit(ui);
+		nodeInit(nodes);
 
-	uilevel1init(ui);
+		trampolineinit(trampoline);
 
-	exitdoorinit(exitdoor);
+		trampolinelevel4init(trampoline);
 
-	exitdoorlevel4init(exitdoor);
+		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
-	textureinit(pTex);
+		platformstate[2].state = CANTDISAPPEAR;
+		platformstate[2].timer = 0;
+		platformstate[2].elapsedtime = 0.0;
+		platformstate[2].interval = 0.0f;
 
-	meshinit(object, pMesh);
+		platformstate[3].state = CANTDISAPPEAR;
+		platformstate[3].timer = 0;
+		platformstate[3].elapsedtime = 0.0f;
+		platformstate[3].interval = 0.0f;
 
-	nodeInit(nodes);
-
-
-	trampolineinit(trampoline);
-
-	trampolinelevel4init(trampoline);
+	}
+	else
+	{
+		platformstate[1].state = CANDISAPPEAR;
+		platformstate[1].timer = 3;
+		platformstate[1].elapsedtime = 0.0f;
+		platformstate[1].interval = 1.0f;
 
 
-	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
-	platformstate[2].state = CANTDISAPPEAR;
-	platformstate[2].timer = 0;
-	platformstate[2].elapsedtime = 0.0;
-	platformstate[2].interval = 0.0f;
+		player.x = -1000;
+		player.y = -200;
+		player.xvel = 0;
+		player.yvel = 0;
+		player.width = 10;
+		player.height = 60;
+		player.halfW = player.width / 2;
+		player.halfH = player.height / 2;
+		player.lefttoken = 0;
+		player.righttoken = 0;
 
-	platformstate[3].state = CANTDISAPPEAR;
-	platformstate[3].timer = 0;
-	platformstate[3].elapsedtime = 0.0f;
-	platformstate[3].interval = 0.0f;
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
 
-	timer = 0;
+		mapBoundary.y = -600;
+
+		collectible_count = 0;
+
+		initAudioList();
+
+		objectinit(object);
+
+		objectlevel4init(object);
+
+		hookinit(playerHook);
+
+		collectibleinit(collectible);
+
+		collectiblelevel4init(collectible);
+
+		portalinit(portal);
+
+		uiinit(ui);
+
+		uilevel1init(ui);
+
+		exitdoorinit(exitdoor);
+
+		exitdoorlevel4init(exitdoor);
+
+		textureinit(pTex);
+
+		meshinit(object, pMesh);
+
+		nodeInit(nodes);
+
+
+		trampolineinit(trampoline);
+
+		trampolinelevel4init(trampoline);
+
+
+		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+
+		platformstate[2].state = CANTDISAPPEAR;
+		platformstate[2].timer = 0;
+		platformstate[2].elapsedtime = 0.0;
+		platformstate[2].interval = 0.0f;
+
+		platformstate[3].state = CANTDISAPPEAR;
+		platformstate[3].timer = 0;
+		platformstate[3].elapsedtime = 0.0f;
+		platformstate[3].interval = 0.0f;
+
+		timer = 0;
+	}
 
 }
 
@@ -331,6 +386,7 @@ void Level4_Update()
 		{
 			next = GS_PAUSEMENU;
 		}
+		SavePlayerPostion();
 		updateSound();
 	}
 }

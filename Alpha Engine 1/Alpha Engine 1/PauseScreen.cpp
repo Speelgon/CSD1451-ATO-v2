@@ -11,6 +11,8 @@ extern square background;
 
 
 extern GS_STATES previousState;
+extern float playertempx;
+extern float playertempy;
 extern int mousex;
 extern int mousey;
 extern int truemousex;
@@ -25,7 +27,7 @@ extern AEGfxTexture* pTexQuit;
 
 extern AEGfxVertexList* backgroundMesh;
 extern AEGfxVertexList* buttonMesh;
-
+int previouslyPaused = 0;
 
 
 void Pausemenu_Load()
@@ -57,6 +59,8 @@ void Pausemenu_Load()
 void Pausemenu_Initialize()
 {
 	AEGfxSetBackgroundColor(0.8f, 0.6f, 0.2f);
+
+	previouslyPaused = 1;
 
 	resume_button.x = 0;
 	resume_button.y = 200;
@@ -149,22 +153,26 @@ void Pausemenu_Update()
 	if (IsAreaClicked(restartpause_button.x, restartpause_button.y, restartpause_button.halfW, restartpause_button.halfH, truemousex, truemousey))
 	{
 		next = previousState;
+		previouslyPaused = 0;
 
 	}
 
 	if (IsAreaClicked(howtoplay_button.x, howtoplay_button.y, howtoplay_button.halfW, howtoplay_button.halfH, truemousex, truemousey))
 	{
 		next = GS_HOWTOPLAY;
+		
 	}
 
 	if (IsAreaClicked(mainmenu_button.x, mainmenu_button.y, mainmenu_button.halfW, mainmenu_button.halfH, truemousex, truemousey))
 	{
 		next = GS_MAINMENU;
+		previouslyPaused = 0;
 	}
 
 	if (IsAreaClicked(quit_button.x, quit_button.y, quit_button.halfW, quit_button.halfH, truemousex, truemousey))
 	{
 		next = GS_QUITCONFIRM;
+		previouslyPaused = 0;
 	}
 	
 

@@ -25,6 +25,8 @@ extern int numberofplatforms;
 extern f64 elapsedtime;
 extern int collectible_count;
 extern GS_STATES previousState;
+extern int previouslyPaused;
+
 
 void Level6_Load()
 {
@@ -74,78 +76,139 @@ void Level6_Initialize()
 {
 
 	previousState = GS_LEVEL6;
+	if (previouslyPaused)
+	{
+		previouslyPaused = 0;
+		RestorePlayerPosition();
+		platformstate[1].state = CANTDISAPPEAR;
+		platformstate[1].timer = 3;
+		platformstate[1].elapsedtime = 0.0f;
+		platformstate[1].interval = 1.0f;
 
-	platformstate[1].state = CANTDISAPPEAR;
-	platformstate[1].timer = 3;
-	platformstate[1].elapsedtime = 0.0f;
-	platformstate[1].interval = 1.0f;
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
+
+		mapBoundary.y = -600;
+
+		initAudioList();
+
+		objectinit(object);
+
+		objectlevel6init(object);
+
+		hookinit(playerHook);
+
+		portalinit(portal);
+
+		portallevel6init(portal);
+
+		uiinit(ui);
+
+		uilevel1init(ui);
+
+		exitdoorinit(exitdoor);
+
+		exitdoorlevel6init(exitdoor);
+
+		textureinit(pTex);
+
+		meshinit(object, pMesh);
+
+		nodeInit(nodes);
+
+		nodeInitlevel6(nodes);
+
+		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+
+		platformstate[2].state = CANTDISAPPEAR;
+		platformstate[2].timer = 0;
+		platformstate[2].elapsedtime = 0.0;
+		platformstate[2].interval = 0.0f;
+
+		platformstate[3].state = CANTDISAPPEAR;
+		platformstate[3].timer = 0;
+		platformstate[3].elapsedtime = 0.0f;
+		platformstate[3].interval = 0.0f;
+
+		timer = 0;
+	}
+	else
+	{
+		platformstate[1].state = CANTDISAPPEAR;
+		platformstate[1].timer = 3;
+		platformstate[1].elapsedtime = 0.0f;
+		platformstate[1].interval = 1.0f;
 
 
 
-	player.x = -1000;
-	player.y = -200;
-	player.xvel = 0;
-	player.yvel = 0;
-	player.width = 10;
-	player.height = 60;
-	player.halfW = player.width / 2;
-	player.halfH = player.height / 2;
-	player.lefttoken = 0;
-	player.righttoken = 0;
+		player.x = -1000;
+		player.y = -200;
+		player.xvel = 0;
+		player.yvel = 0;
+		player.width = 10;
+		player.height = 60;
+		player.halfW = player.width / 2;
+		player.halfH = player.height / 2;
+		player.lefttoken = 0;
+		player.righttoken = 0;
 
-	item.rotation = 0;
-	item.width = 8.f;
-	item.height = 45.f;
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
 
-	mapBoundary.y = -600;
+		mapBoundary.y = -600;
 
-	collectible_count = 0;
+		collectible_count = 0;
 
-	initAudioList();
+		initAudioList();
 
-	objectinit(object);
+		objectinit(object);
 
-	objectlevel6init(object);
+		objectlevel6init(object);
 
-	hookinit(playerHook);
+		hookinit(playerHook);
 
-	collectibleinit(collectible);
+		collectibleinit(collectible);
 
-	collectiblelevel6init(collectible);
+		collectiblelevel6init(collectible);
 
-	portalinit(portal);
+		portalinit(portal);
 
-	portallevel6init(portal);
+		portallevel6init(portal);
 
-	uiinit(ui);
+		uiinit(ui);
 
-	uilevel1init(ui);
+		uilevel1init(ui);
 
-	exitdoorinit(exitdoor);
+		exitdoorinit(exitdoor);
 
-	exitdoorlevel6init(exitdoor);
+		exitdoorlevel6init(exitdoor);
 
-	textureinit(pTex);
+		textureinit(pTex);
 
-	meshinit(object, pMesh);
+		meshinit(object, pMesh);
 
-	nodeInit(nodes);
+		nodeInit(nodes);
 
-	nodeInitlevel6(nodes);
+		nodeInitlevel6(nodes);
 
-	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
-	platformstate[2].state = CANTDISAPPEAR;
-	platformstate[2].timer = 0;
-	platformstate[2].elapsedtime = 0.0;
-	platformstate[2].interval = 0.0f;
+		platformstate[2].state = CANTDISAPPEAR;
+		platformstate[2].timer = 0;
+		platformstate[2].elapsedtime = 0.0;
+		platformstate[2].interval = 0.0f;
 
-	platformstate[3].state = CANTDISAPPEAR;
-	platformstate[3].timer = 0;
-	platformstate[3].elapsedtime = 0.0f;
-	platformstate[3].interval = 0.0f;
+		platformstate[3].state = CANTDISAPPEAR;
+		platformstate[3].timer = 0;
+		platformstate[3].elapsedtime = 0.0f;
+		platformstate[3].interval = 0.0f;
 
-	timer = 0;
+		timer = 0;
+	}
+
+	
 
 }
 
@@ -327,6 +390,8 @@ void Level6_Update()
 		{
 			next = GS_PAUSEMENU;
 		}
+		SavePlayerPostion();
+
 		updateSound();
 	}
 }

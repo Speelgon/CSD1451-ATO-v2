@@ -21,5 +21,6 @@ int blackholeCollision(float& pX, float& pY, float& oX, float& oY, float& pSizeX
 
 int blackholeradiusCollision(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY);
 
-
 void blackholeCollisionResponse(float& px, float& py, float phw, float phh, float bx, float by, float bhw, float bhh);
+void SavePlayerPostion();
+void RestorePlayerPosition();

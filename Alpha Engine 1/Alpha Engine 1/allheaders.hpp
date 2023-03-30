@@ -2,6 +2,7 @@
 #include "AEEngine.h"
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #include "Level1.hpp"
 #include "objects.hpp"
 #include "level1_new.hpp"

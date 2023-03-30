@@ -27,6 +27,7 @@ extern int numberofplatforms;
 extern f64 elapsedtime;
 extern int collectible_count;
 extern GS_STATES previousState;
+extern int previouslyPaused;
 
 
 void Level3_Load()
@@ -77,77 +78,135 @@ void Level3_Initialize()
 {
 	previousState = GS_LEVEL3;
 
-	platformstate[1].state = CANDISAPPEAR;
-	platformstate[1].timer = 3;
-	platformstate[1].elapsedtime = 0.0f;
-	platformstate[1].interval = 1.0f;
+	if (previouslyPaused) 
+	{
+		previouslyPaused = 0;
+		RestorePlayerPosition();
 
-	
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
 
-    player.x = -1000;
-	player.y = -200;
-	player.xvel = 0;
-	player.yvel = 0;
-	player.width = 10;
-	player.height = 60;
-	player.halfW = player.width / 2;
-	player.halfH = player.height / 2;
-	player.lefttoken = 0;
-	player.righttoken = 0;
+		mapBoundary.y = -600;
 
-	item.rotation = 0;
-	item.width = 8.f;
-	item.height = 45.f;
+		collectible_count = 0;
 
-	mapBoundary.y = -600;
+		initAudioList();
 
-	collectible_count = 0;
+		objectinit(object);
 
-	initAudioList();
+		objectlevel3init(object);
 
-	objectinit(object);
+		hookinit(playerHook);
 
-    objectlevel3init(object);
+		portalinit(portal);
 
-	hookinit(playerHook);
+		portallevel3init(portal);
 
-	collectibleinit(collectible);
+		uiinit(ui);
 
-	collectiblelevel3init(collectible);
+		uilevel1init(ui);
 
-	portalinit(portal);
+		exitdoorinit(exitdoor);
 
-    portallevel3init(portal);
+		exitdoorlevel3init(exitdoor);
 
-	uiinit(ui);
+		textureinit(pTex);
 
-	uilevel1init(ui);
+		meshinit(object, pMesh);
 
-	exitdoorinit(exitdoor);
+		nodeInit(nodes);
 
-	exitdoorlevel3init(exitdoor);
+		nodeInitlevel3(nodes);
 
-	textureinit(pTex);
+		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
-	meshinit(object, pMesh);
+		platformstate[2].state = CANTDISAPPEAR;
+		platformstate[2].timer = 0;
+		platformstate[2].elapsedtime = 0.0;
+		platformstate[2].interval = 0.0f;
 
-	nodeInit(nodes);
+		platformstate[3].state = CANTDISAPPEAR;
+		platformstate[3].timer = 0;
+		platformstate[3].elapsedtime = 0.0f;
+		platformstate[3].interval = 0.0f;
 
-	nodeInitlevel3(nodes);
+		timer = 0;
+	}
+	else
+	{
+		platformstate[1].state = CANDISAPPEAR;
+		platformstate[1].timer = 3;
+		platformstate[1].elapsedtime = 0.0f;
+		platformstate[1].interval = 1.0f;
 
-	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
-	platformstate[2].state = CANTDISAPPEAR;
-	platformstate[2].timer = 0;
-	platformstate[2].elapsedtime = 0.0;
-	platformstate[2].interval = 0.0f;
 
-	platformstate[3].state = CANTDISAPPEAR;
-	platformstate[3].timer = 0;
-	platformstate[3].elapsedtime = 0.0f;
-	platformstate[3].interval = 0.0f;
+		player.x = -1000;
+		player.y = -200;
+		player.xvel = 0;
+		player.yvel = 0;
+		player.width = 10;
+		player.height = 60;
+		player.halfW = player.width / 2;
+		player.halfH = player.height / 2;
+		player.lefttoken = 0;
+		player.righttoken = 0;
 
-	timer = 0;
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
+
+		mapBoundary.y = -600;
+
+		collectible_count = 0;
+
+		initAudioList();
+
+		objectinit(object);
+
+		objectlevel3init(object);
+
+		hookinit(playerHook);
+
+		collectibleinit(collectible);
+
+		collectiblelevel3init(collectible);
+
+		portalinit(portal);
+
+		portallevel3init(portal);
+
+		uiinit(ui);
+
+		uilevel1init(ui);
+
+		exitdoorinit(exitdoor);
+
+		exitdoorlevel3init(exitdoor);
+
+		textureinit(pTex);
+
+		meshinit(object, pMesh);
+
+		nodeInit(nodes);
+
+		nodeInitlevel3(nodes);
+
+		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+
+		platformstate[2].state = CANTDISAPPEAR;
+		platformstate[2].timer = 0;
+		platformstate[2].elapsedtime = 0.0;
+		platformstate[2].interval = 0.0f;
+
+		platformstate[3].state = CANTDISAPPEAR;
+		platformstate[3].timer = 0;
+		platformstate[3].elapsedtime = 0.0f;
+		platformstate[3].interval = 0.0f;
+
+		timer = 0;
+	}
 
 }
 
@@ -329,6 +388,7 @@ void Level3_Update()
 		{
 			next = GS_PAUSEMENU;
 		}
+		SavePlayerPostion();
 		updateSound();
 	}
 }
