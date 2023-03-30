@@ -19,18 +19,18 @@
 */
 
 
-void objectinit(squareObject* object) {
+void objectinit(squareObject* object1) {
 
 	for (int i = 1; i < maxObj; i++)
 	{
-		object[i].x = 20000;
-		object[i].y = -2000;
-		object[i].width = 10;
-		object[i].height = 10;
-		object[i].halfW = object[i].width / 2;
-		object[i].halfH = object[i].height / 2;
-		object[i].lefttoken = 0;
-		object[i].righttoken = 0;
+		object1[i].x = 20000;
+		object1[i].y = -2000;
+		object1[i].width = 10;
+		object1[i].height = 10;
+		object1[i].halfW = object1[i].width / 2;
+		object1[i].halfH = object1[i].height / 2;
+		object1[i].lefttoken = 0;
+		object1[i].righttoken = 0;
 	}
 }
 

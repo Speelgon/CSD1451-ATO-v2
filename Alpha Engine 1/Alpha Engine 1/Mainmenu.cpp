@@ -1,3 +1,18 @@
+//==========================================================
+// file		: Mainmenu.cpp
+// 
+// author   : Ng Wen Wen
+// co-author: Ng Yue Zhi
+// 
+// email	: wenwen.ng@digipen.edu
+//			  n.yuezhi@digipen.edu           
+// 
+// brief	: Mainmenu.cpp is where our main collision checks and calculations are done
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
+
 #include "allheaders.hpp"
 #include "Mainmenu.hpp"
 #include "IncrementVariable.hpp"

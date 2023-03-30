@@ -1,6 +1,21 @@
+//==========================================================
+// file		: collision.cpp
+// 
+// author   : Owen Quek
+// co-author: Ng Wen Wen
+// co-author: Kathleen Lim
+// 
+// email	: o.quek@digipen.edu
+//			  wenwen.ng@digipen.edu
+//            l.kathleenxiangxuan@digipen.edu
+//
+// brief	: collision.cpp is where our main collision checks and calculations are done
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "allheaders.hpp"
-
 
 /*================================================================================================================================
 							THIS NAMESPACE CONTAINS THE FUNCTIONS USED TO CHECK THE BOARDERS 
