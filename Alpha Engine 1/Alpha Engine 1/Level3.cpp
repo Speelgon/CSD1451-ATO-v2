@@ -78,6 +78,9 @@ void Level3_Load()
 	pTexTrampoline = AEGfxTextureLoad("Assets/trampoline.png");
 	AE_ASSERT_MESG(pTexTrampoline, "Failed to create trampoline texture!!");
 
+	pTexBlackhole = AEGfxTextureLoad("Assets/blackhole.png");
+	AE_ASSERT_MESG(pTexBlackhole, "Failed to create blackhole texture!!");
+
 }
 
 void Level3_Initialize()
@@ -445,15 +448,15 @@ void Level3_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline);
+		objectrender(player, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline, pTexBlackhole);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline);
+		objectrender(player, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline, pTexBlackhole);
 	}
 	else
 	{
-		objectrender(player, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline);
+		objectrender(player, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline, pTexBlackhole);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
@@ -498,5 +501,6 @@ void Level3_Unload()
 	AEGfxTextureUnload(pTexStick);
 	AEGfxTextureUnload(pTexDisappearingPlat);
 	AEGfxTextureUnload(pTexTrampoline);
+	AEGfxTextureUnload(pTexBlackhole);
 
 }

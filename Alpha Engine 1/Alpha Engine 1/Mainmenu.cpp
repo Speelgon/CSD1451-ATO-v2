@@ -36,6 +36,7 @@ extern AEGfxTexture* pTexPlay = 0;
 extern AEGfxTexture* pTexTutorial = 0;
 extern AEGfxTexture* pTexCredits = 0;
 extern AEGfxTexture* pTexQuit = 0;
+extern AEGfxTexture* pTexLevels = 0;
 f32 settingsbuttony;
 f32 creditsbuttony;
 f32 quitbuttony;
@@ -56,6 +57,9 @@ void Mainmenu_Load()
 
 	pTexCredits = AEGfxTextureLoad("Assets/button_credits.png");
 	AE_ASSERT_MESG(pTexCredits, "Failed to create credits button texture!!");
+
+	pTexLevels = AEGfxTextureLoad("Assets/button_levels.png");
+	AE_ASSERT_MESG(pTexCredits, "Failed to create levels button texture!!");
 
 	pTexQuit = AEGfxTextureLoad("Assets/button_quit.png");
 	AE_ASSERT_MESG(pTexQuit, "Failed to create quit button texture!!");
@@ -236,7 +240,7 @@ void Mainmenu_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(levelSelector.x, levelSelector.y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexQuit, 0, 0);
+	AEGfxTextureSet(pTexLevels, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -294,6 +298,7 @@ void Mainmenu_Unload()
 	AEGfxTextureUnload(pTexPlay);
 	AEGfxTextureUnload(pTexTutorial);
 	AEGfxTextureUnload(pTexCredits);
+	AEGfxTextureUnload(pTexLevels);
 	AEGfxTextureUnload(pTexQuit);
 	freeSound();
 }
