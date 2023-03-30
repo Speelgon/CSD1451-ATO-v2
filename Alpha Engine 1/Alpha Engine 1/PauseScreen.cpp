@@ -165,7 +165,7 @@ void Pausemenu_Update()
 
 	if (IsAreaClicked(mainmenu_button.x, mainmenu_button.y, mainmenu_button.halfW, mainmenu_button.halfH, truemousex, truemousey))
 	{
-		next = GS_MAINMENU;
+		next = GS_MAINMENUCONFIRM;
 		previouslyPaused = 0;
 	}
 

@@ -30,7 +30,7 @@ extern FP fpLoad, fpInitialize, fpUpdate, fpDraw, fpFree, fpUnload;
 
 enum GS_STATES
 {
-	
+
 	GS_SPLASHSCREEN,
 	GS_MAINMENU,
 	GS_HOWTOPLAY,
@@ -48,5 +48,6 @@ enum GS_STATES
 	GS_QUIT,
 	GS_RESTART,
 	GS_QUITCONFIRM,
-	GS_PAUSEMENU
+	GS_PAUSEMENU,
+	GS_MAINMENUCONFIRM
 };

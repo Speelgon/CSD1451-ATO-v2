@@ -34,6 +34,7 @@
     <ClCompile Include="winScreen.cpp" />
     <ClCompile Include="levelSelector.cpp" />
     <ClCompile Include="credits.cpp" />
+    <ClCompile Include="Mainmenu_prompt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allheaders.hpp" />
@@ -67,5 +68,6 @@
     <ClInclude Include="winScreen.hpp" />
     <ClInclude Include="levelSelector.hpp" />
     <ClInclude Include="Credits.hpp" />
+    <ClInclude Include="Mainmenu_prompt.hpp" />
   </ItemGroup>
 </Project>

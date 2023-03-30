@@ -4,6 +4,7 @@
 #include "SplashScreen.hpp"
 #include "Quit_Confirm.hpp"
 #include "PauseScreen.hpp"
+#include "Mainmenu_prompt.hpp"
 int current = GS_SPLASHSCREEN, previous = 0, next = 0;
 
 FP fpLoad = nullptr, fpInitialize = nullptr, fpUpdate = nullptr, fpDraw = nullptr, fpFree = nullptr, fpUnload = nullptr;
@@ -166,6 +167,15 @@ void GSM_Update()
 		fpDraw = quit_confirm_Draw;
 		fpFree = quit_confirm_Free;
 		fpUnload = quit_confirm_Unload;
+		break;
+
+	case GS_MAINMENUCONFIRM:
+		fpLoad = mainmenu_prompt_Load;
+		fpInitialize = mainmenu_prompt_Initialize;
+		fpUpdate = mainmenu_prompt_Update;
+		fpDraw = mainmenu_prompt_Draw;
+		fpFree = mainmenu_prompt_Free;
+		fpUnload = mainmenu_prompt_Unload;
 		break;
 
 	case GS_PAUSEMENU:
