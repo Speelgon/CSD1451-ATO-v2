@@ -1,47 +1,30 @@
-//==========================================================
-// file		: Mainmenu.cpp
-// 
-// author   : Ng Wen Wen
-// co-author: Ng Yue Zhi
-// 
-// email	: wenwen.ng@digipen.edu
-//			  n.yuezhi@digipen.edu           
-// 
-// brief	: Mainmenu.cpp is where our main collision checks and calculations are done
-//
-// Copyright © 2023 DigiPen, All rights reserved.
-//==========================================================
-
-
 #include "allheaders.hpp"
-#include "Mainmenu.hpp"
 #include "IncrementVariable.hpp"
 
-square buttons;
-square background;
-AEGfxVertexList* playMesh;
-AEGfxVertexList* backgroundMesh;
-square levelSelector;
-extern s8 fontId;
-//char strBufferPLAY[5], strBufferHTP[12], strBufferCredits[8], strBufferQuit[5], strBufferTitle[14];
-//char strBufferSettings[50];
-//f32 TextWidth, TextHeight;
+square levels[10];
+
+extern square buttons;
+extern square background;
+extern AEGfxVertexList* playMesh;
+extern AEGfxVertexList* backgroundMesh;
+extern square levelSelector;
+
 extern int mousex;
 extern int mousey;
 extern int truemousex;
 extern int truemousey;
 extern square player;
-extern AEGfxTexture* pTexMenuBackground = 0;
-extern AEGfxTexture* pTexPlay = 0;
-extern AEGfxTexture* pTexTutorial = 0;
-extern AEGfxTexture* pTexCredits = 0;
-extern AEGfxTexture* pTexQuit = 0;
-f32 settingsbuttony;
-f32 creditsbuttony;
-f32 quitbuttony;
+extern AEGfxTexture* pTexMenuBackground ;
+extern AEGfxTexture* pTexPlay;
+extern AEGfxTexture* pTexTutorial;
+extern AEGfxTexture* pTexCredits;
+extern AEGfxTexture* pTexQuit;
+extern f32 settingsbuttony;
+extern f32 creditsbuttony;
+extern f32 quitbuttony;
 
 
-void Mainmenu_Load()
+void levelSelector_Load()
 {
 	std::cout << "GSM:Load\n";
 
@@ -61,8 +44,40 @@ void Mainmenu_Load()
 	AE_ASSERT_MESG(pTexQuit, "Failed to create quit button texture!!");
 }
 
-void Mainmenu_Initialize()
+void levelSelector_Initialize()
 {
+
+	for (int i = 0; i < 10; i++) {
+		levels[i].x = 5000;
+		levels[i].y = 5000;
+		levels[i].width = 60;
+		levels[i].height = 60;
+		levels[i].halfW = 30;
+		levels[i].halfH = 30;
+	}
+
+	float row1Height = 100;
+
+	levels[0].x = -400;
+	levels[0].y = row1Height;
+
+	levels[1].x = -200;
+	levels[1].y = row1Height;
+
+	levels[2].x = 0;
+	levels[2].y = row1Height;
+
+	levels[3].x = 200;
+	levels[3].y = row1Height;
+
+	levels[4].x = 400;
+	levels[4].y = row1Height;
+
+	levels[5].x = -100;
+	levels[5].y = row1Height - 150;
+
+	levels[6].x = 100;
+	levels[6].y = row1Height - 150;
 
 	levelSelector.x = 150;
 	levelSelector.y = 0;
@@ -79,7 +94,7 @@ void Mainmenu_Initialize()
 	creditsbuttony = buttons.y - 160;
 	quitbuttony = buttons.y - 240;
 	buttons.width = 120;
-	buttons.height = 60;
+	buttons.height = 120;
 	buttons.halfW = buttons.width / 2;
 	buttons.halfH = buttons.height / 2;
 
@@ -101,7 +116,7 @@ void Mainmenu_Initialize()
 	AEGfxTriAdd(
 		buttons.halfW, -buttons.halfH, 0xFFFFFFFF, 1.0f, 1.0f,
 		buttons.halfW, buttons.halfH, 0xFFFFFFFF, 1.0f, 0.0f,
-		-buttons.halfW,buttons.halfH, 0xFFFFFFFF, 0.0f, 0.0f);
+		-buttons.halfW, buttons.halfH, 0xFFFFFFFF, 0.0f, 0.0f);
 
 	// Saving the mesh (list of triangles) in pMesh1
 
@@ -125,48 +140,59 @@ void Mainmenu_Initialize()
 	AE_ASSERT_MESG(backgroundMesh, "Failed to create backgroundMesh!!");
 
 	initAudioList();
-	
+
 }
 
-void Mainmenu_Update()
+void levelSelector_Update()
 {
 
 	AEGfxSetCamPosition(0, 0);
 
 	AEInputGetCursorPosition(&mousex, &mousey);
 	truemousex = (int)(mousex - screenwidth / 2);
-	truemousey = (int) ( - mousey + screenheight / 2);
+	truemousey = (int)(-mousey + screenheight / 2);
 
-	if (IsAreaClicked(buttons.x, buttons.y, buttons.halfW, buttons.halfH, truemousex, truemousey))
+	if (IsAreaClicked(levels[0].x, levels[0].y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
 		next = GS_LEVEL1;
 	}
 
-	if (IsAreaClicked(buttons.x, settingsbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
+	if (IsAreaClicked(levels[1].x, levels[1].y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
-		next = GS_HOWTOPLAY;
+		next = GS_LEVEL2;
 	}
 
-	if (IsAreaClicked(buttons.x, creditsbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
+	if (IsAreaClicked(levels[2].x, levels[2].y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
-		next = GS_CREDITS;
+		next = GS_LEVEL3;
 	}
 
-	if (IsAreaClicked(buttons.x, quitbuttony, buttons.halfW, buttons.halfH, truemousex, truemousey))
+	if (IsAreaClicked(levels[3].x, levels[3].y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
-		next = GS_QUIT;
+		next = GS_LEVEL4;
 	}
-	
-	if (IsAreaClicked(levelSelector.x, levelSelector.y, buttons.halfW, buttons.halfH, truemousex, truemousey))
+
+	if (IsAreaClicked(levels[4].x, levels[4].y, buttons.halfW, buttons.halfH, truemousex, truemousey))
 	{
-		next = GS_LEVELSELECTOR;
+		next = GS_LEVEL5;
 	}
+
+	if (IsAreaClicked(levels[5].x, levels[5].y, buttons.halfW, buttons.halfH, truemousex, truemousey))
+	{
+		next = GS_LEVEL6;
+	}
+
+	if (IsAreaClicked(levels[6].x, levels[6].y, buttons.halfW, buttons.halfH, truemousex, truemousey))
+	{
+		next = GS_LEVEL7;
+	}
+
 
 	updateSound();
 
 }
 
-void Mainmenu_Draw()
+void levelSelector_Draw()
 {
 	//====================================//
 	//			 Background Drawing		  //
@@ -175,7 +201,7 @@ void Mainmenu_Draw()
 	// Drawing background
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	
+
 	// Set position for background
 	AEGfxSetPosition(background.x, background.y);
 
@@ -190,12 +216,12 @@ void Mainmenu_Draw()
 	//====================================//
 	//			 Button Drawing			  //
 	//====================================//
-	
+
 	// Drawing top "play" button
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	// Set position 
-	AEGfxSetPosition(buttons.x, buttons.y);
+	AEGfxSetPosition(levels[0].x, levels[0].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	// No texture 
 	AEGfxTextureSet(pTexPlay, 0, 0);
@@ -206,7 +232,7 @@ void Mainmenu_Draw()
 	//Drawing 2nd "settings" button
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxSetPosition(buttons.x, settingsbuttony);
+	AEGfxSetPosition(levels[1].x, levels[1].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	AEGfxTextureSet(pTexTutorial, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
@@ -215,7 +241,7 @@ void Mainmenu_Draw()
 	//Drawing 3rd "credits" button 
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxSetPosition(buttons.x, creditsbuttony);
+	AEGfxSetPosition(levels[2].x, levels[2].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	AEGfxTextureSet(pTexCredits, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
@@ -224,7 +250,7 @@ void Mainmenu_Draw()
 	//Drawing 4th "quit" button
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxSetPosition(buttons.x, quitbuttony);
+	AEGfxSetPosition(levels[3].x, levels[3].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	AEGfxTextureSet(pTexQuit, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
@@ -234,12 +260,32 @@ void Mainmenu_Draw()
 	//Drawing 5th "levelselect" button
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-	AEGfxSetPosition(levelSelector.x, levelSelector.y);
+	AEGfxSetPosition(levels[4].x, levels[4].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	AEGfxTextureSet(pTexQuit, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
+
+	//Drawing 5th "levelselect" button
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxSetPosition(levels[5].x, levels[5].y);
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	AEGfxTextureSet(pTexQuit, 0, 0);
+	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
+
+
+
+	//Drawing 5th "levelselect" button
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+	AEGfxSetPosition(levels[6].x, levels[6].y);
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+	AEGfxTextureSet(pTexQuit, 0, 0);
+	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
 
 	//====================================//
 	//			  TEXT PRINTING			  //
@@ -281,14 +327,14 @@ void Mainmenu_Draw()
 	//AEGfxPrint(fontId, strBufferQuit, -0.065f, -0.66f, 1, 0.f, 0.f, 0.f);
 }
 
-void Mainmenu_Free()
+void levelSelector_Free()
 {
 	AEGfxMeshFree(playMesh);
 	AEGfxMeshFree(backgroundMesh);
 
 }
 
-void Mainmenu_Unload()
+void levelSelector_Unload()
 {
 	AEGfxTextureUnload(pTexMenuBackground);
 	AEGfxTextureUnload(pTexPlay);

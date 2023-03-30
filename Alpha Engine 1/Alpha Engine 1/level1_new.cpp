@@ -12,6 +12,7 @@
 
 
 
+
 //==========================================================================================================================
 //==========================================================================================================================
 
@@ -27,6 +28,8 @@ extern int numberofplatforms;
 extern f64 elapsedtime;
 extern int collectible_count;
 extern GS_STATES previousState;
+
+extern int previouslyPaused;
 
 void Level1NEW_Load()
 {
@@ -76,95 +79,156 @@ void Level1NEW_Initialize()
 {
 	previousState = GS_LEVEL1;
 
-	elapsedtime = 0;
+
+	if (previouslyPaused) // if statements don't work if contains alpha engine
+	{
+		previouslyPaused = 0;
+		RestorePlayerPosition();
+
+		elapsedtime = 0;
+		blackholeTouched = 0;
+		timeDead = 0;
+
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
+
+		mapBoundary.y = -600;
+
+		initAudioList();
+
+		objectinit(object);
+
+		objectlevel1NEWinit(object);
+
+		hookinit(playerHook);
+
+		nodeInit(nodes);
+
+		uiinit(ui);
+
+		uilevel1init(ui);
+
+		blackholelevel1init(blackhole);
+
+		exitdoorinit(exitdoor);
+
+		exitdoorlevel1NEWinit(exitdoor);
+
+		textureinit(pTex);
+
+		meshinit(object, pMesh);
+
+		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+
+		platformstate[2].state = CANTDISAPPEAR;
+		platformstate[2].timer = 0;
+		platformstate[2].elapsedtime = 0.0f;
+		platformstate[2].interval = 0.0f;
+
+		platformstate[3].state = CANTDISAPPEAR;
+		platformstate[3].timer = 0;
+		platformstate[3].elapsedtime = 0.0f;
+		platformstate[3].interval = 0.0f;
+
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
+	}
 	
-	platformstate[1].state = CANDISAPPEAR;
-	platformstate[1].timer = 3;
-	platformstate[1].elapsedtime = 0.0f;
-	platformstate[1].interval = 1.0f; 
+	else
+	{
+		elapsedtime = 0;
+		blackholeTouched = 0;
+		timeDead = 0;
 
-	player.x = -1000;
-	player.y = -200;
-	player.xvel = 0;
-	player.yvel = 0;
-	player.width = 10;
-	player.height = 60;
-	player.halfW = player.width / 2;
-	player.halfH = player.height / 2;
-	player.lefttoken = 0;
-	player.righttoken = 0;
+		platformstate[1].state = CANDISAPPEAR;
+		platformstate[1].timer = 3;
+		platformstate[1].elapsedtime = 0.0f;
+		platformstate[1].interval = 1.0f;
 
-	item.rotation = 0;
-	item.width = 8.f;
-	item.height = 45.f;
-
-	mapBoundary.y = -600;
-
-	collectible_count = 0;
-	initAudioList();
+		player.x = -1000;
+		player.y = -200;
+		player.xvel = 0;
+		player.yvel = 0;
+		player.width = 10;
+		player.height = 60;
+		player.halfW = player.width / 2;
+		player.halfH = player.height / 2;
+		player.lefttoken = 0;
+		player.righttoken = 0;
 
 
-	objectinit(object);
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
 
-	objectlevel1NEWinit(object);
+		mapBoundary.y = -600;
 
-	hookinit(playerHook);
+		collectible_count = 0;
+		initAudioList();
 
-	collectibleinit(collectible);
+		objectinit(object);
 
-	collectiblelevel1NEWinit(collectible);
+		objectlevel1NEWinit(object);
+
+		hookinit(playerHook);
+
+		collectibleinit(collectible);
+
+		collectiblelevel1NEWinit(collectible);
+
+		nodeInit(nodes);
+
+		uiinit(ui);
+
+		uilevel1init(ui);
+
+		blackholelevel1init(blackhole);
+
+		exitdoorinit(exitdoor);
+
+		exitdoorlevel1NEWinit(exitdoor);
+
+		textureinit(pTex);
+
+		meshinit(object, pMesh);
+
+		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+
+		platformstate[2].state = CANTDISAPPEAR;
+		platformstate[2].timer = 0;
+		platformstate[2].elapsedtime = 0.0f;
+		platformstate[2].interval = 0.0f;
+
+		platformstate[3].state = CANTDISAPPEAR;
+		platformstate[3].timer = 0;
+		platformstate[3].elapsedtime = 0.0f;
+		platformstate[3].interval = 0.0f;
+
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
+
+	}
+
 	
-	nodeInit(nodes);
-
-	uiinit(ui);
-
-	uilevel1init(ui);
-
-	exitdoorinit(exitdoor);
-
-	exitdoorlevel1NEWinit(exitdoor);
-
-	textureinit(pTex);
-
-	meshinit(object, pMesh);
-
-	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
-
-	platformstate[2].state = CANTDISAPPEAR;
-	platformstate[2].timer = 0;
-	platformstate[2].elapsedtime = 0.0f;
-	platformstate[2].interval = 0.0f;
-
-	platformstate[3].state = CANTDISAPPEAR;
-	platformstate[3].timer = 0;
-	platformstate[3].elapsedtime = 0.0f;
-	platformstate[3].interval = 0.0f;
-
-	player.x = -1000;
-	player.y = -200;
-	player.xvel = 0;
-	player.yvel = 0;
-	player.width = 10;
-	player.height = 60;
-	player.halfW = player.width / 2;
-	player.halfH = player.height / 2;
-	player.lefttoken = 0;
-	player.righttoken = 0;
-
-	item.rotation = 0;
-	item.width = 8.f;
-	item.height = 45.f;
-	
-
 }//end of initialisation
 
 void Level1NEW_Update()
 {
 	delta = AEFrameRateControllerGetFrameTime();
 
-	if (AEInputCheckCurr(AEVK_L))
+	if (blackholeTouched)
 	{
+		
 		catdeath();
+		hookUpdate();
+		if (playerOutofBounds(player.y, mapBoundary.y) == 1)
+		{
+			current = GS_RESTART;
+		}
+		
 	}
 
 	else
@@ -292,24 +356,39 @@ void Level1NEW_Update()
 		if (playerOutofBounds(player.y, mapBoundary.y) == 1)
 		{
 			current = GS_RESTART;
+
 		}
 
 		//Go to next level when player touches exit door
 		if (exitCollisionDoor(player.x, player.y, exitdoor[0].x, exitdoor[0].y, player.halfW, player.halfH, exitdoor[0].halfW, exitdoor[0].halfH) == 1)
 		{
 			next = GS_WINSCREEN;
+			
 		}
 
 		if (AEInputCheckTriggered(AEVK_ESCAPE))
 		{
 			next = GS_PAUSEMENU;
+			
 		}
+		SavePlayerPostion();
+		
+		
+
+		for (int i{ 0 }; i < maxBlackhole; ++i)
+		{
+			blackholeCollision(player.x, player.y, blackhole[i].x, blackhole[i].y, player.halfW, player.halfH, blackhole[i].halfW, blackhole[i].halfH);
+			blackholeCollisionResponse(player.x, player.y, player.halfW, player.halfH, blackhole[i].x, blackhole[i].y, blackhole[i].halfW, blackhole[i].halfH);
+		}
+		/*else {
+			gravity = 0.15;
+		}*/
 
 		updateSound();
 
 	}
     
-
+	
 
 
 }

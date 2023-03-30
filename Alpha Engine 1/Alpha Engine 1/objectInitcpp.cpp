@@ -19,18 +19,18 @@
 */
 
 
-void objectinit(squareObject* object) {
+void objectinit(squareObject* object1) {
 
 	for (int i = 1; i < maxObj; i++)
 	{
-		object[i].x = 20000;
-		object[i].y = -2000;
-		object[i].width = 10;
-		object[i].height = 10;
-		object[i].halfW = object[i].width / 2;
-		object[i].halfH = object[i].height / 2;
-		object[i].lefttoken = 0;
-		object[i].righttoken = 0;
+		object1[i].x = 20000;
+		object1[i].y = -2000;
+		object1[i].width = 10;
+		object1[i].height = 10;
+		object1[i].halfW = object1[i].width / 2;
+		object1[i].halfH = object1[i].height / 2;
+		object1[i].lefttoken = 0;
+		object1[i].righttoken = 0;
 	}
 }
 
@@ -628,9 +628,9 @@ void blackholeinit(blackhole1* object) {
 
 void blackholelevel1init(blackhole1* object) {
 
-		object[0].x = -1250;
-		object[0].y = 0;
-		object[0].width = 30;
+		object[0].x = -1050;
+		object[0].y = -130;
+		object[0].width = 50;
 		object[0].height = 30;
 		object[0].halfW = object[0].width / 2;
 		object[0].halfH = object[0].height / 2;

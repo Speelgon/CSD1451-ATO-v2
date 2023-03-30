@@ -57,7 +57,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -76,7 +76,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmodL.dll" "$(OutDir)" /s /r /
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -102,6 +102,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="catdeath.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="credits.cpp" />
     <ClCompile Include="HookUpdate.cpp" />
     <ClCompile Include="HowToPlay.cpp" />
     <ClCompile Include="IncrementVariable.cpp" />
@@ -113,8 +114,10 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClCompile Include="Level5.cpp" />
     <ClCompile Include="Level6.cpp" />
     <ClCompile Include="Level7.cpp" />
+    <ClCompile Include="levelSelector.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mainmenu.cpp" />
+    <ClCompile Include="Mainmenu_prompt.cpp" />
     <ClCompile Include="meshInit.cpp" />
     <ClCompile Include="meshUpdate.cpp" />
     <ClCompile Include="movement.cpp" />
@@ -135,6 +138,7 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClInclude Include="audio.hpp" />
     <ClInclude Include="catdeath.hpp" />
     <ClInclude Include="collision.hpp" />
+    <ClInclude Include="Credits.hpp" />
     <ClInclude Include="GSM.hpp" />
     <ClInclude Include="howToPlay.hpp" />
     <ClInclude Include="IncrementVariable.hpp" />
@@ -147,8 +151,10 @@ xcopy "$(SolutionDir)Extern\AlphaEngine_V3.08\lib\fmod.dll" "$(OutDir)" /s /r /y
     <ClInclude Include="Level5.hpp" />
     <ClInclude Include="Level6.hpp" />
     <ClInclude Include="Level7.hpp" />
+    <ClInclude Include="levelSelector.hpp" />
     <ClInclude Include="Mainmenu.hpp" />
     <ClInclude Include="mainmenuinit.hpp" />
+    <ClInclude Include="Mainmenu_prompt.hpp" />
     <ClInclude Include="moreyukivariables.hpp" />
     <ClInclude Include="objectDecs.hpp" />
     <ClInclude Include="objects.hpp" />

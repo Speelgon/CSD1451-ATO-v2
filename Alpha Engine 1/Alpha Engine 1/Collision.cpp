@@ -1,6 +1,21 @@
+//==========================================================
+// file		: collision.cpp
+// 
+// author   : Owen Quek
+// co-author: Ng Wen Wen
+// co-author: Kathleen Lim
+// 
+// email	: o.quek@digipen.edu
+//			  wenwen.ng@digipen.edu
+//            l.kathleenxiangxuan@digipen.edu
+//
+// brief	: collision.cpp is where our main collision checks and calculations are done
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "allheaders.hpp"
-
 
 /*================================================================================================================================
 							THIS NAMESPACE CONTAINS THE FUNCTIONS USED TO CHECK THE BOARDERS 
@@ -343,4 +358,107 @@ Player out of bounds
 		}
 		return 0;
 		
+	}
+
+	int blackholeCollision (float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY)
+	{
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX))
+		{
+			blackholeTouched = true;
+			player.yvel = 0;
+	
+		}
+		// Right side collision
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX))
+		{
+			blackholeTouched = true;
+			player.yvel = 0;
+		}
+		// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
+		if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY))
+		{
+			blackholeTouched = true;
+			player.yvel = 0;
+		}
+		// Bottom side collision	
+		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
+		{
+			blackholeTouched = true;
+			player.yvel = 0;
+		}
+		return 0;
+
+	}
+
+	int blackholeradiusCollision(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY)
+	{
+		float scale = 5.0f;
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY*scale) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY*scale) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX*scale) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX*scale))
+		{
+			return 1;
+
+		}
+		// Right side collision
+		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY*scale) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY*scale) && playerLeftGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX*scale) && playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX*scale))
+		{
+			return 1;
+
+		}
+		// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
+		if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX*scale) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX*scale) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY*scale) && playerBottomGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY*scale))
+		{
+			return 1;
+
+		}
+		// Bottom side collision	
+		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX*scale) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX*scale) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY*scale) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY*scale))
+		{
+			return 1;
+
+
+		}
+		return 0;
+
+	}
+
+	void blackholeCollisionResponse(float& px, float& py, float phw, float phh, float bx, float by, float bhw, float bhh)
+	{
+		//if (blackholeradiusCollision(player.x, player.y, blackhole[i].x, blackhole[i].y, player.halfW, player.halfH, blackhole[i].halfW, blackhole[i].halfH))
+		if (blackholeradiusCollision(px, py, bx, by, phw, phh, bhw, bhh))
+		{
+
+			float acceleration = 88.0f;
+			//calulate the direction 
+			float directionX = bx - px;
+			float directionY = by - py;
+
+			//normalise direction vector
+			float directionLength = sqrtf(powf(directionX, 2) + powf(directionY, 2));
+			directionX /= directionLength;
+			directionY /= directionLength;
+
+			//player's position
+			//gravity = 0;
+			px += directionX * acceleration * delta;
+			py += directionY * acceleration * delta;
+
+
+		}
+	}
+
+	void SavePlayerPostion()
+	{
+		std::ofstream outFile("player_location.txt");
+		outFile << player.x << " " << player.y << std::endl;
+		outFile.close();
+		std::cout << "Stored";
+	}
+
+	void RestorePlayerPosition()
+	{
+		//currently works but unable to distinguish 
+		std::ifstream inFile("player_location.txt");
+		inFile >> player.x >> player.y;
+		inFile.close();
+		std::cout << "playerlocationget";
 	}

@@ -1,9 +1,28 @@
+//==========================================================
+// file		: GSM.cpp
+// 
+// author   : Owen Quek
+// co-author: Ng Wen Wen
+// co-author: Kathleen Lim
+// 
+// email	: o.quek@digipen.edu
+//			  wenwen.ng@digipen.edu
+//            l.kathleenxiangxuan@digipen.edu
+//
+// brief	: collision.c is where our main collision checks and calculations are done
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
+
+
 #pragma once
 #include "allheaders.hpp"
 #include "Mainmenu.hpp"
 #include "SplashScreen.hpp"
 #include "Quit_Confirm.hpp"
 #include "PauseScreen.hpp"
+#include "Mainmenu_prompt.hpp"
 int current = GS_SPLASHSCREEN, previous = 0, next = 0;
 
 FP fpLoad = nullptr, fpInitialize = nullptr, fpUpdate = nullptr, fpDraw = nullptr, fpFree = nullptr, fpUnload = nullptr;
@@ -117,6 +136,16 @@ void GSM_Update()
 		fpUnload = Level7_Unload;
 		break;
 			
+	case GS_LEVELSELECTOR:
+		fpLoad = levelSelector_Load;
+		fpInitialize = levelSelector_Initialize;
+		fpUpdate = levelSelector_Update;
+		fpDraw = levelSelector_Draw;
+		fpFree = levelSelector_Free;
+		fpUnload = levelSelector_Unload;
+		break;
+
+
 	case GS_WINSCREEN:
 		fpLoad = winScreen_Load;
 		fpInitialize = winScreen_Initialize;
@@ -136,6 +165,14 @@ void GSM_Update()
 		fpUnload = howToPlay_Unload;
 		break;
 
+	case GS_CREDITS:
+		fpLoad = Credits_Load;
+		fpInitialize = Credits_Initialize;
+		fpUpdate = Credits_Update;
+		fpDraw = Credits_Draw;
+		fpFree = Credits_Free;
+		fpUnload = Credits_Unload;
+		break;
 
 	case GS_RESTART:		//Breaks the current case if the gamestate is required to restart
 		break;
@@ -148,6 +185,15 @@ void GSM_Update()
 		fpDraw = quit_confirm_Draw;
 		fpFree = quit_confirm_Free;
 		fpUnload = quit_confirm_Unload;
+		break;
+
+	case GS_MAINMENUCONFIRM:
+		fpLoad = mainmenu_prompt_Load;
+		fpInitialize = mainmenu_prompt_Initialize;
+		fpUpdate = mainmenu_prompt_Update;
+		fpDraw = mainmenu_prompt_Draw;
+		fpFree = mainmenu_prompt_Free;
+		fpUnload = mainmenu_prompt_Unload;
 		break;
 
 	case GS_PAUSEMENU:

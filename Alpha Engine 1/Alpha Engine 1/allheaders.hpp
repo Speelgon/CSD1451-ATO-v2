@@ -2,6 +2,7 @@
 #include "AEEngine.h"
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #include "Level1.hpp"
 #include "objects.hpp"
 #include "level1_new.hpp"
@@ -15,6 +16,8 @@
 #include "invertGravity.hpp"
 #include "winScreen.hpp"
 #include "howToPlay.hpp"
+#include "levelSelector.hpp"
+#include "Credits.hpp"
 
 #define screenwidth 1600
 #define screenheight 900
@@ -27,7 +30,7 @@ extern FP fpLoad, fpInitialize, fpUpdate, fpDraw, fpFree, fpUnload;
 
 enum GS_STATES
 {
-	
+
 	GS_SPLASHSCREEN,
 	GS_MAINMENU,
 	GS_HOWTOPLAY,
@@ -38,10 +41,13 @@ enum GS_STATES
 	GS_LEVEL5,
 	GS_LEVEL6,
 	GS_LEVEL7,
+	GS_CREDITS,
 
+	GS_LEVELSELECTOR,
 	GS_WINSCREEN,
 	GS_QUIT,
 	GS_RESTART,
 	GS_QUITCONFIRM,
-	GS_PAUSEMENU
+	GS_PAUSEMENU,
+	GS_MAINMENUCONFIRM
 };

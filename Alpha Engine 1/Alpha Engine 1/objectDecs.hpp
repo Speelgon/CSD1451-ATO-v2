@@ -61,7 +61,9 @@ float pointHookStuckX = 0;
 float pointHookStuckY = 0;
 int collectible_count = 0;
 float deathSeconds = 0.3;
+float resetCheck = 0.0;
 float timeDead = 0;
+
 
 GS_STATES previousState = GS_MAINMENU;
 
@@ -115,6 +117,6 @@ float mapy = 400;
 float halfmapx = mapx / 2;
 float halfmapy = mapy / 2;
 
-bool portalled{ false }, collectibleHit{ false }, platformDisappear{ false }, trampolined{ false };
+bool portalled{ false }, collectibleHit{ false }, platformDisappear{ false }, trampolined{ false }, blackholeTouched{ false };
 //==========================================================================================================================
 //==========================================================================================================================
