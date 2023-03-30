@@ -2,6 +2,7 @@
 #include "AEEngine.h"
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #include "Level1.hpp"
 #include "objects.hpp"
 #include "level1_new.hpp"
@@ -29,7 +30,7 @@ extern FP fpLoad, fpInitialize, fpUpdate, fpDraw, fpFree, fpUnload;
 
 enum GS_STATES
 {
-	
+
 	GS_SPLASHSCREEN,
 	GS_MAINMENU,
 	GS_HOWTOPLAY,
@@ -47,5 +48,6 @@ enum GS_STATES
 	GS_QUIT,
 	GS_RESTART,
 	GS_QUITCONFIRM,
-	GS_PAUSEMENU
+	GS_PAUSEMENU,
+	GS_MAINMENUCONFIRM
 };

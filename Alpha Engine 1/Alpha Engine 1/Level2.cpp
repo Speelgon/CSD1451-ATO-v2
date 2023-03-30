@@ -26,6 +26,8 @@ extern int numberofplatforms;
 extern f64 elapsedtime;
 extern int collectible_count;
 extern GS_STATES previousState;
+extern int previouslyPaused;
+
 
 void Level2_Load()
 {
@@ -78,63 +80,116 @@ void Level2_Initialize()
 	
 	previousState = GS_LEVEL2;
 
-	player.x = -1000;
-	player.y = -200;
-	player.xvel = 0;
-	player.yvel = 0;
-	player.width = 10;
-	player.height = 60;
-	player.halfW = player.width / 2;
-	player.halfH = player.height / 2;
-	player.lefttoken = 0;
-	player.righttoken = 0;
+	if (previouslyPaused)
+	{
+		previouslyPaused = 0;
+		RestorePlayerPosition();
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
 
-	item.rotation = 0;
-	item.width = 8.f;
-	item.height = 45.f;
+		mapBoundary.y = -600;
 
-	mapBoundary.y = -600;
+		initAudioList();
 
-	collectible_count = 0;
-	initAudioList();
+		objectinit(object);
 
-	objectinit(object);
+		objectlevel2init(object);
 
-    objectlevel2init(object);
+		hookinit(playerHook);
 
-	hookinit(playerHook);
+		portalinit(portal);
 
-	collectibleinit(collectible);
+		uiinit(ui);
 
-	collectiblelevel2init(collectible);
+		uilevel1init(ui);
 
-	portalinit(portal);
+		exitdoorinit(exitdoor);
 
-	uiinit(ui);
+		exitdoorlevel2init(exitdoor);
 
-	uilevel1init(ui);
+		nodeInitlevel2(nodes);
 
-	exitdoorinit(exitdoor);
+		textureinit(pTex);
 
-	exitdoorlevel2init(exitdoor);
+		meshinit(object, pMesh);
 
-	nodeInitlevel2(nodes);
+		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
-	textureinit(pTex);
+		platformstate[2].state = CANTDISAPPEAR;
+		platformstate[2].timer = 0;
+		platformstate[2].elapsedtime = 0.0;
+		platformstate[2].interval = 0.0f;
 
-	meshinit(object, pMesh);
+		platformstate[3].state = CANTDISAPPEAR;
+		platformstate[3].timer = 0;
+		platformstate[3].elapsedtime = 0.0f;
+		platformstate[3].interval = 0.0f;
+	}
+	else
+	{
+		player.x = -1000;
+		player.y = -200;
+		player.xvel = 0;
+		player.yvel = 0;
+		player.width = 10;
+		player.height = 60;
+		player.halfW = player.width / 2;
+		player.halfH = player.height / 2;
+		player.lefttoken = 0;
+		player.righttoken = 0;
 
-	meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+		item.rotation = 0;
+		item.width = 8.f;
+		item.height = 45.f;
 
-	platformstate[2].state = CANTDISAPPEAR;
-	platformstate[2].timer = 0;
-	platformstate[2].elapsedtime = 0.0;
-	platformstate[2].interval = 0.0f;
+		mapBoundary.y = -600;
 
-	platformstate[3].state = CANTDISAPPEAR;
-	platformstate[3].timer = 0;
-	platformstate[3].elapsedtime = 0.0f;
-	platformstate[3].interval = 0.0f;
+		collectible_count = 0;
+		initAudioList();
+
+		objectinit(object);
+
+		objectlevel2init(object);
+
+		hookinit(playerHook);
+
+		collectibleinit(collectible);
+
+		collectiblelevel2init(collectible);
+
+		portalinit(portal);
+
+		uiinit(ui);
+
+		uilevel1init(ui);
+
+		blackholeinit(blackhole);
+
+		exitdoorinit(exitdoor);
+
+		exitdoorlevel2init(exitdoor);
+
+		nodeInitlevel2(nodes);
+
+		textureinit(pTex);
+
+		meshinit(object, pMesh);
+
+		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+
+		platformstate[2].state = CANTDISAPPEAR;
+		platformstate[2].timer = 0;
+		platformstate[2].elapsedtime = 0.0;
+		platformstate[2].interval = 0.0f;
+
+		platformstate[3].state = CANTDISAPPEAR;
+		platformstate[3].timer = 0;
+		platformstate[3].elapsedtime = 0.0f;
+		platformstate[3].interval = 0.0f;
+	}
+
+	
 
 	
 }
@@ -318,6 +373,7 @@ void Level2_Update()
 		{
 			next = GS_PAUSEMENU;
 		}
+		SavePlayerPostion();
 		updateSound();
 	}
 }

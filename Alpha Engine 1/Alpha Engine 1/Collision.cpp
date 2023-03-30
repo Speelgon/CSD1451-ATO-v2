@@ -445,3 +445,20 @@ Player out of bounds
 
 		}
 	}
+
+	void SavePlayerPostion()
+	{
+		std::ofstream outFile("player_location.txt");
+		outFile << player.x << " " << player.y << std::endl;
+		outFile.close();
+		std::cout << "Stored";
+	}
+
+	void RestorePlayerPosition()
+	{
+		//currently works but unable to distinguish 
+		std::ifstream inFile("player_location.txt");
+		inFile >> player.x >> player.y;
+		inFile.close();
+		std::cout << "playerlocationget";
+	}
