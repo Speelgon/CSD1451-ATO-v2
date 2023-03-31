@@ -91,8 +91,6 @@ void Level5_Initialize()
 
 		mapBoundary.y = -600;
 
-		collectible_count = 0;
-
 		initAudioList();
 
 		objectinit(object);
