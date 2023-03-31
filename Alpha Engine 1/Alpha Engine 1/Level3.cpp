@@ -85,6 +85,7 @@ void Level3_Load()
 
 void Level3_Initialize()
 {
+
 	previousState = GS_LEVEL3;
 
 	if (previouslyPaused) 
@@ -96,6 +97,7 @@ void Level3_Initialize()
 		portal_elapsedtime = 0.0f;
 		portal_interval = 1.0f;
 		
+
 		item.rotation = 0;
 		item.width = 8.f;
 		item.height = 45.f;
@@ -143,8 +145,9 @@ void Level3_Initialize()
 		platformstate[3].timer = 0;
 		platformstate[3].elapsedtime = 0.0f;
 		platformstate[3].interval = 0.0f;
-
+		
 		timer = 0;
+		t = 0;
 	}
 	else
 	{
@@ -153,7 +156,9 @@ void Level3_Initialize()
 		platformstate[1].elapsedtime = 0.0f;
 		platformstate[1].interval = 1.0f;
 
-
+		portal_timer = 0;
+		portal_elapsedtime = 0.0f;
+		portal_interval = 1.0f;
 
 		player.x = -1000;
 		player.y = -200;
@@ -166,7 +171,6 @@ void Level3_Initialize()
 		player.lefttoken = 0;
 		player.righttoken = 0;
 
-		t = 0;
 
 		item.rotation = 0;
 		item.width = 8.f;
@@ -221,6 +225,7 @@ void Level3_Initialize()
 		platformstate[3].interval = 0.0f;
 
 		timer = 0;
+		t = 0;
 	}
 
 }
@@ -361,8 +366,8 @@ void Level3_Update()
 			player.y = portal[0].y;
 			float camTargetX = portal[1].x;
 			float camTargetY = portal[1].y;
-			float camStartX = portal[0].x;
-			float camStartY = portal[0].y;
+			float camStartX = player.x;
+			float camStartY = player.y;
 			float camTime = portal_interval;
 			
 			float camX = portal[0].x;

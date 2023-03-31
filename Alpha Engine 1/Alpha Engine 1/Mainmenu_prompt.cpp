@@ -25,7 +25,7 @@ void mainmenu_prompt_Load()
 {
 	std::cout << "GSM:Load\n";
 	
-	pTexConfirmationBackground = AEGfxTextureLoad("Assets/pause_background.png");
+	pTexConfirmationBackground = AEGfxTextureLoad("Assets/confirmation_text.png");
 	AE_ASSERT_MESG(pTexConfirmationBackground, "Failed to create background texture!!");
 
 	pTexYes = AEGfxTextureLoad("Assets/button_yes.png");
