@@ -183,7 +183,7 @@ void DisappearingPlatformRender(squareObject* object,PlatformState* platformstat
 
 
 
-void objectrender(squareObject player,  squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook, AEGfxTexture* pTexTrampoline)
+void objectrender(squareObject player,  squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook, AEGfxTexture* pTexTrampoline, AEGfxTexture* pTexBlackhole)
 {
 	
 	//===============================================================
@@ -328,14 +328,14 @@ void objectrender(squareObject player,  squareObject* ui, AEGfxVertexList** pMes
 	//===============================================================
 
 	// Drawing object 3 - (first) - No tint
-	AEGfxSetBlendMode(AE_GFX_BM_NONE);
-	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	
 	AEGfxSetPosition(blackhole[0].x, blackhole[0].y);
 	// No tint
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-	AEGfxTextureSet(NULL, 0, 0);
+	AEGfxTextureSet(pTexBlackhole, 0, 0);
 	AEGfxMeshDraw(pMesh[50], AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -346,8 +346,8 @@ void objectrender(squareObject player,  squareObject* ui, AEGfxVertexList** pMes
 	//===============================================================
 
 	// Drawing object 3 - (first) - No tint
-	AEGfxSetBlendMode(AE_GFX_BM_NONE);
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 	AEGfxSetPosition(trampoline[0].x, trampoline[0].y);
 	// No tint
@@ -356,8 +356,6 @@ void objectrender(squareObject player,  squareObject* ui, AEGfxVertexList** pMes
 	AEGfxTextureSet(pTexTrampoline, 0.0f, 0.0f);
 	AEGfxMeshDraw(pMesh[30], AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
-
-	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 	//===============================================================
 	// Exit Door Drawing												 

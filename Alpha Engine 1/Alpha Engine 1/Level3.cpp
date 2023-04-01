@@ -29,6 +29,12 @@ extern int collectible_count;
 extern GS_STATES previousState;
 extern int previouslyPaused;
 
+extern float portal_timer = 0;
+extern f64 portal_elapsedtime = 0;
+extern f64 portal_interval = 0;
+
+extern float t = 0;
+
 
 void Level3_Load()
 {
@@ -72,16 +78,25 @@ void Level3_Load()
 	pTexTrampoline = AEGfxTextureLoad("Assets/trampoline.png");
 	AE_ASSERT_MESG(pTexTrampoline, "Failed to create trampoline texture!!");
 
+	pTexBlackhole = AEGfxTextureLoad("Assets/blackhole.png");
+	AE_ASSERT_MESG(pTexBlackhole, "Failed to create blackhole texture!!");
+
 }
 
 void Level3_Initialize()
 {
+
 	previousState = GS_LEVEL3;
 
 	if (previouslyPaused) 
 	{
 		previouslyPaused = 0;
 		RestorePlayerPosition();
+
+		portal_timer = 0;
+		portal_elapsedtime = 0.0f;
+		portal_interval = 1.0f;
+		
 
 		item.rotation = 0;
 		item.width = 8.f;
@@ -134,8 +149,9 @@ void Level3_Initialize()
 		platformstate[3].timer = 0;
 		platformstate[3].elapsedtime = 0.0f;
 		platformstate[3].interval = 0.0f;
-
+		
 		timer = 0;
+		t = 0;
 	}
 	else
 	{
@@ -144,7 +160,9 @@ void Level3_Initialize()
 		platformstate[1].elapsedtime = 0.0f;
 		platformstate[1].interval = 1.0f;
 
-
+		portal_timer = 0;
+		portal_elapsedtime = 0.0f;
+		portal_interval = 1.0f;
 
 		player.x = -1000;
 		player.y = -200;
@@ -156,6 +174,7 @@ void Level3_Initialize()
 		player.halfH = player.height / 2;
 		player.lefttoken = 0;
 		player.righttoken = 0;
+
 
 		item.rotation = 0;
 		item.width = 8.f;
@@ -214,6 +233,7 @@ void Level3_Initialize()
 		platformstate[3].interval = 0.0f;
 
 		timer = 0;
+		t = 0;
 	}
 
 }
@@ -350,9 +370,39 @@ void Level3_Update()
 
 		if (portal[0].positiontoken == 0)
 		{
-			player.x = portal[1].x + portal[1].halfW + 20;
-			player.y = portal[1].y;
-			portal[0].positiontoken = 1;
+			player.x = portal[0].x;
+			player.y = portal[0].y;
+			float camTargetX = portal[1].x;
+			float camTargetY = portal[1].y;
+			float camStartX = player.x;
+			float camStartY = player.y;
+			float camTime = portal_interval;
+			
+			float camX = portal[0].x;
+			float camY = portal[0].y;
+			
+
+			t = portal_timer/3;
+			camX = camStartX + t * (camTargetX - camStartX);
+			camY = camStartY + t * (camTargetY - camStartY);
+			
+			AEGfxSetCamPosition(camX, camY);
+			/*AEGfxSetCamPosition(portal[1].x, portal[1].y);*/
+			portal_timer = PortalTimer(&portal_elapsedtime, portal_timer, portal_interval);
+
+
+			if (portal_timer == 3)	
+			{
+				viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
+				player.x = portal[1].x + portal[1].halfW + 20;
+				player.y = portal[1].y;
+				portal[0].positiontoken = 1;
+			}
+		}
+
+		else
+		{
+			viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
 		}
 
 		playerCollisionPortal(player.x, player.y, portal[1].x, portal[1].y, player.halfW, player.halfH, portal[1].halfW, portal[1].halfH, portal[1].positiontoken);
@@ -377,7 +427,7 @@ void Level3_Update()
 
 		//if(player.x<400 && player.x>-400 && player.y<400 && player.y > -300)
 		//{
-		viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
+		
 		//}
 
 
@@ -411,15 +461,15 @@ void Level3_Draw()
 	// Change texture base on where player is facing
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		objectrender(player, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline);
+		objectrender(player, ui, pMesh, collectible, pTexRight, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline, pTexBlackhole);
 	}
 	else if (AEInputCheckCurr(AEVK_A))
 	{
-		objectrender(player, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline);
+		objectrender(player, ui, pMesh, collectible, pTexLeft, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline, pTexBlackhole);
 	}
 	else
 	{
-		objectrender(player, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline);
+		objectrender(player, ui, pMesh, collectible, pTexFront, portal, pTexPortal, pTexCollectible, blackhole, nodes, pTexNode, exitdoor, pTexExitdoor, pTexHook, pTexTrampoline, pTexBlackhole);
 	}
 
 	//This is the part of your code which does the matrix translations, rotations and scaling
@@ -464,5 +514,6 @@ void Level3_Unload()
 	AEGfxTextureUnload(pTexStick);
 	AEGfxTextureUnload(pTexDisappearingPlat);
 	AEGfxTextureUnload(pTexTrampoline);
+	AEGfxTextureUnload(pTexBlackhole);
 
 }

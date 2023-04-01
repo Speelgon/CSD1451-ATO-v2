@@ -146,7 +146,7 @@ void backgroundrender(AEGfxVertexList** pMesh, AEGfxTexture* pTexBackground);
 
 void DisappearingPlatformRender(squareObject* object, PlatformState* platformstate, AEGfxVertexList** pMesh, AEGfxTexture* pTexPlatform, AEGfxTexture* pTexDisappearingPlat);
 
-void objectrender(squareObject player, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook, AEGfxTexture* pTexTrampoline);
+void objectrender(squareObject player, squareObject* ui, AEGfxVertexList** pMesh, collectibleObject* collectible, AEGfxTexture* pTex, portalObject* portal, AEGfxTexture* pTexPortal, AEGfxTexture* pTexCollectible, blackhole1* blackhole, nodeObject* nodes, AEGfxTexture* pTexNode, exitDoor* exitdoor, AEGfxTexture* pTexExitdoor, AEGfxTexture* pTexHook, AEGfxTexture* pTexTrampoline, AEGfxTexture* pTexBlackhole);
 
 void collectibleinit(collectibleObject* object);
 

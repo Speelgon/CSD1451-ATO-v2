@@ -14,10 +14,14 @@ extern int mousey;
 extern int truemousex;
 extern int truemousey;
 extern square player;
-extern AEGfxTexture* pTexMenuBackground ;
-extern AEGfxTexture* pTexPlay;
-extern AEGfxTexture* pTexTutorial;
-extern AEGfxTexture* pTexCredits;
+extern AEGfxTexture* pTexMenuBackground;
+extern AEGfxTexture* pTexLevel1 = 0;
+extern AEGfxTexture* pTexLevel2 = 0;
+extern AEGfxTexture* pTexLevel3 = 0;
+extern AEGfxTexture* pTexLevel4 = 0;
+extern AEGfxTexture* pTexLevel5 = 0;
+extern AEGfxTexture* pTexLevel6 = 0;
+extern AEGfxTexture* pTexLevel7 = 0;
 extern AEGfxTexture* pTexQuit;
 extern f32 settingsbuttony;
 extern f32 creditsbuttony;
@@ -31,14 +35,26 @@ void levelSelector_Load()
 	pTexMenuBackground = AEGfxTextureLoad("Assets/MenuBackground.png");
 	AE_ASSERT_MESG(pTexMenuBackground, "Failed to create menu background texture!!");
 
-	pTexPlay = AEGfxTextureLoad("Assets/button_play.png");
-	AE_ASSERT_MESG(pTexPlay, "Failed to create play button texture!!");
+	pTexLevel1 = AEGfxTextureLoad("Assets/button_1.png");
+	AE_ASSERT_MESG(pTexLevel1, "Failed to create level 1 button texture!!");
 
-	pTexTutorial = AEGfxTextureLoad("Assets/button_tutorial.png");
-	AE_ASSERT_MESG(pTexTutorial, "Failed to create tutorial button texture!!");
+	pTexLevel2 = AEGfxTextureLoad("Assets/button_2.png");
+	AE_ASSERT_MESG(pTexLevel2, "Failed to create level 2 button texture!!");
 
-	pTexCredits = AEGfxTextureLoad("Assets/button_credits.png");
-	AE_ASSERT_MESG(pTexCredits, "Failed to create credits button texture!!");
+	pTexLevel3 = AEGfxTextureLoad("Assets/button_3.png");
+	AE_ASSERT_MESG(pTexLevel3, "Failed to create level 3 button texture!!");
+
+	pTexLevel4 = AEGfxTextureLoad("Assets/button_4.png");
+	AE_ASSERT_MESG(pTexLevel3, "Failed to create level 4 button texture!!");
+
+	pTexLevel5 = AEGfxTextureLoad("Assets/button_5.png");
+	AE_ASSERT_MESG(pTexLevel3, "Failed to create level 5 button texture!!");
+
+	pTexLevel6 = AEGfxTextureLoad("Assets/button_6.png");
+	AE_ASSERT_MESG(pTexLevel3, "Failed to create level 6 button texture!!");
+
+	pTexLevel7 = AEGfxTextureLoad("Assets/button_7.png");
+	AE_ASSERT_MESG(pTexLevel3, "Failed to create level 7 button texture!!");
 
 	pTexQuit = AEGfxTextureLoad("Assets/button_quit.png");
 	AE_ASSERT_MESG(pTexQuit, "Failed to create quit button texture!!");
@@ -224,7 +240,7 @@ void levelSelector_Draw()
 	AEGfxSetPosition(levels[0].x, levels[0].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	// No texture 
-	AEGfxTextureSet(pTexPlay, 0, 0);
+	AEGfxTextureSet(pTexLevel1, 0, 0);
 	// Drawing the mesh (list of triangles)
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
@@ -234,7 +250,7 @@ void levelSelector_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(levels[1].x, levels[1].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexTutorial, 0, 0);
+	AEGfxTextureSet(pTexLevel2, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -243,7 +259,7 @@ void levelSelector_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(levels[2].x, levels[2].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexCredits, 0, 0);
+	AEGfxTextureSet(pTexLevel3, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -252,7 +268,7 @@ void levelSelector_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(levels[3].x, levels[3].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexQuit, 0, 0);
+	AEGfxTextureSet(pTexLevel4, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -262,7 +278,7 @@ void levelSelector_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(levels[4].x, levels[4].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexQuit, 0, 0);
+	AEGfxTextureSet(pTexLevel5, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -272,7 +288,7 @@ void levelSelector_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(levels[5].x, levels[5].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexQuit, 0, 0);
+	AEGfxTextureSet(pTexLevel6, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -283,7 +299,7 @@ void levelSelector_Draw()
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 	AEGfxSetPosition(levels[6].x, levels[6].y);
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	AEGfxTextureSet(pTexQuit, 0, 0);
+	AEGfxTextureSet(pTexLevel7, 0, 0);
 	AEGfxMeshDraw(playMesh, AE_GFX_MDM_TRIANGLES);
 	AEGfxSetTransparency(1.0f);
 
@@ -337,9 +353,13 @@ void levelSelector_Free()
 void levelSelector_Unload()
 {
 	AEGfxTextureUnload(pTexMenuBackground);
-	AEGfxTextureUnload(pTexPlay);
-	AEGfxTextureUnload(pTexTutorial);
-	AEGfxTextureUnload(pTexCredits);
+	AEGfxTextureUnload(pTexLevel1);
+	AEGfxTextureUnload(pTexLevel2);
+	AEGfxTextureUnload(pTexLevel3);
+	AEGfxTextureUnload(pTexLevel4);
+	AEGfxTextureUnload(pTexLevel5);
+	AEGfxTextureUnload(pTexLevel6);
+	AEGfxTextureUnload(pTexLevel7);
 	AEGfxTextureUnload(pTexQuit);
 	freeSound();
 }
