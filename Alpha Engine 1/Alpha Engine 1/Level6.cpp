@@ -106,11 +106,7 @@ void Level6_Initialize()
 
 		portallevel6init(portal);
 
-		uiinit(ui);
-
-		uilevel1init(ui);
-
-		exitdoorinit(exitdoor);
+		blackholeinit(blackhole);
 
 		exitdoorlevel6init(exitdoor);
 
@@ -121,6 +117,8 @@ void Level6_Initialize()
 		nodeInit(nodes);
 
 		nodeInitlevel6(nodes);
+
+		trampolineinit(trampoline);
 
 		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
@@ -138,6 +136,11 @@ void Level6_Initialize()
 	}
 	else
 	{
+
+		elapsedtime = 0;
+		blackholeTouched = 0;
+		timeDead = 0;
+
 		platformstate[1].state = CANTDISAPPEAR;
 		platformstate[1].timer = 3;
 		platformstate[1].elapsedtime = 0.0f;
@@ -172,6 +175,10 @@ void Level6_Initialize()
 
 		hookinit(playerHook);
 
+		blackholeinit(blackhole);
+
+		blackholelevel6init(blackhole);
+
 		collectibleinit(collectible);
 
 		collectiblelevel6init(collectible);
@@ -196,6 +203,8 @@ void Level6_Initialize()
 
 		nodeInitlevel6(nodes);
 
+		trampolineinit(trampoline);
+
 		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
 
 		platformstate[2].state = CANTDISAPPEAR;
@@ -219,9 +228,16 @@ void Level6_Update()
 {
 	delta = AEFrameRateControllerGetFrameTime();
 
-	if (AEInputCheckCurr(AEVK_L))
+	if (blackholeTouched)
 	{
+
 		catdeath();
+		hookUpdate();
+		if (playerOutofBounds(player.y, mapBoundary.y) == 1)
+		{
+			current = GS_RESTART;
+		}
+
 	}
 
 	else
@@ -394,6 +410,12 @@ void Level6_Update()
 			next = GS_PAUSEMENU;
 		}
 		SavePlayerPostion();
+
+		for (int i{ 0 }; i < maxBlackhole; ++i)
+		{
+			blackholeCollision(player.x, player.y, blackhole[i].x, blackhole[i].y, player.halfW, player.halfH, blackhole[i].halfW, blackhole[i].halfH);
+			blackholeCollisionResponse(player.x, player.y, player.halfW, player.halfH, blackhole[i].x, blackhole[i].y, blackhole[i].halfW, blackhole[i].halfH);
+		}
 
 		updateSound();
 	}

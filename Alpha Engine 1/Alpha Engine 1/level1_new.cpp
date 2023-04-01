@@ -399,9 +399,6 @@ void Level1NEW_Update()
 			blackholeCollision(player.x, player.y, blackhole[i].x, blackhole[i].y, player.halfW, player.halfH, blackhole[i].halfW, blackhole[i].halfH);
 			blackholeCollisionResponse(player.x, player.y, player.halfW, player.halfH, blackhole[i].x, blackhole[i].y, blackhole[i].halfW, blackhole[i].halfH);
 		}
-		/*else {
-			gravity = 0.15;
-		}*/
 
 		updateSound();
 

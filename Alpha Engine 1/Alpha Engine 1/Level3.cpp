@@ -120,7 +120,7 @@ void Level3_Initialize()
 
 		portallevel3init(portal);
 
-
+		blackholeinit(blackhole);
 
 		uiinit(ui);
 
@@ -207,6 +207,8 @@ void Level3_Initialize()
 		uiinit(ui);
 
 		uilevel1init(ui);
+
+		blackholeinit(blackhole);
 
 		exitdoorinit(exitdoor);
 

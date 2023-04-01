@@ -625,7 +625,6 @@ void blackholeinit(blackhole1* object) {
 	}
 }
 
-
 void blackholelevel1init(blackhole1* object) {
 
 		object[0].x = -1050;
@@ -636,6 +635,43 @@ void blackholelevel1init(blackhole1* object) {
 		object[0].halfH = object[0].height / 2;
 		object[0].gravPull = 0;
 		object[0].pullRadius = 0;
+
+}
+
+void blackholelevel6init(blackhole1* object) {
+
+	object[0].x = -1450;
+	object[0].y = 300;
+	object[0].width = 50;
+	object[0].height = 30;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+	object[0].gravPull = 0;
+	object[0].pullRadius = 0;
+
+}
+
+void blackholelevel7init(blackhole1* object) {
+
+	object[0].x = -850;
+	object[0].y = -350;
+	object[0].width = 50;
+	object[0].height = 30;
+	object[0].halfW = object[0].width / 2;
+	object[0].halfH = object[0].height / 2;
+	object[0].gravPull = 0;
+	object[0].pullRadius = 0;
+
+	object[1].x = -555;
+	object[1].y = -350;
+	object[1].width = 50;
+	object[1].height = 30;
+	object[1].halfW = object[0].width / 2;
+	object[1].halfH = object[0].height / 2;
+	object[1].gravPull = 0;
+	object[1].pullRadius = 0;
+
+
 
 }
 

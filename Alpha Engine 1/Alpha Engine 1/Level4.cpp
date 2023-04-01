@@ -115,6 +115,8 @@ void Level4_Initialize()
 
 		nodeInit(nodes);
 
+		blackholeinit(blackhole);
+
 		trampolineinit(trampoline);
 
 		trampolinelevel4init(trampoline);
@@ -188,6 +190,7 @@ void Level4_Initialize()
 
 		nodeInit(nodes);
 
+		blackholeinit(blackhole);
 
 		trampolineinit(trampoline);
 

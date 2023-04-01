@@ -106,6 +106,8 @@ void Level5_Initialize()
 
 		portallevel5init(portal);
 
+		blackholeinit(blackhole);
+
 		uiinit(ui);
 
 		uilevel1init(ui);
@@ -149,8 +151,6 @@ void Level5_Initialize()
 		platformstate[1].elapsedtime = 0.0f;
 		platformstate[1].interval = 1.0f;
 
-
-
 		player.x = -1000;
 		player.y = -200;
 		player.xvel = 0;
@@ -182,6 +182,8 @@ void Level5_Initialize()
 
 		collectiblelevel5init(collectible);
 
+		blackholeinit(blackhole);
+
 		portalinit(portal);
 
 		portallevel5init(portal);
@@ -203,6 +205,8 @@ void Level5_Initialize()
 		nodeInitlevel5(nodes);
 
 		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+
+		trampolineinit(trampoline);
 
 		trampolinelevel5init(trampoline);
 

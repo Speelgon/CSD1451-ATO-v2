@@ -341,6 +341,20 @@ void objectrender(squareObject player,  squareObject* ui, AEGfxVertexList** pMes
 
 	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
+	// Drawing object 3 - (first) - No tint
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
+	AEGfxSetPosition(blackhole[1].x, blackhole[1].y);
+	// No tint
+	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+	AEGfxTextureSet(pTexBlackhole, 0, 0);
+	AEGfxMeshDraw(pMesh[50], AE_GFX_MDM_TRIANGLES);
+	AEGfxSetTransparency(1.0f);
+
+	AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
 	//===============================================================
 	// Trampoline Drawing												 
 	//===============================================================

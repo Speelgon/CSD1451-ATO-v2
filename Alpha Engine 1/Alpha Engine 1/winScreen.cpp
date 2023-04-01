@@ -185,7 +185,12 @@ void winScreen_Update()
 
 	if (IsAreaClicked(next_level_button.x, next_level_button.y, next_level_button.halfW, next_level_button.halfH, truemousex, truemousey))
 	{
-		next = previousState+1;
+		if (previousState == GS_LEVEL7) {
+			next = GS_MAINMENU;
+		}
+		else {
+			next = previousState + 1;
+		}
 	}
 
 	if (IsAreaClicked(restart_button.x, restart_button.y, restart_button.halfW, restart_button.halfH, truemousex, truemousey))

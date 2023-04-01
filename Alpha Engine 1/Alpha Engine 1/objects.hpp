@@ -132,6 +132,10 @@ void blackholeinit(blackhole1* object);
 
 void blackholelevel1init(blackhole1* object);
 
+void blackholelevel6init(blackhole1* object);
+
+void blackholelevel7init(blackhole1* object);
+
 void trampolineinit(tramp* object);
 
 void trampolinelevel1init(tramp* object);
