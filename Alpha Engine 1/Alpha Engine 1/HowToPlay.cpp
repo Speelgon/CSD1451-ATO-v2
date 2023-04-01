@@ -28,7 +28,7 @@ void howToPlay_Load()
 	pTexMenuBackground = AEGfxTextureLoad("Assets/how_to_play.png");
 	AE_ASSERT_MESG(pTexMenuBackground, "Failed to create menu background texture!!");
 
-	pTexPlay = AEGfxTextureLoad("Assets/button_play.png");
+	pTexPlay = AEGfxTextureLoad("Assets/button_return.png");
 	AE_ASSERT_MESG(pTexPlay, "Failed to create play button texture!!");
 
 
