@@ -120,6 +120,8 @@ void Level5_Initialize()
 		nodeInitlevel5(nodes);
 
 		meshinitlevel1(object, pMesh, ui, collectible, player, portal, playerHook, blackhole, exitdoor);
+		
+		trampolineinit(trampoline);
 
 		trampolinelevel5init(trampoline);
 

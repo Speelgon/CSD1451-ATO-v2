@@ -90,6 +90,12 @@ void Level2_Initialize()
 
 		mapBoundary.y = -600;
 
+		trampolineinit(trampoline);
+
+		blackholeinit(blackhole);
+
+		portalinit(portal);
+
 		initAudioList();
 
 		objectinit(object);
@@ -147,6 +153,10 @@ void Level2_Initialize()
 
 		collectible_count = 0;
 		initAudioList();
+
+		trampolineinit(trampoline);
+
+		portalinit(portal);
 
 		objectinit(object);
 

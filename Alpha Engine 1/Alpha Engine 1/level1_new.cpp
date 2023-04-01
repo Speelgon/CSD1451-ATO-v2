@@ -31,6 +31,9 @@ extern GS_STATES previousState;
 
 extern int previouslyPaused;
 
+extern HWND mainWindow;
+extern HWND currentWindow;
+
 void Level1NEW_Load()
 {
 	std::cout << "GSM:Load\n";
@@ -79,6 +82,7 @@ void Level1NEW_Initialize()
 {
 	previousState = GS_LEVEL1;
 
+	currentWindow = AESysGetWindowHandle();
 
 	if (previouslyPaused) // if statements don't work if contains alpha engine
 	{
@@ -109,7 +113,13 @@ void Level1NEW_Initialize()
 
 		uilevel1init(ui);
 
+		blackholeinit(blackhole);
+
 		blackholelevel1init(blackhole);
+
+		trampolineinit(trampoline);
+
+		portalinit(portal);
 
 		exitdoorinit(exitdoor);
 
@@ -183,6 +193,12 @@ void Level1NEW_Initialize()
 		uiinit(ui);
 
 		uilevel1init(ui);
+
+		trampolineinit(trampoline);
+
+		blackholeinit(blackhole);
+
+		portalinit(portal);
 
 		blackholelevel1init(blackhole);
 

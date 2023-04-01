@@ -13,6 +13,8 @@
 #include "objectDecs.hpp"
 #include "Mainmenu.hpp"
 
+
+
 // ---------------------------------------------------------------------------
 // main
 s8 fontId;
@@ -29,10 +31,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 // Initialization
 
 // Using custom window procedure
-	AESysInit(hInstance, nCmdShow, screenwidth, screenheight, 1, 60, true, NULL);
+	AESysInit(hInstance, nCmdShow, screenwidth, screenheight, 0, 60, true, NULL);
 
 	// Changing the window title
-	AESysSetWindowTitle("My New Demo!");
+	AESysSetWindowTitle("Leap Climbers");
 
 	// reset the system modules
 	AESysReset();
@@ -44,15 +46,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Initialization end
 	/////////////////////
 
-
-
 	///////////////////////
 	// Variable declaration
 
 	int gGameRunning = 1;
-
 	
-
 	/*float minWorldX = 10;
 	float minWorldY = 10;*/
 

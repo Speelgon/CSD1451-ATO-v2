@@ -36,6 +36,7 @@ extern AEGfxTexture* pTexPlay = 0;
 extern AEGfxTexture* pTexTutorial = 0;
 extern AEGfxTexture* pTexCredits = 0;
 extern AEGfxTexture* pTexQuit = 0;
+extern int previouslyPaused;
 f32 settingsbuttony;
 f32 creditsbuttony;
 f32 quitbuttony;
@@ -63,6 +64,7 @@ void Mainmenu_Load()
 
 void Mainmenu_Initialize()
 {
+	previouslyPaused = 0;
 
 	levelSelector.x = 150;
 	levelSelector.y = 0;

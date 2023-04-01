@@ -65,6 +65,11 @@ float resetCheck = 0.0;
 float timeDead = 0;
 
 
+
+
+HWND mainWindow;
+HWND currentWindow;
+
 GS_STATES previousState = GS_MAINMENU;
 
 //==========================================================================================================================
