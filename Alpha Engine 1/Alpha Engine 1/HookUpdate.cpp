@@ -1,3 +1,16 @@
+//==========================================================
+// file		: HookUpdate.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//			  
+// brief	: HookUpdate.cpp is the functions for updating the location of the hook is located
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
+
 #include "allheaders.hpp"
 #include "objects.hpp"
 #include "Level1.hpp"

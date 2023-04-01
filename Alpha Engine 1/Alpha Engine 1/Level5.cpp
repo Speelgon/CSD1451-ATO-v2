@@ -210,8 +210,6 @@ void Level5_Initialize()
 
 		trampolinelevel5init(trampoline);
 
-
-
 		platformstate[2].state = CANTDISAPPEAR;
 		platformstate[2].timer = 0;
 		platformstate[2].elapsedtime = 0.0;

@@ -1,3 +1,15 @@
+//==========================================================
+// file		: credits.cpp
+// 
+// author   : Ng Wen Wen
+// 
+// email	: wenwen.ng@digipen.edu
+//			  
+// brief	: credits.cpp is where the credits functions are defined
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #include "allheaders.hpp"
 #include "IncrementVariable.hpp"
 #include "utils.h"

@@ -1,3 +1,16 @@
+//==========================================================
+// file		: catdeath.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: catdeath.cpp contains the death animation for the cat
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
+
 #include "allheaders.hpp"
 #include "objects.hpp"
 

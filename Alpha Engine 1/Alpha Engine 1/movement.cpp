@@ -1,3 +1,15 @@
+//==========================================================
+// file		: movement.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: movement.cpp defines the functions for the player movemnt
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "allheaders.hpp"
 #include "movement.hpp"
@@ -6,7 +18,6 @@ extern f64 delta;
 extern f64 assumedFrameRate;
 extern squareObject player;
 extern float jumpspeed;
-//For the movement, the variables are passed in as functions, so the extern thing isn't really necessary here, thats also why its less complicated wrt variable placement
 
 void playerInputMovement(float& pX, float& pY, float playerSpeed,int& jumptoken) {
 
@@ -57,22 +68,12 @@ void playerEasingMovement(float& pxvel, float& pyvel, float stabilizer)
 	{
 		pxvel += (float)(stabilizer * delta * assumedFrameRate);
 	}
-	//if (pyvel > 0)
-	//{
-	//	pyvel -= stabilizer;
-	//}
-	//if (pyvel < 0)
-	//{
-	//	pyvel += stabilizer;
-	//}
+
 	if (pxvel <= 0.5 && pxvel >= -0.5)
 	{
 		pxvel = 0;
 	}
-	//if (pyvel <= 0.5 && pyvel >= -0.5)
-	//{
-	//	pyvel = 0;
-	//}
+
 }
 
 void playerGravity(float& pY, float grav)
@@ -81,9 +82,7 @@ void playerGravity(float& pY, float grav)
 }
 
 void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle item, node* collidingNode) {
-	
-	//pXvel += grav * cos(item.rotation);
-	//pYvel += grav * sin(item.rotation);
+
 	pXvel = 0;
 	pYvel = 0;
 	playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
@@ -91,23 +90,5 @@ void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle item, n
 	player.y += (f32)(player.xvel * cos(item.rotation) * assumedFrameRate * delta);
 	pXvel = 0;
 	pYvel = 0;
-	//float xdist = player.x - collidingNode->x;
-	//float ydist = player.y - collidingNode->y;
-	//if (player.x-collidingNode->x >= xdist)
-	//{
-	//	//player.x = xdist;
-	//}
-	//if (player.y-collidingNode->y >= ydist)
-	//{
-	//	//player.y = ydist;
-	//}
-
-	//AEVec2 tension;
-	//tension.x = 0;
-	//tension.y = 0;
-	//tension.x = (grav) * cos(item.rotation);
-	//tension.y = (grav) * sin(item.rotation);
-	//pXvel += tension.x;
-	//pYvel += tension.y;
 
 }

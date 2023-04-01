@@ -1,3 +1,15 @@
+//==========================================================
+// file		: Main.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: Main.cpp is where the game runs
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 // ---------------------------------------------------------------------------
 // includes
 #pragma once

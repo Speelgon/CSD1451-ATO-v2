@@ -1,3 +1,15 @@
+//==========================================================
+// file		: winScreen.hpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: winScreen.hpp declares the functions to load the win screen
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 
 void winScreen_Load();

@@ -1,3 +1,15 @@
+//==========================================================
+// file		: Level1.hpp
+// 
+// author   : Kathleen Lim
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//
+// brief	: Level1.hpp contains all the variables required for level 1
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "objects.hpp"
 extern square player;

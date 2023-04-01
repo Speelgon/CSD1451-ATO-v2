@@ -1,3 +1,19 @@
+//==========================================================
+// file		: objectRender.cpp
+// 
+// author   : Owen Quek
+// co-author: Ng Wen Wen
+// co-author: Kathleen Lim
+// 
+// email	: o.quek@digipen.edu
+//			  wenwen.ng@digipen.edu
+//            l.kathleenxiangxuan@digipen.edu
+//
+// brief	: objectRender.cpp allows draws all the objects required for each gamestate
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "allheaders.hpp"
 #include "objects.hpp"

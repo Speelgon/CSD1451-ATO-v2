@@ -1,3 +1,15 @@
+//==========================================================
+// file		: Level1.cpp
+// 
+// author   : Kathleen Lim
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//
+// brief	: Level1.cpp is where our the old level1 gamestate functions are declared and setup
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "allheaders.hpp"
 #include "Level1.hpp"
