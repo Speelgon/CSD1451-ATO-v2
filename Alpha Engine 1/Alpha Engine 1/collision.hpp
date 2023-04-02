@@ -4,10 +4,12 @@
 // author   : Owen Quek
 // co-author: Ng Wen Wen
 // co-author: Kathleen Lim
+// co-author: Tham Kwan Eu
 // 
 // email	: o.quek@digipen.edu
 //			  wenwen.ng@digipen.edu
 //            l.kathleenxiangxuan@digipen.edu
+//			  t.kwaneu@digipen.edu
 //
 // brief	: collision.c is where our main collision checks and calculations are done
 //

@@ -1,5 +1,16 @@
 #include "audio.hpp"
-
+//==========================================================
+// file		: audio.cpp
+// 
+// author   : Tham Kwan Eu
+// 
+// email	: t.kwaneu@digipen.edu
+//
+// brief	: file that handles the background music and sound effects for the game
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+// 
 //===================================//
 //			Sound Groups enum		 //
 //===================================//
@@ -18,9 +29,6 @@ enum soundType {
 };
 
 AEAudio soundList[MAXASSETS];
-
-//std::vector<AEAudio> soundListVector;
-
 
 AEAudioGroup soundGroups[MAXGROUPS];
 
@@ -171,6 +179,11 @@ void updateSound() {
 	//===============================//
 
 	//======== Window Minimized Check =========//
+	/*!
+	\brief	checks if window is minimized using IsIconic in window.h
+			pauses all sound groups if minimized
+			resumes all sound groups when window is 
+	*/
 	windowHandle = AESysGetWindowHandle();
 	if (IsIconic(windowHandle)) {
 		for (int i{ 0 }; i < MAXGROUPS; ++i) {

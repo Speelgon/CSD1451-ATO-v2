@@ -4,6 +4,18 @@
 #include <iostream>
 #include <string>
 #include <Windows.h>
+//==========================================================
+// file		: audio.hpp
+// 
+// author   : Tham Kwan Eu
+// 
+// email	: t.kwaneu@digipen.edu
+//
+// brief	: file that declares functions to be used in audio.cpp
+//			  also references external variables to be used
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+
 //=========== AE AUDIO VARIABLES ===========//
 extern int current;
 extern bool portalled;
@@ -30,4 +42,7 @@ void playAudio(AEAudio const& audioList, AEAudioGroup group, double volume = 0.5
 ***************************************/
 void updateSound();
 
+/***************************************
+@brief		stops all sound groups and resets all external variables
+***************************************/
 void freeSound();

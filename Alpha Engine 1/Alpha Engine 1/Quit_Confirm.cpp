@@ -1,3 +1,17 @@
+//==========================================================
+// file		: Quit_Confirm.cpp
+// 
+// author   : Ng Yue Zhi
+// co-author: Ng Wen Wen
+// 
+// email	: n.yuezhi@digipen.edu
+//			  wenwen.ng@digipen.edu
+// 
+// brief	: Quit_Confirm.cpp provides definitions for functions for a game state for the quit confirmation prompt toggle
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #include "allheaders.hpp"
 #include "IncrementVariable.hpp"
 #include "winScreen.hpp"

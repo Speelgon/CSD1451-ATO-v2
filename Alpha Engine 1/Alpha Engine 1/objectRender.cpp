@@ -456,10 +456,6 @@ void anglePlayerToMouse() {
 	AEVec2Normalize(&item.direction, &item.direction);
 	item.rotation = atan2(item.direction.y, item.direction.x);
 
-	item.direction.x = (mouseX - worldwidth / 2) * cos(item.rotation) - (mouseY - worldheight / 2) * sin(item.rotation);
-	item.direction.y = (mouseX - worldwidth / 2) * sin(item.rotation) + (mouseY - worldheight / 2) * cos(item.rotation);
-	AEVec2Normalize(&item.direction, &item.direction);
-
 }
 
 void anglePlayerToNode(node nodes) {
@@ -480,20 +476,18 @@ void kwanEuItemRender(AEGfxTexture* pTexStick) {
 
 	// Set Scale for Item
 	AEMtx33 scale = { 0 };
-	AEMtx33Scale(&scale, 1, 1); //set scale to 1 so object can be shown. DO NOT SET TO HIGHER VALUES UNLESS INCREASING SIZE
+	AEMtx33Scale(&scale, 1, 1);
 
 	// Create a rotation matrix
 	AEMtx33 rotate = { 0 };
-	//Replaced the dt with 1/60 so the thing object doesn't stutter every second
+	
 	AEMtx33Rot(&rotate, 360 - AERadToDeg(item.rotation) /60);
 
 	// Create a translation matrix that translates by
 	// 100 in the x-axis and 100 in the y-axis
 	AEMtx33 translate = { 0 };
 
-	
-
-	AEMtx33Trans(&translate, 12* item.direction.x + player.x, -12* item.direction.y + player.y);
+	AEMtx33Trans(&translate, 12* item.direction.x + player.x, -14* item.direction.y + player.y);
 
 	// Concat the matrices
 	AEMtx33 transform = { 0 };
