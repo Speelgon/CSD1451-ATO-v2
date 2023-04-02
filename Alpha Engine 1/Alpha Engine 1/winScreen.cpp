@@ -1,3 +1,15 @@
+//==========================================================
+// file		: winScreen.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: winScreen.cpp creates the winscreen after a player wins a level
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #include "winScreen.hpp"
 
 #include "allheaders.hpp"

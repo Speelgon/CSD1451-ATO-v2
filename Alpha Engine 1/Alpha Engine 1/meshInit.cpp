@@ -1,3 +1,14 @@
+//==========================================================
+// file		: mesInit.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: meshInit.cpp initializes all the meshes required
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #pragma once
 #include "allheaders.hpp"
 #include "objects.hpp"

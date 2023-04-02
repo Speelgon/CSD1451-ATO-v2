@@ -1,3 +1,16 @@
+//==========================================================
+// file		: levelSelector.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: levelSelector.cpp allows the player to select the levels 1-7
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
+
 #include "allheaders.hpp"
 #include "IncrementVariable.hpp"
 

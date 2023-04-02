@@ -1,3 +1,15 @@
+//==========================================================
+// file		: levelSelector.hpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: levelSelector.hpp declares functions that allow the player to select the levels 1-7
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 
 

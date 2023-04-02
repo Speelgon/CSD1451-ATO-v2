@@ -1,3 +1,15 @@
+//==========================================================
+// file		: Level6.hpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: Level6.hpp contains all variables for level 6
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "objects.hpp"
 

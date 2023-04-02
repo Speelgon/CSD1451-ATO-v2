@@ -1,3 +1,18 @@
+//==========================================================
+// file		: collision.cpp
+// 
+// author   : Owen Quek
+// co-author: Ng Wen Wen
+// co-author: Kathleen Lim
+// 
+// email	: o.quek@digipen.edu
+//			  wenwen.ng@digipen.edu
+//            l.kathleenxiangxuan@digipen.edu
+//
+// brief	: Declares the object types and functions taking those objects
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #pragma once
 #define maxObj 150
 #define meshMax 50

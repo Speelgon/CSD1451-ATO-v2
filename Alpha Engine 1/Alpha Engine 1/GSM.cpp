@@ -9,7 +9,7 @@
 //			  wenwen.ng@digipen.edu
 //            l.kathleenxiangxuan@digipen.edu
 //
-// brief	: collision.c is where our main collision checks and calculations are done
+// brief	: GSM.cpp is where all gamestates are managed
 //
 // Copyright © 2023 DigiPen, All rights reserved.
 //==========================================================
@@ -28,8 +28,7 @@ int current = GS_SPLASHSCREEN, previous = 0, next = 0;
 FP fpLoad = nullptr, fpInitialize = nullptr, fpUpdate = nullptr, fpDraw = nullptr, fpFree = nullptr, fpUnload = nullptr;
 
 // ----------------------------------------------------------------------------
-// This function prints GSM initialize to the output stream
-// It sets all states to a staring state.
+// This function initializes the gamestate
 // ----------------------------------------------------------------------------
 
 void GSM_Initialize(int startingState)
@@ -39,9 +38,7 @@ void GSM_Initialize(int startingState)
 }
 
 // ----------------------------------------------------------------------------
-// This function prints GSM:Update to the output stream and
-// loads the function pointers to functions declared in level1.c based
-// on the current state of the game, which is initialized in GSM_Initialize
+// Updates the GSM and loads the function pointers
 // ----------------------------------------------------------------------------
 
 void GSM_Update()
@@ -50,7 +47,7 @@ void GSM_Update()
 	std::cout << "GSM:Update\n";
 	switch (current)
 	{
-	case GS_SPLASHSCREEN:			//Loads the function pointers for MAINMENU
+	case GS_SPLASHSCREEN:			
 
 		fpLoad = SplashScreen_Load;
 		fpInitialize = SplashScreen_Initialize;
@@ -61,7 +58,7 @@ void GSM_Update()
 		
 		break;
 
-	case GS_MAINMENU:			//Loads the function pointers for MAINMENU
+	case GS_MAINMENU:			
 		
 		fpLoad = Mainmenu_Load;
 		fpInitialize = Mainmenu_Initialize;

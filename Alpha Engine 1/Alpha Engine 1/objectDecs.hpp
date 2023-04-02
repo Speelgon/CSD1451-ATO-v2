@@ -1,3 +1,15 @@
+//==========================================================
+// file		: collision.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: objectDecs.hpp declares all the variables needed for every level
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 
 #include "allheaders.hpp"

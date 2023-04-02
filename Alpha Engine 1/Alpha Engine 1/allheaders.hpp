@@ -1,3 +1,19 @@
+//==========================================================
+// file		: allheaders.cpp
+// 
+// author   : Owen Quek
+// co-author: Ng Wen Wen
+// co-author: Kathleen Lim
+// 
+// email	: o.quek@digipen.edu
+//			  wenwen.ng@digipen.edu
+//            l.kathleenxiangxuan@digipen.edu
+//
+// brief	: Where all the headers are declared
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "AEEngine.h"
 #include <cstdlib>

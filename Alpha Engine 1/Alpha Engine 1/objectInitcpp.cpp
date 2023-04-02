@@ -1,3 +1,19 @@
+//==========================================================
+// file		: objectInIt.cpp
+// 
+// author   : Kathleen Lim
+// co-author: Ng Wen Wen
+// co-author: Owen Quek
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//			  wenwen.ng@digipen.edu
+//			  o.quek@digipen.edu
+//
+// brief	: objectInit.cpp initializes the objects for each gamestate
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "allheaders.hpp"
 #include "objects.hpp"

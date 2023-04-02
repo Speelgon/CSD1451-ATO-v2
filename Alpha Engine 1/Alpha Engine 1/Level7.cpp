@@ -1,3 +1,16 @@
+//==========================================================
+// file		: Level7.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: Level7.cpp is where level 7 functions are defined
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
+
 #pragma once
 #include "allheaders.hpp"
 #include "Level7.hpp"

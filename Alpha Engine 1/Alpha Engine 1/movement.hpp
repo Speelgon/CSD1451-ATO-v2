@@ -1,3 +1,15 @@
+//==========================================================
+// file		: movement.hpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: movement.hpp declares
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "objects.hpp"
 

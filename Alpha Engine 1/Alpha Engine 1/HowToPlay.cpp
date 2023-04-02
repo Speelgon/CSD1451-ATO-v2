@@ -1,3 +1,15 @@
+//==========================================================
+// file		: HowToPlay.cpp
+// 
+// author   : Ng Wen Wen
+
+// email	: wenwen.ng@digipen.edu
+
+// brief	: HowToPlay.cpp is where all gamestates are managed
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #include "allheaders.hpp"
 #include "Mainmenu.hpp"
 #include "IncrementVariable.hpp"
