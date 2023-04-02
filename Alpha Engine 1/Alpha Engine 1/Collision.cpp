@@ -234,19 +234,10 @@ Portal Collision
 		
 	}
 
-	void playerCollisionMapBoundary(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float playerSpeedX, float playerSpeedY)
+	/*void playerCollisionMapBoundary(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float playerSpeedX, float playerSpeedY)
 	{
 
-	}
-
-	//collectibles will always have same size and width
-	int playerOverCollectible(float px, float py, float cx, float cy, float cSize)
-		{
-		float cTopRight = cx + cSize;
-		float cBottomLeft = cy + cSize;
-		//float 
-		return 0;
-		}
+	}*/
 
 	int playerHookCollision(node* nodesPtr, hook* playerHookPtr, int &collisionFlag) {
 		
@@ -291,7 +282,7 @@ Player out of bounds
 
 	void playerCollisionTrampoline(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float& playerSpeedX, float& playerSpeedY, int& jumptokenRef, int& lefttoken, int& righttoken)
 	{
-
+		playerSpeedX = playerSpeedX;
 		// Left side collision
 		if (playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerBottomLessThanObjectTop(pY, oY, pSizeY, oSizeY) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerRightLessThanObjectRight(pX, oX, pSizeX, oSizeX) && lefttoken == 1)
 		{

@@ -176,7 +176,7 @@ int whichvariableincreased(int incrementobjintializer, int& a, int& b, float mid
 			  middlex - optionhalfside, middley - optionhalfside, 0x00FFFFFF, 0.0f,
 			  middlex + optionhalfside, middley + optionhalfside, 0x00FFFFFF, 0.0f,
 			  middlex + optionhalfside, middley - optionhalfside, 0x00FFFFFF, 0.0f);*/
-
+	return 1;
 }
 
 //make two rectangles pop up when condition is checked labled a and b on bottom right side

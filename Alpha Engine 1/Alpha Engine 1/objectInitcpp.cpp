@@ -497,16 +497,16 @@ void collectiblelevel7init(collectibleObject* objectPtr) {
 }
 
 
-void portalinit(portalObject* portal) {
+void portalinit(portalObject* portalPtr) {
 
 	for (int i = 0; i < maxPortal; i++)
 	{
-		portal[i].x = 20000;
-		portal[i].y = -2000;
-		portal[i].width = 10;
-		portal[i].height = 10;
-		portal[i].halfW = portal[i].width / 2;
-		portal[i].halfH = portal[i].height / 2;
+		portalPtr[i].x = 20000;
+		portalPtr[i].y = -2000;
+		portalPtr[i].width = 10;
+		portalPtr[i].height = 10;
+		portalPtr[i].halfW = portalPtr[i].width / 2;
+		portalPtr[i].halfH = portalPtr[i].height / 2;
 	}
 }
 

@@ -58,7 +58,7 @@ void playerActualMovement(float& pX, float& pY, float& pxvel, float& pyvel)
 }
 
 
-void playerEasingMovement(float& pxvel, float& pyvel, float stabilizer)
+void playerEasingMovement(float& pxvel, float stabilizer)
 {
 	if (pxvel > 0)
 	{
@@ -81,8 +81,8 @@ void playerGravity(float& pY, float grav)
 	pY -= (float)(grav * assumedFrameRate * delta);
 }
 
-void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle itemArg, node* collidingNode) {
-
+void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle itemArg) {
+	grav = 0;
 	pXvel = 0;
 	pYvel = 0;
 	playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp

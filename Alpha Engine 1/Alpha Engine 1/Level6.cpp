@@ -279,7 +279,7 @@ void Level6_Update()
 			{
 				if (playerHookCollision(nodes, &playerHook, hookCollisionFlag)) {
 					anglePlayerToNode(nodes[collidedNode]);
-					movementWhenHooked(player.xvel, player.yvel, gravity, item, nodes);
+					movementWhenHooked(player.xvel, player.yvel, gravity, item);
 				}
 				else {
 					anglePlayerToMouse();
@@ -460,9 +460,9 @@ void Level6_Update()
 
 		//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
-		playerEasingMovement(player.xvel, player.yvel, stabliser);
+		playerEasingMovement(player.xvel, stabliser);
 
-		playerCollisionMapBoundary(player.x, player.y, object[0].x, object[0].y, player.halfW, player.halfH, object[0].halfW, object[0].halfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
+		/*playerCollisionMapBoundary*/(player.x, player.y, object[0].x, object[0].y, player.halfW, player.halfH, object[0].halfW, object[0].halfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
 
 		incrementobjintializer = whichvariableincreased(incrementobjintializer, a, b, middlex, middley, optionhalfside, pMeshY1, pMeshY2, truemousex, truemousey);
 
