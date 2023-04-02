@@ -32,10 +32,14 @@ AEAudio soundList[MAXASSETS];
 
 AEAudioGroup soundGroups[MAXGROUPS];
 
-bool bgmPlayed{ false }, jumped{ false }, hooked{ true };
+bool bgmPlayed{ false }, jumped{ false };
 
 HWND windowHandle;
 
+/*!
+\brief	function that loads all sound assets into the game
+		and sets the soundgroups for background music and sound effects
+*/
 void initAudioList() {
 	//soundListVector.push_back(AEAudioLoadSound("Assets/Sound/bounce.wav"));
 	soundList[bounce] = AEAudioLoadSound("Assets/Sound/bounce.wav");
@@ -75,13 +79,21 @@ void initAudioList() {
 	
 }
 
+/*!
+\brief	function that calls the AEAudioPlay function and allows the customisation of volume, pitch and loop
+		also has default values for volume, pitch and loop
+*/
 void playAudio(AEAudio const& audio, AEAudioGroup group, double volume, double pitch, s32 loop) {
 	if (!AEAudioIsValidAudio(audio)) {
 		return;
 	}
-	AEAudioPlay(audio, soundGroups[0], volume, pitch, loop);
+	AEAudioPlay(audio, group, volume, pitch, loop);
 }
 
+/*!
+\brief	function that handles majority of the audio playback for bgm and sfx
+		
+*/
 void updateSound() {
 	//============ BGM ============//
 	if (!bgmPlayed) {
@@ -107,6 +119,7 @@ void updateSound() {
 		case GS_LEVEL7: 
 			playAudio(soundList[level7bgm], soundGroups[BGM], 0.4f, 1, -1);
 			break;
+		case GS_LEVELSELECTOR:
 		case GS_MAINMENU:
 			playAudio(soundList[menubgm], soundGroups[BGM], 0.4f, 1, -1);
 			break;
@@ -117,8 +130,7 @@ void updateSound() {
 		case GS_LEVEL8: 
 		playAudio(soundList[level7bgm], soundGroups[BGM], 0.4f, 0.9f, -1);
 		break;
-		case GS_LEVEL9: break;
-		case GS_LEVEL10: break;*/
+		*/
 		}
 		bgmPlayed = true;
 	}
@@ -127,14 +139,11 @@ void updateSound() {
 
 
 	//======= Detect Collision Events ========//
-	//Collision objects: Portal, Exit Door, Collectibles, Nodes
+	//Collision objects: Portal, Collectibles, Nodes
+	
 	//nodes
-	if (hookCollisionFlag) hooked = false;
-	if (AEInputCheckTriggered(AEVK_LBUTTON) && !hooked) {
+	if (AEInputCheckTriggered(AEVK_LBUTTON) && hookCollisionFlag) {
 		playAudio(soundList[nodeCollide], soundGroups[SFX], 0.4);
-		if (!hookCollisionFlag) {
-			hooked = true;
-		}
 	}
 	
 	//collectible small fix needed
@@ -144,17 +153,25 @@ void updateSound() {
 	}
 
 	if (current == GS_RESTART) {
-		playAudio(soundList[spawn], soundGroups[SFX], 0.4);
+		playAudio(soundList[spawn], soundGroups[SFX], 0.4f);
 	}
 
+	//platform disappearing
 	if (platformDisappear) {
 		playAudio(soundList[platformDisappeared], soundGroups[SFX], 0.4);
 		platformDisappear = false;
 	}
 
+	//trampoline
 	if (trampolined) {
 		playAudio(soundList[bounce], soundGroups[SFX], 0.4f, 0.8f);
 		trampolined = false;
+	}
+
+	//blackhole
+	if (blackholeTouched) {
+		playAudio(soundList[spawn], soundGroups[SFX], 0.4f);
+		
 	}
 	//========================================//
 
@@ -182,7 +199,7 @@ void updateSound() {
 	/*!
 	\brief	checks if window is minimized using IsIconic in window.h
 			pauses all sound groups if minimized
-			resumes all sound groups when window is 
+			resumes all sound groups when window is focused
 	*/
 	windowHandle = AESysGetWindowHandle();
 	if (IsIconic(windowHandle)) {
@@ -198,10 +215,13 @@ void updateSound() {
 	//============================================//
 }
 
+/*!
+\brief	resets all flags to false and stops all soundgroups from playing audio
+		resets all soundgroup pitch and volume to 0
+*/
 void freeSound() {
 	bgmPlayed = false;
 	jumped = false;
-	hooked = false;
 	for (int i{ 0 }; i < MAXGROUPS; ++i) {
 		AEAudioStopGroup(soundGroups[i]);
 		AEAudioSetGroupPitch(soundGroups[i], 0);

@@ -21,6 +21,7 @@ extern int current;
 extern bool portalled;
 extern bool jumped;
 extern bool trampolined;
+extern bool blackholeTouched;
 //======= END OF AE AUDIO VARIABLES ========//
 
 /***************************************
