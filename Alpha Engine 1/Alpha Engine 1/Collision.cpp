@@ -103,7 +103,7 @@ namespace {
 ==================================================================================================================================
 */
 
-	void playerCollisionSquare(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float& playerSpeedX, float& playerSpeedY,int& jumptoken,int& lefttoken, int& righttoken)
+	void playerCollisionSquare(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float& playerSpeedX, float& playerSpeedY,int& jumptokenRef,int& lefttoken, int& righttoken)
 	{
 
 	// Left side collision
@@ -127,7 +127,7 @@ namespace {
 			pY = oY + oSizeY + pSizeY;
 			lefttoken = 0;
 			righttoken = 0;
-			jumptoken = 1;
+			jumptokenRef = 1;
 		}
 		// Bottom side collision	
 		else if (playerLeftLessThanObjectRight(pX, oX, pSizeX, oSizeX) && playerRightGreaterThanObjectLeft(pX, oX, pSizeX, oSizeX) && playerTopGreaterThanObjectBottom(pY, oY, pSizeY, oSizeY) && playerTopLessThanObjectTop(pY, oY, pSizeY, oSizeY))
@@ -248,20 +248,20 @@ Portal Collision
 		return 0;
 		}
 
-	int playerHookCollision(node* nodes, hook* playerHook, int &collisionFlag) {
+	int playerHookCollision(node* nodesPtr, hook* playerHookPtr, int &collisionFlag) {
 		
 		f32 distance1{ 0 }, distance2{ 0 };
 
 		for (int i{ 0 }; i < 2; ++i) {
-			distance1 = playerHook->x - nodes[i].x;
-			distance2 = playerHook->y - nodes[i].y;
+			distance1 = playerHookPtr->x - nodesPtr[i].x;
+			distance2 = playerHookPtr->y - nodesPtr[i].y;
 			if (distance1 < 0) distance1 = -distance1;
 			if (distance2 < 0) distance2 = -distance2;
-			if (distance1 <= (nodes[i].halfW*2.0) && distance2 <= (nodes[i].halfH*2.0)) {
+			if (distance1 <= (nodesPtr[i].halfW*2.0) && distance2 <= (nodesPtr[i].halfH*2.0)) {
 				collisionFlag = 1;
 				collidedNode = i;
-				pointHookStuckX = nodes[i].x;
-				pointHookStuckY = nodes[i].y;
+				pointHookStuckX = nodesPtr[i].x;
+				pointHookStuckY = nodesPtr[i].y;
 				jumptoken = 1;
 				return 1;
 			}
@@ -289,7 +289,7 @@ Player out of bounds
 
 
 
-	void playerCollisionTrampoline(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float& playerSpeedX, float& playerSpeedY, int& jumptoken, int& lefttoken, int& righttoken)
+	void playerCollisionTrampoline(float& pX, float& pY, float& oX, float& oY, float& pSizeX, float& pSizeY, float& oSizeX, float& oSizeY, float& playerSpeedX, float& playerSpeedY, int& jumptokenRef, int& lefttoken, int& righttoken)
 	{
 
 		// Left side collision
@@ -312,7 +312,7 @@ Player out of bounds
 			playerSpeedY = 10;
 			lefttoken = 0;
 			righttoken = 0;
-			jumptoken = 1;
+			jumptokenRef = 1;
 			trampolined = true;
 		}
 		// Bottom side collision	
@@ -441,8 +441,8 @@ Player out of bounds
 
 			//player's position
 			//gravity = 0;
-			px += directionX * acceleration * delta;
-			py += directionY * acceleration * delta;
+			px += directionX * acceleration * float(delta);
+			py += directionY * acceleration * float(delta);
 
 
 		}

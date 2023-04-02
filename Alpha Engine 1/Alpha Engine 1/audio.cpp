@@ -52,9 +52,8 @@ void initAudioList() {
 	soundList[portalCollision] = AEAudioLoadSound("Assets/Sound/portalCollision.wav");
 	soundList[collectibleCollision] = AEAudioLoadSound("Assets/Sound/collectibleCollision.wav");
 	soundList[platformDisappeared] = AEAudioLoadSound("Assets/Sound/platformDisappear.wav");
-	soundList[spawn] = AEAudioLoadSound("Assets/Sound/spawn.wav");
 	soundList[win] = AEAudioLoadSound("Assets/Sound/win.wav");
-
+	soundList[spawn] = AEAudioLoadSound("Assets/Sound/spawn.wav");
 
 	//check that all audio is valid, else exit
 	for (int i{ 0 }; i < MAXASSETS; ++i) {	
@@ -76,7 +75,6 @@ void initAudioList() {
 			AEAudioSetGroupVolume(soundGroups[i], 1);
 		}
 	}
-	
 }
 
 /*!
@@ -87,7 +85,7 @@ void playAudio(AEAudio const& audio, AEAudioGroup group, double volume, double p
 	if (!AEAudioIsValidAudio(audio)) {
 		return;
 	}
-	AEAudioPlay(audio, group, volume, pitch, loop);
+	AEAudioPlay(audio, group, static_cast<float>(volume), static_cast<float>(pitch), loop);
 }
 
 /*!
@@ -150,10 +148,6 @@ void updateSound() {
 	if (collectibleHit) {
 		playAudio(soundList[collectibleCollision], soundGroups[1]);
 		collectibleHit = false;
-	}
-
-	if (current == GS_RESTART) {
-		playAudio(soundList[spawn], soundGroups[SFX], 0.4f);
 	}
 
 	//platform disappearing

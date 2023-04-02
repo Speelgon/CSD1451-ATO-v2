@@ -97,29 +97,29 @@ namespace {
 
 
 
-void viewportCollision(float& vX, float& vY, float worldX, float worldY, float& vW, float& vH, float worldhalfw, float worldhalfh, float playerSpeedX, float playerSpeedY)
+void viewportCollision(float& vX, float& vY, float worldXarg, float worldYarg, float& vW, float& vH, float worldhalfw, float worldhalfh, float playerSpeedX, float playerSpeedY)
 {
 	//float camX, camY;
 	//cam position follows player.x, player.y
 	AEGfxSetCamPosition(vX, vY);
-	if (VplayerTopGreaterThanObjectBottom(vY, worldY, vH, worldhalfh) && VplayerBottomLessThanObjectTop(vY, worldY, vH, worldhalfh) && VplayerRightGreaterThanObjectLeft(vX, worldX, vW, worldhalfw) && VplayerRightLessThanObjectRight(vX, worldX, vW, worldhalfw) && leftToken == 1)
+	if (VplayerTopGreaterThanObjectBottom(vY, worldYarg, vH, worldhalfh) && VplayerBottomLessThanObjectTop(vY, worldYarg, vH, worldhalfh) && VplayerRightGreaterThanObjectLeft(vX, worldXarg, vW, worldhalfw) && VplayerRightLessThanObjectRight(vX, worldXarg, vW, worldhalfw) && leftToken == 1)
 	{
 		AEGfxSetCamPosition(vX - playerSpeedX, vY);
 	}
 	// Right side collision
-	if (VplayerTopGreaterThanObjectBottom(vY, worldY, vH, worldhalfh) && VplayerBottomLessThanObjectTop(vY, worldY, vH, worldhalfh) && VplayerLeftGreaterThanObjectLeft(vX, worldX, vW, worldhalfw) && VplayerLeftLessThanObjectRight(vX, worldX, vW, worldhalfw) && rightToken == 1)
+	if (VplayerTopGreaterThanObjectBottom(vY, worldYarg, vH, worldhalfh) && VplayerBottomLessThanObjectTop(vY, worldYarg, vH, worldhalfh) && VplayerLeftGreaterThanObjectLeft(vX, worldXarg, vW, worldhalfw) && VplayerLeftLessThanObjectRight(vX, worldXarg, vW, worldhalfw) && rightToken == 1)
 	{
 		AEGfxSetCamPosition(vX + playerSpeedX, vY);
 	}
 	// Top side collision (ONLY TOP SIDE AND BOTTOM SIDE TAKE AWAY THE TOKENS)
-	if (VplayerLeftLessThanObjectRight(vX, worldX, vW, worldhalfw) && VplayerRightGreaterThanObjectLeft(vX, worldX, vW, worldhalfw) && VplayerBottomLessThanObjectTop(vY, worldY, vH, worldhalfh) && VplayerBottomGreaterThanObjectBottom(vY, worldY, vH, worldhalfh))
+	if (VplayerLeftLessThanObjectRight(vX, worldXarg, vW, worldhalfw) && VplayerRightGreaterThanObjectLeft(vX, worldXarg, vW, worldhalfw) && VplayerBottomLessThanObjectTop(vY, worldYarg, vH, worldhalfh) && VplayerBottomGreaterThanObjectBottom(vY, worldYarg, vH, worldhalfh))
 	{
 		AEGfxSetCamPosition(vX, vY + playerSpeedY);
 		leftToken = 0;
 		rightToken = 0;
 	}
 	// Bottom side collision	
-	else if (VplayerLeftLessThanObjectRight(vX, worldX, vW, worldhalfw) && VplayerRightGreaterThanObjectLeft(vX, worldX, vW, worldhalfw) && VplayerTopGreaterThanObjectBottom(vY, worldY, vH, worldhalfh) && VplayerTopLessThanObjectTop(vY, worldY, vH, worldhalfh))
+	else if (VplayerLeftLessThanObjectRight(vX, worldXarg, vW, worldhalfw) && VplayerRightGreaterThanObjectLeft(vX, worldXarg, vW, worldhalfw) && VplayerTopGreaterThanObjectBottom(vY, worldYarg, vH, worldhalfh) && VplayerTopLessThanObjectTop(vY, worldYarg, vH, worldhalfh))
 	{
 		AEGfxSetCamPosition(vX, vY - playerSpeedY);
 		leftToken = 0;
@@ -136,12 +136,12 @@ void viewportCollision(float& vX, float& vY, float worldX, float worldY, float& 
 
 
 
-	/*if (playerRightmoreThanObjectRight(vX, worldX, vW, worldhalfw))
+	/*if (playerRightmoreThanObjectRight(vX, worldXarg, vW, worldhalfw))
 	{
 		AEGfxSetCamPosition(vX-playerSpeedY, vY);
 	}*/
 
-	//if (viewportRightlessThanRightWorld(vX, worldX, vW) && viewportLeftmoreThanLeftWorld(vX, minworldX, vW) && viewportBottommoreThanBottomWorld(vY, minworldY, vH) && viewportToplessThanTopWorld(vY, worldY, vH))
+	//if (viewportRightlessThanRightWorld(vX, worldXarg, vW) && viewportLeftmoreThanLeftWorld(vX, minworldX, vW) && viewportBottommoreThanBottomWorld(vY, minworldY, vH) && viewportToplessThanTopWorld(vY, worldYarg, vH))
 	//{
 	//	AEGfxSetCamPosition(vX, vY);
 	//}

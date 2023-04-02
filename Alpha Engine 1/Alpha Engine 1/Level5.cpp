@@ -424,7 +424,7 @@ void Level5_Update()
 
 			AEGfxSetCamPosition(camX, camY);
 			/*AEGfxSetCamPosition(portal[1].x, portal[1].y);*/
-			portal_timer = PortalTimer(&portal_elapsedtime, portal_timer, portal_interval);
+			portal_timer = PortalTimer(&portal_elapsedtime, int(portal_timer), portal_interval);
 
 			player.yvel = 0;
 			if (portal_timer == 4)
@@ -456,7 +456,7 @@ void Level5_Update()
 
 			AEGfxSetCamPosition(camX, camY);
 			/*AEGfxSetCamPosition(portal[1].x, portal[1].y);*/
-			portal_timer = PortalTimer(&portal_elapsedtime, portal_timer, portal_interval);
+			portal_timer = PortalTimer(&portal_elapsedtime, int(portal_timer), portal_interval);
 			player.yvel = 0;
 
 			if (portal_timer == 4)

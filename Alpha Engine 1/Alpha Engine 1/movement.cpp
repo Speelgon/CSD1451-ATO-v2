@@ -19,21 +19,21 @@ extern f64 assumedFrameRate;
 extern squareObject player;
 extern float jumpspeed;
 
-void playerInputMovement(float& pX, float& pY, float playerSpeed,int& jumptoken) {
+void playerInputMovement(float& pX, float& pY, float playerSpeedArg,int& jumptokenRef) {
 
-	if (AEInputCheckCurr(AEVK_W) && jumptoken == 1)
+	if (AEInputCheckCurr(AEVK_W) && jumptokenRef == 1)
 	{
 		pY = jumpspeed;
-		jumptoken = 0;
+		jumptokenRef = 0;
 	}
 
 	if (AEInputCheckCurr(AEVK_A))
 	{
-		pX = -playerSpeed;
+		pX = -playerSpeedArg;
 	}
 	if (AEInputCheckCurr(AEVK_D))
 	{
-		pX = playerSpeed;
+		pX = playerSpeedArg;
 	}
 }
 
@@ -81,13 +81,13 @@ void playerGravity(float& pY, float grav)
 	pY -= (float)(grav * assumedFrameRate * delta);
 }
 
-void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle item, node* collidingNode) {
+void movementWhenHooked(float &pXvel, float &pYvel,float grav, rectangle itemArg, node* collidingNode) {
 
 	pXvel = 0;
 	pYvel = 0;
 	playerInputMovement(player.xvel, player.yvel, playerSpeed, jumptoken); //LOCATED IN movement.cpp
-	player.x -= (f32)(player.xvel * sin(item.rotation) * assumedFrameRate * delta);
-	player.y += (f32)(player.xvel * cos(item.rotation) * assumedFrameRate * delta);
+	player.x -= (f32)(player.xvel * sin(itemArg.rotation) * assumedFrameRate * delta);
+	player.y += (f32)(player.xvel * cos(itemArg.rotation) * assumedFrameRate * delta);
 	pXvel = 0;
 	pYvel = 0;
 

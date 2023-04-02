@@ -35,7 +35,7 @@ float PortalTimer(f64* normalElapsedTime, int timer, f64 interval)
 		timer++;
 		*normalElapsedTime = 0;
 	}
-	return timer;
+	return float(timer);
 }
 //put below code in your update
 //if (timer > 0)

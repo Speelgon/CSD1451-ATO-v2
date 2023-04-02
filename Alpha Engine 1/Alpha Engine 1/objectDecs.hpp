@@ -60,7 +60,7 @@ AEGfxTexture* pTexTrampoline = 0;
 AEGfxTexture* pTexBlackhole = 0;
 
 float stabliser = 0.25;
-float gravity = 0.15;
+float gravity = 0.15f;
 float jumpspeed = 8;
 int jumptoken = 1;
 float playerSpeed = 2;
@@ -73,7 +73,7 @@ f64 assumedFrameRate = 60;
 float pointHookStuckX = 0;
 float pointHookStuckY = 0;
 int collectible_count = 0;
-float deathSeconds = 0.3;
+float deathSeconds = 0.3f;
 float resetCheck = 0.0;
 float timeDead = 0;
 

@@ -137,18 +137,18 @@ struct PlatformState platformstate[maxObj] = {
 };
 int numberofplatforms = maxObj;
 
-int UpdateTimer(f64 elapsedtime, int timer, f64 timeinterval)
+int UpdateTimer(f64 elapsedtimeArg, int timerArg, f64 timeinterval)
 {
 	for (int i = 0; i < 4; i++)
 	{
 		platformstate[i].elapsedtime += AEFrameRateControllerGetFrameTime();
-		if (elapsedtime >= platformstate[i].interval)
+		if (elapsedtimeArg >= platformstate[i].interval)
 		{
-			timer--;
-			elapsedtime = 0;
+			timerArg--;
+			elapsedtimeArg = 0;
 		}
 	}
-	return timer;
+	return timerArg;
 }
 
 void Level1_Load()
