@@ -40,6 +40,11 @@ extern int collectible_count;
 extern GS_STATES previousState;
 extern int previouslyPaused;
 
+extern float portal_timer;
+extern f64 portal_elapsedtime;
+extern f64 portal_interval;
+
+extern float t;
 
 
 void Level7_Load()
@@ -102,6 +107,10 @@ void Level7_Initialize()
 		platformstate[1].elapsedtime = 0.0f;
 		platformstate[1].interval = 1.0f;
 
+		portal_timer = 0;
+		portal_elapsedtime = 0.0f;
+		portal_interval = 1.0f;
+
 		item.rotation = 0;
 		item.width = 8.f;
 		item.height = 45.f;
@@ -155,6 +164,7 @@ void Level7_Initialize()
 		platformstate[3].interval = 0.0f;
 
 		timer = 0;
+		t = 0;
 	}
 	else
 	{
@@ -168,7 +178,9 @@ void Level7_Initialize()
 		platformstate[1].elapsedtime = 0.0f;
 		platformstate[1].interval = 1.0f;
 
-
+		portal_timer = 0;
+		portal_elapsedtime = 0.0f;
+		portal_interval = 1.0f;
 
 		player.x = -1000;
 		player.y = -200;
@@ -240,6 +252,7 @@ void Level7_Initialize()
 		platformstate[3].interval = 0.0f;
 
 		timer = 0;
+		t = 0;
 	}
 
 	
@@ -382,24 +395,75 @@ void Level7_Update()
 
 
 		playerCollisionPortal(player.x, player.y, portal[0].x, portal[0].y, player.halfW, player.halfH, portal[0].halfW, portal[0].halfH, portal[0].positiontoken);
+		playerCollisionPortal(player.x, player.y, portal[1].x, portal[1].y, player.halfW, player.halfH, portal[1].halfW, portal[1].halfH, portal[1].positiontoken);
 
 		if (portal[0].positiontoken == 0)
 		{
 			player.x = portal[1].x + portal[1].halfW + 20;
 			player.y = portal[1].y;
-			portal[0].positiontoken = 1;
+
+			float camTargetX = portal[1].x;
+			float camTargetY = portal[1].y;
+			float camStartX = portal[0].x;
+			float camStartY = portal[0].y;
+
+			float camX = portal[0].x;
+			float camY = portal[0].y;
+
+			t = portal_timer / 3;
+			camX = camStartX + t * (camTargetX - camStartX);
+			camY = camStartY + t * (camTargetY - camStartY);
+
+			AEGfxSetCamPosition(camX, camY);
+			/*AEGfxSetCamPosition(portal[1].x, portal[1].y);*/
+			portal_timer = PortalTimer(&portal_elapsedtime, portal_timer, portal_interval);
+
+			player.yvel = 0;
+			if (portal_timer == 4)
+			{
+				player.x = portal[1].x + portal[1].halfW + 20;
+				player.y = portal[1].y;
+				portal[0].positiontoken = 1;
+				portal_timer = 0;
+			}
 		}
 
-		playerCollisionPortal(player.x, player.y, portal[1].x, portal[1].y, player.halfW, player.halfH, portal[1].halfW, portal[1].halfH, portal[1].positiontoken);
-
-
-		if (portal[1].positiontoken == 0)
+		else if (portal[1].positiontoken == 0)
 		{
 			player.x = portal[0].x - portal[0].halfW - 20;
 			player.y = portal[0].y;
-			portal[1].positiontoken = 1;
-		}
+			float camTargetX = portal[0].x;
+			float camTargetY = portal[0].y;
+			float camStartX = portal[1].x;
+			float camStartY = portal[1].y;
 
+			float camX = portal[1].x;
+			float camY = portal[1].y;
+
+
+			t = portal_timer / 3;
+			camX = camStartX + t * (camTargetX - camStartX);
+			camY = camStartY + t * (camTargetY - camStartY);
+
+			AEGfxSetCamPosition(camX, camY);
+			/*AEGfxSetCamPosition(portal[1].x, portal[1].y);*/
+			portal_timer = PortalTimer(&portal_elapsedtime, portal_timer, portal_interval);
+
+			player.yvel = 0;
+			if (portal_timer == 4)
+			{
+				player.x = portal[0].x - portal[0].halfW - 20;
+				player.y = portal[0].y;
+				portal[1].positiontoken = 1;
+				portal_timer = 0;
+			}
+
+
+		}
+		else
+		{
+			viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
+		}
 		//playerActualMovement(player.x, player.y, player.xvel, player.yvel); //LOCATED IN movement.cpp
 
 		playerEasingMovement(player.xvel, player.yvel, stabliser);
@@ -412,7 +476,7 @@ void Level7_Update()
 
 		//if(player.x<400 && player.x>-400 && player.y<400 && player.y > -300)
 		//{
-		viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);
+		/*viewportCollision(player.x, player.y, worldX, worldY, viewporthalfw, viewporthalfh, worldhalfW, worldhalfH, playerSpeed + player.xvel, playerSpeed + player.yvel);*/
 		//}
 
 

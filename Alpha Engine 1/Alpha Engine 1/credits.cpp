@@ -31,6 +31,7 @@ extern AEGfxTexture* pTexCredits_3 = 0;
 extern AEGfxTexture* pTexCredits_4 = 0;
 extern AEGfxTexture* pTexCredits_5 = 0;
 extern AEGfxTexture* pTexCredits_6 = 0;
+extern AEGfxTexture* pTexCredits_7 = 0;
 
 extern f64 normalElapsedTime;
 extern int timer;
@@ -48,19 +49,22 @@ void Credits_Load()
 	AE_ASSERT_MESG(pTexCredits_1, "Failed to create credits page 1 texture!!");
 
 	pTexCredits_2 = AEGfxTextureLoad("Assets/credits_2.png");
-	AE_ASSERT_MESG(pTexCredits_1, "Failed to create credits page 2 texture!!");
+	AE_ASSERT_MESG(pTexCredits_2, "Failed to create credits page 2 texture!!");
 
 	pTexCredits_3 = AEGfxTextureLoad("Assets/credits_3.png");
-	AE_ASSERT_MESG(pTexCredits_1, "Failed to create credits page 3 texture!!");
+	AE_ASSERT_MESG(pTexCredits_3, "Failed to create credits page 3 texture!!");
 
 	pTexCredits_4 = AEGfxTextureLoad("Assets/credits_4.png");
-	AE_ASSERT_MESG(pTexCredits_1, "Failed to create credits page 4 texture!!");
+	AE_ASSERT_MESG(pTexCredits_4, "Failed to create credits page 4 texture!!");
 
 	pTexCredits_5 = AEGfxTextureLoad("Assets/credits_5.png");
-	AE_ASSERT_MESG(pTexCredits_1, "Failed to create credits page 5 texture!!");
+	AE_ASSERT_MESG(pTexCredits_5, "Failed to create credits page 5 texture!!");
 
 	pTexCredits_6 = AEGfxTextureLoad("Assets/credits_6.png");
-	AE_ASSERT_MESG(pTexCredits_1, "Failed to create credits page 6 texture!!");
+	AE_ASSERT_MESG(pTexCredits_6, "Failed to create credits page 6 texture!!");
+
+	pTexCredits_7 = AEGfxTextureLoad("Assets/credits_7.png");
+	AE_ASSERT_MESG(pTexCredits_7, "Failed to create credits page 6 texture!!");
 
 
 }
@@ -68,7 +72,7 @@ void Credits_Load()
 void Credits_Initialize()
 {
 
-	timer = 6;
+	timer = 7;
 	elapsedtime = 0.0f;
 	interval = 1.0f;
 
@@ -135,7 +139,7 @@ void Credits_Update()
 void Credits_Draw()
 {
 	
-	if (timer == 6)
+	if (timer == 7)
 	{
 		//========================================//
 		//			 Credits Page 1 Drawing		  //
@@ -158,7 +162,7 @@ void Credits_Draw()
 	}
 
 	
-	if (timer == 5)
+	if (timer == 6)
 	{
 		//========================================//
 		//			 Credits Page 2 Drawing		  //
@@ -181,7 +185,7 @@ void Credits_Draw()
 
 	}
 
-	if (timer == 4)
+	if (timer == 5)
 	{
 		//========================================//
 		//			 Credits Page 3 Drawing		  //
@@ -203,7 +207,7 @@ void Credits_Draw()
 		AEGfxSetTransparency(1.0f);
 	}
 
-	if (timer == 3)
+	if (timer == 4)
 	{
 		//========================================//
 		//			 Credits Page 4 Drawing		  //
@@ -225,7 +229,7 @@ void Credits_Draw()
 		AEGfxSetTransparency(1.0f);
 	}
 
-	if (timer == 2)
+	if (timer == 3)
 	{
 		//========================================//
 		//			 Credits Page 5 Drawing		  //
@@ -247,10 +251,10 @@ void Credits_Draw()
 		AEGfxSetTransparency(1.0f);
 	}
 
-	if (timer == 1)
+	if (timer == 2)
 	{
 		//========================================//
-		//			 Credits Page 1 Drawing		  //
+		//			 Credits Page 6 Drawing		  //
 		//========================================//
 
 		// Drawing background
@@ -263,6 +267,28 @@ void Credits_Draw()
 		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 		// Texture for platform
 		AEGfxTextureSet(pTexCredits_6, 0.0f, 0.0f);
+		// Drawing the mesh (list of triangles)
+		AEGfxMeshDraw(backgroundMesh, AE_GFX_MDM_TRIANGLES);
+
+		AEGfxSetTransparency(1.0f);
+	}
+
+	if (timer == 1)
+	{
+		//========================================//
+		//			 Credits Page 7 Drawing		  //
+		//========================================//
+
+		// Drawing background
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
+		// Set position for background
+		AEGfxSetPosition(background.x, background.y);
+
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Texture for platform
+		AEGfxTextureSet(pTexCredits_7, 0.0f, 0.0f);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(backgroundMesh, AE_GFX_MDM_TRIANGLES);
 
@@ -293,5 +319,6 @@ void Credits_Unload()
 	AEGfxTextureUnload(pTexCredits_4);
 	AEGfxTextureUnload(pTexCredits_5);
 	AEGfxTextureUnload(pTexCredits_6);
+	AEGfxTextureUnload(pTexCredits_7);
 	freeSound();
 }
