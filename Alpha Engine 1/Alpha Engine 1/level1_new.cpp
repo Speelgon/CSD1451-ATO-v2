@@ -5,7 +5,7 @@
 // 
 // email	: l.kathleenxiangxuan@digipen.edu
 //
-// brief	: level1_new.cpp is where our the old level1 gamestate functions are declared and setup
+// brief	: level1_new.cpp is where our the new level1 gamestate functions are declared and setup
 //
 // Copyright © 2023 DigiPen, All rights reserved.
 //==========================================================

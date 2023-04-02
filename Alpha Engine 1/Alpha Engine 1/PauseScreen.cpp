@@ -1,3 +1,14 @@
+//==========================================================
+// file		: PauseScreen.cpp
+// 
+// author   : Kathleen Lim
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//
+// brief	: PauseScreen.cpp contains logic for Game's PauseScreen
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #include "allheaders.hpp"
 #include "PauseScreen.hpp"
 #include "IncrementVariable.hpp"

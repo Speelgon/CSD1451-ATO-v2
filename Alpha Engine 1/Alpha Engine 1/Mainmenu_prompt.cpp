@@ -1,3 +1,14 @@
+//==========================================================
+// file		: Mainmenu_prompt.cpp
+// 
+// author   : Kathleen Lim
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//
+// brief	: Mainmenu_prompt.cpp contains logic to ask players for double confirmation
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #include "allheaders.hpp"
 #include "IncrementVariable.hpp"
 #include "winScreen.hpp"

@@ -1,3 +1,14 @@
+//==========================================================
+// file		: Level2.hpp
+// 
+// author   : Kathleen Lim
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//
+// brief	: Level2.hpp contains all the variables required for level 2
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #pragma once
 #include "objects.hpp"
 

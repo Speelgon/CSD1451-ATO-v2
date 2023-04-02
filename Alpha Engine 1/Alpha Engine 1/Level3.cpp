@@ -1,3 +1,14 @@
+//==========================================================
+// file		: Level3.cpp
+// 
+// author   : Kathleen Lim
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//
+// brief	: Level3.cpp contains all the variables required for level 3
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #pragma once
 #include "allheaders.hpp"
 #include "Level3.hpp"

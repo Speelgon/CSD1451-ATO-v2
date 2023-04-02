@@ -1,3 +1,14 @@
+//==========================================================
+// file		: SplashScreen.cpp
+// 
+// author   : Kathleen Lim
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//
+// brief	: SplashScreen.cpp contains logic for Game's Splash Screen
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #include "allheaders.hpp"
 //Variables Declaration 
 AEGfxVertexList* pMesh_logo = nullptr;

@@ -1,5 +1,5 @@
 //==========================================================
-// file		: collision.cpp
+// file		: objects.hpp
 // 
 // author   : Owen Quek
 // co-author: Ng Wen Wen

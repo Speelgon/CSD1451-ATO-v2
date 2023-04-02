@@ -1,3 +1,14 @@
+//==========================================================
+// file		: PauseScreen.hpp
+// 
+// author   : Kathleen Lim
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//
+// brief	: PauseScreen.hpp contains declaration for Game's PauseScreen
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #pragma once
 
 void Pausemenu_Load();

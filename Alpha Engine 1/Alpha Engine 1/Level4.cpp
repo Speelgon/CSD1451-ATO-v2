@@ -1,3 +1,14 @@
+//==========================================================
+// file		: Level4.cpp
+// 
+// author   : Kathleen Lim
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//
+// brief	: Level4.cpp contains all the variables required for level 4
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #pragma once
 #include "allheaders.hpp"
 #include "Level4.hpp"

@@ -1,3 +1,14 @@
+//==========================================================
+// file		: Level4.hpp
+// 
+// author   : Kathleen Lim
+// 
+// email	: l.kathleenxiangxuan@digipen.edu
+//
+// brief	: Level4.hpp contains all the variables required for level 4
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #pragma once
 #include "objects.hpp"
 
