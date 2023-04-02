@@ -1,4 +1,16 @@
-
+//==========================================================
+// file		: utils.cpp
+// 
+// author   : Ng Yue Zhi
+// co-author: Ng Wen Wen
+// 
+// email	: n.yuezhi@digipen.edu
+//			  wenwen.ng@digipen.edu
+// 
+// brief	: utils.cpp contains definitions of a function to implement a generic timer
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
 #include "allheaders.hpp"
 #include "Mainmenu.hpp"
 #include "IncrementVariable.hpp"

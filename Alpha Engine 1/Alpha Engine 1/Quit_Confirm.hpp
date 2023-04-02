@@ -1,3 +1,17 @@
+//==========================================================
+// file		: Quit_Confirm.hpp
+// 
+// author   : Ng Yue Zhi
+// 
+// email	: n.yuezhi@digipen.edu
+//			 
+// 
+// brief	: Quit_Confirm.h provides declarations for functions for a game state for the quit confirmation prompt toggle
+//
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
+
 #pragma once
 void quit_confirm_Load();
 
