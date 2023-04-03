@@ -19,7 +19,6 @@
 #pragma once
 #include "allheaders.hpp"
 #include "objects.hpp"
-#include "PlatformsDisappear.hpp"
 /*================================================================================================================================
 
 							INTSRUCTIONS FOR PRINTING SHAPES ON THE SCREEN

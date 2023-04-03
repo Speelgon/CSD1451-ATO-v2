@@ -60,7 +60,6 @@
     <ClInclude Include="objects.hpp" />
     <ClInclude Include="movement.hpp" />
     <ClInclude Include="PauseScreen.hpp" />
-    <ClInclude Include="PlatformsDisappear.hpp" />
     <ClInclude Include="Quit_Confirm.hpp" />
     <ClInclude Include="SplashScreen.hpp" />
     <ClInclude Include="utils.h" />

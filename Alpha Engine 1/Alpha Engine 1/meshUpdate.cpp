@@ -1,3 +1,15 @@
+//==========================================================
+// file		: meshUpdate.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: meshUpdate.cpp updates the mesh of the item eery frame should its values change
+// 
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #include "allheaders.hpp"
 #include "objects.hpp"
 #include "Level1.hpp"

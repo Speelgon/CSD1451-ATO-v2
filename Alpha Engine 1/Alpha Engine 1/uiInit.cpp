@@ -1,3 +1,15 @@
+//==========================================================
+// file		: uiInit.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+//
+// brief	: uiInit.cpp was supposed to initialize all th emeshes required for the UI
+// 
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #pragma once
 #include "allheaders.hpp"
 #include "objects.hpp"

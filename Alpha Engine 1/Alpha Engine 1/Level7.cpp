@@ -20,7 +20,6 @@
 #include "IncrementVariable.hpp"
 #include "vpCollision.hpp"
 #include "catdeath.hpp"
-#include "PlatformsDisappear.hpp"
 #include "utils.h"
 #include "objects.hpp"
 

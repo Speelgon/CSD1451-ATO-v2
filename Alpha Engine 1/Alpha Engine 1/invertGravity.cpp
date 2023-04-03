@@ -1,3 +1,16 @@
+//==========================================================
+// file		: invertGravity.cpp
+// 
+// author   : Owen Quek
+// 
+// email	: o.quek@digipen.edu
+
+//
+// brief	: Defines the function to invert gravity. Not implemented
+// 
+// Copyright © 2023 DigiPen, All rights reserved.
+//==========================================================
+
 #include "invertGravity.hpp"
 
 extern float gravity;
